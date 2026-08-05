@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#d9fb06" />
+
+  <!-- Preconnect and DNS prefetch for faster loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://www.youtube.com" />
+  <link rel="dns-prefetch" href="https://images.unsplash.com" />
+
+  <!-- Title Tag - Critical for SEO -->
+  <title>Websy — Desarrollo Web, E-commerce & Automatizaciones IA | Salta, Argentina</title>
+
+  <!-- Enhanced SEO Meta Tags -->
+  <meta name="description"
+    content="Agencia de desarrollo web en Salta, Argentina. Creamos páginas web profesionales, tiendas e-commerce, apps móviles, automatizaciones con IA, chatbots WhatsApp, CRM/ERP y SEO. Soluciones digitales para toda Latinoamérica." />
+  <meta name="keywords"
+    content="desarrollo web argentina, diseño web salta, agencia digital latinoamerica, e-commerce argentina, tienda online, aplicaciones moviles, chatbot whatsapp, automatizaciones ia, CRM ERP, SEO posicionamiento web, landing pages, paginas web profesionales, desarrollo react, marketing digital, diseño web profesional" />
+  <meta name="author" content="Websy SRL - Sebastian Aguirre" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="language" content="es" />
+  <meta http-equiv="content-language" content="es-419" />
+  <meta name="revisit-after" content="3 days" />
+  <meta name="distribution" content="global" />
+  <meta name="rating" content="general" />
+  <meta name="coverage" content="Worldwide" />
+  <meta name="target" content="all" />
+  <meta name="HandheldFriendly" content="True" />
+
+  <!-- Geo Targeting - Salta, Argentina + Latinoamérica -->
+  <meta name="geo.region" content="AR-A" />
+  <meta name="geo.placename" content="Salta, Argentina" />
+  <meta name="geo.position" content="-24.7821;-65.4232" />
+  <meta name="ICBM" content="-24.7821, -65.4232" />
+
+  <!-- Hreflang Tags - Critical for LATAM targeting -->
+  <link rel="alternate" hreflang="es" href="https://www.websysrl.com/" />
+  <link rel="alternate" hreflang="es-AR" href="https://www.websysrl.com/" />
+  <link rel="alternate" hreflang="es-419" href="https://www.websysrl.com/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.websysrl.com/" />
+
+  <!-- Social Media Links for SEO -->
+  <link rel="me" href="https://www.facebook.com/websyar" />
+  <link rel="me" href="https://www.youtube.com/@websyar" />
+  <link rel="me" href="https://www.instagram.com/websyar" />
+  <link rel="me" href="https://x.com/websyar" />
+  <link rel="me" href="https://www.linkedin.com/company/websy-dev" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.websysrl.com/" />
+  <meta property="og:title" content="Websy — Desarrollo Web, E-commerce & Automatizaciones IA | Argentina" />
+  <meta property="og:description"
+    content="Agencia de desarrollo web en Salta, Argentina. Páginas web profesionales, tiendas online, apps móviles, automatizaciones con IA y chatbots WhatsApp para toda Latinoamérica." />
+  <meta property="og:image" content="%PUBLIC_URL%/websy-logo.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Websy" />
+  <meta property="og:locale" content="es_AR" />
+  <meta property="og:locale:alternate" content="es_ES" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://www.websysrl.com/" />
+  <meta name="twitter:title" content="Websy — Desarrollo Web, E-commerce & Automatizaciones IA" />
+  <meta name="twitter:description"
+    content="Agencia de desarrollo web en Salta, Argentina. Páginas web profesionales, tiendas online, apps y automatizaciones con IA para toda Latinoamérica." />
+  <meta name="twitter:image" content="%PUBLIC_URL%/websy-logo.png" />
+  <meta name="twitter:site" content="@websyar" />
+
+  <!-- Structured Data #1: Organization -->
+  <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "Websy",
+          "alternateName": "Websy SRL",
+          "url": "https://www.websysrl.com",
+          "logo": "https://www.websysrl.com/websy-logo.png",
+          "description": "Agencia de desarrollo web y automatizaciones con IA en Salta, Argentina. Especialistas en e-commerce, CRM/ERP, chatbots WhatsApp y SEO para toda Latinoamérica.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Salta",
+            "addressRegion": "Salta",
+            "addressCountry": "AR"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+54-9-388-484-6695",
+            "contactType": "customer service",
+            "areaServed": ["AR", "MX", "CO", "CL", "PE", "EC", "UY", "PY", "BO", "VE", "CR", "PA", "DO", "GT", "HN", "SV", "NI"],
+            "availableLanguage": ["Spanish", "English"]
+          },
+          "sameAs": [
+            "https://www.facebook.com/websyar",
+            "https://www.youtube.com/@websyar",
+            "https://www.instagram.com/websyar",
+            "https://x.com/websyar",
+            "https://www.linkedin.com/company/websy-dev"
+          ],
+          "founder": {
+            "@type": "Person",
+            "name": "Sebastian Aguirre",
+            "jobTitle": "Ingeniero en Sistemas & Full Stack Developer"
+          },
+          "foundingDate": "2023",
+          "numberOfEmployees": {
+            "@type": "QuantitativeValue",
+            "minValue": 2,
+            "maxValue": 10
+          }
+        }
+    </script>
+
+  <!-- Structured Data #2: ProfessionalService (Local Business SEO) -->
+  <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "ProfessionalService",
+          "name": "Websy - Desarrollo Web & Automatizaciones",
+          "image": "https://www.websysrl.com/websy-logo.png",
+          "url": "https://www.websysrl.com",
+          "telephone": "+54-9-388-484-6695",
+          "email": "websyar@gmail.com",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Salta",
+            "addressRegion": "Salta",
+            "postalCode": "4400",
+            "addressCountry": "AR"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -24.7821,
+            "longitude": -65.4232
+          },
+          "priceRange": "$$",
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:00",
+            "closes": "18:00"
+          },
+          "areaServed": [
+            {"@type": "Country", "name": "Argentina"},
+            {"@type": "Country", "name": "México"},
+            {"@type": "Country", "name": "Colombia"},
+            {"@type": "Country", "name": "Chile"},
+            {"@type": "Country", "name": "Perú"},
+            {"@type": "Country", "name": "Ecuador"},
+            {"@type": "Country", "name": "Uruguay"},
+            {"@type": "Country", "name": "Paraguay"},
+            {"@type": "Country", "name": "Bolivia"}
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Servicios de Desarrollo Web",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Desarrollo de Páginas Web Profesionales",
+                  "description": "Diseño y desarrollo de sitios web responsivos, landing pages optimizadas para conversión y portales corporativos."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Tiendas E-commerce",
+                  "description": "Desarrollo de tiendas online con pasarelas de pago, gestión de inventario y optimización para ventas."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Automatizaciones con Inteligencia Artificial",
+                  "description": "Chatbots WhatsApp, automatizaciones con Make/n8n, integración de IA para procesos empresariales."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Aplicaciones Móviles Android & iOS",
+                  "description": "Desarrollo de aplicaciones nativas y multiplataforma para Android e iOS."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "SEO y Marketing Digital",
+                  "description": "Posicionamiento web, estrategias SEO on-page y off-page, Google Ads y marketing digital integral."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Sistemas CRM y ERP",
+                  "description": "Desarrollo de sistemas de gestión empresarial, CRM, ERP y paneles administrativos a medida."
+                }
+              }
+            ]
+          }
+        }
+    </script>
+
+  <!-- Structured Data #3: WebSite + SearchAction (Sitelinks Search Box) -->
+  <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "Websy",
+          "alternateName": "Websy SRL - Desarrollo Web & Automatizaciones",
+          "url": "https://www.websysrl.com",
+          "inLanguage": "es",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://www.websysrl.com/servicios?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }
+    </script>
+
+  <!-- Structured Data #4: FAQPage (Featured Snippets) -->
+  <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Cuánto cuesta crear una página web profesional en Argentina?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "En Websy, nuestros planes de desarrollo web arrancan desde USD 300 para landing pages hasta USD 1.200+ para e-commerce completos y sistemas empresariales. El precio varía según funcionalidades, diseño personalizado e integraciones requeridas. Ofrecemos cotización gratuita en 24 horas."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué servicios de desarrollo web ofrece Websy?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Websy ofrece desarrollo de páginas web profesionales, tiendas e-commerce, aplicaciones móviles Android e iOS, automatizaciones con Inteligencia Artificial, chatbots para WhatsApp e Instagram, sistemas CRM/ERP, SEO y marketing digital. Trabajamos con clientes de toda Latinoamérica."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Websy trabaja con clientes fuera de Argentina?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí, Websy brinda servicios de desarrollo web y automatizaciones a clientes de toda Latinoamérica incluyendo México, Colombia, Chile, Perú, Ecuador, Uruguay, Paraguay y Bolivia. Trabajamos de forma 100% remota con comunicación constante."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuánto tiempo tarda en desarrollarse una página web?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Una landing page puede estar lista en 5-7 días hábiles. Un sitio web corporativo toma entre 2-3 semanas. Un e-commerce completo entre 3-6 semanas dependiendo de la complejidad. Usamos metodología ágil con entregas incrementales."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué tecnologías utiliza Websy para el desarrollo web?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Utilizamos React, Next.js, Node.js, Python, Firebase, PostgreSQL, MongoDB y herramientas de automatización como Make (Integromat) y n8n. Para IA integramos OpenAI, Google AI y modelos de lenguaje avanzados."
+              }
+            }
+          ]
+        }
+    </script>
+
+  <!-- Structured Data #5: BreadcrumbList -->
+  <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Inicio",
+              "item": "https://www.websysrl.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Servicios",
+              "item": "https://www.websysrl.com/servicios"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Planes",
+              "item": "https://www.websysrl.com/planes"
+            },
+            {
+              "@type": "ListItem",
+              "position": 4,
+              "name": "Blog",
+              "item": "https://www.websysrl.com/blog"
+            },
+            {
+              "@type": "ListItem",
+              "position": 5,
+              "name": "Contacto",
+              "item": "https://www.websysrl.com/contacto"
+            }
+          ]
+        }
+    </script>
+
+  <!-- Preconnect to external domains -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <!-- Firebase domains - preconnect for faster initialization -->
+  <link rel="preconnect" href="https://firestore.googleapis.com">
+  <link rel="preconnect" href="https://www.googleapis.com">
+  <link rel="dns-prefetch" href="//firestore.googleapis.com">
+
+  <!-- Performance Optimizations -->
+  <link rel="dns-prefetch" href="//fonts.googleapis.com">
+  <link rel="dns-prefetch" href="//images.unsplash.com">
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="/manifest.json" />
+
+  <!-- Apple Touch Icons -->
+  <link rel="apple-touch-icon" href="/websy-logo.png" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Websy" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/websy-logo.png" />
+  <link rel="shortcut icon" href="/websy-logo.png" />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://www.websysrl.com/" />
+
+  <!-- Critical CSS - Inlined for FCP optimization -->
+  <style>
+    /* Critical above-the-fold styles */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.5;
+      color: #333;
+      background: #fff;
+      -webkit-font-smoothing: antialiased
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1rem
+    }
+
+    @media(min-width:768px) {
+      .container {
+        padding: 0 1.5rem
+      }
+    }
+
+    @media(min-width:1024px) {
+      .container {
+        padding: 0 2rem
+      }
+    }
+
+    /* Navigation placeholder - prevents CLS */
+    nav.fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background: #fff;
+      border-bottom: 1px solid #e0e0e0;
+      height: 68px
+    }
+
+    /* Hero section base */
+    #inicio {
+      margin-top: 0;
+      padding: 0
+    }
+
+    .animate-pulse {
+      animation: pulse 2s cubic-bezier(.4, 0, .6, 1) infinite
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: .5
+      }
+    }
+
+    /* Grid system basics */
+    .grid {
+      display: grid
+    }
+
+    .flex {
+      display: flex
+    }
+
+    .items-center {
+      align-items: center
+    }
+
+    .justify-between {
+      justify-content: space-between
+    }
+
+    /* Image optimization */
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block
+    }
+
+    /* Fade in animation */
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn .3s ease-out .1s forwards
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1
+      }
+    }
+  </style>
+
+  <!-- Google Analytics 4 (GA4) -->
+  <script>
+    (function () {
+      const trackingId = '%REACT_APP_GA_TRACKING_ID%';
+      if (trackingId && trackingId !== 'undefined' && trackingId !== 'G-XXXXXXXXXX') {
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=' + trackingId;
+        document.head.appendChild(script);
+
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { dataLayer.push(arguments); };
+        window.gtag('js', new Date());
+        window.gtag('config', trackingId, {
+          page_path: window.location.pathname,
+        });
+      }
+    })();
+  </script>
+</head>
+
+<body>
+  <noscript>
+    <div style="padding: 20px; max-width: 1200px; margin: 0 auto; font-family: Arial, sans-serif;">
+      <h1>Websy — Agencia de Desarrollo Web, E-commerce & Automatizaciones IA en Argentina</h1>
+      <p>Somos una agencia de desarrollo web ubicada en Salta, Argentina, con clientes en toda Latinoamérica. Creamos
+        soluciones digitales que transforman negocios: páginas web profesionales, tiendas e-commerce, aplicaciones
+        móviles, automatizaciones con inteligencia artificial y mucho más.</p>
+
+      <h2>Servicios de Desarrollo Web Profesional</h2>
+
+      <h3>Diseño Web y Landing Pages</h3>
+      <p>Diseñamos y desarrollamos páginas web profesionales optimizadas para conversión. Nuestras landing pages tienen
+        diseño responsivo que se adapta perfectamente a celulares, tablets y computadoras. Cada sitio web incluye SEO
+        on-page, certificado SSL y hosting optimizado.</p>
+
+      <h3>Tiendas E-commerce y Ventas Online</h3>
+      <p>Creamos tiendas online completas con integración de MercadoPago, Stripe y otras pasarelas de pago. Gestión de
+        inventario, control de pedidos, facturación electrónica y panel administrativo incluido. Soluciones e-commerce
+        optimizadas para vender más en Argentina y toda Latinoamérica.</p>
+
+      <h3>Automatizaciones con Inteligencia Artificial</h3>
+      <p>Implementamos chatbots inteligentes para WhatsApp e Instagram que responden 24/7. Automatizamos procesos con
+        Make (Integromat) y n8n. Integramos IA de OpenAI y Google para atención al cliente, generación de contenido y
+        análisis de datos.</p>
+
+      <h3>Aplicaciones Móviles Android e iOS</h3>
+      <p>Desarrollamos aplicaciones nativas y multiplataforma para Android e iOS. Apps de delivery, gestión, catálogos,
+        reservas y más. Publicación en Google Play Store y Apple App Store incluida.</p>
+
+      <h3>SEO y Posicionamiento Web</h3>
+      <p>Posicionamos tu negocio en los primeros resultados de Google. Estrategias SEO on-page y off-page, auditoría
+        técnica, optimización de velocidad, Google My Business y marketing de contenidos. Aparecer primero en Google es
+        posible con Websy.</p>
+
+      <h3>Sistemas CRM, ERP y Gestión Empresarial</h3>
+      <p>Desarrollamos sistemas a medida para la gestión de tu empresa: CRM para seguimiento de clientes, ERP para
+        control de operaciones, paneles administrativos, facturación electrónica y reportes en tiempo real.</p>
+
+      <h2>¿Por qué elegir Websy?</h2>
+      <ul>
+        <li>Más de 50 proyectos entregados exitosamente</li>
+        <li>Clientes en Argentina, México, Colombia, Chile y toda Latinoamérica</li>
+        <li>Tecnologías modernas: React, Node.js, Python, Firebase</li>
+        <li>Cotización gratuita en 24 horas</li>
+        <li>Soporte post-lanzamiento incluido</li>
+        <li>Metodología ágil con entregas semanales</li>
+      </ul>
+
+      <h2>Planes y Precios</h2>
+      <p>Planes desde USD 300. Estándar (USD 300-450), Comercio (USD 500-700), PyMES (USD 700-1.200) y Corporativo
+        (desde USD 1.200). Cada plan incluye diseño responsivo, hosting, SSL y soporte técnico.</p>
+
+      <h2>Casos de Éxito</h2>
+      <p>Hemos trabajado con empresas de múltiples industrias: gastronomía, retail, servicios profesionales, educación,
+        salud y más. Nuestro portfolio incluye e-commerce, sistemas de gestión, aplicaciones móviles y plataformas web
+        complejas.</p>
+
+      <h2>Blog - Artículos sobre Desarrollo Web y Tecnología</h2>
+      <p>Publicamos artículos sobre desarrollo web, e-commerce, automatizaciones con IA, SEO, marketing digital y
+        tendencias tecnológicas para emprendedores y empresas en Latinoamérica.</p>
+
+      <h2>Contacto</h2>
+      <p>WhatsApp: +54 9 388 484-6695. Email: websyar@gmail.com. Ubicación: Salta, Argentina. Atendemos clientes de toda
+        Latinoamérica de forma 100% remota. Consulta inicial gratuita.</p>
+
+      <nav style="margin-top: 30px; padding: 20px; background: #f5f5f5; border-radius: 8px;">
+        <h3>Navegación del Sitio</h3>
+        <ul style="list-style: none; padding: 0;">
+          <li style="margin: 10px 0;"><a href="/" style="color: #0066cc;">Inicio</a></li>
+          <li style="margin: 10px 0;"><a href="/servicios" style="color: #0066cc;">Servicios</a></li>
+          <li style="margin: 10px 0;"><a href="/servicios/desarrollo-web" style="color: #0066cc;">Desarrollo Web</a>
+          </li>
+          <li style="margin: 10px 0;"><a href="/servicios/ecommerce" style="color: #0066cc;">E-commerce</a></li>
+          <li style="margin: 10px 0;"><a href="/servicios/aplicaciones-moviles" style="color: #0066cc;">Aplicaciones
+              Móviles</a></li>
+          <li style="margin: 10px 0;"><a href="/servicios/automatizaciones-ia" style="color: #0066cc;">Automatizaciones
+              IA</a></li>
+          <li style="margin: 10px 0;"><a href="/servicios/seo-marketing" style="color: #0066cc;">SEO y Marketing</a>
+          </li>
+          <li style="margin: 10px 0;"><a href="/servicios/sistemas-gestion" style="color: #0066cc;">Sistemas CRM/ERP</a>
+          </li>
+          <li style="margin: 10px 0;"><a href="/planes" style="color: #0066cc;">Planes y Precios</a></li>
+          <li style="margin: 10px 0;"><a href="/blog" style="color: #0066cc;">Blog</a></li>
+          <li style="margin: 10px 0;"><a href="/casos-de-exito" style="color: #0066cc;">Casos de Éxito</a></li>
+          <li style="margin: 10px 0;"><a href="/contacto" style="color: #0066cc;">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </noscript>
+  <div id="root"></div>
+
+  <!-- PostHog - Deferred to not block main thread -->
+  <script>
+    // Load PostHog after page is interactive and idle
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        !(function (t, e) {
+          var o, n, p, r;
+          e.__SV ||
+            ((window.posthog = e),
+              (e._i = []),
+              (e.init = function (i, s, a) {
+                function g(t, e) {
+                  var o = e.split(".");
+                  2 == o.length && ((t = t[o[0]]), (e = o[1])),
+                    (t[e] = function () {
+                      t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+                    });
+                }
+                ((p = t.createElement("script")).type = "text/javascript"),
+                  (p.crossOrigin = "anonymous"),
+                  (p.async = !0),
+                  (p.src = s.api_host.replace(".i.posthog.com", "-assets.i.posthog.com") + "/static/array.js"),
+                  (r = t.getElementsByTagName("script")[0]).parentNode.insertBefore(p, r);
+                var u = e;
+                for (
+                  void 0 !== a ? (u = e[a] = []) : (a = "posthog"),
+                  u.people = u.people || [],
+                  u.toString = function (t) {
+                    var e = "posthog";
+                    return "posthog" !== a && (e += "." + a), t || (e += " (stub)"), e;
+                  },
+                  u.people.toString = function () { return u.toString(1) + ".people (stub)"; },
+                  o = "init capture identify setPersonProperties group reset get_distinct_id".split(" "),
+                  n = 0;
+                  n < o.length;
+                  n++
+                ) g(u, o[n]);
+                e._i.push([i, s, a]);
+              }),
+              (e.__SV = 1));
+        })(document, window.posthog || []);
+        posthog.init("phc_yJW1VjHGGwmCbbrtczfqqNxgBDbhlhOWcdzcIJEOTFE", {
+          api_host: "https://us.i.posthog.com",
+          person_profiles: "identified_only",
+          loaded: function (posthog) { posthog.capture('$pageview'); }
+        });
+      }, 8000); // 8s delay to not block LCP/TBT
+    });
+  </script>
+
+  <!-- Service Worker Disabled -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function (registrations) {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+  </script>
+
+  <!-- Performance Monitoring -->
+  <script>
+    // Web Vitals monitoring
+    function reportWebVitals(metric) {
+      // Send to analytics service
+      if (window.gtag) {
+        window.gtag('event', metric.name, {
+          value: Math.round(metric.value * 1000) / 1000,
+          event_category: 'Web Vitals',
+          event_label: metric.id,
+          non_interaction: true,
+        });
+      }
+    }
+
+    // Report LCP
+    new PerformanceObserver((list) => {
+      for (const entry of list.getEntries()) {
+        if (entry.entryType === 'largest-contentful-paint') {
+          reportWebVitals({
+            name: 'LCP',
+            value: entry.startTime,
+            id: 'v3-' + Date.now()
+          });
+        }
+      }
+    }).observe({ entryTypes: ['largest-contentful-paint'] });
+
+    // Report FID
+    new PerformanceObserver((list) => {
+      for (const entry of list.getEntries()) {
+        reportWebVitals({
+          name: 'FID',
+          value: entry.processingStart - entry.startTime,
+          id: 'v3-' + Date.now()
+        });
+      }
+    }).observe({ entryTypes: ['first-input'] });
+  </script>
+</body>
+
+</html>
