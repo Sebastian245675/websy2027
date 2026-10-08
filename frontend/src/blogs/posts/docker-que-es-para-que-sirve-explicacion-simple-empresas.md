@@ -111,6 +111,14 @@ Docker Engine es de código abierto. Docker Desktop tiene condiciones de licenci
 
 No exactamente: es más liviano y comparte el sistema operativo del servidor. Se usan para cosas distintas y a veces juntos.
 
+### ¿Es seguro usar Docker en producción?
+
+Sí, con buenas prácticas: imágenes oficiales y actualizadas, contenedores que no corren como administrador, secretos fuera de las imágenes y solo los puertos necesarios expuestos. Las imágenes también se pueden escanear en busca de vulnerabilidades conocidas.
+
+### ¿Qué pasa con los datos cuando se reinicia un contenedor?
+
+Lo que se guarda dentro del contenedor se pierde al reemplazarlo. Los datos que deben persistir, como la base de datos o los archivos subidos, se guardan en volúmenes o en servicios externos.
+
 ## Infraestructura ordenada
 
 En Websy usamos Docker para que los sistemas se instalen y actualicen de forma confiable. Mira la [guía de hosting, seguridad y cloud](/blog/guia-hosting-seguridad-y-cloud-para-sitios-web) o [escríbenos](/contacto).

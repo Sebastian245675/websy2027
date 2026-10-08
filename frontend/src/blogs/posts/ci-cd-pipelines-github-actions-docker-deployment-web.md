@@ -103,6 +103,14 @@ Tiene minutos gratuitos mensuales para repositorios privados y es gratuito para 
 
 Una versión simple, sí: compilar y desplegar automáticamente ya evita errores. Las pruebas se suman a medida que el proyecto crece.
 
+### ¿Qué diferencia hay entre entrega continua y despliegue continuo?
+
+En la entrega continua, cada versión queda lista para publicar y una persona decide cuándo hacerlo. En el despliegue continuo, cada cambio que pasa las pruebas se publica solo, sin intervención.
+
+### ¿Cuánto tiempo lleva configurar un pipeline básico?
+
+Para un proyecto web, un pipeline que compile, pruebe y publique en un entorno de prueba se arma en poco tiempo. Lo que lleva más trabajo es escribir pruebas útiles, y eso se suma de forma gradual.
+
 ## Publicaciones seguras
 
 En Websy trabajamos con despliegues automáticos y verificaciones de cada publicación. Mira la [guía de hosting, seguridad y cloud](/blog/guia-hosting-seguridad-y-cloud-para-sitios-web) o [escríbenos](/contacto).
