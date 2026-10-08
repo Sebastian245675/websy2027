@@ -82,12 +82,13 @@ export const freelancerStartupPosts = [
   {
     id: 1308,
     slug: 'como-facturar-como-freelancer-argentina-monotributo-factura-electronica',
-    title: 'Cómo facturar como Freelancer en Argentina: Monotributo, Factura Electrónica y tips impositivos',
-    seoTitle: 'Facturar como Freelancer Argentina: Monotributo | Websy',
-    seoDescription: 'Guía completa para freelancers argentinos: cómo inscribirse en Monotributo, emitir facturas electrónicas, cobrar en USD y cumplir con AFIP.',
+    title: 'Cómo facturar como freelancer en Argentina: monotributo, factura C y E',
+    seoTitle: 'Cómo facturar como freelancer en Argentina (2026)',
+    seoDescription: 'Pasos para facturar como freelancer en Argentina: monotributo, Ingresos Brutos, factura C, factura E al exterior, recategorización y checklist mensual.',
     seoKeywords: 'facturar como freelancer argentina, monotributo freelancer, factura electronica freelancer, cobrar dolares freelancer argentina, impuestos freelancer',
     category: 'Industrias & Tech',
     date: '2026-07-26',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [1014, 1103, 1110]

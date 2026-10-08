@@ -1,62 +1,100 @@
-Automatizar la emisión de facturas electrónicas directamente al concretarse una venta es una necesidad operativa fundamental para cualquier PyME, e-commerce o sistema de gestión en Argentina.
+**Para integrar la factura electrónica de ARCA (ex AFIP) en un software, tu sistema se autentica en el WSAA con un certificado digital para obtener un ticket de acceso (token y sign), y con ese ticket llama al web service de facturación electrónica (WSFEv1) para consultar el último número de comprobante y solicitar el CAE de cada factura.** Todo se prueba primero en el ambiente de homologación y recién después se pasa a producción.
 
-Emitir comprobantes manualmente ingresando al portal de comprobantes en línea de AFIP para cada venta genera demoras, errores humanos y cuellos de botella en la operación. Integrar los **Web Services de AFIP (WSFE v1)** por API permite solicitar el **CAE (Código de Autorización Electrónico)** y generar facturas en PDF en milisegundos de forma transparente.
+Esta guía es para desarrolladores y equipos técnicos: arquitectura de la integración, cómo generar el certificado, el flujo de autenticación y emisión, los métodos principales, el manejo de errores y lo que suele fallar en producción. Si buscás la visión de negocio, mirá [automatizar la facturación electrónica](/blog/automatizar-facturacion-electronica-argentina-afip-sistema-web).
 
----
+## Las piezas de la integración
 
-## 1. El Flujo Técnico de Autenticación y Facturación con AFIP
+| Pieza | Qué es | Para qué se usa |
+| --- | --- | --- |
+| Certificado digital | Certificado X.509 emitido por ARCA a partir de tu CSR | Firmar el pedido de autenticación |
+| WSAA | Web Service de Autenticación y Autorización | Obtener el ticket de acceso para un servicio |
+| Ticket de acceso (TA) | Token y sign con vencimiento | Autenticar cada llamada al servicio de negocio |
+| WSFEv1 | Web service de factura electrónica (mercado interno) | Emitir comprobantes A, B, C y obtener el CAE |
+| Punto de venta para web services | Punto de venta habilitado en ARCA | Numerar los comprobantes emitidos por el sistema |
+| Homologación y producción | Dos ambientes separados con URLs y certificados propios | Probar sin emitir comprobantes reales |
 
-La arquitectura de comunicación con AFIP se divide en dos fases obligatorias: **WSAA (Autenticación)** y **WSFE (Facturación)**.
+Para exportación (factura E) existe un web service específico, distinto de WSFEv1.
 
+## Generar el certificado
+
+1. Generá una clave privada y un pedido de certificado (CSR) con OpenSSL, con el CUIT en el campo correspondiente del sujeto.
+2. En el sitio de ARCA, con clave fiscal, usá el servicio de administración de certificados digitales para subir el CSR y descargar el certificado.
+3. Con el administrador de relaciones de clave fiscal, autorizá ese certificado para el servicio de facturación electrónica.
+4. Guardá la clave privada en el servidor como secreto: nunca en el repositorio de código.
+
+En homologación el proceso es similar, con el certificado de testing.
+
+## Flujo de autenticación (WSAA)
+
+1. Tu sistema arma un "ticket de requerimiento de acceso" (un XML con el servicio pedido, por ejemplo `wsfe`, y una ventana de tiempo).
+2. Lo firma con el certificado y la clave privada (formato CMS/PKCS#7).
+3. Lo envía al WSAA, que devuelve el ticket de acceso con `token`, `sign` y su vencimiento.
+4. **Guardá el ticket y reutilizalo** hasta que venza: pedir uno nuevo en cada factura es un error frecuente y el WSAA rechaza pedidos repetidos mientras el anterior sigue vigente.
+
+## Flujo de emisión (WSFEv1)
+
+1. **Consultar el último comprobante autorizado** para el punto de venta y tipo de comprobante (`FECompUltimoAutorizado`).
+2. **Armar el comprobante** con el número siguiente, la fecha, el concepto (productos, servicios o ambos), el documento del receptor, los importes (neto, IVA discriminado según el tipo, total) y, si corresponde, las fechas de servicio.
+3. **Solicitar el CAE** (`FECAESolicitar`).
+4. **Leer el resultado**: aprobado, rechazado u observado, con el CAE y su vencimiento si se aprobó.
+5. **Generar el PDF** con el código QR que exige ARCA.
+6. **Guardar todo** asociado a la venta: número, CAE, vencimiento, respuesta completa.
+
+Los métodos auxiliares (tipos de comprobante, alícuotas de IVA, tipos de documento, monedas) permiten validar los datos antes de enviar.
+
+## Ejemplo de estructura en el backend
+
+```text
+FacturaService
+  ├── obtenerTicket(servicio)        -> usa el TA guardado o pide uno nuevo al WSAA
+  ├── ultimoNumero(ptoVta, tipo)     -> FECompUltimoAutorizado
+  ├── emitir(venta)                  -> arma el comprobante y llama a FECAESolicitar
+  ├── generarPdf(comprobante)        -> PDF con el QR
+  └── reintentarPendientes()         -> tarea programada para comprobantes sin CAE
 ```
-[ Sistema de Gestión Web ] ──► (Solicitá Ticket de Acceso TA al WSAA con Certificado X.509)
-                                                        │
-                                                        ▼
-[ Token y Sign Recibido ] ───► (Consulta a WSFE v1 enviando CUIT y detalles del comprobante)
-                                                        │
-                                                        ▼
-[ AFIP Devuelve CAE y Vencimiento ] ─► (Generación automática de Factura PDF con QR)
-```
 
-1. **Servicio WSAA (Web Service de Autenticación y Autorización)**:
-   - Requiere un certificado digital privado (.crt y .key) generado desde la web de AFIP con clave fiscal.
-   - Devuelve un Ticket de Acceso (Token + Sign) válido por **12 horas**, el cual debe guardarse en caché para no saturar los servidores de AFIP.
-2. **Servicio WSFE v1 (Web Service de Facturación Electrónica)**:
-   - Recibe los datos del comprobante (Punto de Venta, Tipo de Factura A/B/C, CUIT del comprador, Importe Neto, IVA del 21% o 10.5%).
-   - Si los datos son válidos, AFIP asigna y devuelve el número de **CAE y fecha de vencimiento**.
+## Errores y casos a manejar
 
----
+| Situación | Qué hacer |
+| --- | --- |
+| Rechazo por datos (importes, documento, tipo) | Mostrar el motivo, no reintentar sin corregir |
+| El servicio no responde | Marcar el comprobante como pendiente y reintentar |
+| Respuesta perdida tras enviar | Antes de reintentar, consultar el último autorizado para no duplicar ni saltear números |
+| Ticket de acceso vencido | Pedir uno nuevo y repetir la llamada |
+| Certificado vencido | Alertas con anticipación y procedimiento de renovación |
+| Ventas simultáneas | Serializar la emisión por punto de venta para no tomar el mismo número |
 
-## 2. Requisitos para Generación del Código QR Obligatorio de AFIP
+## Buenas prácticas
 
-Desde 2021, AFIP exige que todas las facturas electrónicas impresas o enviadas en PDF contengan un **código QR escaneable** que encodifique en Base64 una URL oficial con el siguiente formato JSON:
+- **Una cola de emisión por punto de venta**, para evitar números duplicados con ventas concurrentes.
+- **Logs de cada request y response** (sin datos sensibles innecesarios) para auditar.
+- **Separación de ambientes** con configuración, nunca con cambios en el código.
+- **Notas de crédito asociadas** al comprobante original para devoluciones.
+- **Alertas** de certificado próximo a vencer y de comprobantes pendientes.
+- **Seguir las novedades de ARCA**: los web services incorporan campos y validaciones nuevas cada tanto, y la documentación oficial es la referencia.
 
-```json
-{
-  "ver": 1,
-  "fecha": "2026-07-23",
-  "cuit": 30716543219,
-  "ptoVta": 5,
-  "tipoCmp": 1,
-  "nroCmp": 1420,
-  "importe": 150000.00,
-  "moneda": "PES",
-  "ctz": 1,
-  "tipoDocRec": 80,
-  "nroDocRec": 30554433221,
-  "tipoCodAut": "E",
-  "codAut": 74291823910283
-}
-```
+## Preguntas frecuentes
 
----
+### ¿Qué es el WSFEv1?
 
-## 3. Ventajas de la Integración Automatizada de AFIP de Websy
+Es el web service de factura electrónica de ARCA para el mercado interno. Permite solicitar el CAE de comprobantes A, B y C, y consultar números y parámetros.
 
-- **Emisión Instantánea**: La factura se emite y se envía por correo o WhatsApp al cliente inmediatamente después de confirmado el pago.
-- **Sincronización con MercadoPago**: Facturación automática de ventas cobradas por pasarelas de pago.
-- **Soporte para Notas de Crédito y Débito**: Anulación de comprobantes con un solo clic desde el panel de control.
+### ¿Qué es el WSAA?
 
----
+El web service de autenticación de ARCA. Con el certificado digital se obtiene un ticket de acceso (token y sign) que habilita las llamadas al servicio de facturación.
 
-En [Websy realizamos integraciones directas con los Web Services de AFIP para sistemas web, ERP y e-commerce](/servicios/sistemas-gestion). ¿Querés automatizar la facturación de tu empresa? [Contactate con nuestro equipo técnico](/contacto).
+### ¿Cuánto dura el ticket de acceso?
+
+Tiene un vencimiento de algunas horas. Se debe guardar y reutilizar hasta que venza, en lugar de pedir uno por cada factura.
+
+### ¿Puedo probar sin emitir facturas reales?
+
+Sí, en el ambiente de homologación de ARCA, con un certificado de testing y URLs propias.
+
+### ¿Conviene una librería o un servicio intermediario?
+
+Hay librerías de código abierto en varios lenguajes y servicios que exponen una API más simple. La integración directa da más control; un intermediario ahorra tiempo de desarrollo a cambio de un costo por uso.
+
+## Integramos ARCA en tu sistema
+
+En Websy integramos la facturación electrónica en sistemas de gestión y tiendas online, con manejo de errores y reintentos. Mirá el servicio de [sistemas de gestión](/servicios/sistemas-gestion) o [escribinos](/contacto).

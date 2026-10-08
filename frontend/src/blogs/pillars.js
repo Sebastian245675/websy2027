@@ -26,4 +26,16 @@ export const pillarPosts = [
     author: 'Sebastian Aguirre',
     pillar: true,
   },
+  {
+    id: 9008,
+    slug: 'guia-sistemas-de-gestion-crm-y-erp-para-pymes',
+    title: 'Sistemas de gestión, CRM y ERP para pymes: guía para elegir e implementar',
+    seoTitle: 'CRM, ERP y sistemas de gestión para pymes: guía',
+    seoDescription: 'Qué es un CRM y un ERP, cuál necesita tu pyme, cuándo conviene uno a medida, cuánto cuesta y cómo pasar de planillas de Excel a un sistema sin frenar la operación.',
+    seoKeywords: 'mejor crm para pymes, sistema de gestion para pymes, erp pymes, crm a medida',
+    date: '2026-10-08',
+    image: null,
+    author: 'Sebastian Aguirre',
+    pillar: true,
+  },
 ];

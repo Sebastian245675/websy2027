@@ -55,12 +55,13 @@ export const advancedGuidePosts = [
   {
     id: 1405,
     slug: 'como-crear-un-saas-desde-cero-guia-tecnica-negocio',
-    title: 'Cómo Crear un SaaS desde Cero: Guía Técnica y de Negocio para Emprendedores Tech',
-    seoTitle: 'Crear SaaS desde Cero: Guía Técnica y Negocio | Websy',
-    seoDescription: 'Todo lo que necesitás saber para crear un producto SaaS: validación de idea, stack tecnológico, arquitectura multi-tenant, modelo de precios y lanzamiento.',
+    title: 'Cómo crear un SaaS desde cero: validación, MVP, precios y métricas',
+    seoTitle: 'Cómo crear un SaaS desde cero: guía paso a paso',
+    seoDescription: 'Cómo validar la idea, qué incluir en el MVP, decisiones técnicas, precios y planes, métricas clave y una hoja de ruta de 90 días para lanzar tu SaaS.',
     seoKeywords: 'como crear un saas, crear software saas, emprender saas, startup saas, saas desde cero, desarrollo saas',
     category: 'SaaS & Software Nube',
     date: '2026-07-29',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [1112, 501, 101]

@@ -2,12 +2,13 @@ export const techNicheIndustriesPosts = [
   {
     id: 801,
     slug: 'desarrollo-de-software-saas-multi-tenant-guia-arquitectura',
-    title: 'Desarrollo de Software SaaS Multi-Tenant: Guía completa de arquitectura y monetización',
-    seoTitle: 'Cómo desarrollar un Software SaaS Multi-Tenant en 2026 | Websy',
-    seoDescription: 'Aprendé los pilares fundamentales para crear un modelo de negocio Software-as-a-Service (SaaS). Aislamiento de datos, modelos de suscripción y escalabilidad.',
+    title: 'Arquitectura multi-tenant para SaaS: modelos, aislamiento de datos y escala',
+    seoTitle: 'Arquitectura multi-tenant para SaaS: guía técnica',
+    seoDescription: 'Los tres modelos multi-tenant, cómo aislar los datos con Row Level Security, identificar el tenant, migraciones, personalización y cómo escalar.',
     seoKeywords: 'desarrollo saas multi tenant, crear software saas argentina, arquitectura saas suscripciones, desarrollar plataforma saas',
     category: 'SaaS & Software Nube',
     date: '2026-07-14',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [802, 803, 804]

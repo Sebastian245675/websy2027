@@ -1,64 +1,112 @@
-El mercado global de SaaS alcanzará $908 mil millones en 2030. Y la barrera de entrada nunca fue tan baja: con $5.000-$15.000 USD podés construir y lanzar un MVP funcional de tu producto SaaS.
+**Para crear un SaaS desde cero conviene seguir este orden: validar que el problema existe y que hay quien pague por resolverlo, construir un MVP con las funciones mínimas, cobrar suscripciones desde el principio, medir retención y ampliar el producto según lo que piden los clientes que pagan.** La tecnología importa, pero la mayoría de los SaaS que fracasan lo hacen por construir algo que nadie necesitaba o por no saber cobrar.
 
----
+En esta guía verás cómo validar la idea, qué incluir en el MVP, las decisiones técnicas clave (arquitectura, pagos, seguridad), cómo definir precios y planes, qué métricas seguir y cuánto cuesta lanzar.
 
-## Paso 1: Validar la Idea (antes de escribir código)
+## 1. Validar antes de programar
 
-El 42% de las startups fracasan porque construyen algo que nadie necesita. Antes de invertir en desarrollo:
+- **Define el problema y para quién**: "las veterinarias pierden turnos por no tener recordatorios" es mejor que "un software para veterinarias".
+- **Habla con 15 a 20 potenciales clientes**: cómo resuelven hoy el problema, cuánto les cuesta, qué usan.
+- **Muestra un prototipo** navegable (por ejemplo en Figma) antes de desarrollar.
+- **Pide un compromiso**: una preventa, una carta de intención o una lista de espera con datos de contacto.
 
-1. **Identificar el dolor**: ¿Qué tarea hacen tus potenciales clientes que es manual, lenta o propensa a errores?
-2. **Hablar con 20+ potenciales clientes**: No vendas tu solución, preguntá sobre su problema.
-3. **Buscar competidores**: Si no hay competidores, probablemente no hay mercado. Si hay muchos, hay demanda comprobada.
-4. **Crear landing page de validación**: Describí el producto, poné un botón "Registrarme para acceso temprano" y medí cuántos se inscriben.
+Si nadie está dispuesto a pagar o a comprometerse, es mejor saberlo antes de invertir en desarrollo.
 
----
+## 2. Qué incluir en el MVP
 
-## Paso 2: Definir el MVP (Minimum Viable Product)
+El MVP (producto mínimo viable) es la versión más chica que resuelve el problema principal y que alguien pagaría.
 
-El MVP es la versión más simple de tu producto que resuelve el problema principal. NO es el producto completo.
-
-### Regla del MVP:
-- ¿Tu usuario puede lograr su objetivo principal? → **Incluir**.
-- ¿Es un nice-to-have que no bloquea el uso? → **No incluir** (versión 2).
-
----
-
-## Paso 3: Stack Tecnológico Recomendado para SaaS
-
-| Capa | Tecnología Recomendada |
+| Incluir | Dejar para después |
 | --- | --- |
-| **Frontend** | Next.js (React) |
-| **Backend** | Node.js + NestJS o Python + FastAPI |
-| **Base de Datos** | PostgreSQL (Supabase) |
-| **Autenticación** | NextAuth.js o Supabase Auth |
-| **Pagos** | Stripe Billing (suscripciones) |
-| **Email** | Resend o SendGrid |
-| **Hosting** | Vercel (frontend) + Railway/Render (backend) |
-| **Monitoreo** | Sentry (errores) + PostHog (analytics) |
+| La función principal que resuelve el problema | Funciones secundarias |
+| Registro e inicio de sesión | Inicio de sesión con todas las redes |
+| Gestión básica de la cuenta y usuarios | Roles y permisos avanzados |
+| Cobro de la suscripción | Muchos planes y cupones |
+| Soporte por un canal | Centro de ayuda completo |
+| Métricas de uso | Reportes avanzados para el cliente |
 
----
+## 3. Decisiones técnicas clave
 
-## Paso 4: Arquitectura Multi-Tenant
+### Arquitectura multi-tenant
 
-En SaaS, múltiples empresas (tenants) usan el mismo software pero con datos aislados. Hay 3 modelos:
+Un SaaS atiende a muchas empresas en la misma plataforma. La forma de separar los datos de cada cliente es una de las decisiones más importantes y difíciles de cambiar después. Lo explicamos en [arquitectura multi-tenant](/blog/desarrollo-de-software-saas-multi-tenant-guia-arquitectura).
 
-| Modelo | Aislamiento | Costo | Ideal Para |
-| --- | --- | --- | --- |
-| **Base de datos compartida, schema compartido** | Bajo (row-level) | Muy bajo | MVP, startups |
-| **Base de datos compartida, schema separado** | Medio | Medio | SaaS en crecimiento |
-| **Base de datos separada por tenant** | Alto | Alto | Enterprise, salud, finanzas |
+### Stack tecnológico
 
----
+Una combinación habitual y probada: frontend en React o Next.js, backend en Node.js o Python, base de datos PostgreSQL, alojamiento en la nube. Más importante que la tecnología exacta es que sea estándar, para conseguir desarrolladores y escalar.
 
-## Paso 5: Modelo de Precios
+### Cobros recurrentes
 
-| Modelo | Ejemplo |
+Para cobrar suscripciones se usan plataformas como Stripe (internacional) o Mercado Pago (suscripciones en varios países de Latinoamérica). Hay que resolver pruebas gratuitas, cambios de plan, fallos de cobro y facturación electrónica según el país. Ver [Stripe vs Mercado Pago](/blog/stripe-vs-mercadopago-cual-pasarela-pagos-elegir-ecommerce).
+
+### Seguridad
+
+Aislamiento de datos entre clientes, contraseñas cifradas, permisos por rol, copias de seguridad y registros de acceso. Un error de seguridad que expone datos de un cliente a otro puede terminar con el negocio. Ver [OWASP Top 10](/blog/ciberseguridad-web-owasp-top-10-como-proteger-tu-pagina-o-app).
+
+## 4. Precios y planes
+
+| Modelo | Cómo cobra | Conviene cuando |
+| --- | --- | --- |
+| Por usuario | Precio por cada persona que usa el sistema | El valor crece con el equipo |
+| Por uso | Según volumen (envíos, facturas, mensajes) | El valor depende del volumen |
+| Por niveles | Planes básico, profesional, empresa | Clientes de distintos tamaños |
+| Freemium | Plan gratuito limitado y planes pagos | El producto se vende solo y el costo de un usuario gratuito es bajo |
+
+Empieza simple: dos o tres planes como máximo. Cobra desde el primer cliente, aunque sea con descuento de lanzamiento: el cliente que paga da información mucho más valiosa que el que usa gratis.
+
+## 5. Métricas de un SaaS
+
+| Métrica | Qué mide |
 | --- | --- |
-| **Freemium** | Plan gratis limitado + planes pagos | 
-| **Flat Rate** | $29/mes por usuario |
-| **Por Uso** | $0.01 por transacción procesada |
-| **Por Tiers** | Starter $19/mes → Pro $49/mes → Business $99/mes |
+| MRR (ingreso recurrente mensual) | Cuánto factura el SaaS por mes en suscripciones |
+| Churn (cancelaciones) | Qué porcentaje de clientes se da de baja cada mes |
+| CAC (costo de adquisición) | Cuánto cuesta conseguir un cliente |
+| LTV (valor de vida del cliente) | Cuánto deja un cliente durante toda su permanencia |
+| Activación | Qué porcentaje de nuevos usuarios llega a usar la función principal |
 
----
+Un SaaS sano tiene un LTV varias veces mayor que el CAC y un churn bajo y estable.
 
-En [Websy desarrollamos productos SaaS desde la validación hasta el lanzamiento](/servicios/desarrollo-web). [Construí tu SaaS con nosotros](/contacto).
+## 6. Cuánto cuesta lanzar un SaaS
+
+Depende del alcance del MVP. Como referencia, un sistema de gestión a medida para pymes en Websy va de USD 4.000 a 8.000; un SaaS suma la parte multi-tenant, los cobros recurrentes y el panel de administración de la plataforma, por lo que se cotiza según el alcance. A eso se agregan hosting, servicios externos, soporte y marketing.
+
+## Hoja de ruta de 90 días para el MVP
+
+| Período | Objetivo | Resultado esperado |
+| --- | --- | --- |
+| Semanas 1 y 2 | Entrevistas con clientes potenciales y prototipo | Problema confirmado y lista de interesados |
+| Semanas 3 y 4 | Diseño de pantallas y arquitectura | Alcance del MVP cerrado y aprobado |
+| Semanas 5 a 10 | Desarrollo de la función principal, cuentas y cobros | MVP funcionando en ambiente de prueba |
+| Semana 11 | Prueba con los primeros clientes | Errores corregidos y ajustes de uso |
+| Semana 12 | Lanzamiento con precio de lanzamiento | Primeros clientes pagando |
+
+Después del lanzamiento, el trabajo cambia: medir activación y cancelaciones, hablar con quienes se dan de baja y priorizar las mejoras que retienen clientes.
+
+## Errores comunes
+
+- **Construir durante meses sin mostrarlo a nadie**.
+- **Demasiadas funciones en el MVP**.
+- **No cobrar al principio** "para conseguir usuarios".
+- **Elegir una arquitectura que no separa bien los datos** de cada cliente.
+- **Ignorar el soporte y la incorporación de clientes nuevos**: buena parte del churn ocurre en las primeras semanas.
+
+## Preguntas frecuentes
+
+### ¿Cómo crear un SaaS desde cero?
+
+Valida el problema con clientes potenciales, construye un MVP con la función principal, cobra suscripciones desde el inicio, mide uso y cancelaciones, y amplía según lo que piden los clientes que pagan.
+
+### ¿Cuánto cuesta desarrollar un SaaS?
+
+Depende del alcance del MVP, la arquitectura multi-tenant, los cobros y las integraciones. Conviene empezar con un MVP acotado y crecer por etapas.
+
+### ¿Qué tecnología usar para un SaaS?
+
+Una combinación estándar como React o Next.js, Node.js o Python, PostgreSQL y alojamiento en la nube. Lo importante es que sea mantenible y escalable.
+
+### ¿Cómo cobrar suscripciones en Latinoamérica?
+
+Con plataformas como Mercado Pago (suscripciones en varios países de la región) o Stripe para pagos internacionales, más la facturación electrónica del país.
+
+## Desarrollamos tu SaaS
+
+En Websy acompañamos desde el MVP hasta el lanzamiento. Mira la [guía de sistemas de gestión](/blog/guia-sistemas-de-gestion-crm-y-erp-para-pymes), el servicio de [sistemas a medida](/servicios/sistemas-gestion) o [escríbenos](/contacto).

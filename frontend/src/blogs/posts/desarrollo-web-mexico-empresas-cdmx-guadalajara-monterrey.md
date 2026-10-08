@@ -45,7 +45,7 @@ Para vender en todo el país hay que integrar paqueterías o un agregador de env
 
 ## Un ejemplo real: 4 sucursales en un solo sistema
 
-Para una cadena de bicicletas con 4 sucursales en México desarrollamos un [sistema de gestión con tienda en línea conectada](/casos-de-exito/sistema-gestion-sucursales-tienda-online-bicicleteria-mexico). Antes, cada sucursal llevaba su propio stock; ahora las cuatro y la tienda en línea trabajan sobre la misma base de datos, así que lo que se vende en un local deja de estar disponible en línea al instante. Es un ejemplo de por qué, a partir de cierto tamaño, conviene un sistema a medida antes que varias herramientas sueltas.
+Para una cadena de bicicletas con 4 sucursales en México desarrollamos un [sistema de gestión con tienda en línea conectada](/casos-de-exito/sistema-gestion-sucursales-tienda-online-bicicleteria-mexico). Las cuatro sucursales y la tienda en línea trabajan sobre la misma base de datos, así que lo que se vende en un local deja de estar disponible en línea al instante. Evita el problema típico de las cadenas: que cada local lleve su propio stock y se publique en línea lo que ya se vendió. Es un ejemplo de por qué, a partir de cierto tamaño, conviene un sistema a medida antes que varias herramientas sueltas.
 
 ## Ciudad de México, Guadalajara y Monterrey
 
