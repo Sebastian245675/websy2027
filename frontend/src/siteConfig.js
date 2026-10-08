@@ -5,6 +5,7 @@ export const CONTACT = {
   phoneDisplay: '+54 9 388 484-6695',
   whatsapp: '5493884846695',
   location: 'Salta, Argentina',
+  address: 'San Luis 2105, Salta',
 };
 
 export const whatsappUrl = (text) =>

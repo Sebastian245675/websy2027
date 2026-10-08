@@ -20,6 +20,7 @@ const staticPages = [
   { loc: '/', page: 'pages/HomePage.jsx', changefreq: 'weekly', priority: '1.0' },
   { loc: '/servicios', page: 'pages/ServicesPage.jsx', changefreq: 'monthly', priority: '0.9' },
   { loc: '/planes', page: 'pages/PlansPage.jsx', changefreq: 'monthly', priority: '0.9' },
+  { loc: '/diseno-web-salta', page: 'pages/SaltaPage.jsx', changefreq: 'monthly', priority: '0.9' },
   { loc: '/casos-de-exito', page: 'pages/SuccessStoriesPage.jsx', changefreq: 'monthly', priority: '0.8' },
   { loc: '/contacto', page: 'pages/ContactPage.jsx', changefreq: 'monthly', priority: '0.9' },
   { loc: '/blog', page: 'pages/BlogPage.jsx', changefreq: 'weekly', priority: '0.9' },

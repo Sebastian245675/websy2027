@@ -36,6 +36,7 @@ export const Footer = () => {
     { name: t('footer.links.cases'), to: '/casos-de-exito' },
     { name: t('footer.links.investment'), to: '/planes' },
     { name: t('footer.links.blog'), to: '/blog' },
+    { name: 'Diseño web en Salta', to: '/diseno-web-salta' },
     { name: t('footer.links.contact'), to: '/contacto' },
   ];
 
@@ -86,7 +87,7 @@ export const Footer = () => {
           <ul className="space-y-2">
             <li><a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" data-wa-location="pie_telefono" className={linkCls}>{CONTACT.phoneDisplay}</a></li>
             <li><a href={`mailto:${CONTACT.email}`} className={linkCls}>{CONTACT.email}</a></li>
-            <li className="text-xs text-[#666]">{CONTACT.location}</li>
+            <li><Link to="/diseno-web-salta" className={linkCls}>{CONTACT.address}</Link></li>
           </ul>
         </div>
 

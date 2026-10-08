@@ -114,6 +114,10 @@ const NotFoundPage = lazy(() =>
   import("./pages/NotFoundPage").then(module => ({ default: module.NotFoundPage }))
 );
 
+const SaltaPage = lazy(() =>
+  import("./pages/SaltaPage").then(module => ({ default: module.SaltaPage }))
+);
+
 const NicheLandingPage = lazy(() =>
   import("./pages/NicheLandingPage").then(module => ({ default: module.NicheLandingPage }))
 );
@@ -233,6 +237,11 @@ function App() {
                     <Route path="/blog" element={
                       <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
                         <BlogPage />
+                      </Suspense>
+                    } />
+                    <Route path="/diseno-web-salta" element={
+                      <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
+                        <SaltaPage />
                       </Suspense>
                     } />
                     <Route path="/politica-de-privacidad" element={

@@ -271,6 +271,26 @@ export const ServiceDetailPage = () => {
         </div>
       </section>
 
+      {/* Local page: Salta clients land on the page with the office, local cases and prices */}
+      <section className="py-12 md:py-14">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <div className="rounded-2xl bg-[#182A2C] text-white p-7 md:p-9 flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+            <div>
+              <h2 className="text-xl md:text-2xl font-black">¿Tu empresa está en Salta?</h2>
+              <p className="mt-2 text-sm md:text-base text-white/75 max-w-2xl">
+                Te recibimos en nuestra oficina de San Luis 2105. Mirá precios, casos del NOA y cómo trabajamos con negocios salteños.
+              </p>
+            </div>
+            <Link
+              to="/diseno-web-salta"
+              className="shrink-0 inline-flex items-center justify-center rounded-full bg-[#d9fb06] px-6 py-3 text-sm font-bold text-[#182A2C] hover:bg-white transition-colors"
+            >
+              Diseño web en Salta
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Related Services */}
       {relatedServices.length > 0 && (
         <section className="py-16 md:py-20 bg-[#f9fafb]">
