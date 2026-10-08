@@ -15,12 +15,13 @@ export const advancedGuidePosts = [
   {
     id: 1402,
     slug: 'inteligencia-artificial-chatgpt-como-usarlo-en-tu-empresa-ejemplos',
-    title: 'ChatGPT para Empresas: 15 Formas Prácticas de usar IA para ahorrar tiempo y ganar más',
-    seoTitle: 'ChatGPT para Empresas: 15 Usos Prácticos | Websy',
-    seoDescription: 'Descubrí 15 formas concretas de usar ChatGPT y la IA en tu empresa: atención al cliente, ventas, marketing, RRHH, operaciones y más.',
+    title: 'Cómo usar ChatGPT en tu empresa: ejemplos por área e instrucciones listas',
+    seoTitle: 'Cómo usar ChatGPT en tu empresa: ejemplos por área',
+    seoDescription: 'Ejemplos para usar ChatGPT en atención, ventas, marketing y administración, cómo escribir buenas instrucciones, qué datos no cargar y cuándo integrarlo.',
     seoKeywords: 'chatgpt para empresas, como usar chatgpt en mi negocio, inteligencia artificial empresas, ia para negocios, chatgpt uso empresarial',
     category: 'IA & Automatización',
     date: '2026-08-01',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [909, 407, 1304]

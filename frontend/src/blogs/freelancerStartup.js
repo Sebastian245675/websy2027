@@ -29,12 +29,13 @@ export const freelancerStartupPosts = [
   {
     id: 1304,
     slug: 'automatizar-procesos-empresa-herramientas-sin-programar',
-    title: 'Cómo automatizar procesos en tu empresa sin saber programar: Zapier, Make y No-Code',
-    seoTitle: 'Automatizar Procesos Empresa sin Programar | Websy',
-    seoDescription: 'Guía de automatización empresarial con herramientas no-code: Zapier, Make (Integromat), n8n. Automatiza facturación, emails, CRM y más sin escribir código.',
+    title: 'Cómo automatizar los procesos de una empresa sin programar: método y herramientas',
+    seoTitle: 'Automatizar procesos de una empresa sin programar',
+    seoDescription: 'Qué procesos automatizar primero, ejemplos por área, Zapier vs Make vs n8n y un método paso a paso para tu primera automatización sin escribir código.',
     seoKeywords: 'automatizar procesos empresa, zapier automatizacion, make integromat, no code automatizacion, automatizar tareas repetitivas, automatizacion sin programar',
     category: 'IA & Automatización',
     date: '2026-07-30',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [909, 407, 1012]
@@ -134,12 +135,13 @@ export const freelancerStartupPosts = [
   {
     id: 1312,
     slug: 'whatsapp-business-api-vs-app-diferencias-como-implementar',
-    title: 'WhatsApp Business API vs App: Diferencias, Cuál Elegir y Cómo Implementar en tu Empresa',
-    seoTitle: 'WhatsApp Business API vs App: Diferencias | Websy',
-    seoDescription: 'Entiende la diferencia entre WhatsApp Business App (gratis) y WhatsApp Business API (empresarial). Cuál necesitás y cómo implementar cada uno.',
+    title: 'WhatsApp Business API vs app: diferencias, precios y cómo implementarla',
+    seoTitle: 'WhatsApp Business API vs app: diferencias y precios',
+    seoDescription: 'App WhatsApp Business vs API: costo por plantilla, varios agentes, chatbots e integraciones. Cuál necesitas y cómo implementar la API paso a paso.',
     seoKeywords: 'whatsapp business api, whatsapp business app, diferencia whatsapp business api, whatsapp empresarial, whatsapp api empresa, whatsapp business gratis',
     category: 'IA & Automatización',
     date: '2026-07-22',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [1007, 909, 407]

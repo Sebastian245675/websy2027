@@ -1,62 +1,91 @@
-En el ecosistema de desarrollo de Inteligencia Artificial para empresas, el término **RAG (Retrieval-Augmented Generation)** se ha convertido en el estándar de oro absoluto.
+**RAG (Retrieval-Augmented Generation, o generación aumentada por recuperación) es una técnica que hace que un modelo de inteligencia artificial responda usando la información de tu empresa: antes de redactar, el sistema busca en tus documentos los fragmentos relevantes para la pregunta y se los pasa al modelo junto con la instrucción de responder solo con eso.** Así un asistente puede hablar de tus precios, tus productos o tus procesos sin "entrenar" un modelo propio y con mucho menos riesgo de inventar.
 
-Pero, ¿qué es exactamente RAG y por qué las empresas no pueden confiar únicamente en modelos LLM tradicionales como ChatGPT sin esta tecnología?
+En esta guía verás cómo funciona RAG paso a paso, en qué se diferencia de entrenar un modelo, qué casos de uso tiene en una empresa, cómo se implementa y qué errores hacen que falle.
 
----
+## Por qué hace falta RAG
 
-## 1. Definición Básica: ¿Qué es RAG?
+Un modelo de lenguaje sabe mucho de temas generales, pero no conoce tu catálogo, tus precios de este mes ni tu manual de procedimientos. Si le preguntas, puede responder con seguridad algo que no es cierto. RAG resuelve ese problema dándole, en cada pregunta, la información correcta para responder.
 
-**Retrieval-Augmented Generation** (Generación Aumentada por Recuperación) es un patrón de arquitectura de software que combina el poder de comprensión del lenguaje natural de los Grandes Modelos de Lenguaje (LLMs) con la precisión de tus bases de datos privadas en tiempo real.
+## Cómo funciona, paso a paso
 
-En lugar de reentrenar un modelo costoso (Fine-Tuning), RAG funciona como un **examen con libro abierto**: cuando el usuario hace una pregunta, el sistema busca los fragmentos exactos de información dentro de tus documentos y se los entrega al LLM para que redacte la respuesta final.
+### Preparación (una vez y cada vez que cambia la información)
 
----
+1. **Reunir los documentos**: catálogo, preguntas frecuentes, políticas, manuales, fichas técnicas.
+2. **Dividirlos en fragmentos** de tamaño manejable, por ejemplo por sección o por producto.
+3. **Convertir cada fragmento en un "embedding"**: una representación numérica de su significado.
+4. **Guardar los fragmentos y sus embeddings** en una base de datos que permite buscar por significado (una base vectorial).
 
-## 2. Las 3 Fases del Flujo RAG
+### En cada pregunta
 
-```
-┌─────────────────────────────────────────────────────────┐
-│ 1. FASE DE RECUPERACIÓN (RETRIEVAL)                      │
-│ Búsqueda semántica por vectores en Pinecone / PGVector  │
-└──────────────────────────┬──────────────────────────────┘
-                           │
-                           ▼
-┌─────────────────────────────────────────────────────────┐
-│ 2. FASE DE AUMENTO (AUGMENTATION)                       │
-│ Se inyecta la información privada recuperada en el Prompt│
-└──────────────────────────┬──────────────────────────────┘
-                           │
-                           ▼
-┌─────────────────────────────────────────────────────────┐
-│ 3. FASE DE GENERACIÓN (GENERATION)                      │
-│ El LLM (GPT-4o / Claude) sintetiza la respuesta final    │
-└─────────────────────────────────────────────────────────┘
-```
+1. El usuario pregunta algo.
+2. La pregunta se convierte en embedding.
+3. Se buscan los fragmentos con significado más parecido.
+4. Se arma la instrucción para el modelo: la pregunta, los fragmentos encontrados y la regla de responder solo con esa información.
+5. El modelo redacta la respuesta, idealmente indicando de qué documento salió.
 
-1. **Retrieval (Recuperación)**: El sistema recibe la consulta del usuario, genera un embedding numérico y busca en la base de datos vectorial los 3 a 5 párrafos más parecidos.
-2. **Augmentation (Aumento)**: Inserta esos párrafos directamente dentro de las instrucciones del sistema (Prompt) como contexto verificado.
-3. **Generation (Generación)**: El modelo genera una respuesta natural, precisa y 100% respaldada por tus documentos originales.
+## RAG vs entrenar un modelo
 
----
-
-## 3. Ventajas de RAG vs. Fine-Tuning Tradicional
-
-| Criterio | Fine-Tuning Tradicional | Arquitectura RAG (Websy) |
+| | RAG | Entrenar o ajustar un modelo (fine-tuning) |
 | --- | --- | --- |
-| **Costo de Actualización** | Altísimo (miles de dólares por reentrenamiento) | Instantáneo (basta agregar un documento a la BD) |
-| **Tiempos de Implementación** | Semanas / Meses | Días u Horas |
-| **Control de Alucinaciones** | Medio / Incierto | Ultra preciso (Cero inventos) |
-| **Trazabilidad de Fuentes** | Imposible saber de dónde sacó la respuesta | Muestra el documento y página de origen exacta |
-| **Seguridad de Datos** | Riesgo de fuga en el modelo | Privacidad garantizada |
+| Para qué sirve | Responder con información que cambia | Enseñar un estilo o un formato muy específico |
+| Actualizar la información | Cambias el documento y listo | Hay que volver a entrenar |
+| Costo inicial | Bajo a medio | Mayor |
+| Riesgo de inventar | Menor, si está bien configurado | No resuelve el problema por sí solo |
+| Trazabilidad | Puedes mostrar de dónde sale cada respuesta | Difícil |
 
----
+Para la mayoría de las empresas, RAG es la opción correcta: la información de un negocio cambia seguido y tiene que poder actualizarse sin tocar el modelo.
 
-## 4. Casos Prácticos de Aplicación Empresarial
+## Casos de uso en empresas
 
-- **Asistente Legal y de Contratos**: Analiza cientos de PDFs de contratos en segundos y cita la cláusula exacta.
-- **Soporte Técnico de Maquinaria / Software**: Responde procedimientos de reparación consultando manuales técnicos de 500 páginas.
-- **Consultas Financieras y ERP**: Permite a gerentes consultar estados de cuenta y proyecciones en lenguaje cotidiano.
+- **Atención al cliente**: un asistente en WhatsApp o en la web que responde con tu catálogo y tus políticas. Ver [cómo crear un chatbot con IA](/blog/como-crear-un-chatbot-con-ia-para-tu-empresa-openai-api).
+- **Base de conocimiento interna**: el equipo pregunta "¿cómo se procesa una devolución?" y obtiene la respuesta del manual.
+- **Soporte técnico**: respuestas a partir de manuales y fichas de producto.
+- **Ventas**: el vendedor consulta especificaciones y condiciones sin buscar en carpetas.
+- **Legal y administración**: encontrar cláusulas o requisitos en documentos largos (siempre con revisión profesional).
 
----
+## Cómo se implementa
 
-En [Websy implementamos arquitecturas RAG empresariales de alto rendimiento](/servicios/automatizaciones-ia). [Hablá con nuestros ingenieros de IA hoy mismo](/contacto).
+| Pieza | Opciones habituales |
+| --- | --- |
+| Modelo de lenguaje | Modelos de OpenAI, Anthropic, Google o de código abierto |
+| Modelo de embeddings | Los que ofrecen esos mismos proveedores |
+| Base vectorial | PostgreSQL con la extensión pgvector, o servicios especializados |
+| Orquestación | Código propio, librerías como LangChain o LlamaIndex, o nodos de IA en n8n |
+| Canal | WhatsApp, chat web, el CRM o el sistema interno |
+
+Si tu sistema ya usa PostgreSQL, pgvector permite guardar los embeddings en la misma base de datos, sin sumar otro servicio.
+
+## Errores que hacen fallar un RAG
+
+- **Documentos desordenados o desactualizados**: el asistente responde con la versión vieja del precio.
+- **Fragmentos mal cortados**: una tabla partida al medio pierde sentido.
+- **Buscar pocos fragmentos o demasiados**: con pocos falta contexto; con demasiados el modelo se confunde y cuesta más.
+- **No permitir que diga "no sé"**: si no encuentra información, tiene que reconocerlo.
+- **No medir**: hay que probar con preguntas reales y revisar qué fragmentos se usaron.
+- **Ignorar permisos**: un empleado de ventas no debería obtener respuestas de documentos de recursos humanos.
+
+## Cómo medir la calidad
+
+Arma un set de preguntas reales con la respuesta correcta. Para cada una, revisa si el sistema encontró los fragmentos correctos y si la respuesta es fiel a ellos. Repite la prueba cada vez que cambies documentos o configuración.
+
+## Preguntas frecuentes
+
+### ¿Qué es RAG en inteligencia artificial?
+
+Es una técnica que busca información relevante en tus documentos y se la pasa al modelo de lenguaje para que responda con esos datos, en lugar de responder solo con lo que aprendió en su entrenamiento.
+
+### ¿Para qué sirve RAG en una empresa?
+
+Para asistentes que responden con la información real del negocio: atención al cliente, bases de conocimiento internas, soporte técnico y consulta de documentos.
+
+### ¿RAG elimina las alucinaciones?
+
+Las reduce mucho, pero no las elimina por completo. Se complementa con instrucciones claras, la opción de decir "no sé", citas de la fuente y revisión de conversaciones.
+
+### ¿Necesito entrenar un modelo propio?
+
+En la mayoría de los casos no. RAG permite usar un modelo existente con tu información, y actualizarla es tan simple como cambiar el documento.
+
+## Implementamos asistentes con tu información
+
+En Websy armamos asistentes con RAG conectados a WhatsApp, a la web o a tu sistema. Mira la [guía de automatización e IA](/blog/guia-automatizacion-e-inteligencia-artificial-para-empresas), qué es [un agente de IA](/blog/agentes-de-ia-autonomos-con-langchain-y-n8n-automatizacion) o [escríbenos](/contacto).

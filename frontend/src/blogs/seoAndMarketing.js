@@ -94,12 +94,13 @@ export const seoAndMarketingPosts = [
   {
     id: 909,
     slug: 'que-es-inteligencia-artificial-y-como-puede-ayudar-a-mi-empresa',
-    title: '¿Qué es la Inteligencia Artificial y cómo puede ayudar a mi empresa a vender más?',
-    seoTitle: 'Inteligencia Artificial para Empresas: Qué es y Cómo Usarla | Websy',
-    seoDescription: 'Explicación simple y práctica de qué es la IA, cómo funciona ChatGPT y 5 formas concretas de aplicar Inteligencia Artificial en tu PyME para aumentar ventas.',
+    title: 'Inteligencia artificial para empresas: qué es, tipos y cómo puede ayudar a tu pyme',
+    seoTitle: 'Inteligencia artificial para empresas: qué es y usos',
+    seoDescription: 'Qué es la inteligencia artificial explicada simple, tipos que usa una empresa, ejemplos por área, límites, cuánto cuesta y cómo empezar sin riesgos.',
     seoKeywords: 'que es inteligencia artificial, ia para empresas pymes, como usar chatgpt en mi negocio, inteligencia artificial ventas, automatizacion ia empresa',
     category: 'IA & Automatización',
     date: '2026-07-26',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [407, 406, 405]

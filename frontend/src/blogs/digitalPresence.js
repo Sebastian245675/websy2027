@@ -80,12 +80,13 @@ export const digitalPresencePosts = [
   {
     id: 1007,
     slug: 'chatbot-whatsapp-business-automatizar-respuestas-clientes',
-    title: 'Chatbot para WhatsApp Business: Cómo automatizar respuestas y no perder clientes',
-    seoTitle: 'Chatbot WhatsApp Business: Automatizar Respuestas | Websy',
-    seoDescription: 'Implementa un chatbot inteligente en WhatsApp Business que responde consultas de clientes 24/7, califica leads y agenda reuniones automáticamente.',
+    title: 'Chatbot para WhatsApp: qué es, tipos, cómo implementarlo y cuánto cuesta',
+    seoTitle: 'Chatbot para WhatsApp: tipos, cómo instalarlo y costos',
+    seoDescription: 'Qué hace un chatbot para WhatsApp, chatbot de menú o con IA, cómo elegir plataforma, implementación paso a paso, costos y ejemplos por rubro.',
     seoKeywords: 'chatbot whatsapp business, automatizar whatsapp, bot whatsapp empresa, respuestas automaticas whatsapp, whatsapp business automatizacion',
     category: 'IA & Automatización',
     date: '2026-07-26',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [909, 407, 406]

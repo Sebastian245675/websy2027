@@ -14,4 +14,16 @@ export const pillarPosts = [
     author: 'Sebastian Aguirre',
     pillar: true,
   },
+  {
+    id: 9006,
+    slug: 'guia-automatizacion-e-inteligencia-artificial-para-empresas',
+    title: 'Automatización e inteligencia artificial para empresas: guía práctica',
+    seoTitle: 'Automatización e IA para empresas: guía práctica 2026',
+    seoDescription: 'Qué procesos conviene automatizar, cómo usar WhatsApp, chatbots e IA generativa en una pyme, con qué herramientas y cómo calcular si la inversión se paga.',
+    seoKeywords: 'automatizacion de procesos, inteligencia artificial para empresas, automatizar whatsapp, chatbot ia',
+    date: '2026-10-08',
+    image: null,
+    author: 'Sebastian Aguirre',
+    pillar: true,
+  },
 ];

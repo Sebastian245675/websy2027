@@ -82,12 +82,13 @@ export const businessTechPosts = [
   {
     id: 1107,
     slug: 'email-marketing-automatizado-guia-pymes-herramientas',
-    title: 'Email Marketing Automatizado: La Máquina de Ventas que trabaja mientras dormís',
-    seoTitle: 'Email Marketing Automatizado para PyMEs: Guía 2026 | Websy',
-    seoDescription: 'Aprendé a crear campañas de email marketing automatizadas que nutran leads y generen ventas en piloto automático. Herramientas, templates y estrategias.',
+    title: 'Email marketing automatizado para pymes: flujos, herramientas y cómo llegar a la bandeja',
+    seoTitle: 'Email marketing automatizado para pymes: guía',
+    seoDescription: 'Los flujos de email que más venden, herramientas según tu tamaño, cómo armar la lista sin comprar bases, cómo evitar el spam y qué métricas mirar.',
     seoKeywords: 'email marketing automatizado, email marketing para empresas, campañas email automaticas, newsletter estrategia, herramientas email marketing',
     category: 'SEO & Marketing',
     date: '2026-07-27',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [906, 1006, 905]

@@ -1,132 +1,105 @@
-Integrar modelos de IA generativa a través de la API de OpenAI (GPT-4o, GPT-4o-mini, DALL-E 3) permite dotar a cualquier aplicación web o sistema de gestión de capacidades avanzadas de redacción, clasificación de tickets, resúmenes ejecutivos y análisis predictivo.
+**Para integrar la API de OpenAI en tu sistema o tu web necesitas una cuenta de desarrollador en la plataforma de OpenAI, una clave de API guardada en tu servidor (nunca en el código del navegador), el SDK oficial o llamadas HTTP desde tu backend, y un diseño que controle costos, errores y privacidad.** Con eso puedes sumar a cualquier aplicación funciones de redacción, resumen, clasificación, extracción de datos o asistentes conversacionales.
 
-En esta guía para desarrolladores y líderes de tecnología te explicamos la implementación paso a paso utilizando **Node.js, Express y React**.
+Esta guía es para equipos técnicos y responsables de producto: cómo se estructura la integración, un ejemplo mínimo en Node.js, cómo pedir respuestas en formato estructurado, cómo conectar funciones de tu sistema y qué cuidar en producción.
 
----
+## Arquitectura recomendada
 
-## 1. Configuración de Credenciales y Buenas Prácticas de Seguridad
+La regla principal: **el navegador o la app nunca hablan directo con OpenAI**. El flujo correcto es:
 
-### REGLA DE ORO DE SEGURIDAD
-> **NUNCA expongas tu `OPENAI_API_KEY` en el código frontend de React.**
-> Si la clave se incluye en el bundle cliente, cualquier usuario malintencionado podrá extraerla del inspector web y agotar tus créditos en minutos.
+1. El usuario hace una acción en tu web o tu app.
+2. Tu frontend llama a tu propio backend.
+3. El backend valida al usuario, arma la instrucción con los datos necesarios y llama a la API de OpenAI con la clave guardada en variables de entorno.
+4. El backend valida la respuesta, la guarda si corresponde y la devuelve al frontend.
 
----
+Así la clave no queda expuesta, puedes limitar cuánto usa cada usuario y controlas qué datos se envían.
 
-## 2. Creación del Servidor Backend Seguro (Node.js / Express)
+## Ejemplo mínimo en Node.js
 
-Instala la librería oficial de OpenAI:
-```bash
-npm install openai express dotenv cors
-```
-
-Código del servidor en Node.js (`server.js`):
+Con el SDK oficial (`npm install openai`) y la clave en la variable de entorno `OPENAI_API_KEY`:
 
 ```javascript
-import express from 'express';
-import OpenAI from 'openai';
-import dotenv from 'dotenv';
-import cors from 'cors';
+import OpenAI from "openai";
 
-dotenv.config();
+const client = new OpenAI(); // lee OPENAI_API_KEY del entorno
 
-const app = express();
-app.use(express.json());
-app.use(cors({ origin: 'https-[#182A2C]-tudominio.com' }));
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
-app.post('/api/analizar-consulta', async (req, res) => {
-  try {
-    const { mensaje } = req.body;
-
-    const response = await openai.chat.completions.create({
-      model: 'gpt-4o-mini', // Rápido y económico para tareas estándar
-      messages: [
-        {
-          role: 'system',
-          content: 'Eres un analista comercial senior. Extrae la intención principal del cliente y sugiere los 2 mejores servicios.'
-        },
-        { role: 'user', content: mensaje }
-      ],
-      max_tokens: 300,
-      temperature: 0.3,
-    });
-
-    res.json({ respuesta: response.choices[0].message.content });
-  } catch (error) {
-    console.error('Error OpenAI API:', error);
-    res.status(500).json({ error: 'Error al procesar la solicitud con IA' });
-  }
-});
-
-app.listen(5000, () => console.log('Servidor de IA activo en puerto 5000'));
+export async function resumirConsulta(texto) {
+  const response = await client.responses.create({
+    model: process.env.OPENAI_MODEL, // definir el modelo por configuración, no en el código
+    instructions: "Resume la consulta del cliente en una línea y detecta el producto que busca.",
+    input: texto,
+  });
+  return response.output_text;
+}
 ```
 
----
+Definir el modelo por configuración permite cambiarlo sin tocar el código cuando OpenAI publica versiones nuevas o cambian los precios.
 
-## 3. Conexión desde el Frontend en React
+## Respuestas en formato estructurado
 
-```javascript
-import React, { useState } from 'react';
+Para usar la respuesta dentro de tu sistema (por ejemplo, guardar campos en el CRM), conviene pedirla en JSON con un esquema definido. La API permite indicar un esquema para que la respuesta lo respete, lo que evita tener que interpretar texto libre:
 
-export const ModuloIA = () => {
-  const [prompt, setPrompt] = useState('');
-  const [resultado, setResultado] = useState('');
-  const [cargando, setCargando] = useState(false);
+| Caso | Campos del esquema |
+| --- | --- |
+| Clasificar una consulta | categoría, urgencia, producto, requiere_humano |
+| Extraer datos de una factura | proveedor, fecha, número, total, impuestos |
+| Calificar un cliente potencial | presupuesto, plazo, ciudad, interés |
 
-  const procesarConIA = async () => {
-    setCargando(true);
-    try {
-      const res = await fetch('/api/analizar-consulta', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ mensaje: prompt })
-      });
-      const data = await res.json();
-      setResultado(data.respuesta);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setCargando(false);
-    }
-  };
+Valida siempre el JSON recibido antes de guardarlo.
 
-  return (
-    <div className="p-6 bg-gray-50 border border-gray-200">
-      <textarea 
-        value={prompt}
-        onChange={(e) => setPrompt(e.target.value)}
-        placeholder="Escribe la consulta comercial aquí..."
-        className="w-full p-3 border border-gray-300 rounded mb-4"
-      />
-      <button 
-        onClick={procesarConIA}
-        disabled={cargando}
-        className="bg-[#182A2C] text-white font-bold px-6 py-3"
-      >
-        {cargando ? 'Procesando con IA...' : 'Analizar con GPT-4o'}
-      </button>
-      {resultado && (
-        <div className="mt-6 p-4 bg-[#182A2C] text-white">
-          <h4 className="text-[#d9fb06] font-bold mb-2">Resultado de la IA:</h4>
-          <p>{resultado}</p>
-        </div>
-      )}
-    </div>
-  );
-};
-```
+## Conectar funciones de tu sistema
 
----
+Cuando el modelo necesita datos o acciones de tu sistema (consultar stock, buscar un pedido, agendar un turno), se le describen "herramientas" o funciones con sus parámetros. El modelo responde indicando qué función quiere usar y con qué datos; tu backend la ejecuta, verifica permisos y le devuelve el resultado para que redacte la respuesta final. El modelo nunca ejecuta nada por sí mismo: tu código decide.
 
-## 4. Control de Costos y Rate Limits en Producción
+## Responder con la información de tu empresa
 
-1. **Configura Soft and Hard Limits**: Establece presupuestos mensuales máximos en el panel de facturación de OpenAI.
-2. **Implementa Cache con Redis**: Si muchos usuarios hacen la misma pregunta, responde desde el cache sin llamar nuevamente a la API.
-3. **Utiliza GPT-4o-mini**: Es hasta un 90% más económico que GPT-4o original y ofrece rendimiento superior para clasificaciones y resúmenes.
+El modelo no conoce tus precios ni tus políticas. Para que responda con esos datos, tu backend busca la información relevante (en tu base de datos o en una base vectorial) y la incluye en la llamada. Esa técnica, RAG, está explicada en [qué es RAG](/blog/que-es-rag-retrieval-augmented-generation-ia-empresas).
 
----
+## Costos y cómo controlarlos
 
-En [Websy realizamos integraciones profesionales con OpenAI y arquitecturas Serverless](/servicios/automatizaciones-ia). ¿Querés dotar a tu software de Inteligencia Artificial? [Contactate con nuestro equipo técnico](/contacto).
+La API se cobra por uso, según la cantidad de texto procesado (tokens) de entrada y de salida, con precios distintos por modelo. Para controlar el gasto:
+
+- **Elige el modelo según la tarea**: los modelos más chicos suelen alcanzar para clasificar o extraer datos.
+- **Envía solo el contexto necesario**: no todo el historial ni todo el catálogo en cada llamada.
+- **Pon límites**: máximo de llamadas por usuario y por día, y alertas de consumo en el panel de OpenAI.
+- **Guarda en caché** respuestas a preguntas idénticas.
+
+## Buenas prácticas para producción
+
+- **Clave en variables de entorno**, rotada si se filtra.
+- **Reintentos con espera** ante errores temporales o límites de uso.
+- **Tiempo máximo de respuesta** y un mensaje alternativo si la API no responde.
+- **Registro de llamadas** (sin datos personales innecesarios) para depurar y medir costos.
+- **Revisión humana** en tareas de alto impacto.
+- **Privacidad**: revisa las condiciones de uso de datos de la API y cumple la ley de protección de datos de tu país antes de enviar información de clientes.
+
+## Ideas de integración
+
+| Sistema | Integración |
+| --- | --- |
+| CRM | Resumir conversaciones y sugerir el próximo paso con cada cliente |
+| Tienda online | Generar descripciones de productos a partir de sus características |
+| Sistema de gestión | Extraer datos de facturas de proveedores |
+| Atención | Clasificar y derivar correos o mensajes entrantes |
+| Web | Asistente que responde con la información del sitio |
+
+## Preguntas frecuentes
+
+### ¿Cómo integrar ChatGPT en mi página web?
+
+No se integra la app de ChatGPT, sino la API de OpenAI: tu web llama a tu backend, que llama a la API con la clave guardada en el servidor y devuelve la respuesta. Así la clave no queda expuesta.
+
+### ¿Cuánto cuesta usar la API de OpenAI?
+
+Se paga por uso, según la cantidad de texto que entra y sale de cada llamada y el modelo elegido. Los precios vigentes están en la página de precios de OpenAI.
+
+### ¿Puedo usar la API con datos de mis clientes?
+
+Sí, pero revisa las condiciones de uso de datos del servicio, envía solo lo necesario y cumple la ley de protección de datos de tu país.
+
+### ¿Qué lenguaje de programación necesito?
+
+OpenAI tiene SDK oficiales para JavaScript/TypeScript y Python, y la API se puede usar por HTTP desde cualquier lenguaje.
+
+## Integramos la IA en tu sistema
+
+En Websy integramos modelos de lenguaje en sistemas de gestión, tiendas y webs, con control de costos y privacidad. Mira la [guía de automatización e IA](/blog/guia-automatizacion-e-inteligencia-artificial-para-empresas), el servicio de [automatizaciones con IA](/servicios/automatizaciones-ia) o [escríbenos](/contacto).

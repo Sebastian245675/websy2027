@@ -277,6 +277,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.websysrl.com/blog/guia-automatizacion-e-inteligencia-artificial-para-empresas</loc>
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.websysrl.com/blog/como-migrar-de-wordpress-a-react-nextjs-guia-completa</loc>
     <lastmod>2026-08-02</lastmod>
     <changefreq>monthly</changefreq>
@@ -302,7 +308,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/inteligencia-artificial-chatgpt-como-usarlo-en-tu-empresa-ejemplos</loc>
-    <lastmod>2026-08-01</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -392,7 +398,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/ia-generativa-para-empresas-casos-de-uso-y-retorno-de-inversion</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -434,7 +440,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/automatizar-procesos-empresa-herramientas-sin-programar</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -470,7 +476,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/como-automatizar-el-crm-de-tu-empresa-con-inteligencia-artificial</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -536,7 +542,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/n8n-vs-make-integromat-comparativa-automatizacion-empresarial-2026</loc>
-    <lastmod>2026-07-28</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -584,7 +590,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/email-marketing-automatizado-guia-pymes-herramientas</loc>
-    <lastmod>2026-07-27</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -626,7 +632,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/chatbot-whatsapp-business-automatizar-respuestas-clientes</loc>
-    <lastmod>2026-07-26</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -644,7 +650,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/que-es-inteligencia-artificial-y-como-puede-ayudar-a-mi-empresa</loc>
-    <lastmod>2026-07-26</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -746,7 +752,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/agentes-de-ia-autonomos-con-langchain-y-n8n-automatizacion</loc>
-    <lastmod>2026-07-22</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -758,7 +764,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/whatsapp-business-api-vs-app-diferencias-como-implementar</loc>
-    <lastmod>2026-07-22</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -872,7 +878,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/integrar-chatgpt-openai-api-en-tu-sistema-o-web</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -932,7 +938,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/automatizacion-whatsapp-negocios-guia-completa</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -956,7 +962,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/como-crear-un-chatbot-con-ia-para-tu-empresa-openai-api</loc>
-    <lastmod>2026-06-30</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -1004,7 +1010,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/que-es-rag-retrieval-augmented-generation-ia-empresas</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
