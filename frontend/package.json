@@ -19,7 +19,7 @@
     "dev": "craco start",
     "prebuild": "node scripts/generate-sitemap.js",
     "build": "cross-env GENERATE_SOURCEMAP=false craco build",
-    "postbuild": "react-snap",
+    "postbuild": "react-snap && node scripts/finalize-build.js",
     "build:analyze": "cross-env GENERATE_SOURCEMAP=false craco build && npx source-map-explorer 'build/static/js/*.js'",
     "test": "craco test"
   },

@@ -122,6 +122,7 @@ const include = [
   ...casePages,
   ...landingSlugs.map((slug) => `/lp/${slug}`),
   ...uniquePosts.map((p) => `/blog/${p.slug}`),
+  '/404', // becomes build/404.html (scripts/finalize-build.js), served by nginx for unknown routes
 ];
 if (JSON.stringify(pkg.reactSnap?.include) !== JSON.stringify(include)) {
   pkg.reactSnap = { ...pkg.reactSnap, include };
