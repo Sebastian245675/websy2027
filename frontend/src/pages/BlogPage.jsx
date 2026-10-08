@@ -35,6 +35,17 @@ const MOST_READ_SLUGS = [
 
 const PAGE_SIZES = [10, 20, 50];
 
+// Real URLs for pagination and categories, so crawlers can follow them as <a href>
+const blogUrl = (params, changes) => {
+  const next = new URLSearchParams(params);
+  Object.entries(changes).forEach(([key, value]) => {
+    if (value === null || value === '' || value === 'Todos' || value === 1) next.delete(key);
+    else next.set(key, String(value));
+  });
+  const qs = next.toString();
+  return qs ? `/blog?${qs}` : '/blog';
+};
+
 const formatDate = (date) =>
   new Date(`${date}T12:00:00`).toLocaleDateString('es-AR', { day: 'numeric', month: 'long', year: 'numeric' });
 
@@ -76,7 +87,7 @@ const CategoryLabel = ({ category }) => (
   </span>
 );
 
-const Pagination = ({ page, totalPages, onChange }) => {
+const Pagination = ({ page, totalPages, hrefFor, onNavigate }) => {
   if (totalPages <= 1) return null;
   // Compact page list: first, last, current ±1, with gaps
   const pages = [];
@@ -85,36 +96,30 @@ const Pagination = ({ page, totalPages, onChange }) => {
     else if (pages[pages.length - 1] !== '…') pages.push('…');
   }
   const btn = 'min-w-[36px] h-9 px-2.5 rounded-lg text-sm font-semibold flex items-center justify-center transition-colors';
+  const arrow = (target, label, Icon) => (target < 1 || target > totalPages ? (
+    <span className={`${btn} text-[#182A2C] opacity-30`} aria-hidden="true"><Icon size={18} /></span>
+  ) : (
+    <Link to={hrefFor(target)} onClick={onNavigate} className={`${btn} text-[#182A2C] hover:bg-slate-100`} aria-label={label}>
+      <Icon size={18} />
+    </Link>
+  ));
   return (
     <nav className="flex flex-wrap justify-center items-center gap-1" aria-label="Paginación del blog">
-      <button
-        onClick={() => onChange(page - 1)}
-        disabled={page === 1}
-        className={`${btn} text-[#182A2C] hover:bg-slate-100 disabled:opacity-30 disabled:hover:bg-transparent`}
-        aria-label="Página anterior"
-      >
-        <ChevronLeft size={18} />
-      </button>
+      {arrow(page - 1, 'Página anterior', ChevronLeft)}
       {pages.map((p, i) => p === '…' ? (
         <span key={`gap-${i}`} className="px-1 text-slate-400">…</span>
       ) : (
-        <button
+        <Link
           key={p}
-          onClick={() => onChange(p)}
+          to={hrefFor(p)}
+          onClick={onNavigate}
           aria-current={p === page ? 'page' : undefined}
           className={`${btn} ${p === page ? 'bg-[#182A2C] text-white' : 'text-[#182A2C] hover:bg-slate-100'}`}
         >
           {p}
-        </button>
+        </Link>
       ))}
-      <button
-        onClick={() => onChange(page + 1)}
-        disabled={page === totalPages}
-        className={`${btn} text-[#182A2C] hover:bg-slate-100 disabled:opacity-30 disabled:hover:bg-transparent`}
-        aria-label="Página siguiente"
-      >
-        <ChevronRight size={18} />
-      </button>
+      {arrow(page + 1, 'Página siguiente', ChevronRight)}
     </nav>
   );
 };
@@ -171,10 +176,14 @@ export const BlogPage = () => {
   const pagePosts = listPosts.slice((page - 1) * pageSize, page * pageSize);
   const showFeatured = featured && page === 1;
 
-  const goToPage = (p) => {
-    updateParams({ pagina: p === 1 ? null : p });
-    listTopRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
+  const scrollToList = () => listTopRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  const postsByCategory = useMemo(
+    () => blogCategories.filter((c) => c !== 'Todos')
+      .map((cat) => ({ cat, posts: sortedPosts.filter((p) => p.category === cat) }))
+      .filter(({ posts }) => posts.length),
+    [sortedPosts]
+  );
 
   const resetFilters = () => setParams(new URLSearchParams(), { replace: true });
 
@@ -202,7 +211,7 @@ export const BlogPage = () => {
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
             <div className="max-w-2xl">
               <h1 className="text-[34px] md:text-[44px] font-extrabold text-[#182A2C] leading-[1.1] tracking-tight">
-                Blog Websy
+                Blog de desarrollo web, apps e inteligencia artificial para empresas
               </h1>
               <p className="mt-3 text-base md:text-lg text-slate-600 leading-relaxed">
                 Guías prácticas sobre desarrollo web, apps, e-commerce, inteligencia artificial y tecnología para hacer crecer tu empresa.
@@ -230,6 +239,18 @@ export const BlogPage = () => {
               )}
             </div>
           </div>
+
+          <div className="mt-6 max-w-3xl space-y-3 text-[15px] md:text-base text-slate-600 leading-relaxed">
+            <p>
+              En este blog explicamos lo que una empresa necesita saber antes de invertir en tecnología: cuánto cuesta una página web o una app, cómo aparecer en Google, qué conviene automatizar con inteligencia artificial y cómo elegir entre opciones como WordPress o React, una plataforma de e-commerce o una tienda a medida, Make o n8n.
+            </p>
+            <p>
+              Lo escribe el equipo de Websy, una agencia de desarrollo web de Salta, Argentina, que trabaja con pymes y profesionales de Argentina, Colombia, México y Estados Unidos. Por eso los ejemplos, los precios y las herramientas son de Latinoamérica: Mercado Pago, facturación electrónica, WhatsApp Business.
+            </p>
+            <p>
+              Los artículos están organizados por categoría: desarrollo web, apps móviles, e-commerce, IA y automatización, sistemas de gestión, APIs y cloud, ciberseguridad, diseño UX/UI, SaaS, soluciones por industria y SEO. Si recién empezás, te sirven las guías de costos y la de SEO local; si ya tenés una web, las de velocidad y conversión. Al final de la página está el <a href="#indice-de-articulos" className="font-semibold text-[#182A2C] underline decoration-[#d9fb06] decoration-2 underline-offset-4">índice con todos los artículos</a>.
+            </p>
+          </div>
           </div>
         </div>
 
@@ -239,9 +260,11 @@ export const BlogPage = () => {
             {blogCategories.map((cat) => {
               const isActive = activeCategory === cat;
               return (
-                <button
+                <Link
                   key={cat}
-                  onClick={() => updateParams({ categoria: cat, pagina: null })}
+                  to={blogUrl(params, { categoria: cat, pagina: null })}
+                  replace
+                  aria-current={isActive ? 'page' : undefined}
                   className={`px-4 py-3.5 text-sm font-semibold whitespace-nowrap border-b-2 transition-colors ${
                     isActive
                       ? 'border-[#182A2C] text-[#182A2C]'
@@ -249,7 +272,7 @@ export const BlogPage = () => {
                   }`}
                 >
                   {cat}
-                </button>
+                </Link>
               );
             })}
           </div>
@@ -341,7 +364,7 @@ export const BlogPage = () => {
                 <p className="text-sm text-slate-500">
                   Mostrando <strong className="text-[#182A2C]">{rangeStart} - {rangeEnd}</strong> de <strong className="text-[#182A2C]">{listPosts.length}</strong> artículos
                 </p>
-                <Pagination page={page} totalPages={totalPages} onChange={goToPage} />
+                <Pagination page={page} totalPages={totalPages} hrefFor={(p) => blogUrl(params, { pagina: p })} onNavigate={scrollToList} />
                 <label className="flex items-center gap-2 text-sm text-slate-500">
                   Mostrar
                   <select
@@ -386,8 +409,10 @@ export const BlogPage = () => {
                     const isActive = activeCategory === cat;
                     return (
                       <li key={cat}>
-                        <button
-                          onClick={() => { updateParams({ categoria: cat, pagina: null }); listTopRef.current?.scrollIntoView({ behavior: 'smooth' }); }}
+                        <Link
+                          to={blogUrl(params, { categoria: cat, pagina: null })}
+                          replace
+                          onClick={scrollToList}
                           className={`w-full flex items-center justify-between gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
                             isActive ? 'bg-[#182A2C] text-white' : 'text-[#334155] hover:bg-slate-100'
                           }`}
@@ -399,7 +424,7 @@ export const BlogPage = () => {
                           <span className={`text-xs font-semibold ${isActive ? 'text-white/70' : 'text-slate-400'}`}>
                             {categoryCounts[cat] || 0}
                           </span>
-                        </button>
+                        </Link>
                       </li>
                     );
                   })}
@@ -422,6 +447,28 @@ export const BlogPage = () => {
             </div>
           </aside>
         </div>
+
+        {/* Índice completo: todos los artículos enlazados con <a href>, sin depender de la paginación */}
+        <section id="indice-de-articulos" aria-labelledby="indice-titulo" className="mt-16 pt-12 border-t border-slate-200" style={{ scrollMarginTop: '135px' }}>
+          <h2 id="indice-titulo" className="text-2xl md:text-3xl font-extrabold text-[#182A2C] tracking-tight mb-2">Índice de artículos</h2>
+          <p className="text-slate-600 mb-10">Los {blogPosts.length} artículos del blog, por categoría.</p>
+          <div className="grid gap-10 md:grid-cols-2">
+            {postsByCategory.map(({ cat, posts }) => (
+              <div key={cat}>
+                <h3 className="text-base font-bold uppercase tracking-[0.12em] mb-4" style={{ color: '#556902' }}>{cat} ({posts.length})</h3>
+                <ul className="space-y-2">
+                  {posts.map((post) => (
+                    <li key={post.slug}>
+                      <Link to={`/blog/${post.slug}`} className="text-[15px] text-[#182A2C] hover:underline decoration-[#d9fb06] decoration-2 underline-offset-4">
+                        {post.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
         </div>
       </div>
 
