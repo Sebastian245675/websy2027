@@ -100,12 +100,13 @@ export const businessTechPosts = [
   {
     id: 1108,
     slug: 'diseno-web-responsive-que-es-por-que-es-obligatorio',
-    title: '¿Qué es el Diseño Web Responsive y por qué tu página DEBE verse perfecta en celulares?',
-    seoTitle: 'Diseño Web Responsive: Qué es y Por Qué es Obligatorio | Websy',
-    seoDescription: 'Entiende qué es el diseño responsive, por qué Google penaliza sitios no adaptados a móviles y cómo lograr que tu web se vea perfecta en cualquier dispositivo.',
+    title: 'Qué es el diseño web responsive y por qué es obligatorio',
+    seoTitle: 'Qué es el diseño web responsive',
+    seoDescription: 'Cómo funciona el diseño responsive, mobile-first, lo que más falla en el celular, puntos de quiebre, cómo probar tu web y un checklist.',
     seoKeywords: 'diseño web responsive, que es responsive, pagina web responsive, web adaptable a celulares, diseño movil, mobile first',
     category: 'UI/UX Design',
     date: '2026-07-26',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [706, 704, 1015]

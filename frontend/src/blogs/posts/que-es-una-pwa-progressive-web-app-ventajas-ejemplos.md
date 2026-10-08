@@ -1,27 +1,97 @@
-Las **Progressive Web Apps (PWA)** o Aplicaciones Web Progresivas representan la convergencia ideal entre la accesibilidad universal de un sitio web y la potencia interactiva de una aplicación móvil nativa.
+**Una PWA (Progressive Web App, o aplicación web progresiva) es una página o aplicación web que se puede instalar en el celular o la computadora como si fuera una app: tiene ícono propio, se abre a pantalla completa, puede funcionar en parte sin conexión y enviar notificaciones, sin pasar por Google Play ni App Store.** Para una empresa, es una forma de dar una experiencia de app a sus clientes con el costo y el alcance de una web, que además se puede encontrar en Google.
 
-Empresas globales como Twitter (X Lite), Starbucks, Uber y Pinterest han reemplazado o complementado sus aplicaciones nativas con PWAs, logrando incrementos de más del **60% en la retención de usuarios** y reduciendo drásticamente los costos de infraestructura.
+En esta guía verás cómo funciona una PWA, qué necesita técnicamente, qué puede y qué no puede hacer, ejemplos de uso, cuánto cuesta y cuándo conviene frente a una app nativa.
 
----
+## Cómo funciona
 
-## 1. Las 4 Características Clave de una PWA
+Una PWA es una web normal con tres agregados:
 
-1. **Instalable sin pasar por App Store o Google Play**: El usuario visita tu sitio web en su celular y ve un botón directo de *"Agregar a la pantalla de inicio"*. La app se instala en segundos sin consumir megabytes de almacenamiento.
-2. **Funcionamiento Sin Conexión a Internet (Offline Mode)**: Mediante **Service Workers**, la PWA guarda en caché los datos esenciales para que el cliente pueda seguir navegando aunque pierda la cobertura 4G/5G.
-3. **Notificaciones Push Nativas**: Podés enviar alertas con promociones, recordatorios o novedades directamente a la pantalla de bloqueo del celular del cliente.
-4. **Actualizaciones Instantáneas**: No requiere que el usuario descargue actualizaciones desde las tiendas; cada vez que modificás el sitio, todos los usuarios ven la versión nueva al instante.
+| Componente | Para qué sirve |
+| --- | --- |
+| HTTPS | Obligatorio para las funciones de PWA |
+| Manifiesto web | Archivo con nombre, ícono, colores y forma de abrirse; permite instalarla |
+| Service worker | Script que gestiona la caché, el funcionamiento sin conexión y las notificaciones |
 
----
+## Qué puede hacer
 
-## 2. Cuadro Comparativo: PWA vs. App Nativa (iOS/Android)
+- **Instalarse** en la pantalla de inicio con su ícono.
+- **Abrirse a pantalla completa**, sin la barra del navegador.
+- **Funcionar sin conexión o con conexión lenta** en las pantallas y datos guardados en caché.
+- **Enviar notificaciones push** (en iPhone, cuando el usuario la instaló en la pantalla de inicio, desde iOS 16.4).
+- **Usar la cámara, la ubicación y compartir** contenido.
+- **Actualizarse sola**, sin pasar por una tienda.
+- **Aparecer en Google** como cualquier web.
 
-| Característica | Aplicación Web Progresiva (PWA) | App Nativa (Swift / Kotlin) |
+## Qué no puede hacer (o hace con límites)
+
+- Integraciones profundas con el sistema (algunas funciones de Bluetooth, NFC o tareas en segundo plano, sobre todo en iPhone).
+- Estar en App Store como una app nativa completa (Google Play sí permite publicar PWA empaquetadas).
+- Ser descubierta por quienes buscan apps solo dentro de las tiendas.
+
+## Ejemplos de uso para empresas
+
+| Empresa | PWA |
+| --- | --- |
+| Restaurante | Menú, pedidos y seguimiento, instalable para clientes frecuentes |
+| Comercio mayorista | Catálogo y pedidos para los clientes, instalable en el celular del comprador |
+| Empresa de servicios | Portal de clientes con turnos y pagos |
+| Equipo de campo | Formularios de inspección que se completan con mala señal y se sincronizan después |
+| Medio o blog | Lectura sin conexión y notificaciones de nuevos artículos |
+
+## PWA vs app nativa
+
+| | PWA | App nativa o multiplataforma |
 | --- | --- | --- |
-| **Costo de Desarrollo** | 1 único código web (Ahorras un 60%) | 2 desarrollos separados (iOS + Android) |
-| **Proceso de Instalación** | Instantáneo con 1 clic desde la web | Requiere buscar en App Store y descargar |
-| **Fricción de Entrada** | Mínima (Cero descargas pesadas) | Alta (Muchos usuarios no descargan apps) |
-| **Posicionamiento SEO** | 100% Indexable en Google | No indexable en motores de búsqueda web |
+| Costo | Menor | Mayor |
+| Publicación | Inmediata | Revisión de tiendas |
+| Actualizaciones | Instantáneas | Por las tiendas |
+| SEO | Sí | No |
+| Funciones del teléfono | Amplias, con límites | Completas |
+| Presencia en tiendas | Limitada | Completa |
 
----
+Comparación completa en [app nativa o PWA](/blog/aplicaciones-moviles-vs-web-apps-progresivas-pwa-cual-elegir).
 
-En [Websy desarrollamos Aplicaciones Web Progresivas de alto rendimiento](/servicios/desarrollo-web). ¿Querés convertir tu sitio web en una App instalable? [Consultá con nuestro equipo](/contacto).
+## Cuánto cuesta
+
+Convertir una web moderna en PWA (manifiesto, service worker, ajustes de diseño) es un trabajo acotado. Una PWA con funciones de aplicación (pedidos, cuentas, pagos) cuesta como una aplicación web; en general, menos que una app nativa para dos plataformas. Ver la [guía de precios](/blog/precios-desarrollo-web-apps-y-software-latam).
+
+## Cómo convertir una web en PWA, paso a paso
+
+1. **Verifica que la web use HTTPS** y cargue rápido en el celular.
+2. **Crea el manifiesto** con nombre, íconos en varios tamaños, color de tema y modo de visualización.
+3. **Registra un service worker** que guarde en caché las pantallas principales y defina qué mostrar sin conexión.
+4. **Ajusta el diseño** para que funcione bien a pantalla completa.
+5. **Prueba la instalación** en Android y en iPhone.
+6. **Agrega notificaciones** si aportan valor, pidiendo permiso en el momento oportuno.
+
+## Cuándo conviene
+
+| Situación | ¿PWA? |
+| --- | --- |
+| Clientes que te usan de vez en cuando y te encuentran en Google | Sí |
+| Presupuesto ajustado y necesidad de experiencia tipo app | Sí |
+| Validar una idea antes de invertir en una app | Sí |
+| Uso intensivo de hardware o funciones avanzadas en iPhone | Mejor app nativa |
+| Necesitas estar en App Store para que te encuentren | Mejor app |
+
+## Preguntas frecuentes
+
+### ¿Qué es una PWA?
+
+Una aplicación web que se puede instalar en el teléfono o la computadora, con ícono, pantalla completa, funcionamiento parcial sin conexión y notificaciones, sin pasar por las tiendas de apps.
+
+### ¿Cómo se instala una PWA?
+
+En Android, desde el aviso o el menú "Instalar aplicación" del navegador. En iPhone, desde Safari con "Compartir" y "Agregar a pantalla de inicio".
+
+### ¿Las PWA funcionan en iPhone?
+
+Sí, con algunas limitaciones. Desde iOS 16.4 pueden recibir notificaciones si el usuario las instaló en la pantalla de inicio.
+
+### ¿Una PWA es más barata que una app?
+
+En general sí: es una sola web para todos los dispositivos, sin publicación ni mantenimiento en tiendas.
+
+## Tu web como app
+
+En Websy convertimos webs en PWA y desarrollamos aplicaciones web instalables. Mira la [guía de desarrollo web](/blog/guia-desarrollo-web-para-empresas), la [guía de apps](/blog/guia-desarrollo-de-aplicaciones-moviles-para-empresas) o [escríbenos](/contacto).

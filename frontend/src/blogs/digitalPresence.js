@@ -123,12 +123,13 @@ export const digitalPresencePosts = [
   {
     id: 1010,
     slug: 'como-disenar-logo-profesional-para-empresa-guia-branding',
-    title: 'Cómo diseñar un logo profesional para tu empresa: Guía de Branding que transmite confianza',
-    seoTitle: 'Diseño de Logo Profesional: Guía de Branding | Websy',
-    seoDescription: 'Aprendé los principios de diseño de logos profesionales, psicología del color y cómo tu identidad visual impacta directamente en las ventas de tu empresa.',
+    title: 'Cómo diseñar un logo profesional para tu empresa: guía paso a paso',
+    seoTitle: 'Cómo diseñar un logo profesional paso a paso',
+    seoDescription: 'Tipos de logo, proceso de diseño paso a paso, qué archivos y versiones recibir, errores comunes, checklist de aprobación y cómo se conecta con la web.',
     seoKeywords: 'como diseñar un logo, diseño logo profesional, logo para empresa, branding empresa, identidad visual, logo negocio',
     category: 'UI/UX Design',
     date: '2026-07-23',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [706, 704, 705]
@@ -178,12 +179,13 @@ export const digitalPresencePosts = [
   {
     id: 1015,
     slug: 'velocidad-de-carga-web-como-optimizar-pagespeed-100',
-    title: 'Velocidad de Carga Web: Cómo conseguir 100/100 en PageSpeed y no perder visitantes',
-    seoTitle: 'Optimizar Velocidad Web: 100/100 en PageSpeed | Websy',
-    seoDescription: 'Aprendé a optimizar la velocidad de carga de tu web para obtener 100/100 en Google PageSpeed. Técnicas: WebP, lazy loading, CDN, code splitting y caché.',
+    title: 'Cómo mejorar la velocidad de carga de una web: 10 optimizaciones',
+    seoTitle: 'Cómo mejorar la velocidad de carga de tu web',
+    seoDescription: 'Cómo medir la velocidad, las 10 optimizaciones con más impacto, qué hacer en WordPress y en webs modernas, y por qué el 100 de PageSpeed no es la meta.',
     seoKeywords: 'velocidad de carga web, optimizar pagespeed, web lenta como arreglar, mejorar rendimiento pagina web, core web vitals, pagespeed 100',
     category: 'Desarrollo Web',
     date: '2026-07-18',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [104, 901, 903]

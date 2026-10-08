@@ -44,7 +44,9 @@ const linkExists = (href) => {
   return false;
 };
 
-const VOSEO = /\b(podés|tenés|querés|sabés|necesitás|hacés|elegís|mirá|pedí|contanos|escribinos|fijate|revisá|preguntá|armá|definí|exigí|poné|usá|probá|cotizá|consultá|empezá|vendé|elegí|ves que|vos)\b/i;
+// Unicode-aware word boundaries: \b does not treat accented letters as part of a word,
+// so "probándolo" would match "probá"
+const VOSEO = /(?<![\p{L}])(podés|tenés|querés|sabés|necesitás|hacés|elegís|mirá|pedí|contanos|escribinos|fijate|revisá|preguntá|armá|definí|exigí|poné|usá|probá|cotizá|consultá|empezá|vendé|elegí|ves que|vos)(?![\p{L}])/iu;
 
 const report = { short: [], noAnswer: [], noFaq: [], brokenLinks: [], voseo: [] };
 const words = {};

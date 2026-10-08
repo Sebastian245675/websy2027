@@ -313,8 +313,14 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.websysrl.com/blog/guia-desarrollo-web-para-empresas</loc>
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.websysrl.com/blog/como-migrar-de-wordpress-a-react-nextjs-guia-completa</loc>
-    <lastmod>2026-08-02</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -356,7 +362,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/tendencias-desarrollo-web-2026-tecnologias-frameworks</loc>
-    <lastmod>2026-08-01</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -368,7 +374,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/diseno-ux-ui-que-es-por-que-importa-para-tu-negocio</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -452,7 +458,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/como-disenar-un-formulario-de-contacto-de-alta-conversion</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -584,7 +590,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/psicologia-del-color-en-diseno-web-y-conversion-de-ventas</loc>
-    <lastmod>2026-07-28</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -608,7 +614,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/diferencia-entre-pagina-web-y-aplicacion-web-cual-necesito</loc>
-    <lastmod>2026-07-28</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -632,7 +638,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/figma-que-es-como-usar-para-disenar-paginas-web-apps</loc>
-    <lastmod>2026-07-27</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -656,7 +662,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/diseno-web-responsive-que-es-por-que-es-obligatorio</loc>
-    <lastmod>2026-07-26</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -674,7 +680,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/accesibilidad-web-wcag-que-es-como-implementarla</loc>
-    <lastmod>2026-07-26</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -740,13 +746,13 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/next-js-que-es-por-que-usarlo-para-tu-pagina-web</loc>
-    <lastmod>2026-07-24</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/errores-comunes-al-crear-pagina-web-empresa-como-evitarlos</loc>
-    <lastmod>2026-07-24</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -764,7 +770,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/como-disenar-logo-profesional-para-empresa-guia-branding</loc>
-    <lastmod>2026-07-23</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -818,7 +824,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/que-es-react-javascript-framework-para-que-sirve</loc>
-    <lastmod>2026-07-21</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -836,7 +842,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/diseno-de-design-systems-figma-a-codigo-react</loc>
-    <lastmod>2026-07-20</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -884,7 +890,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/velocidad-de-carga-web-como-optimizar-pagespeed-100</loc>
-    <lastmod>2026-07-18</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -902,7 +908,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/desarrollo-web-con-tailwind-css-vs-bootstrap-css-vanilla</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -974,13 +980,13 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/importancia-del-diseno-ui-ux-en-el-exito-de-un-producto-digital</loc>
-    <lastmod>2026-07-04</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/que-es-una-pwa-progressive-web-app-ventajas-ejemplos</loc>
-    <lastmod>2026-07-02</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -1010,7 +1016,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/desarrollo-web-react-vs-wordpress-guia-comparativa</loc>
-    <lastmod>2026-06-25</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -1028,13 +1034,13 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/core-web-vitals-como-optimizar-velocidad-web-posicionamiento-google</loc>
-    <lastmod>2026-06-18</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/tendencias-diseno-web-2026-glassmorphism-microinteracciones-modo-oscuro</loc>
-    <lastmod>2026-06-16</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -1058,7 +1064,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/desarrollo-web-jamstack-headless-cms-nextjs</loc>
-    <lastmod>2026-06-10</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

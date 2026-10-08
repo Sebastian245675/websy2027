@@ -86,4 +86,16 @@ export const pillarPosts = [
     author: 'Sebastian Aguirre',
     pillar: true,
   },
+  {
+    id: 9002,
+    slug: 'guia-desarrollo-web-para-empresas',
+    title: 'Desarrollo web para empresas: guía completa para planificar, construir y mantener tu sitio',
+    seoTitle: 'Desarrollo web para empresas: guía completa 2026',
+    seoDescription: 'Qué tipo de sitio necesita tu empresa, con qué tecnología conviene construirlo, cómo es el proceso paso a paso y qué cuidar en diseño, velocidad y mantenimiento.',
+    seoKeywords: 'desarrollo web para empresas, como hacer una pagina web para mi empresa, desarrollo web profesional',
+    date: '2026-10-08',
+    image: null,
+    author: 'Sebastian Aguirre',
+    pillar: true,
+  },
 ];

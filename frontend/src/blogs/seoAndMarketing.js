@@ -72,12 +72,13 @@ export const seoAndMarketingPosts = [
   {
     id: 907,
     slug: 'diferencia-entre-pagina-web-y-aplicacion-web-cual-necesito',
-    title: '¿Cuál es la diferencia entre una Página Web y una Aplicación Web? ¿Cuál necesita mi negocio?',
-    seoTitle: 'Página Web vs Aplicación Web: Diferencias y Cuál Elegir | Websy',
-    seoDescription: 'Entiende la diferencia técnica entre un sitio web informativo y una aplicación web interactiva. Descubrí cuál es la mejor opción para tu negocio.',
+    title: 'Diferencia entre página web y aplicación web: cuál necesita tu negocio',
+    seoTitle: 'Página web vs aplicación web: diferencias y cuál elegir',
+    seoDescription: 'Diferencias entre página web y aplicación web con ejemplos, cómo saber cuál necesitas, tecnología, costos y cómo combinarlas.',
     seoKeywords: 'diferencia pagina web aplicacion web, que es una web app, sitio web vs aplicacion, necesito pagina web o app, desarrollo web app a medida',
     category: 'Desarrollo Web',
     date: '2026-07-28',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [1, 101, 501]

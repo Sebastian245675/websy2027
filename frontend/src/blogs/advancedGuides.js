@@ -2,12 +2,13 @@ export const advancedGuidePosts = [
   {
     id: 1401,
     slug: 'como-migrar-de-wordpress-a-react-nextjs-guia-completa',
-    title: 'Cómo migrar de WordPress a React/Next.js: Guía Completa para no perder tu SEO',
-    seoTitle: 'Migrar WordPress a React/Next.js sin Perder SEO | Websy',
-    seoDescription: 'Guía técnica paso a paso para migrar tu sitio web de WordPress a React/Next.js manteniendo el posicionamiento SEO, URLs y tráfico orgánico.',
+    title: 'Cómo migrar de WordPress a Next.js sin perder posicionamiento',
+    seoTitle: 'Migrar de WordPress a Next.js sin perder SEO',
+    seoDescription: 'Cuándo conviene migrar, tres arquitecturas posibles, proceso paso a paso, mapa de redirecciones y checklist de SEO para la migración.',
     seoKeywords: 'migrar wordpress a react, wordpress a nextjs, cambiar wordpress por react, migracion web wordpress, dejar wordpress',
     category: 'Desarrollo Web',
     date: '2026-08-02',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [1011, 1310, 901]
@@ -29,12 +30,13 @@ export const advancedGuidePosts = [
   {
     id: 1403,
     slug: 'diseno-ux-ui-que-es-por-que-importa-para-tu-negocio',
-    title: 'Diseño UX/UI: Qué es, por qué importa y cómo un buen diseño puede DUPLICAR tus ventas',
-    seoTitle: 'Diseño UX/UI: Qué es y Cómo Duplica Ventas | Websy',
-    seoDescription: 'Entiende la diferencia entre UX y UI, por qué el diseño de interfaces impacta directamente en las ventas y cómo aplicar principios de UX en tu web.',
+    title: 'Qué es el diseño UX/UI y por qué importa para tu negocio',
+    seoTitle: 'Qué es el diseño UX/UI y por qué importa',
+    seoDescription: 'Diferencia entre UX y UI, por qué importan para el negocio, el proceso de diseño paso a paso, principios clave y señales de problemas de experiencia.',
     seoKeywords: 'diseño ux ui, que es ux, que es ui, diseño experiencia usuario, diseño interfaz usuario, ux ui que es, importancia ux diseño web',
     category: 'UI/UX Design',
     date: '2026-07-31',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [706, 704, 1010]

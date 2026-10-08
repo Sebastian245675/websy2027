@@ -1,52 +1,94 @@
-Una página web que tarda más de 3 segundos en cargar pierde el **53% de sus visitantes móviles** antes de que vean una sola palabra de tu contenido. Google lo sabe, y por eso usa la velocidad de carga como **factor de ranking SEO directo**.
+**Para mejorar la velocidad de carga de una web, lo que más impacto tiene es: optimizar las imágenes (formato WebP o AVIF, tamaño adecuado, carga diferida y dimensiones declaradas), reducir el JavaScript que se carga al inicio (menos plugins, scripts de terceros y librerías), servir el contenido desde un hosting rápido con CDN, optimizar las fuentes y usar caché.** Mide antes y después con PageSpeed Insights y, sobre todo, con los datos reales de usuarios que muestra Search Console.
 
----
+En esta guía tienes cómo medir correctamente, las 10 optimizaciones ordenadas por impacto, qué hacer en WordPress y en webs modernas, y por qué el puntaje de 100 no debe ser la meta.
 
-## ¿Cómo medir la velocidad de tu web?
+## Cómo medir
 
-Ingresá a [PageSpeed Insights](https://pagespeed.web.dev/) de Google, pegá tu URL y analizá los resultados. La herramienta evalúa 4 métricas principales (Core Web Vitals):
-
-| Métrica | Qué Mide | Valor Ideal |
+| Herramienta | Qué muestra | Cuándo usarla |
 | --- | --- | --- |
-| **LCP (Largest Contentful Paint)** | Tiempo en mostrar el contenido principal | < 2.5 segundos |
-| **FID (First Input Delay)** | Tiempo de respuesta al primer clic | < 100 milisegundos |
-| **CLS (Cumulative Layout Shift)** | Estabilidad visual (que no salten elementos) | < 0.1 |
-| **INP (Interaction to Next Paint)** | Responsividad general de la página | < 200 milisegundos |
+| PageSpeed Insights | Puntaje de laboratorio y datos reales de usuarios (si hay suficientes) | Diagnóstico de una página |
+| Search Console, informe de Core Web Vitals | Datos reales agrupados por tipo de página | Seguimiento del sitio completo |
+| Herramientas de desarrollador del navegador | Qué recursos se cargan y cuánto pesan | Encontrar los culpables |
+| WebPageTest | Pruebas detalladas desde distintas ubicaciones y conexiones | Análisis profundo |
 
----
+Mide siempre la versión para celular: es la que Google usa y la que ven la mayoría de tus clientes.
 
-## 10 Técnicas para Llegar a 100/100 en PageSpeed
+## Las 10 optimizaciones con más impacto
 
-### 1. Convertir imágenes a formato WebP/AVIF
-Las imágenes representan el 50% del peso de una web. WebP reduce el tamaño un 30% respecto a JPEG sin perder calidad visible.
+| # | Optimización | Qué mejora |
+| --- | --- | --- |
+| 1 | Imágenes en WebP o AVIF, comprimidas y con el tamaño en que se muestran | Peso total y tiempo de carga |
+| 2 | Dimensiones declaradas (width y height) en imágenes y videos | Estabilidad visual (CLS) |
+| 3 | Carga diferida de imágenes fuera de la primera pantalla | Carga inicial |
+| 4 | La imagen principal (la más grande arriba) sin carga diferida y con prioridad | Tiempo hasta ver el contenido principal (LCP) |
+| 5 | Menos JavaScript inicial: quitar plugins y scripts que no se usan | Respuesta a la interacción (INP) |
+| 6 | Scripts de terceros (chat, píxeles, mapas) diferidos | Carga e interacción |
+| 7 | Fuentes optimizadas: pocas variantes, precargadas, con display swap | Texto visible antes |
+| 8 | Hosting rápido y CDN | Tiempo de respuesta del servidor |
+| 9 | Caché del navegador y del servidor | Visitas repetidas y carga del servidor |
+| 10 | HTML con el contenido (renderizado en el servidor o estático) | Primera carga y SEO |
 
-### 2. Implementar Lazy Loading
-Las imágenes y videos que están "abajo del pliegue" (fuera de la vista inicial) deben cargarse solo cuando el usuario hace scroll hasta ellas.
+## WordPress: qué revisar
 
-### 3. Minificar CSS, JavaScript y HTML
-Eliminar espacios, comentarios y código muerto reduce el peso de los archivos un 20-40%.
+- Quitar plugins que no se usan y los constructores visuales pesados si no son necesarios.
+- Usar un tema liviano.
+- Plugin de caché bien configurado.
+- Optimización de imágenes al subirlas.
+- Hosting administrado para WordPress.
 
-### 4. Usar CDN (Content Delivery Network)
-Un CDN como Cloudflare o Vercel Edge Network sirve tu web desde el servidor más cercano al usuario. Si tu servidor está en USA y el usuario en Buenos Aires, sin CDN la latencia es de 200ms. Con CDN, 20ms.
+Si después de todo sigue lento, puede convenir migrar. Ver [React vs WordPress](/blog/desarrollo-web-react-vs-wordpress-guia-comparativa).
 
-### 5. Code Splitting (División de Código)
-No cargues todo el JavaScript de la web al inicio. Dividí el código por rutas: solo carga el JS necesario para la página actual.
+## Webs modernas (React, Next.js)
 
-### 6. Preload de Recursos Críticos
-Usá `<link rel="preload">` para fuentes y CSS críticos que el navegador debe descargar inmediatamente.
+- Renderizado en el servidor o generación estática, para no depender de JavaScript para mostrar el contenido.
+- Componente de imagen optimizado del framework.
+- División del código: cada página carga solo lo que usa.
+- Revisar el tamaño de las dependencias.
 
-### 7. Caché del Navegador
-Configurá headers `Cache-Control` para que el navegador guarde recursos estáticos y no los descargue nuevamente en visitas posteriores.
+Ver [qué es Next.js](/blog/next-js-que-es-por-que-usarlo-para-tu-pagina-web).
 
-### 8. Eliminar Render-Blocking Resources
-Mové el CSS crítico inline y cargá el resto de forma asíncrona.
+## El puntaje de 100 no es la meta
 
-### 9. Comprimir con Gzip/Brotli
-Activá compresión Brotli en tu servidor para reducir el tamaño de transferencia un 70%.
+El puntaje de PageSpeed es una prueba de laboratorio en condiciones simuladas. Lo que importa para Google y para tus ventas es la experiencia real de los usuarios: que las Core Web Vitals estén en verde en los datos de campo. Una web con 85 puntos y buenas métricas reales está mejor que una con 100 que nadie usa. Ver [qué son las Core Web Vitals](/blog/core-web-vitals-como-optimizar-velocidad-web-posicionamiento-google).
 
-### 10. Optimizar Fuentes Web
-Usá `font-display: swap` para que el texto sea visible inmediatamente mientras la fuente personalizada carga en segundo plano.
+## Por qué la velocidad importa
 
----
+- **Ventas**: los visitantes abandonan las páginas que tardan en cargar, sobre todo en el celular.
+- **SEO**: la experiencia de carga es una de las señales que usa Google.
+- **Publicidad**: una página de destino rápida mejora el rendimiento de las campañas.
+- **Costos**: una web liviana consume menos recursos del servidor.
 
-En [Websy optimizamos cada proyecto web para máximo rendimiento en PageSpeed](/servicios/desarrollo-web). [Pedí tu auditoría de velocidad gratuita](/contacto?plan=Auditoría+Gratuita).
+## Checklist rápido
+
+| Control | Hecho |
+| --- | --- |
+| Imágenes en WebP o AVIF y con tamaño adecuado | |
+| Width y height en imágenes | |
+| Imagen principal sin carga diferida | |
+| Scripts de terceros diferidos | |
+| Plugins o librerías sin uso eliminados | |
+| Fuentes optimizadas | |
+| CDN y caché configurados | |
+| Core Web Vitals revisadas en Search Console | |
+
+## Preguntas frecuentes
+
+### ¿Cómo hago que mi página web cargue más rápido?
+
+Optimizando imágenes, reduciendo el JavaScript y los scripts de terceros, usando un hosting rápido con CDN, optimizando fuentes y configurando caché.
+
+### ¿Qué velocidad de carga es buena?
+
+Según los umbrales de Google, que el contenido principal se vea en 2,5 segundos o menos (LCP), que la página responda a la interacción en 200 milisegundos o menos (INP) y que no haya saltos visuales (CLS de 0,1 o menos).
+
+### ¿El puntaje de PageSpeed afecta el SEO?
+
+Google usa los datos reales de experiencia de los usuarios, no el puntaje de laboratorio. El puntaje sirve como diagnóstico.
+
+### ¿Por qué mi web es lenta en el celular y rápida en la computadora?
+
+Porque los celulares tienen menos capacidad de procesamiento y conexiones más variables. Hay que optimizar pensando en el celular.
+
+## Webs rápidas desde el inicio
+
+En Websy desarrollamos webs rápidas en celular, con imágenes optimizadas, poco JavaScript y CDN. Mira la [guía de desarrollo web](/blog/guia-desarrollo-web-para-empresas) o [escríbenos](/contacto).
