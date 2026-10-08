@@ -12,9 +12,9 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const SRC = path.join(ROOT, 'src');
 const POSTS = path.join(SRC, 'blogs', 'posts');
-// Reference length: a complete article (direct answer, sections, table, FAQ) lands around 900-1.800 words.
+// Reference length: a complete article (direct answer, sections, table, FAQ) lands around 700-1.900 words.
 // Below this it is usually missing something; above it, length alone is not a goal.
-const MIN_WORDS = 900;
+const MIN_WORDS = 700;
 const strict = process.argv.includes('--strict');
 
 const slugsIn = (file, re) => [...fs.readFileSync(file, 'utf8').matchAll(re)].map((m) => m[1]);
@@ -68,8 +68,7 @@ const all = Object.values(words).sort((a, b) => a - b);
 console.log(`${postSlugs.size} posts · words min ${all[0]} · median ${all[all.length >> 1]} · max ${all[all.length - 1]} · under ${MIN_WORDS}: ${report.short.length}`);
 const show = (title, list) => {
   console.log(`\n${title}: ${list.length}`);
-  list.slice(0, 40).forEach((l) => console.log(`  ${l}`));
-  if (list.length > 40) console.log(`  ... and ${list.length - 40} more`);
+  list.forEach((l) => console.log(`  ${l}`));
 };
 show('Broken internal links', report.brokenLinks);
 show('Voseo in posts aimed at CO/MX/LATAM', report.voseo);

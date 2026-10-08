@@ -62,4 +62,16 @@ export const pillarPosts = [
     author: 'Sebastian Aguirre',
     pillar: true,
   },
+  {
+    id: 9005,
+    slug: 'guia-ecommerce-como-vender-por-internet-en-latam',
+    title: 'E-commerce en Latinoamérica: guía completa para vender por internet',
+    seoTitle: 'E-commerce en Latinoamérica: guía para vender online',
+    seoDescription: 'Cómo armar un e-commerce en Argentina, Colombia o México: plataforma o tienda a medida, medios de pago, envíos, impuestos, marketing y cómo medir las ventas.',
+    seoKeywords: 'ecommerce latinoamerica, como vender por internet, tienda online, comercio electronico pymes',
+    date: '2026-10-08',
+    image: null,
+    author: 'Sebastian Aguirre',
+    pillar: true,
+  },
 ];

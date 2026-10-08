@@ -2,12 +2,13 @@ export const freelancerStartupPosts = [
   {
     id: 1301,
     slug: 'como-empezar-a-vender-por-internet-desde-cero-guia-completa',
-    title: 'Cómo empezar a vender por internet desde cero: Guía Completa para principiantes 2026',
-    seoTitle: 'Cómo Vender por Internet desde Cero: Guía 2026 | Websy',
-    seoDescription: 'Aprendé paso a paso cómo empezar a vender por internet: elegir producto, crear tienda online, configurar pagos y atraer tus primeros clientes.',
+    title: 'Cómo vender por internet desde cero: canales, primeros clientes y plan de 90 días',
+    seoTitle: 'Cómo vender por internet desde cero: guía práctica',
+    seoDescription: 'Redes, marketplace o tienda propia: cómo empezar a vender por internet, validar el producto, cobrar y enviar, conseguir los primeros clientes y crecer.',
     seoKeywords: 'como vender por internet, vender online desde cero, empezar a vender por internet, como vender productos online, vender por internet argentina colombia',
     category: 'E-commerce',
     date: '2026-08-02',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [904, 301, 1008]

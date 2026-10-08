@@ -1,50 +1,85 @@
-Procesar cobros de forma fluida y segura es el corazón de cualquier tienda e-commerce. Si tu pasarela falla o resulta confusa, los usuarios abandonarán el carrito en el último segundo.
+**Para integrar Mercado Pago en una tienda online tienes dos caminos: Checkout Pro, donde el cliente paga en una página de Mercado Pago a la que lo rediriges con una "preferencia de pago" creada desde tu servidor, y Checkout API o Bricks, donde el formulario de pago queda dentro de tu sitio.** En ambos casos, el pago se confirma en tu servidor con notificaciones (webhooks) y recién ahí se marca el pedido como pagado, se descuenta el stock y se emite la factura.
 
-En esta guía explicamos cómo integrar **MercadoPago (para Argentina y Latinoamérica)** y **Stripe (para facturación internacional en dólares)** en tu e-commerce.
+Esta guía explica las opciones de integración, el flujo completo paso a paso, cómo probar con credenciales de prueba, cómo manejar los estados del pago y los errores más comunes. Sirve tanto para equipos técnicos como para quien necesita entender qué pedirle a su desarrollador. Al final hay notas para integrar Stripe con el mismo enfoque.
 
----
+## Opciones de integración
 
-## 1. MercadoPago: Checkout API Transparente vs. Checkout Pro
+| Opción | Cómo funciona | Ventajas | Desventajas |
+| --- | --- | --- | --- |
+| Plugin de tu plataforma (Tiendanube, Shopify, WooCommerce) | Se activa desde el panel | Sin desarrollo | Poca personalización |
+| Checkout Pro | Redirige a una página de Mercado Pago | Rápido de integrar, el comprador ve un entorno conocido | El cliente sale de tu sitio |
+| Checkout API / Bricks | Formulario de pago dentro de tu sitio | Experiencia integrada y personalizable | Más desarrollo y más responsabilidad de seguridad |
+| Link de pago | Un enlace generado por pedido | Ideal para ventas por WhatsApp o redes | No es una integración de tienda |
 
-- **Checkout Pro (Redirección)**: Envía al cliente a la página externa de MercadoPago para pagar. Es fácil de instalar pero genera fricción visual.
-- **Checkout API (Transparente)**: El cliente ingresa los datos de su tarjeta de crédito o débito directamente en tu propio sitio web, manteniendo la identidad visual de tu marca y aumentando la tasa de conversión hasta un **25%**.
+## Flujo con Checkout Pro paso a paso
 
----
+1. **Crea una aplicación** en el panel de desarrolladores de Mercado Pago y obtén las credenciales (de prueba y de producción).
+2. **El cliente confirma el carrito** en tu tienda.
+3. **Tu servidor crea una preferencia de pago** con los productos, cantidades, precios, datos del comprador, las URL de retorno (pago aprobado, pendiente, fallido) y la URL de notificación.
+4. **Rediriges al cliente** al enlace de pago de la preferencia.
+5. **El cliente paga** con el medio que elija.
+6. **Mercado Pago avisa a tu servidor** mediante la notificación con el identificador del pago.
+7. **Tu servidor consulta el pago** a la API para confirmar su estado real.
+8. **Actualizas el pedido**: si está aprobado, descuentas stock, emites la factura y envías la confirmación al cliente.
 
-## 2. Ejemplo Práctico: Integración de MercadoPago Checkout API (Node.js)
+El paso 7 es clave: nunca confíes solo en que el navegador volvió a la página de "pago aprobado"; confirma siempre con la API.
 
-```javascript
-import { MercadoPagoConfig, Payment } from 'mercadopago';
+## Estados del pago y qué hacer
 
-const client = new MercadoPagoConfig({ accessToken: process.env.MP_ACCESS_TOKEN });
-const payment = new Payment(client);
+| Estado | Qué significa | Qué hacer con el pedido |
+| --- | --- | --- |
+| Aprobado | El pago se acreditó | Confirmar, descontar stock, facturar, enviar |
+| Pendiente o en proceso | Medio que se paga después o pago en revisión | Reservar el stock y esperar la notificación |
+| Rechazado | La tarjeta o el pago fueron rechazados | Ofrecer reintentar con otro medio |
+| Cancelado o vencido | No se completó a tiempo | Liberar el stock |
+| Reembolsado o contracargo | Se devolvió el dinero | Registrar y, si corresponde, emitir nota de crédito |
 
-export async function crearPagoTarjeta(req, res) {
-  try {
-    const response = await payment.create({
-      body: {
-        transaction_amount: Number(req.body.transaction_amount),
-        token: req.body.token,
-        description: req.body.description,
-        installments: Number(req.body.installments),
-        payment_method_id: req.body.payment_method_id,
-        payer: { email: req.body.email }
-      }
-    });
+## Pruebas antes de publicar
 
-    res.json({ status: response.status, id: response.id });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-}
-```
+- Usa las **credenciales de prueba** y los **usuarios de prueba** que ofrece Mercado Pago.
+- Prueba con las **tarjetas de prueba** para simular pagos aprobados y rechazados.
+- Verifica que las **notificaciones lleguen** a tu servidor y se procesen una sola vez aunque lleguen repetidas.
+- Haz una **compra real de bajo monto** en producción antes de abrir la tienda.
 
----
+## Buenas prácticas
 
-## 3. Stripe: Cobros Internacionales con Apple Pay y Google Pay
+- **Credenciales en el servidor**, nunca en el código del navegador (excepto la clave pública cuando el método lo requiere).
+- **Procesar notificaciones de forma idempotente**: la misma notificación puede llegar varias veces.
+- **Guardar el identificador del pago** asociado al pedido.
+- **Reservar stock** mientras el pago está pendiente para no vender dos veces la misma unidad.
+- **Conciliar** pagos, pedidos y facturas periódicamente.
+- **Mostrar las cuotas** disponibles en la ficha del producto.
 
-Para vender servicios o productos físicos a clientes de Estados Unidos, Europa o globalmente, **Stripe Elements** permite aceptar tarjetas internacionales, Apple Pay, Google Pay y Klarna en milisegundos con verificación 3D Secure 2.0.
+## Integrar Stripe con el mismo enfoque
 
----
+Stripe sigue una lógica parecida: tu servidor crea una sesión de pago (Checkout Session) o un intento de pago (PaymentIntent), el cliente paga en la página de Stripe o en un formulario integrado, y Stripe notifica a tu servidor por webhook (por ejemplo, el evento de pago completado). Las mismas reglas aplican: confirmar en el servidor, idempotencia y conciliación. Ver cuándo conviene cada una en [Stripe vs Mercado Pago](/blog/stripe-vs-mercadopago-cual-pasarela-pagos-elegir-ecommerce).
 
-En [Websy integramos pasarelas de pago seguras en e-commerce a medida](/servicios/ecommerce). [Contactá a nuestro equipo](/contacto).
+## Errores comunes
+
+- **Marcar el pedido como pagado** al volver del checkout sin consultar la API.
+- **No procesar los pagos pendientes**: se pierden ventas de medios que se acreditan después.
+- **Procesar dos veces la misma notificación**: doble descuento de stock o doble factura.
+- **Precios calculados en el navegador**: el precio siempre lo define el servidor.
+- **No probar los rechazos**: el cliente no sabe qué hacer y abandona.
+
+## Preguntas frecuentes
+
+### ¿Cómo integrar Mercado Pago en mi tienda online?
+
+Con el plugin de tu plataforma si usas Tiendanube, Shopify o WooCommerce; o, en una tienda a medida, creando preferencias de pago desde tu servidor (Checkout Pro) o integrando el formulario en tu sitio (Checkout API o Bricks), y confirmando cada pago con notificaciones.
+
+### ¿Qué diferencia hay entre Checkout Pro y Checkout API?
+
+En Checkout Pro el cliente paga en una página de Mercado Pago; con Checkout API o Bricks, el formulario queda dentro de tu sitio, con más personalización y más desarrollo.
+
+### ¿Cómo sé si un pago se aprobó?
+
+Por la notificación que Mercado Pago envía a tu servidor y consultando el estado del pago en la API, no solo por la página de retorno del navegador.
+
+### ¿Puedo probar sin cobrar de verdad?
+
+Sí, con las credenciales, usuarios y tarjetas de prueba de Mercado Pago.
+
+## Integramos tus pagos
+
+En Websy integramos Mercado Pago y Stripe en tiendas y sistemas, con stock y facturación conectados. Mira la [guía de e-commerce](/blog/guia-ecommerce-como-vender-por-internet-en-latam), el servicio de [tiendas online](/servicios/ecommerce) o [escríbenos](/contacto).

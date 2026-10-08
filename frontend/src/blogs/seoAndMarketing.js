@@ -30,13 +30,13 @@ export const seoAndMarketingPosts = [
   {
     id: 904,
     slug: 'como-crear-una-tienda-online-desde-cero-paso-a-paso',
-    title: 'Cómo crear una tienda online desde cero en 2026: Guía Paso a Paso para vender por internet',
-    seoTitle: 'Cómo Crear una Tienda Online Paso a Paso 2026 | Websy',
-    seoDescription: 'Aprendé a montar tu tienda online desde cero: elegir plataforma, subir productos, configurar pagos con MercadoPago y empezar a vender por internet hoy.',
+    title: 'Cómo crear una tienda online desde cero: 10 pasos y checklist de lanzamiento',
+    seoTitle: 'Cómo crear una tienda online desde cero: 10 pasos',
+    seoDescription: 'Cómo crear una tienda online: márgenes, plataforma, catálogo, pagos, envíos, legales y facturación, pruebas y lanzamiento, con checklist y errores comunes.',
     seoKeywords: 'como crear una tienda online, vender por internet, crear ecommerce desde cero, montar tienda online argentina, vender productos por internet',
     category: 'E-commerce',
     date: '2026-07-31',
-    updated: '2026-10-07',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [2, 301, 302]

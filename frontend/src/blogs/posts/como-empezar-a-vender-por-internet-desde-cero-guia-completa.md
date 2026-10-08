@@ -1,70 +1,105 @@
-Millones de personas buscan cada mes "cómo vender por internet" en Google. Y la realidad es que nunca fue tan fácil como en 2026: con menos de $500 USD podés tener tu tienda online funcionando y recibiendo pagos en menos de 7 días.
+**Para empezar a vender por internet desde cero, elige primero el canal según tu producto y tu presupuesto: redes sociales y WhatsApp para validar con poca inversión, un marketplace como Mercado Libre para acceder a compradores que ya están buscando, y una tienda online propia para construir tu marca y tus márgenes.** La mayoría de los negocios exitosos combina los tres: valida en redes, gana volumen en marketplaces y fideliza en su propia tienda.
 
-Pero la facilidad de empezar también significa más competencia. En esta guía te damos el camino exacto para vender por internet de forma profesional, no como amateur.
+En esta guía comparamos los canales de venta online, explicamos cómo validar un producto antes de invertir, qué necesitas para cobrar y enviar, cómo conseguir los primeros clientes y cuándo dar el paso a una tienda propia.
 
----
+## Canales para vender por internet
 
-## Paso 1: Elegir qué vender
-
-### Productos Físicos
-- Ropa y accesorios
-- Alimentos artesanales
-- Productos de belleza y cosmética
-- Artículos para el hogar
-- Electrónica y accesorios tech
-
-### Productos Digitales (Margen de ganancia más alto)
-- Cursos online y e-books
-- Plantillas de diseño (Canva, Notion, Excel)
-- Software y plugins
-- Fotografía de stock
-- Música y beats
-
-### Servicios
-- Diseño gráfico y web
-- Consultoría y asesoría
-- Marketing digital
-- Clases particulares
-- Traducción y redacción
-
----
-
-## Paso 2: Elegir dónde vender
-
-| Plataforma | Ventaja | Desventaja | Comisión |
+| Canal | Ventajas | Desventajas | Ideal para |
 | --- | --- | --- | --- |
-| **MercadoLibre** | Tráfico masivo incluido | Alta competencia, comisiones altas | 11-36% |
-| **Tiendanube** | Tienda propia, fácil de usar | Sin tráfico propio | 2% plan gratis |
-| **Instagram Shopping** | Visual, ideal para moda/comida | Dependés del algoritmo | 0% |
-| **Web propia (Websy)** | Control total, SEO, 0% comisión | Requiere inversión inicial | 0% |
-| **WhatsApp Business** | Catálogo + venta directa | No escalable a largo plazo | 0% |
+| Redes sociales + WhatsApp | Sin costo inicial, contacto directo | No escala, depende de responder a mano | Validar y vender a una comunidad |
+| Marketplace (Mercado Libre, Amazon en México) | Compradores que ya buscan, confianza de la plataforma | Comisiones, competencia por precio, el cliente es del marketplace | Productos con demanda existente |
+| Tienda online propia | Margen, marca, datos de tus clientes | Hay que atraer visitas | Construir un negocio a largo plazo |
+| Venta B2B online | Pedidos más grandes y recurrentes | Proceso comercial más largo | Fabricantes y distribuidores |
 
----
+## Valida antes de invertir
 
-## Paso 3: Crear tu presencia online profesional
+1. **Busca demanda**: ¿la gente busca tu producto en Google o en Mercado Libre? ¿Qué precios tiene la competencia?
+2. **Prueba con una oferta mínima**: publica el producto en redes o en un marketplace y mide consultas y ventas.
+3. **Calcula el margen real**: precio menos costo, comisiones, envío e impuestos.
+4. **Escucha a los primeros clientes**: qué los hizo comprar, qué dudas tenían.
 
-No vendas desde un WhatsApp personal con foto de paisaje. Necesitás como mínimo:
-1. **Logo profesional** (mínimo $50 USD en Fiverr o herramienta como Looka).
-2. **Catálogo de productos** con fotos profesionales y descripciones completas.
-3. **Página web o landing page** para generar confianza y captar tráfico de Google.
-4. **Redes sociales activas** con contenido estratégico (no solo publicar productos).
+## Lo que necesitas para cobrar y enviar
 
----
+| Necesidad | Opciones |
+| --- | --- |
+| Cobrar | Links de pago, Mercado Pago, pasarelas locales (PSE en Colombia, OXXO y SPEI en México) |
+| Facturar | Inscripción fiscal y facturación electrónica de tu país |
+| Enviar | Correos, operadores logísticos, envíos del marketplace, retiro en local |
+| Atender | WhatsApp Business con respuestas rápidas y catálogo |
 
-## Paso 4: Configurar cobros online
+## Los primeros clientes
 
-- **MercadoPago**: La opción #1 en Argentina, Colombia, México. Acepta tarjetas, transferencias y efectivo.
-- **Stripe**: Para ventas internacionales en USD/EUR.
-- **PayPal**: Opción complementaria para clientes del exterior.
+- **Tu red**: amigos, conocidos, clientes del negocio físico.
+- **Contenido útil en redes**: el producto en uso, cómo elegir, preguntas frecuentes.
+- **Perfil de empresa en Google** si tienes local o atiendes una zona.
+- **Un incentivo de lanzamiento**: envío gratis o un descuento por tiempo limitado.
+- **Reseñas**: pide a cada comprador su opinión y muéstralas.
 
----
+Ver [cómo vender por Instagram](/blog/como-vender-por-instagram-tienda-online-estrategia) y [cómo conseguir clientes con una página web](/blog/como-conseguir-clientes-por-internet-para-mi-negocio).
 
-## Paso 5: Atraer tus primeros clientes
+## Qué vender: cómo elegir el producto
 
-1. **Semana 1-2**: Publicar en tus redes sociales personales. Pedirle a amigos y familia que compartan.
-2. **Semana 2-4**: Invertir $5-10 USD/día en Instagram Ads o Google Ads para generar las primeras ventas.
-3. **Mes 2+**: Publicar contenido SEO en tu blog para posicionar en Google y recibir tráfico gratuito permanente.
+| Criterio | Pregunta |
+| --- | --- |
+| Demanda | ¿La gente lo busca en Google o en marketplaces? |
+| Margen | ¿Queda ganancia después de comisiones, envío e impuestos? |
+| Logística | ¿Es fácil de enviar (tamaño, peso, fragilidad)? |
+| Diferenciación | ¿Por qué te lo comprarían a ti? |
+| Recompra | ¿Se vuelve a comprar (consumibles) o es una compra única? |
 
----
+Los productos con buen margen, fáciles de enviar y con recompra son los más sencillos para empezar.
 
-En [Websy te ayudamos a crear tu tienda online profesional y empezar a vender en menos de 7 días](/servicios/ecommerce). [Consultá sin compromiso](/contacto).
+## Costos por canal
+
+| Canal | Costo inicial | Costo por venta | Costo de atraer clientes |
+| --- | --- | --- | --- |
+| Redes + WhatsApp | Nulo | Comisión del medio de pago | Tiempo de contenido o anuncios |
+| Marketplace | Bajo | Comisión del marketplace + medio de pago | Publicaciones y posicionamiento dentro del marketplace |
+| Tienda propia | Desarrollo o abono | Medio de pago (y comisión de plataforma si aplica) | SEO, redes y anuncios |
+
+## Cuándo dar el paso a una tienda propia
+
+- Respondes las mismas preguntas de precio y stock decenas de veces por día.
+- Las comisiones del marketplace se llevan buena parte del margen.
+- Quieres que tus clientes vuelvan a comprarte a ti, no al marketplace.
+- Necesitas vender sin depender de que alguien responda el WhatsApp.
+
+En ese punto, una tienda online propia permite que el cliente vea precio, stock y pague solo. Ver [cómo crear una tienda online](/blog/como-crear-una-tienda-online-desde-cero-paso-a-paso).
+
+## Plan de 90 días para empezar
+
+| Mes | Acciones |
+| --- | --- |
+| 1 | Validar el producto en redes y WhatsApp, definir precios y envíos, inscripción fiscal |
+| 2 | Publicar en un marketplace, conseguir las primeras reseñas, ordenar el stock |
+| 3 | Lanzar la tienda propia, configurar analítica y una campaña acotada en redes o Google |
+
+## Errores comunes al empezar
+
+- **Invertir en stock grande** antes de validar.
+- **Calcular el precio sin comisiones ni envío**.
+- **No tener política de cambios y devoluciones** clara.
+- **Responder tarde**: en internet el cliente compara y compra donde le responden.
+- **Depender de un solo canal**: un cambio de reglas en una plataforma puede frenar todas tus ventas.
+
+## Preguntas frecuentes
+
+### ¿Cómo empezar a vender por internet sin dinero?
+
+Puedes empezar con redes sociales y WhatsApp Business, que no tienen costo, vendiendo por pedido o con poco stock para validar el producto antes de invertir.
+
+### ¿Qué conviene más, Mercado Libre o una tienda propia?
+
+Mercado Libre da acceso a compradores que ya buscan, con comisiones. La tienda propia da margen, marca y datos de tus clientes. Muchas empresas usan los dos.
+
+### ¿Qué productos se venden más por internet?
+
+Depende del país y la temporada. Lo importante es validar la demanda de tu producto específico buscando en Google y en marketplaces, y probando con una oferta mínima.
+
+### ¿Necesito una empresa para vender online?
+
+Necesitas estar inscrito para facturar. En Argentina, muchos emprendedores empiezan como monotributistas. Consulta con un contador.
+
+## Te ayudamos a vender online
+
+En Websy desarrollamos tiendas online conectadas a Mercado Pago, WhatsApp e Instagram. Mira la [guía de e-commerce](/blog/guia-ecommerce-como-vender-por-internet-en-latam) o [escríbenos](/contacto).

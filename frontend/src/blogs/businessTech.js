@@ -112,12 +112,13 @@ export const businessTechPosts = [
   {
     id: 1109,
     slug: 'e-commerce-mercadopago-argentina-integracion-pasarela-pagos',
-    title: 'Cómo integrar MercadoPago en tu tienda online: Guía Técnica para Argentina y LATAM',
-    seoTitle: 'Integrar MercadoPago en tu E-commerce: Guía Técnica | Websy',
-    seoDescription: 'Tutorial paso a paso para integrar MercadoPago como pasarela de pagos en tu tienda online. Checkout Pro, API de pagos, webhooks y suscripciones.',
+    title: 'Comisiones de Mercado Pago para tiendas online en Argentina: cómo calcular el costo real',
+    seoTitle: 'Comisiones de Mercado Pago para tiendas online (AR)',
+    seoDescription: 'Qué compone el costo de cobrar con Mercado Pago en Argentina: plazo de liberación, IVA, cuotas sin interés y retenciones, y cómo trasladarlo al precio.',
     seoKeywords: 'integrar mercadopago, mercadopago ecommerce, pasarela de pagos argentina, mercadopago api, cobrar online mercadopago, checkout mercadopago',
     category: 'E-commerce',
     date: '2026-07-25',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [301, 302, 904]

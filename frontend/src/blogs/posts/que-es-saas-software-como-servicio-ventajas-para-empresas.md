@@ -52,6 +52,18 @@ Muchas empresas combinan: SaaS para lo estándar (correo, contabilidad, diseño)
 5. **Lee las condiciones de privacidad** y dónde se alojan los datos.
 6. **Pregunta por el soporte**: idioma, horarios, canales.
 
+## Cómo calcular el costo real de un SaaS
+
+Un ejemplo ilustrativo con números redondos: un CRM que cuesta USD 25 por usuario por mes, para un equipo de 8 personas, son USD 200 por mes y USD 7.200 en tres años, sin contar integraciones ni planes superiores. Si el equipo crece a 15 personas, el costo casi se duplica. Hacer esta cuenta con tus números y tu crecimiento esperado es la mejor forma de comparar contra un sistema propio.
+
+| Concepto | Qué sumar |
+| --- | --- |
+| Abono | Precio por usuario × usuarios × meses |
+| Plan superior | Funciones que vas a necesitar al crecer |
+| Integraciones | Conectores o herramientas adicionales con abono |
+| Implementación | Configuración, migración de datos y capacitación |
+| Moneda | Impacto del tipo de cambio si se cobra en dólares |
+
 ## ¿Y si quieres crear tu propio SaaS?
 
 Si tienes un software que resuelve un problema de tu rubro y otras empresas podrían usarlo, puedes convertirlo en un SaaS y cobrar suscripciones. Implica decisiones de negocio (precio, planes, soporte) y técnicas (varios clientes en la misma plataforma, seguridad entre cuentas, facturación recurrente). Lo explicamos en [cómo crear un SaaS](/blog/como-crear-un-saas-desde-cero-guia-tecnica-negocio) y en [arquitectura multi-tenant](/blog/desarrollo-de-software-saas-multi-tenant-guia-arquitectura).
