@@ -1,6 +1,5 @@
 export {
   blogPosts,
   blogCategories,
-  getPostBySlug,
-  searchBlogPosts
+  getPostBySlug
 } from './blogs';

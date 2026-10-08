@@ -28,7 +28,7 @@ const staticPages = [
 // Routes in App.js that are deliberately not in the sitemap
 const NOT_IN_SITEMAP = ['/panel-cotizaciones', '/lp/:slug', '*'];
 // Dynamic routes; their URLs come from services, case studies and blog posts below
-const DYNAMIC_ROUTES = ['/servicios/:slug', '/casos-de-exito/:slug', '/blog/:slug'];
+const DYNAMIC_ROUTES = ['/servicios/:slug', '/casos-de-exito/:slug', '/blog/:slug', '/autores/:slug'];
 
 // A new public route in App.js must be added to staticPages (or to one of the lists above)
 const appRoutes = [...fs.readFileSync(path.join(SRC, 'App.js'), 'utf8').matchAll(/<Route path="([^"]+)"/g)].map((m) => m[1]);
@@ -100,10 +100,16 @@ const caseSlugs = [...casesSrc.matchAll(/^\s{4}slug:\s*'([^']+)'/gm)].map((m) =>
 const hubPaths = [...hubsSrc.matchAll(/^\s{4}path:\s*'([^']+)'/gm)].map((m) => m[1]);
 const casePages = [...hubPaths, ...caseSlugs].map((slug) => `/casos-de-exito/${slug}`);
 
+// Author pages (src/blogs/authors.js)
+const authorSlugs = [...fs.readFileSync(path.join(SRC, 'blogs', 'authors.js'), 'utf8')
+  .matchAll(/^\s{4}slug:\s*'([^']+)'/gm)].map((m) => m[1]);
+
 // Each post object declares `slug`, then `date` and optionally `updated`, before the next post's `slug`
 const blogPosts = [];
 const blogDir = path.join(SRC, 'blogs');
-for (const file of fs.readdirSync(blogDir).filter((f) => f.endsWith('.js') && f !== 'index.js')) {
+// Modules in src/blogs that are not lists of posts
+const NOT_POST_MODULES = ['index.js', 'clusters.js', 'authors.js', 'postContent.js'];
+for (const file of fs.readdirSync(blogDir).filter((f) => f.endsWith('.js') && !NOT_POST_MODULES.includes(f))) {
   const content = fs.readFileSync(path.join(blogDir, file), 'utf8');
   const tokens = [...content.matchAll(/^\s*(slug|date|updated):\s*['"]([^'"]+)['"]/gm)];
   tokens.forEach(([, key, value], i) => {
@@ -155,6 +161,7 @@ const newestPost = latest(...uniquePosts.map(postLastmod));
 
 const servicesLastmod = pageLastmod('pages/ServiceDetailPage.jsx');
 const casesLastmod = pageLastmod('pages/CaseStudyPage.jsx');
+const authorsLastmod = pageLastmod('pages/AuthorPage.jsx', 'blogs/authors.js');
 
 const entries = [
   ...staticPages.map((p) => url({
@@ -163,6 +170,7 @@ const entries = [
   })),
   ...serviceSlugs.map((slug) => url({ loc: `/servicios/${slug}`, lastmod: servicesLastmod, changefreq: 'monthly', priority: '0.9' })),
   ...casePages.map((loc) => url({ loc, lastmod: casesLastmod, changefreq: 'monthly', priority: '0.8' })),
+  ...authorSlugs.map((slug) => url({ loc: `/autores/${slug}`, lastmod: authorsLastmod, changefreq: 'monthly', priority: '0.5' })),
   ...uniquePosts.map((p) => url({ loc: `/blog/${p.slug}`, lastmod: postLastmod(p), changefreq: 'monthly', priority: '0.7' })),
 ];
 
@@ -224,6 +232,7 @@ const include = [
   ...staticPages.map((p) => p.loc),
   ...serviceSlugs.map((slug) => `/servicios/${slug}`),
   ...casePages,
+  ...authorSlugs.map((slug) => `/autores/${slug}`),
   ...landingSlugs.map((slug) => `/lp/${slug}`),
   ...uniquePosts.map((p) => `/blog/${p.slug}`),
   '/404', // becomes build/404.html (scripts/finalize-build.js), served by nginx for unknown routes

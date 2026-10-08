@@ -4,6 +4,32 @@ import { SEOHead } from '../components/SEOHead';
 import { blogPosts } from '../blogData';
 import { EMBED_ID, embedJson, loadPostContent, readEmbeddedContent } from '../blogs/postContent';
 import postStats from '../blogs/postStats.json';
+import { clusterOf } from '../blogs/clusters';
+import { authorByName } from '../blogs/authors';
+
+const SITE_URL = 'https://www.websysrl.com';
+
+// "## Preguntas frecuentes" section of the markdown: each "### question" and the text under it.
+// Only questions visible on the page go into the FAQPage schema.
+const extractFaq = (md) => {
+  if (!md) return [];
+  const section = md.split(/^## Preguntas frecuentes[^\n]*$/m)[1];
+  if (!section) return [];
+  const body = section.split(/^## /m)[0];
+  return body.split(/^### /m).slice(1).map((block) => {
+    const [q, ...rest] = block.split('\n');
+    const a = rest.join(' ').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/[*_`>|]/g, '').replace(/\s+/g, ' ').trim();
+    return { q: q.trim(), a };
+  }).filter((f) => f.q && f.a);
+};
+
+// Neighbours in the cluster reading order, so every post links to 4 posts on the same topic
+const clusterNeighbours = (cluster, slug, count = 4) => {
+  const list = cluster.posts.map((e) => e.slug);
+  const i = list.indexOf(slug);
+  const ordered = i === -1 ? list : [...list.slice(i + 1), ...list.slice(0, i)];
+  return ordered.slice(0, count);
+};
 
 // Inline SVG icons
 const FiClock = ({ size = 16 }) => (
@@ -236,21 +262,33 @@ export const BlogPostPage = () => {
     );
   }
 
-  const relatedPosts = (post.relatedPosts || [])
-    .map(id => blogPosts.find(p => p.id === id))
-    .filter(Boolean);
+  const mapped = clusterOf(post.slug);
+  const cluster = mapped && mapped.cluster;
+  const pillarPost = cluster && !mapped.isPillar ? blogPosts.find((p) => p.slug === cluster.pillar) : null;
+  const serviceLink = cluster && ((mapped.entry && mapped.entry.service) || cluster.service);
+  const relatedPosts = cluster && !mapped.isPillar
+    ? clusterNeighbours(cluster, post.slug).map((s) => blogPosts.find((p) => p.slug === s)).filter(Boolean)
+    : (post.relatedPosts || []).map((id) => blogPosts.find((p) => p.id === id)).filter(Boolean);
+  const pillarIndex = mapped && mapped.isPillar
+    ? cluster.posts.map((e) => ({ entry: e, post: blogPosts.find((p) => p.slug === e.slug) })).filter((x) => x.post)
+    : [];
+  const author = authorByName(post.author);
+  const faq = extractFaq(content);
 
-  // Article schema
+  // BlogPosting schema: author links to the author page (E-E-A-T)
   const articleSchema = {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
     "headline": post.title,
     "description": post.seoDescription,
     "author": {
       "@type": "Person",
       "name": post.author,
-      "url": "https://www.websysrl.com"
+      "url": author ? `${SITE_URL}/autores/${author.slug}` : SITE_URL,
+      ...(author && { "jobTitle": author.jobTitle })
     },
+    ...(cluster && { "articleSection": cluster.name }),
+    ...(mapped && mapped.entry && { "keywords": mapped.entry.kw }),
     "publisher": {
       "@type": "Organization",
       "name": "Websy",
@@ -302,6 +340,13 @@ export const BlogPostPage = () => {
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      {faq.length > 0 && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": faq.map(({ q, a }) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } }))
+        }) }} />
+      )}
 
       {/* Header */}
       <section className="bg-[#182A2C] pt-[100px] md:pt-[120px] pb-16 md:pb-20 relative overflow-hidden">
@@ -342,7 +387,9 @@ export const BlogPostPage = () => {
                 {post.author.split(' ').map(n => n[0]).join('')}
               </div>
               <div>
-                <p className="text-white text-sm font-bold">{post.author}</p>
+                <p className="text-white text-sm font-bold">
+                  {author ? <Link to={`/autores/${author.slug}`} className="hover:underline">{post.author}</Link> : post.author}
+                </p>
                 <p className="text-gray-400 text-xs">Websy</p>
                 <a 
                   href={`https://wa.me/573186218792?text=Hola%20${encodeURIComponent(post.author)},%20le%C3%AD%20el%20art%C3%ADculo%20"${encodeURIComponent(post.title)}"%20en%20el%20blog%20de%20Websy%20y%20quiero%20m%C3%A1s%20informaci%C3%B3n.`}
@@ -381,6 +428,41 @@ export const BlogPostPage = () => {
         </div>
       </article>
 
+      {/* Cluster: index of the guide (pillar) or link up to the guide + related service */}
+      {cluster && (
+        <section className="pb-12">
+          <div className="container mx-auto px-4 max-w-3xl space-y-6">
+            {pillarIndex.length > 0 && (
+              <div className="border border-gray-200 p-6 md:p-8">
+                <h2 className="text-2xl font-black text-[#182A2C] mb-5">Todos los artículos de esta guía</h2>
+                <ol className="space-y-3 list-decimal pl-5">
+                  {pillarIndex.map(({ entry, post: p }) => (
+                    <li key={p.slug} className="text-gray-700">
+                      <Link to={`/blog/${p.slug}`} className="font-bold text-[#182A2C] underline decoration-[#d9fb06] decoration-2 underline-offset-4">{p.title}</Link>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            )}
+            {pillarPost && (
+              <Link to={`/blog/${pillarPost.slug}`} className="block border-l-4 border-[#d9fb06] bg-[#182A2C]/5 p-5 hover:bg-[#182A2C]/10 transition-colors">
+                <span className="block text-[11px] font-black uppercase tracking-[0.15em] text-gray-500 mb-1">Este artículo es parte de la guía</span>
+                <span className="block text-lg font-black text-[#182A2C]">{pillarPost.title}</span>
+              </Link>
+            )}
+            {serviceLink && (
+              <Link to={serviceLink} className="flex items-center justify-between gap-4 bg-[#182A2C] text-white p-5 hover:bg-black transition-colors">
+                <span>
+                  <span className="block text-[11px] font-black uppercase tracking-[0.15em] text-[#d9fb06] mb-1">Servicio relacionado</span>
+                  <span className="block text-lg font-bold">{cluster.serviceLabel}</span>
+                </span>
+                <FiArrowRight size={20} />
+              </Link>
+            )}
+          </div>
+        </section>
+      )}
+
       {/* Share & Back */}
       <section className="border-t border-gray-100 py-8">
         <div className="container mx-auto px-4 max-w-3xl flex items-center justify-between">
@@ -406,12 +488,12 @@ export const BlogPostPage = () => {
         <section className="py-16 bg-[#f9fafb] border-t border-gray-100">
           <div className="container mx-auto px-4 max-w-5xl">
             <h2 className="text-2xl md:text-3xl font-black text-[#182A2C] mb-8 text-center">
-              Artículos relacionados
+              {cluster ? `Más sobre ${cluster.name.toLowerCase()}` : 'Artículos relacionados'}
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {relatedPosts.map(rp => (
                 <Link
-                  key={rp.id}
+                  key={rp.slug}
                   to={`/blog/${rp.slug}`}
                   className="group bg-white rounded-xl border border-gray-100 p-6 hover:border-[#d9fb06] hover:shadow-lg transition-all duration-300"
                 >

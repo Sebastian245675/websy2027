@@ -106,6 +106,10 @@ const PrivacyPolicyPage = lazy(() =>
   import("./pages/PrivacyPolicyPage").then(module => ({ default: module.PrivacyPolicyPage }))
 );
 
+const AuthorPage = lazy(() =>
+  import("./pages/AuthorPage").then(module => ({ default: module.AuthorPage }))
+);
+
 const NotFoundPage = lazy(() =>
   import("./pages/NotFoundPage").then(module => ({ default: module.NotFoundPage }))
 );
@@ -244,6 +248,11 @@ function App() {
                     <Route path="/blog/:slug" element={
                       <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
                         <BlogPostPage />
+                      </Suspense>
+                    } />
+                    <Route path="/autores/:slug" element={
+                      <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
+                        <AuthorPage />
                       </Suspense>
                     } />
                     <Route path="*" element={

@@ -2,8 +2,8 @@ import React, { useMemo, useRef } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import {
   Search, X, ChevronLeft, ChevronRight, ArrowRight, Calendar, Clock,
-  Code2, Smartphone, ShoppingCart, Bot, Database, Cloud, ShieldCheck,
-  Palette, Building2, TrendingUp, Layers, FileText,
+  Code2, Smartphone, ShoppingCart, Bot, Database, ShieldCheck,
+  Building2, TrendingUp, FileText,
 } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
 import { blogPosts, blogCategories } from '../blogData';
@@ -11,17 +11,15 @@ import postStats from '../blogs/postStats.json';
 
 // Posts have no images, so each category gets a branded cover (icon + accent color)
 const CATEGORY_STYLE = {
-  'Desarrollo Web': { icon: Code2, accent: '#d9fb06' },
-  'Apps Móviles': { icon: Smartphone, accent: '#38bdf8' },
+  'Precios y costos': { icon: TrendingUp, accent: '#d9fb06' },
+  'Desarrollo web y diseño': { icon: Code2, accent: '#d9fb06' },
+  'Hosting, seguridad y cloud': { icon: ShieldCheck, accent: '#60a5fa' },
+  'Apps móviles': { icon: Smartphone, accent: '#38bdf8' },
   'E-commerce': { icon: ShoppingCart, accent: '#fbbf24' },
-  'IA & Automatización': { icon: Bot, accent: '#a78bfa' },
-  'Sistemas & ERP': { icon: Database, accent: '#34d399' },
-  'APIs & Cloud': { icon: Cloud, accent: '#60a5fa' },
-  'Ciberseguridad': { icon: ShieldCheck, accent: '#f87171' },
-  'UI/UX Design': { icon: Palette, accent: '#f472b6' },
-  'Industrias & Tech': { icon: Building2, accent: '#fb923c' },
-  'SEO & Marketing': { icon: TrendingUp, accent: '#4ade80' },
-  'SaaS & Software Nube': { icon: Layers, accent: '#22d3ee' },
+  'Automatización e IA': { icon: Bot, accent: '#a78bfa' },
+  'SEO y marketing': { icon: Search, accent: '#4ade80' },
+  'Sistemas de gestión y CRM': { icon: Database, accent: '#34d399' },
+  'Páginas web por rubro': { icon: Building2, accent: '#fb923c' },
 };
 const styleFor = (category) => CATEGORY_STYLE[category] || { icon: FileText, accent: '#d9fb06' };
 

@@ -15,12 +15,13 @@ export const mobileDevelopmentPosts = [
   {
     id: 202,
     slug: 'cuanto-cuesta-desarrollar-una-app-movil-argentina-latam',
-    title: '¿Cuánto cuesta desarrollar una aplicación móvil en Argentina y LATAM en 2026?',
-    seoTitle: '¿Cuánto cuesta crear una App móvil en 2026? Guía de precios | Websy',
-    seoDescription: 'Conoce los precios reales de desarrollo de aplicaciones móviles en Argentina y Latinoamérica. Rangos de costos para apps MVP, corporativas y complejas.',
+    title: '¿Cuánto cuesta desarrollar una app móvil en 2026? Precios por tipo de app',
+    seoTitle: 'Cuánto cuesta desarrollar una app en 2026: precios reales',
+    seoDescription: 'Una app sencilla para Android e iOS arranca en USD 2.000; con pagos o mapas, en USD 5.000. Precios por tipo de app, plazos y costos tras el lanzamiento.',
     seoKeywords: 'cuanto cuesta crear una app, precio desarrollo app movil argentina, costo app ios android, presupuesto aplicacion movil',
     category: 'Apps Móviles',
     date: '2026-06-20',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [201, 203, 205]
@@ -80,12 +81,13 @@ export const mobileDevelopmentPosts = [
   {
     id: 207,
     slug: 'cuanto-cuesta-mantener-una-aplicacion-movil-servidores-y-licencias',
-    title: '¿Cuánto cuesta mantener una Aplicación Móvil en 2026? Servidores, Licencias y Mantenimiento',
-    seoTitle: '¿Cuánto cuesta mantener una App móvil en 2026? | Websy',
-    seoDescription: 'Desglose completo de costos de mantenimiento de apps móviles: servidores cloud, cuentas de desarrollador Apple/Google, actualizaciones del sistema y soporte.',
+    title: '¿Cuánto cuesta mantener una app móvil? Servidores, cuentas y actualizaciones',
+    seoTitle: 'Cuánto cuesta mantener una app: costos anuales',
+    seoDescription: 'Costos de mantener una app publicada: USD 99/año de Apple, USD 25 de Google Play, servidor, servicios por uso y las actualizaciones que exigen las tiendas.',
     seoKeywords: 'cuanto cuesta mantener una app, costo mantenimiento aplicacion movil, servidor cloud app movil, cuenta apple developer costo',
     category: 'Apps Móviles',
     date: '2026-07-30',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [201, 202, 203]

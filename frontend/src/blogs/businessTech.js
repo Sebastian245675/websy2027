@@ -2,12 +2,13 @@ export const businessTechPosts = [
   {
     id: 1101,
     slug: 'como-elegir-empresa-de-desarrollo-de-software-sin-ser-estafado',
-    title: 'Cómo elegir una empresa de desarrollo de software sin ser estafado: 10 Señales de Alerta',
-    seoTitle: 'Elegir Empresa de Software sin ser Estafado: 10 Alertas | Websy',
-    seoDescription: 'Aprendé a identificar las 10 señales de alerta de empresas de software fraudulentas y los 7 criterios para elegir un proveedor confiable.',
+    title: 'Cómo elegir una empresa de desarrollo de software: 10 señales de alerta',
+    seoTitle: 'Cómo elegir una empresa de desarrollo de software',
+    seoDescription: 'Las 10 señales de alerta antes de contratar desarrollo, qué preguntar en la primera reunión, qué debe decir el contrato y cómo comparar presupuestos.',
     seoKeywords: 'elegir empresa desarrollo software, como contratar programador, empresa software confiable, desarrollo software estafa, contratar desarrollo web',
     category: 'Desarrollo Web',
     date: '2026-08-02',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [1, 907, 902]
@@ -28,12 +29,13 @@ export const businessTechPosts = [
   {
     id: 1103,
     slug: 'desarrollo-web-argentina-mejores-empresas-como-contratar',
-    title: 'Desarrollo Web en Argentina 2026: Cómo contratar el equipo correcto para tu proyecto',
-    seoTitle: 'Desarrollo Web Argentina: Cómo Contratar Bien | Websy',
-    seoDescription: 'Guía completa sobre el mercado de desarrollo web en Argentina: precios, tecnologías, modalidades de contratación y cómo evaluar a tu equipo de desarrollo.',
+    title: 'Empresas de desarrollo web en Argentina: cómo elegir y cuánto cuesta contratar',
+    seoTitle: 'Empresas de desarrollo web en Argentina: cómo elegir',
+    seoDescription: 'Freelancer, agencia o software factory: cómo contratar desarrollo web en Argentina, precios en dólares y pesos, Mercado Pago, ARCA y cómo elegir proveedor.',
     seoKeywords: 'desarrollo web argentina, empresa desarrollo web argentina, contratar desarrolladores argentina, agencia web argentina, programadores web argentina',
     category: 'Desarrollo Web',
     date: '2026-07-31',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [1101, 1, 902]

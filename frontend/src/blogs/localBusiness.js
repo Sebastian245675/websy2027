@@ -80,12 +80,13 @@ export const localBusinessPosts = [
   {
     id: 1207,
     slug: 'desarrollo-software-colombia-empresas-bogota-medellin',
-    title: 'Desarrollo de Software en Colombia 2026: Bogotá, Medellín y el boom tech latinoamericano',
-    seoTitle: 'Desarrollo Software Colombia: Bogotá y Medellín | Websy',
-    seoDescription: 'El ecosistema de desarrollo de software en Colombia está en auge. Precios, tecnologías, talento y cómo contratar equipos de desarrollo en Bogotá y Medellín.',
+    title: 'Desarrollo de software y páginas web en Colombia: Bogotá, Medellín y Cali',
+    seoTitle: 'Desarrollo de software en Colombia: Bogotá, Medellín y Cali',
+    seoDescription: 'Cómo contratar desarrollo web en Colombia, precios en pesos colombianos, PSE, facturación DIAN y casos reales en Bogotá, Cali y Manizales.',
     seoKeywords: 'desarrollo software colombia, empresa desarrollo web bogota, desarrollo web medellin, programadores colombia, agencia web colombia',
     category: 'Desarrollo Web',
     date: '2026-07-27',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [1103, 1101, 902]

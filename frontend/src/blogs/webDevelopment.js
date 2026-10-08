@@ -2,13 +2,13 @@ export const webDevelopmentPosts = [
   {
     id: 1,
     slug: 'cuanto-cuesta-pagina-web-argentina-2026',
-    title: '¿Cuánto cuesta una página web en Argentina en 2026? Guía Completa de Precios y Opciones',
-    seoTitle: '¿Cuánto cuesta una página web en Argentina en 2026? Precios y opciones | Websy',
-    seoDescription: 'Guía completa de precios de desarrollo web en Argentina 2026. Landing pages y sitios desde USD 800, tiendas online y sistemas a medida. Comparativa actualizada con ROI y costos ocultos.',
+    title: '¿Cuánto cuesta una página web en Argentina en 2026? Precios en dólares y en pesos',
+    seoTitle: 'Cuánto cuesta una página web en Argentina (2026)',
+    seoDescription: 'Precios 2026 de una página web en Argentina: landing y sitio institucional desde USD 800, tiendas de USD 1.800 a 3.500. En pesos, qué incluye y cómo pagar.',
     seoKeywords: 'cuanto cuesta pagina web argentina, precio web argentina, costo desarrollo web, presupuesto pagina web, diseño web precios argentina 2026, cuanto cobra un programador web',
     category: 'Desarrollo Web',
     date: '2026-07-15',
-    updated: '2026-10-07',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [6, 101, 104]

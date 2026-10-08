@@ -1,77 +1,115 @@
-Si estás evaluando crear una página web para tu empresa en Argentina o Latinoamérica en 2026, la pregunta inevitable es: **¿cuánto presupuesto deberías asignar y qué valor real te entrega cada alternativa del mercado?**
+**En Argentina, una página web profesional para una pyme cuesta en 2026 desde USD 800 (unos $1.170.000 al tipo de cambio oficial de octubre de 2026), tanto para una landing page como para un sitio institucional. Una tienda online a medida va de USD 1.800 a 3.500 y un sistema de gestión de USD 4.000 a 8.000.** Los presupuestos más baratos que vas a encontrar suelen ser plantillas sin diseño propio, sin SEO y sin rondas de cambios definidas.
 
-Existe una disparidad enorme de cotizaciones: desde personas que ofrecen sitios por $50 USD en redes sociales hasta agencias que presupuestan $5.000 USD por el mismo nombre de proyecto. Comprender qué estás pagando exactamente es vital para no tirar tu dinero a la basura.
+En el mercado argentino hay cotizaciones de todo tipo para "una página web": desde ofertas de USD 50 en redes sociales hasta agencias que presupuestan varios miles de dólares. En esta guía te explicamos qué estás pagando en cada caso, qué factores mueven el precio, qué gastos vienen después y cómo pagar en pesos sin que el tipo de cambio te juegue en contra.
 
----
+## Precios de una página web en Argentina (2026)
 
-## 1. El Mito del "Sitio Web Barato": Lo que Nadie te Cuenta
+Estos son los precios de Websy, que usamos como referencia. El valor en pesos está calculado con el dólar oficial del Banco Nación de octubre de 2026 (≈ $1.460) y es aproximado.
 
-Cuando contratas un desarrollo web de muy bajo costo ($50 a $150 USD), en el 99% de los casos recibes una plantilla genérica de WordPress descargada de internet sin licencias oficiales, instalada sobre un hosting compartido sobrepoblado.
+| Tipo de proyecto | Precio en USD | En pesos (aprox.) | Plazo habitual | Para quién |
+| --- | --- | --- | --- | --- |
+| Landing page | Desde 800 | ≈ $1.170.000 | 5 a 7 días hábiles | Campañas, lanzamientos, captar consultas |
+| Sitio institucional | Desde 800 | ≈ $1.170.000 | 2 a 3 semanas | Estudios, consultoras, comercios, profesionales |
+| Tienda online a medida | 1.800 a 3.500 | ≈ $2.630.000 a $5.110.000 | 3 a 6 semanas | Marcas que venden online |
+| Sistema de gestión | 4.000 a 8.000 | ≈ $5.840.000 a $11.680.000 | Según módulos | Stock, CRM, ERP, multisucursal |
 
-### Riesgos inmediatos de una web barata:
-- **Tiempos de carga superiores a 5 segundos**: El 60% de tus visitantes abandonará el sitio antes de ver tu producto.
-- **Inseguridad y Malware**: Las plantillas piratas suelen contener puertas traseras (backdoors) que infectan tu sitio con publicidad no deseada o roban datos.
-- **Invisibilidad en Google**: Cero optimización de estructura HTML, sin etiquetas meta ni velocidad suficiente para pasar los exámenes de Google.
-- **Imposibilidad de Escalabilidad**: Cuando quieras agregar un botón de pago o integrar un CRM, la plantilla se romperá por completo.
+El detalle de qué incluye cada plan está en [Inversión](/planes). Si querés ver los precios de apps y la comparación entre países, mirá la [guía de precios de desarrollo web, apps y software](/blog/precios-desarrollo-web-apps-y-software-latam).
 
----
+## Por qué hay presupuestos de USD 50 y de USD 5.000
 
-## 2. Los 6 Factores Técnicos que Determinan el Precio Real de una Web
+### Lo que suele traer una web muy barata
 
-El valor comercial de un proyecto web profesional se calcula en base a la complejidad arquitectónica y las horas de ingeniería involucradas:
+Un presupuesto mínimo casi siempre es una plantilla genérica, a veces de origen dudoso, instalada en un hosting compartido. Funciona el primer día, pero aparecen problemas:
 
-1. **Stack Tecnológico**: El desarrollo a medida con **React, Next.js y Tailwind CSS** ofrece una experiencia instantánea tipo aplicación móvil sin las trabas de los CMS antiguos.
-2. **Estrategia UI/UX Custom**: Prototipado previo en Figma diseñado específicamente para reflejar la identidad visual de tu marca y maximizar la conversión.
-3. **Optimización SEO de Código**: Implementación de estructura semántica H1-H6, esquema de datos JSON-LD (Schema.org), sitemaps XML y etiquetas canónicas.
-4. **Integración con Canales de Venta**: Conexión directa con la API oficial de WhatsApp Business, pasarelas de cobro transparente (MercadoPago / Stripe) y sistemas de gestión.
-5. **Responsividad Móvil Perfecta (Mobile-First)**: Adaptación pixel-perfect para teléfonos inteligentes, tablets y monitores 4K.
-6. **Seguridad y Cifrado**: Certificados SSL/TLS 1.3, protección contra ataques CSRF/XSS y cabeceras HTTP hardening.
+- **Carga lenta en el celular**: muchas plantillas cargan scripts y fotos pesadas que no se usan. La mayoría de tus clientes te va a ver desde el teléfono.
+- **Seguridad**: las plantillas descargadas de fuentes no oficiales pueden traer código malicioso, y los plugins sin actualizar son una puerta de entrada habitual.
+- **Google no la muestra**: sin títulos pensados para búsquedas, sin datos estructurados y con una estructura desordenada, la web existe pero no aparece.
+- **No crece**: cuando quieras sumar un botón de pago, un catálogo o una integración, la plantilla no lo soporta y hay que empezar de nuevo.
 
----
+### Lo que paga un presupuesto profesional
 
-## 3. Precios de Websy en 2026
+- **Diseño propio** hecho en Figma y aprobado antes de programar.
+- **Desarrollo pensado para velocidad**: en Websy usamos React y Next.js con el contenido entregado en el HTML, lo que ayuda a Google a leer la página.
+- **SEO técnico incluido**: títulos y descripciones por página, datos estructurados de tu tipo de negocio, sitemap y URLs limpias.
+- **Integraciones**: WhatsApp, Mercado Pago, formularios que llegan a tu correo o a tu CRM.
+- **Rondas de cambios por escrito**: entre 3 y 5, según el contrato.
+- **El dominio a tu nombre** y acceso al código.
 
-| Tipo de Proyecto Web | Precio (USD) | Plazo de Entrega | Tipo de Empresa Recomendada |
-| --- | --- | --- | --- |
-| **Landing Page de Alta Conversión** | Desde USD 800 | 5 a 7 días hábiles | Captación de leads, lanzamientos de productos, anuncios Ads |
-| **Sitio Institucional Multi-sección** | Desde USD 800 | 2 a 3 semanas | PYMES, firmas de abogados, consultoras, clínicas |
-| **Tienda Online / E-commerce** | USD 1.800 - 3.500 | 3 a 6 semanas | Marcas de indumentaria, tecnología, venta minorista/mayorista |
-| **Sistema de Gestión para Pymes** | USD 4.000 - 8.000 | Según módulos | Inventario multisucursal, CRM, ERP, portales inmobiliarios |
+## Los 6 factores que mueven el precio
 
-El detalle de cada plan está en [Inversión](/planes).
+1. **Cantidad de secciones y páginas**: una landing de una sola página no es lo mismo que un sitio con una página por servicio.
+2. **Diseño a medida o plantilla**: el diseño propio lleva más horas, pero diferencia tu marca.
+3. **Funciones especiales**: turnos online, catálogo con filtros, área de clientes, cotizador.
+4. **Integraciones**: Mercado Pago, facturación electrónica de ARCA (ex AFIP), CRM, WhatsApp Business.
+5. **Contenido**: quién escribe los textos, quién consigue las fotos, si hay que traducir.
+6. **SEO**: si la web tiene que posicionar en Google desde el primer día o es solo una tarjeta de presentación.
 
----
+## Gastos fijos después de tener la web
 
-## 4. Desglose de Costos Fijos de Infraestructura (Servidores y Dominio)
+Además del desarrollo, una web tiene costos que se pagan todos los años o todos los meses:
 
-Además del desarrollo inicial, todo sitio web requiere mantener 2 o 3 servicios esenciales de infraestructura:
+| Concepto | Qué es | Cuánto cuesta aproximadamente |
+| --- | --- | --- |
+| Dominio .com.ar | Tu dirección web, se registra en NIC Argentina | Costo anual bajo; consultá la tarifa vigente en NIC Argentina |
+| Dominio .com | Alternativa internacional | Entre USD 10 y 20 por año según el registrador |
+| Hosting | Donde vive la web | Un sitio en Next.js puede alojarse gratis o por pocos dólares; una tienda o un sistema necesita servidor pago |
+| Certificado SSL | El candado de HTTPS | Gratis con Let's Encrypt o Cloudflare |
+| Correo corporativo | tu@tuempresa.com.ar | Zoho tiene plan gratuito limitado; Google Workspace cobra por usuario por mes |
+| Mantenimiento | Actualizaciones y cambios | Depende de cuántos cambios necesites por mes |
 
-- **Dominio Web (.com / .com.ar)**: Varía entre $10 y $18 USD al año en NIC Argentina o Namecheap.
-- **Hosting en la Nube (Vercel / AWS / Cloudflare)**: Para desarrollos modernos en React/Next.js, el alojamiento suele ser gratuito o de muy bajo costo ($0 a $15 USD mensuales) ya que se distribuye globalmente por CDN.
-- **Certificado SSL de Cifrado**: Incluido sin costo adicional en desarrollos modernos mediante Let's Encrypt o Cloudflare.
-- **Cuentas de Correo Corporativo (tu@tuempresa.com)**: Gratis con Zoho Mail o $6 USD/mes por usuario con Google Workspace.
+Si tu dominio vence y no lo renovás, cualquiera lo puede registrar. Poné la renovación automática y que esté a nombre de tu empresa. Sobre hosting, comparamos opciones en [mejor hosting para páginas web](/blog/mejor-hosting-para-paginas-web-en-argentina-colombia-mexico).
 
----
+## Cómo pagar una web en Argentina
 
-## 5. El Retorno de Inversión (ROI): ¿Cómo se Pagará Sola tu Página Web?
+Con la volatilidad del tipo de cambio, casi todos los proveedores cotizan en dólares. Eso no significa que tengas que pagar con dólares: en Websy se puede pagar en pesos al tipo de cambio del día, y el total se divide en 3 partes:
 
-Una página web no debe considerarse un gasto decorativo, sino una **herramienta de generación de ingresos en piloto automático**. 
+- **30% al inicio** del proyecto.
+- **30% a mitad** del proyecto, cuando ves el avance.
+- **40% en la entrega**, con la web publicada y funcionando.
 
-Imagina este escenario práctico:
-- Tu negocio vende un servicio promedio de **$200 USD**.
-- Inviertes **USD 800** en una Landing Page profesional en Websy.
-- Con captar **4 clientes nuevos** gracias a la velocidad y credibilidad del sitio, habrás recuperado el 100% de tu inversión. A partir del quinto cliente, todo es ganancia neta.
+Se puede pagar con Mercado Pago o Naranja X, lo que te permite financiar en cuotas con tarjeta. Desde el exterior, con Dólar App o Binance.
 
----
+## Cuándo se paga sola una página web
 
-## 6. Preguntas Frecuentes antes de Contratar un Desarrollo Web
+Hacé esta cuenta con los números de tu negocio:
 
-### ¿Puedo modificar los textos e imágenes yo mismo cuando el sitio esté listo?
-Absolutamente. En Websy entregamos todos los desarrollos con administradores de contenido intuitivos (Headless CMS o paneles propios) para que cualquier persona del equipo pueda editar precios, noticias o fotos sin tocar código.
+- Si cada cliente nuevo te deja, por ejemplo, USD 200 de ganancia,
+- y la web cuesta USD 800,
+- con 4 clientes que lleguen por la web recuperaste la inversión. Desde el quinto, es ganancia.
 
-### ¿En qué moneda se abona el desarrollo?
-Aceptamos pagos en Pesos Argentinos (ARS) al tipo de cambio oficial/MEP, transferencias bancarias locales, dólares USD vía transferencia internacional o criptomonedas (USDT/USDC).
+La clave es que la web traiga consultas, no solo que exista. Por eso importan el SEO y que el contacto sea fácil (WhatsApp a un toque, formulario corto). En [cómo conseguir clientes con una página web](/blog/como-conseguir-clientes-por-internet-para-mi-negocio) explicamos cómo hacerlo.
 
----
+## Errores comunes al presupuestar
 
-En [Websy desarrollamos sitios web de alto rendimiento orientados a ventas reales](/servicios/desarrollo-web). ¿Querés saber cuánto cuesta la web que tu empresa necesita? [Pedí tu presupuesto exacto sin compromiso en menos de 24 hs](/contacto?plan=Auditoría+Gratuita).
+- **Comparar precios sin comparar lo que incluyen**: armá una tabla con alcance, rondas de cambios, plazo, SEO y soporte.
+- **Dejar el dominio a nombre del proveedor**: si la relación termina, perdés tu dirección y tu posicionamiento.
+- **No prever quién escribe los textos**: es la causa número uno de demoras.
+- **Pensar la web solo para computadora**: la mayoría de las visitas llegan desde el celular.
+
+Más en [errores al crear una página web](/blog/errores-comunes-al-crear-pagina-web-empresa-como-evitarlos) y en [cómo elegir una empresa de desarrollo](/blog/como-elegir-empresa-de-desarrollo-de-software-sin-ser-estafado).
+
+## Preguntas frecuentes
+
+### ¿Cuánto cuesta una página web en Argentina en 2026?
+
+En Websy, una landing page o un sitio institucional arranca en USD 800 (unos $1.170.000 al oficial de octubre de 2026). Una tienda online a medida va de USD 1.800 a 3.500.
+
+### ¿Puedo pagar en pesos?
+
+Sí. Se cotiza en dólares para que el precio no cambie durante el proyecto, pero se paga en pesos al tipo de cambio del día, con Mercado Pago o Naranja X, en 3 pagos: 30% al inicio, 30% a mitad y 40% en la entrega.
+
+### ¿Puedo modificar los textos yo mismo después?
+
+Sí. Se puede entregar la web con un panel para editar textos, fotos y precios sin tocar código, o con soporte para que te hagamos los cambios.
+
+### ¿Cuánto tarda en estar lista?
+
+Una landing page suele estar en 5 a 7 días hábiles; un sitio institucional, en 2 a 3 semanas; una tienda online, entre 3 y 6 semanas. El plazo exacto queda escrito en la cotización.
+
+### ¿Incluye el dominio y el hosting?
+
+El hosting está incluido en los planes. El dominio se registra a tu nombre (por ejemplo en NIC Argentina para .com.ar) y te asesoramos para hacerlo.
+
+## Pedí tu presupuesto
+
+Somos de Salta y trabajamos con empresas de todo el país. Mirá el servicio de [desarrollo web](/servicios/desarrollo-web), nuestros [casos de éxito](/casos-de-exito) o [pedí tu presupuesto](/contacto) y te respondemos en 24 horas.

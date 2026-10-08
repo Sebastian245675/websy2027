@@ -265,6 +265,18 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.websysrl.com/autores/sebastian-aguirre</loc>
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.websysrl.com/blog/precios-desarrollo-web-apps-y-software-latam</loc>
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.websysrl.com/blog/como-migrar-de-wordpress-a-react-nextjs-guia-completa</loc>
     <lastmod>2026-08-02</lastmod>
     <changefreq>monthly</changefreq>
@@ -272,7 +284,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/como-elegir-empresa-de-desarrollo-de-software-sin-ser-estafado</loc>
-    <lastmod>2026-08-02</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -326,7 +338,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/desarrollo-web-argentina-mejores-empresas-como-contratar</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -344,7 +356,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/como-hacer-una-pagina-web-gratis-opciones-reales-ventajas-desventajas</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -434,7 +446,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/cuanto-cuesta-mantener-una-aplicacion-movil-servidores-y-licencias</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -590,7 +602,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/desarrollo-software-colombia-empresas-bogota-medellin</loc>
-    <lastmod>2026-07-27</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -668,7 +680,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/mejor-hosting-para-paginas-web-en-argentina-colombia-mexico</loc>
-    <lastmod>2026-07-25</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -722,7 +734,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/desarrollo-web-mexico-empresas-cdmx-guadalajara-monterrey</loc>
-    <lastmod>2026-07-23</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -872,7 +884,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/cuanto-cuesta-pagina-web-argentina-2026</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -974,7 +986,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/cuanto-cuesta-desarrollar-una-app-movil-argentina-latam</loc>
-    <lastmod>2026-06-20</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
