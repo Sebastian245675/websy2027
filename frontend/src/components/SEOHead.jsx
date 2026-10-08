@@ -96,7 +96,7 @@ export const SEOHead = ({
 
     upsertMeta('description', finalDescription);
     upsertMeta('robots', noindex
-      ? 'noindex, nofollow'
+      ? 'noindex'
       : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
 
     // Open Graph
