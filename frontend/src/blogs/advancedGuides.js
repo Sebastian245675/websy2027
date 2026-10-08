@@ -97,12 +97,13 @@ export const advancedGuidePosts = [
   {
     id: 1408,
     slug: 'docker-que-es-para-que-sirve-explicacion-simple-empresas',
-    title: '¿Qué es Docker y por qué tu equipo de desarrollo debería usarlo? Explicación Simple',
-    seoTitle: 'Qué es Docker: Explicación Simple para Empresas | Websy',
-    seoDescription: 'Entiende qué es Docker, los contenedores y por qué simplifican el desarrollo, testing y despliegue de software. Guía sin jerga técnica innecesaria.',
+    title: 'Qué es Docker y para qué sirve: explicación simple para empresas',
+    seoTitle: 'Qué es Docker y para qué sirve en una empresa',
+    seoDescription: 'Qué es Docker con una analogía simple, imagen, contenedor, Dockerfile y Compose, para qué lo usa una empresa, ventajas, límites y cuándo conviene.',
     seoKeywords: 'que es docker, docker para que sirve, contenedores docker, docker explicacion simple, docker vs maquina virtual, docker empresas',
     category: 'APIs & Cloud',
     date: '2026-07-26',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [601, 1315, 1115]
@@ -123,12 +124,13 @@ export const advancedGuidePosts = [
   {
     id: 1410,
     slug: 'github-que-es-para-que-sirve-control-versiones-explicacion',
-    title: '¿Qué es GitHub y para qué sirve? La herramienta que todo equipo de software necesita',
-    seoTitle: 'Qué es GitHub: Control de Versiones Explicado | Websy',
-    seoDescription: 'Explicación simple de GitHub, Git y control de versiones. Por qué es indispensable para cualquier proyecto de software y cómo funciona.',
+    title: 'Qué es GitHub y para qué sirve: control de versiones explicado',
+    seoTitle: 'Qué es GitHub y para qué sirve',
+    seoDescription: 'Qué es Git y qué es GitHub, conceptos básicos, por qué el código debe estar a nombre de tu empresa, cómo trabajar con un proveedor y seguridad.',
     seoKeywords: 'que es github, github para que sirve, que es git, control de versiones, repositorio github, como usar github',
     category: 'APIs & Cloud',
     date: '2026-07-24',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [1101, 1315, 601]

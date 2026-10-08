@@ -1,45 +1,99 @@
-Si tu empresa recopila datos personales de clientes (nombre, email, teléfono, dirección, datos de pago), estás **legalmente obligado** a proteger esa información. El incumplimiento puede resultar en multas significativas y daño reputacional irreparable.
+**Las leyes de protección de datos personales de Latinoamérica exigen, en lo esencial, lo mismo a una empresa: recolectar solo los datos necesarios y con un fin informado, contar con el consentimiento del titular cuando corresponde, guardarlos de forma segura, permitir que la persona acceda, corrija o pida eliminar sus datos y no compartirlos sin una base legal.** En Argentina rige la Ley 25.326, en Colombia la Ley 1581 de 2012 y en México la ley federal de protección de datos personales en posesión de los particulares.
 
----
+En esta guía verás qué datos protege la ley, qué obligaciones concretas tiene tu empresa en la web, los formularios, el CRM y WhatsApp, las particularidades de cada país y una lista de medidas técnicas. Es una guía general: para tu caso específico, consulta con un abogado.
 
-## Legislación por País
+## Qué son los datos personales
 
-### Argentina - Ley 25.326 de Protección de Datos Personales
-- Registro obligatorio de bases de datos ante la AAIP (Agencia de Acceso a la Información Pública).
-- Consentimiento expreso del titular para recopilar datos.
-- Derecho de acceso, rectificación, supresión y oposición (derechos ARSO).
+Cualquier información que identifica o permite identificar a una persona: nombre, documento, correo, teléfono, dirección, IP, fotos, historial de compras. Algunos son **datos sensibles** (salud, origen étnico, opiniones políticas, religión, datos biométricos, vida sexual) y tienen protección reforzada.
 
-### Colombia - Ley 1581 de 2012
-- Registro de bases de datos ante la SIC (Superintendencia de Industria y Comercio).
-- Autorización previa e informada del titular.
-- Política de tratamiento de datos obligatoria y pública.
+## Obligaciones principales de una empresa
 
-### México - LFPDPPP
-- Aviso de Privacidad obligatorio en tu sitio web.
-- Consentimiento tácito o expreso según la sensibilidad de los datos.
-- Derechos ARCO (Acceso, Rectificación, Cancelación, Oposición).
+| Obligación | Qué significa en la práctica |
+| --- | --- |
+| Finalidad | Usar los datos solo para lo que informaste |
+| Información | Explicar quién trata los datos, para qué y cómo ejercer derechos (política de privacidad o aviso de privacidad) |
+| Consentimiento | Obtenerlo cuando la ley lo exige, de forma clara (no casillas premarcadas) |
+| Minimización | Pedir solo los datos necesarios |
+| Seguridad | Proteger los datos contra accesos indebidos, pérdida o alteración |
+| Derechos del titular | Responder pedidos de acceso, rectificación, supresión u oposición |
+| Transferencias | Compartir con terceros o enviar al exterior solo con base legal y garantías |
+| Registro | Inscribir las bases de datos donde la ley lo exige |
 
----
+## Particularidades por país
 
-## Medidas Técnicas de Protección
+| País | Norma principal | Autoridad | Puntos a tener en cuenta |
+| --- | --- | --- | --- |
+| Argentina | Ley 25.326 de Protección de Datos Personales | Agencia de Acceso a la Información Pública (AAIP) | Inscripción de bases de datos en el registro nacional; derecho de acceso gratuito |
+| Colombia | Ley 1581 de 2012 (habeas data) y decretos reglamentarios | Superintendencia de Industria y Comercio (SIC) | Política de tratamiento de datos obligatoria, autorización previa del titular, Registro Nacional de Bases de Datos para las empresas obligadas |
+| México | Ley federal de protección de datos personales en posesión de los particulares | Las funciones del antiguo INAI se reasignaron en 2025; verifica la autoridad vigente | Aviso de privacidad obligatorio; derechos ARCO (acceso, rectificación, cancelación, oposición) |
 
-1. **Encriptación de datos en reposo y en tránsito** (SSL/TLS + encriptación de base de datos).
-2. **Control de acceso basado en roles** (no todos los empleados necesitan ver todos los datos).
-3. **Backups encriptados** almacenados en ubicación geográfica diferente.
-4. **Logs de auditoría** (quién accedió a qué dato y cuándo).
-5. **Política de retención de datos** (no guardar datos más tiempo del necesario).
-6. **Plan de respuesta ante incidentes** (qué hacer si hay una filtración).
+Las normas y autoridades se actualizan; verifica la versión vigente en cada país.
 
----
+## Dónde aplicar la ley en tu operación digital
 
-## Checklist de Cumplimiento para tu Sitio Web
+### Sitio web y formularios
 
-- ☐ Política de Privacidad publicada y accesible.
-- ☐ Aviso de cookies con opción de rechazo.
-- ☐ Formularios con checkbox de consentimiento explícito.
-- ☐ Posibilidad de que el usuario solicite la eliminación de sus datos.
-- ☐ Datos de contacto del Responsable de Tratamiento de Datos.
+- Política o aviso de privacidad accesible desde el pie de página y junto a cada formulario.
+- Casilla de aceptación sin marcar por defecto cuando se pide consentimiento.
+- Pedir solo los campos necesarios.
 
----
+### Cookies y analítica
 
-En [Websy implementamos seguridad y cumplimiento de protección de datos en todos nuestros desarrollos](/servicios/desarrollo-web). [Asegurá el cumplimiento de tu empresa](/contacto).
+- Informar qué cookies y herramientas de medición usas.
+- Pedir consentimiento para las cookies no esenciales cuando la normativa o las plataformas lo requieren.
+
+### CRM y bases de clientes
+
+- Acceso solo para quienes lo necesitan, con usuarios individuales.
+- Registro de qué se hizo con cada dato y de dónde vino.
+- Proceso para responder pedidos de acceso o eliminación.
+
+### WhatsApp y email marketing
+
+- Mensajes promocionales solo a quien aceptó recibirlos.
+- Opción visible para darse de baja.
+- Cuidado con los datos que se envían a herramientas de inteligencia artificial. Ver [cómo automatizar WhatsApp Business](/blog/automatizacion-whatsapp-negocios-guia-completa).
+
+## Medidas técnicas recomendadas
+
+| Medida | Para qué |
+| --- | --- |
+| HTTPS en todo el sitio | Cifrar los datos en tránsito |
+| Contraseñas con hash seguro | Que no se puedan leer si se filtra la base |
+| Cifrado de datos sensibles | Protección adicional en reposo |
+| Permisos por rol | Cada usuario ve solo lo necesario |
+| Verificación en dos pasos | Proteger cuentas con acceso a datos |
+| Copias de seguridad cifradas | Recuperación sin exponer datos |
+| Registros de acceso | Detectar y auditar accesos indebidos |
+| Eliminación periódica | No guardar datos más tiempo del necesario |
+
+Ver [seguridad en bases de datos](/blog/seguridad-en-bases-de-datos-postgresql-y-mysql-para-empresas) y [cómo proteger una página web de hackers](/blog/proteger-pagina-web-de-hackers-seguridad-web-basica).
+
+## Si hay una filtración de datos
+
+1. Contener el incidente y cerrar la vía de acceso.
+2. Evaluar qué datos y cuántas personas se vieron afectados.
+3. Cumplir las obligaciones de aviso a la autoridad y a los titulares que establezca tu país.
+4. Documentar lo ocurrido y las medidas tomadas.
+
+## Preguntas frecuentes
+
+### ¿Mi web necesita política de privacidad?
+
+Sí, si recolecta datos personales mediante formularios, registros, newsletters, cookies de medición o compras.
+
+### ¿Qué ley de datos personales rige en Argentina?
+
+La Ley 25.326 de Protección de Datos Personales, cuya autoridad de aplicación es la Agencia de Acceso a la Información Pública.
+
+### ¿Qué es la autorización de tratamiento de datos en Colombia?
+
+El consentimiento previo, expreso e informado que la Ley 1581 de 2012 exige al titular para tratar sus datos, salvo las excepciones de la ley.
+
+### ¿Puedo usar los datos de mis clientes para enviar promociones?
+
+Si la persona lo aceptó o si la ley de tu país lo permite por la relación comercial existente, ofreciendo siempre la opción de darse de baja.
+
+## Webs y sistemas que cuidan los datos
+
+En Websy desarrollamos webs y sistemas con política de privacidad, consentimiento y medidas de seguridad desde el diseño. Mira la [guía de hosting, seguridad y cloud](/blog/guia-hosting-seguridad-y-cloud-para-sitios-web) o [escríbenos](/contacto).

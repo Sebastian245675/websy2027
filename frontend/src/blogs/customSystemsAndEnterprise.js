@@ -16,12 +16,13 @@ export const customSystemsAndEnterprisePosts = [
   {
     id: 502,
     slug: 'desarrollo-de-apis-rest-graphql-microservicios',
-    title: 'Desarrollo de APIs REST y GraphQL: Cómo conectar tus aplicaciones y sistemas',
-    seoTitle: 'APIs REST vs GraphQL: Arquitectura e Integración de Sistemas | Websy',
-    seoDescription: 'Aprendé las diferencias entre arquitecturas REST y GraphQL. Descubrí cómo integrar aplicaciones web, móviles y bases de datos mediante APIs robustas.',
+    title: 'REST vs GraphQL: diferencias, cuándo usar cada uno y microservicios',
+    seoTitle: 'REST vs GraphQL: diferencias y cuándo usar cada uno',
+    seoDescription: 'REST vs GraphQL con ejemplos, cuándo conviene cada uno, cuándo sí y cuándo no usar microservicios, webhooks y buenas prácticas para cualquier API.',
     seoKeywords: 'desarrollo apis rest graphql, microservicios arquitectura, conectar sistemas web app, desarrollo backend nodejs python',
     category: 'APIs & Cloud',
     date: '2026-06-22',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [501, 503, 504]
@@ -85,12 +86,13 @@ export const customSystemsAndEnterprisePosts = [
   {
     id: 507,
     slug: 'seguridad-en-bases-de-datos-postgresql-y-mysql-para-empresas',
-    title: 'Seguridad y Optimización en Bases de Datos PostgreSQL y MySQL Empresariales',
-    seoTitle: 'Seguridad en Bases de Datos PostgreSQL / MySQL | Websy',
-    seoDescription: 'Guía técnica para asegurar y optimizar bases de datos relacionales empresariales: respaldos automatizados, cifrado de datos y consultas de alta velocidad.',
+    title: 'Seguridad en bases de datos PostgreSQL y MySQL: guía por capas',
+    seoTitle: 'Seguridad en bases de datos: guía y checklist',
+    seoDescription: 'Cómo proteger una base de datos de empresa: red, usuarios y permisos, inyección SQL, cifrado, copias de seguridad, monitoreo y un checklist.',
     seoKeywords: 'seguridad base de datos postgresql mysql, optimizar consultas sql, respaldos backups automatizados bd, arquitectura datos empresa',
     category: 'APIs & Cloud',
     date: '2026-07-30',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [501, 502, 602]

@@ -74,4 +74,16 @@ export const pillarPosts = [
     author: 'Sebastian Aguirre',
     pillar: true,
   },
+  {
+    id: 9003,
+    slug: 'guia-hosting-seguridad-y-cloud-para-sitios-web',
+    title: 'Hosting, seguridad y cloud para sitios web: guía para empresas',
+    seoTitle: 'Hosting, seguridad y cloud para sitios web: guía',
+    seoDescription: 'Dónde alojar un sitio o una app, cómo protegerlo de ataques y qué piezas técnicas (SSL, CDN, APIs, bases de datos, backups) necesita una empresa.',
+    seoKeywords: 'hosting web empresas, seguridad web, cloud para empresas, infraestructura web',
+    date: '2026-10-08',
+    image: null,
+    author: 'Sebastian Aguirre',
+    pillar: true,
+  },
 ];

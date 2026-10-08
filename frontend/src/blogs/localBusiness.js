@@ -42,12 +42,13 @@ export const localBusinessPosts = [
   {
     id: 1204,
     slug: 'api-rest-que-es-como-funciona-guia-principiantes',
-    title: '¿Qué es una API REST y cómo funciona? Explicación Simple con Ejemplos Reales',
-    seoTitle: 'Qué es API REST: Guía Simple con Ejemplos | Websy',
-    seoDescription: 'Explicación simple y práctica de qué es una API REST, cómo funciona, para qué sirve y ejemplos reales de uso en aplicaciones web y móviles.',
+    title: 'Qué es una API REST y cómo funciona: guía para principiantes',
+    seoTitle: 'Qué es una API REST y cómo funciona',
+    seoDescription: 'Qué es una API explicada simple, cómo funciona REST con métodos y códigos de respuesta, autenticación, usos en una empresa y buenas prácticas de diseño.',
     seoKeywords: 'que es api rest, api rest explicacion simple, como funciona una api, api para principiantes, api rest ejemplos, que es una api web',
     category: 'APIs & Cloud',
     date: '2026-07-30',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [601, 1115, 501]

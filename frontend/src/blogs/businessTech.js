@@ -58,12 +58,13 @@ export const businessTechPosts = [
   {
     id: 1105,
     slug: 'proteger-pagina-web-de-hackers-seguridad-web-basica',
-    title: 'Cómo proteger tu página web de hackers: 10 Medidas de Seguridad Web que debés implementar HOY',
-    seoTitle: 'Seguridad Web: Proteger tu Página de Hackers | Websy',
-    seoDescription: 'Las 10 medidas de seguridad web esenciales para proteger tu sitio de hackers, malware e inyecciones SQL. Implementalas hoy y dormí tranquilo.',
+    title: 'Cómo proteger una página web de hackers: medidas por prioridad',
+    seoTitle: 'Cómo proteger una página web de hackers',
+    seoDescription: 'Cómo atacan las webs de pymes, medidas de seguridad por prioridad, plan para WordPress, qué hacer si te hackearon y un checklist mensual.',
     seoKeywords: 'seguridad web, proteger pagina web hackers, hackeo pagina web, seguridad sitio web, como proteger mi web, ciberseguridad web',
     category: 'Ciberseguridad',
     date: '2026-07-29',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [601, 604, 1013]
@@ -194,12 +195,13 @@ export const businessTechPosts = [
   {
     id: 1115,
     slug: 'base-de-datos-postgresql-vs-mysql-vs-mongodb-cual-elegir',
-    title: 'PostgreSQL vs MySQL vs MongoDB: ¿Cuál Base de Datos necesita tu proyecto?',
-    seoTitle: 'PostgreSQL vs MySQL vs MongoDB: Cuál Elegir | Websy',
-    seoDescription: 'Comparativa técnica entre PostgreSQL, MySQL y MongoDB. Descubrí cuál base de datos es mejor para tu proyecto web, e-commerce o sistema empresarial.',
+    title: 'PostgreSQL vs MySQL vs MongoDB: cuál elegir para tu proyecto',
+    seoTitle: 'PostgreSQL vs MySQL vs MongoDB: cuál elegir',
+    seoDescription: 'Bases relacionales vs documentales, comparación de PostgreSQL, MySQL y MongoDB, qué elegir según el proyecto, consistencia y servicios administrados.',
     seoKeywords: 'postgresql vs mysql, mongodb vs postgresql, que base de datos usar, base de datos web, comparar bases de datos, sql vs nosql',
     category: 'APIs & Cloud',
     date: '2026-07-19',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [601, 104, 501]

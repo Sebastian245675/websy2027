@@ -150,12 +150,13 @@ export const digitalPresencePosts = [
   {
     id: 1013,
     slug: 'certificado-ssl-https-que-es-por-que-es-obligatorio-web',
-    title: '¿Qué es un Certificado SSL (HTTPS) y por qué es OBLIGATORIO para tu página web en 2026?',
-    seoTitle: 'Certificado SSL HTTPS: Qué es y Por Qué es Obligatorio | Websy',
-    seoDescription: 'Entiende qué es SSL/HTTPS, por qué Google penaliza sitios sin certificado, cómo obtener uno gratis y cómo instalarlo en tu web.',
+    title: 'Qué es un certificado SSL y por qué tu web necesita HTTPS',
+    seoTitle: 'Qué es un certificado SSL y por qué es obligatorio',
+    seoDescription: 'Qué hace un certificado SSL, tipos (DV, OV, EV, wildcard), cómo se obtiene gratis, cómo pasar tu web a HTTPS sin perder SEO y errores comunes.',
     seoKeywords: 'que es ssl, certificado ssl, https pagina web, ssl gratis, como instalar ssl, web no segura, candado verde navegador',
     category: 'APIs & Cloud',
     date: '2026-07-20',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [601, 903, 910]

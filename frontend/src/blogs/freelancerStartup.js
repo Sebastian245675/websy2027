@@ -58,12 +58,13 @@ export const freelancerStartupPosts = [
   {
     id: 1306,
     slug: 'como-proteger-datos-clientes-empresa-ley-proteccion-datos',
-    title: 'Cómo proteger los datos de tus clientes: Ley de Protección de Datos y seguridad empresarial',
-    seoTitle: 'Protección de Datos Clientes: Ley y Seguridad | Websy',
-    seoDescription: 'Guía sobre protección de datos personales para empresas en Argentina (Ley 25.326), Colombia (Ley 1581) y México (LFPDPPP). Cumplimiento y seguridad.',
+    title: 'Ley de protección de datos personales para empresas: Argentina, Colombia y México',
+    seoTitle: 'Protección de datos personales para empresas (LATAM)',
+    seoDescription: 'Obligaciones de una empresa con los datos de sus clientes en Argentina, Colombia y México, cómo aplicarlas en web, CRM y WhatsApp y medidas técnicas.',
     seoKeywords: 'proteccion datos personales, ley proteccion datos argentina, datos clientes seguridad, ley 25326, habeas data, proteccion datos empresa',
     category: 'Ciberseguridad',
     date: '2026-07-28',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [1105, 604, 1013]
@@ -179,12 +180,13 @@ export const freelancerStartupPosts = [
   {
     id: 1315,
     slug: 'node-js-que-es-para-que-sirve-backend-servidor',
-    title: '¿Qué es Node.js? El Motor detrás del Backend de las Apps más Grandes del Mundo',
-    seoTitle: 'Qué es Node.js: Backend para Apps Modernas | Websy',
-    seoDescription: 'Explicación simple de Node.js: qué es, cómo funciona, por qué LinkedIn y Netflix lo eligieron y cuándo usarlo para el backend de tu proyecto.',
+    title: 'Qué es Node.js y para qué sirve en el backend',
+    seoTitle: 'Qué es Node.js y para qué sirve',
+    seoDescription: 'Qué es Node.js explicado simple, cómo funciona, para qué sirve con ejemplos, ventajas y límites, comparación con otros backends y frameworks habituales.',
     seoKeywords: 'que es node js, nodejs que es, para que sirve nodejs, node.js backend, servidor node js, desarrollo backend nodejs',
     category: 'APIs & Cloud',
     date: '2026-07-19',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [1313, 1310, 1115]

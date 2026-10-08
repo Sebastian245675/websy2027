@@ -28,16 +28,16 @@
   "readTime": "1 min"
  },
  "docker-que-es-para-que-sirve-explicacion-simple-empresas": {
-  "words": 240,
-  "readTime": "1 min"
+  "words": 683,
+  "readTime": "3 min"
  },
  "pagina-web-para-agencias-viajes-turismo-reservas": {
   "words": 197,
   "readTime": "1 min"
  },
  "github-que-es-para-que-sirve-control-versiones-explicacion": {
-  "words": 257,
-  "readTime": "1 min"
+  "words": 728,
+  "readTime": "4 min"
  },
  "automatizacion-whatsapp-negocios-guia-completa": {
   "words": 1294,
@@ -88,8 +88,8 @@
   "readTime": "5 min"
  },
  "proteger-pagina-web-de-hackers-seguridad-web-basica": {
-  "words": 326,
-  "readTime": "2 min"
+  "words": 756,
+  "readTime": "4 min"
  },
  "como-crear-una-aplicacion-movil-desde-cero-guia-completa": {
   "words": 911,
@@ -128,40 +128,40 @@
   "readTime": "1 min"
  },
  "base-de-datos-postgresql-vs-mysql-vs-mongodb-cual-elegir": {
-  "words": 168,
-  "readTime": "1 min"
+  "words": 743,
+  "readTime": "4 min"
  },
  "aws-vs-vercel-vs-firebase-donde-alojar-tu-proyecto-web-app": {
-  "words": 391,
-  "readTime": "2 min"
+  "words": 740,
+  "readTime": "4 min"
  },
  "ciberseguridad-web-owasp-top-10-como-proteger-tu-pagina-o-app": {
-  "words": 306,
-  "readTime": "2 min"
+  "words": 784,
+  "readTime": "4 min"
  },
  "ci-cd-pipelines-github-actions-docker-deployment-web": {
-  "words": 185,
-  "readTime": "1 min"
+  "words": 674,
+  "readTime": "3 min"
  },
  "certificados-ssl-https-y-protocolo-http3-guia-seguridad": {
-  "words": 225,
-  "readTime": "1 min"
+  "words": 736,
+  "readTime": "4 min"
  },
  "cloudflare-vs-cloudfront-cdn-para-acelerar-y-proteger-tu-web": {
-  "words": 159,
-  "readTime": "1 min"
+  "words": 728,
+  "readTime": "4 min"
  },
  "como-prevenir-ataques-ddos-y-fuerza-bruta-en-paginas-web": {
-  "words": 139,
-  "readTime": "1 min"
+  "words": 713,
+  "readTime": "4 min"
  },
  "por-que-tu-empresa-necesita-un-crm-erp-a-medida": {
   "words": 864,
   "readTime": "4 min"
  },
  "desarrollo-de-apis-rest-graphql-microservicios": {
-  "words": 221,
-  "readTime": "1 min"
+  "words": 719,
+  "readTime": "4 min"
  },
  "como-migrar-un-sistema-legacy-excel-a-un-sistema-web-moderno": {
   "words": 1034,
@@ -180,8 +180,8 @@
   "readTime": "4 min"
  },
  "seguridad-en-bases-de-datos-postgresql-y-mysql-para-empresas": {
-  "words": 142,
-  "readTime": "1 min"
+  "words": 740,
+  "readTime": "4 min"
  },
  "importancia-del-diseno-ui-ux-en-el-exito-de-un-producto-digital": {
   "words": 329,
@@ -252,8 +252,8 @@
   "readTime": "5 min"
  },
  "certificado-ssl-https-que-es-por-que-es-obligatorio-web": {
-  "words": 205,
-  "readTime": "1 min"
+  "words": 723,
+  "readTime": "4 min"
  },
  "automatizar-facturacion-electronica-argentina-afip-sistema-web": {
   "words": 1086,
@@ -312,8 +312,8 @@
   "readTime": "5 min"
  },
  "como-proteger-datos-clientes-empresa-ley-proteccion-datos": {
-  "words": 279,
-  "readTime": "1 min"
+  "words": 850,
+  "readTime": "4 min"
  },
  "figma-que-es-como-usar-para-disenar-paginas-web-apps": {
   "words": 286,
@@ -348,8 +348,8 @@
   "readTime": "1 min"
  },
  "node-js-que-es-para-que-sirve-backend-servidor": {
-  "words": 282,
-  "readTime": "1 min"
+  "words": 702,
+  "readTime": "4 min"
  },
  "como-posicionar-mi-negocio-local-en-google-seo-local": {
   "words": 964,
@@ -364,8 +364,8 @@
   "readTime": "1 min"
  },
  "api-rest-que-es-como-funciona-guia-principiantes": {
-  "words": 235,
-  "readTime": "1 min"
+  "words": 769,
+  "readTime": "4 min"
  },
  "metricas-web-que-medir-google-analytics-kpis-sitio-web": {
   "words": 758,
@@ -446,6 +446,10 @@
  "guia-ecommerce-como-vender-por-internet-en-latam": {
   "words": 943,
   "readTime": "5 min"
+ },
+ "guia-hosting-seguridad-y-cloud-para-sitios-web": {
+  "words": 816,
+  "readTime": "4 min"
  },
  "como-aparecer-en-google-primeros-resultados-guia-seo-2026": {
   "words": 1030,

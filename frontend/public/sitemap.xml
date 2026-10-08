@@ -307,6 +307,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.websysrl.com/blog/guia-hosting-seguridad-y-cloud-para-sitios-web</loc>
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.websysrl.com/blog/como-migrar-de-wordpress-a-react-nextjs-guia-completa</loc>
     <lastmod>2026-08-02</lastmod>
     <changefreq>monthly</changefreq>
@@ -434,13 +440,13 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/como-prevenir-ataques-ddos-y-fuerza-bruta-en-paginas-web</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/seguridad-en-bases-de-datos-postgresql-y-mysql-para-empresas</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -470,7 +476,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/api-rest-que-es-como-funciona-guia-principiantes</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -506,13 +512,13 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/proteger-pagina-web-de-hackers-seguridad-web-basica</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/cloudflare-vs-cloudfront-cdn-para-acelerar-y-proteger-tu-web</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -590,7 +596,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/como-proteger-datos-clientes-empresa-ley-proteccion-datos</loc>
-    <lastmod>2026-07-28</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -644,7 +650,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/docker-que-es-para-que-sirve-explicacion-simple-empresas</loc>
-    <lastmod>2026-07-26</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -716,7 +722,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/github-que-es-para-que-sirve-control-versiones-explicacion</loc>
-    <lastmod>2026-07-24</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -800,7 +806,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/ci-cd-pipelines-github-actions-docker-deployment-web</loc>
-    <lastmod>2026-07-21</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -836,7 +842,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/certificado-ssl-https-que-es-por-que-es-obligatorio-web</loc>
-    <lastmod>2026-07-20</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -854,7 +860,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/base-de-datos-postgresql-vs-mysql-vs-mongodb-cual-elegir</loc>
-    <lastmod>2026-07-19</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -866,7 +872,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/node-js-que-es-para-que-sirve-backend-servidor</loc>
-    <lastmod>2026-07-19</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -956,7 +962,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/certificados-ssl-https-y-protocolo-http3-guia-seguridad</loc>
-    <lastmod>2026-07-07</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -980,7 +986,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/aws-vs-vercel-vs-firebase-donde-alojar-tu-proyecto-web-app</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -1010,7 +1016,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/desarrollo-de-apis-rest-graphql-microservicios</loc>
-    <lastmod>2026-06-22</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -1040,7 +1046,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/ciberseguridad-web-owasp-top-10-como-proteger-tu-pagina-o-app</loc>
-    <lastmod>2026-06-14</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
