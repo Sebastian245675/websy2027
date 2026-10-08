@@ -1,57 +1,108 @@
-El **46% de todas las búsquedas en Google tienen intención local**. Cuando alguien busca "plomero cerca de mí", "dentista en Palermo" o "restaurante italiano en Medellín", Google muestra un mapa con los 3 negocios mejor posicionados (el llamado **Map Pack**).
+**El SEO local es el trabajo para que tu negocio aparezca cuando alguien busca lo que ofreces en tu ciudad o "cerca de mí": en el mapa de Google (el bloque con tres negocios), en Google Maps y en los resultados orgánicos.** Se apoya en tres pilares: un Perfil de empresa en Google completo y con reseñas, una web con una página por servicio que mencione tu ciudad y tenga datos estructurados de negocio local, y datos de contacto idénticos en todos los sitios donde aparece tu empresa.
 
-Si tu negocio no aparece en ese Top 3, estás invisible para las búsquedas locales más comerciales.
+En esta guía verás cómo decide Google qué negocios mostrar, un paso a paso para posicionar tu negocio local, cómo conseguir y gestionar reseñas, qué poner en tu web y cómo medir los resultados.
 
----
+## Cómo decide Google qué negocios mostrar
 
-## ¿Qué es el SEO Local?
+Según Google, los resultados locales dependen de tres factores:
 
-Es el conjunto de técnicas para posicionar tu negocio en las búsquedas geográficas de Google. A diferencia del SEO tradicional (que posiciona páginas web en resultados orgánicos), el SEO local posiciona tu **ficha de Google My Business** en el Map Pack.
+| Factor | Qué significa | Qué puedes hacer |
+| --- | --- | --- |
+| Relevancia | Qué tan bien coincide tu negocio con lo que se busca | Categoría correcta, servicios cargados, contenido en la web |
+| Distancia | Qué tan cerca estás de quien busca o de la ubicación buscada | Dirección correcta; no se puede "falsear" |
+| Prominencia | Qué tan conocido y recomendado es tu negocio | Reseñas, menciones, enlaces, presencia en directorios |
 
----
+## Paso a paso para posicionar tu negocio local
 
-## Los 3 Factores que Determinan el Ranking Local
+### 1. Perfil de empresa en Google
 
-### 1. Relevancia
-¿Tu ficha de Google corresponde con lo que el usuario está buscando? Por eso es fundamental elegir la **categoría principal correcta** y completar todos los campos.
+Crea o reclama tu perfil, verifícalo y completa todo: categoría principal precisa (por ejemplo "Abogado especialista en derecho laboral" en lugar de solo "Abogado"), categorías secundarias, horarios, servicios, zona de atención, fotos reales y descripción. El paso a paso está en [cómo aparecer en Google Maps](/blog/google-my-business-como-aparecer-en-google-maps-gratis).
 
-### 2. Distancia
-¿Tu negocio está cerca de donde el usuario hizo la búsqueda? No podés controlar este factor, pero podés optimizar los otros dos para compensar.
+### 2. Datos de contacto coherentes (NAP)
 
-### 3. Prominencia
-¿Tu negocio es conocido y tiene buena reputación online? Google mide esto con reseñas, backlinks, menciones en directorios y actividad en tu ficha.
+Nombre, dirección y teléfono deben ser idénticos en el perfil de Google, tu web, redes sociales y directorios. Diferencias como "Av." y "Avenida" o dos teléfonos distintos confunden a Google.
 
----
+### 3. Una página por servicio en tu web
 
-## Estrategia de SEO Local Paso a Paso
+Cada servicio con su página, el servicio y la ciudad en el título y en el texto de forma natural ("Instalación de aire acondicionado en Salta"), preguntas frecuentes locales, precios orientativos y un contacto inmediato.
 
-### Paso 1: Optimizar Google My Business (Perfil de Empresa)
-- Nombre exacto del negocio (no agregues keywords artificiales).
-- Dirección verificada.
-- Teléfono local (no celular personal).
-- Horarios actualizados (incluyendo feriados).
-- Categoría principal + hasta 9 categorías secundarias.
-- Descripción de 750 caracteres con keywords naturales.
-- Fotos profesionales del local (mínimo 10).
+### 4. Datos estructurados de negocio local
 
-### Paso 2: Conseguir Reseñas de 5 Estrellas
-- Pedí activamente a clientes satisfechos que dejen reseña en Google.
-- Respondé TODAS las reseñas en menos de 24 horas.
-- Las reseñas con texto largo (50+ palabras) tienen más peso que las de solo estrellas.
+En la web, el tipo LocalBusiness (o uno más específico como LegalService, MedicalClinic, Restaurant) con nombre, dirección, coordenadas, teléfono, horarios y zona atendida. Un ejemplo real: para [Ruarte & Ruarte](/casos-de-exito/pagina-web-estudio-juridico-salta-ruarte), un estudio jurídico de Salta, usamos LegalService con dirección, coordenadas y horario.
 
-### Paso 3: Citas NAP Consistentes
-NAP = Name, Address, Phone. Tu negocio debe aparecer con datos **idénticos** en:
-- Google My Business
-- Tu sitio web (footer)
-- Directorios locales (Yelp, Páginas Amarillas, Clutch)
-- Redes sociales (Facebook, Instagram, LinkedIn)
+### 5. Reseñas
 
-### Paso 4: Contenido Local en tu Web
-Crear páginas específicas para cada servicio + ubicación:
-- "/servicios/desarrollo-web-buenos-aires"
-- "/servicios/diseño-web-medellin"
-- "/servicios/ecommerce-ciudad-de-mexico"
+Son el factor de prominencia más visible. Pide reseñas a todos los clientes satisfechos, con un enlace directo, y responde todas, también las negativas.
 
----
+### 6. Menciones locales
 
-En [Websy optimizamos tu presencia local en Google para que tu negocio domine las búsquedas de tu zona](/servicios/desarrollo-web). [Pedí tu auditoría de SEO local](/contacto?plan=Auditoría+Gratuita).
+Directorios de tu ciudad y de tu rubro, cámaras de comercio, asociaciones profesionales, proveedores y medios locales.
+
+## Cómo conseguir más reseñas (sin romper las reglas)
+
+- **Pídelas en el momento justo**: cuando el cliente te agradece o recibe el resultado.
+- **Usa el enlace directo** a la ventana de reseña de tu perfil.
+- **Envíalo por WhatsApp**, que es donde el cliente ya está.
+- **Responde todas**, agradeciendo y, en las negativas, ofreciendo una solución.
+- **No compres reseñas ni las ofrezcas a cambio de descuentos**: va contra las políticas de Google y puede hacer que eliminen reseñas o suspendan el perfil.
+
+## Qué buscan tus clientes locales
+
+| Tipo de búsqueda | Ejemplo | Qué página la responde |
+| --- | --- | --- |
+| Servicio + ciudad | "dentista en Salta" | Página del servicio |
+| "Cerca de mí" | "farmacia cerca de mí" | Perfil de empresa en Google |
+| Servicio + barrio o zona | "veterinaria zona norte" | Página del servicio con la zona mencionada |
+| Urgencia | "cerrajero 24 horas" | Página del servicio con horario y teléfono visibles |
+| Precio local | "cuánto cuesta una limpieza dental en Salta" | Página o artículo con precios orientativos |
+
+## Si atiendes varias ciudades
+
+- **Con local en cada ciudad**: un perfil de Google por local y una página por sede en la web.
+- **Sin local, atiendes a domicilio**: un perfil con zona de atención (sin mostrar dirección) y páginas que expliquen la cobertura.
+- **Evita crear páginas casi idénticas por ciudad** cambiando solo el nombre: Google las considera páginas puerta y las penaliza. Cada página local debe tener contenido propio (casos de esa zona, condiciones, precios, preguntas locales).
+
+## Cómo medir el SEO local
+
+| Métrica | Dónde |
+| --- | --- |
+| Búsquedas y vistas del perfil | Rendimiento del Perfil de empresa en Google |
+| Llamadas, solicitudes de ruta y clics al sitio | Perfil de empresa en Google |
+| Consultas locales y posición | Google Search Console, filtrando por consultas con la ciudad |
+| Consultas recibidas por WhatsApp o formulario | Google Analytics 4 y CRM |
+
+## Checklist de SEO local
+
+| Tarea | Hecho |
+| --- | --- |
+| Perfil de empresa en Google verificado | |
+| Categoría principal específica y categorías secundarias | |
+| Horarios, servicios, fotos reales y descripción completos | |
+| Nombre, dirección y teléfono iguales en web, perfil y directorios | |
+| Una página por servicio en la web, con la ciudad mencionada | |
+| Datos estructurados de negocio local en la web | |
+| Enlace directo para pedir reseñas y respuesta a todas | |
+| Presencia en directorios locales y del rubro | |
+| Seguimiento de llamadas, rutas y clics del perfil | |
+
+## Preguntas frecuentes
+
+### ¿Qué es el SEO local?
+
+El conjunto de acciones para que un negocio aparezca en Google y Google Maps cuando alguien busca sus servicios en una ciudad o cerca de su ubicación.
+
+### ¿Cómo aparezco en el mapa de Google?
+
+Con un Perfil de empresa en Google verificado y completo, la categoría correcta, reseñas, fotos reales y datos de contacto coherentes con tu web.
+
+### ¿Necesito una web para el SEO local?
+
+El perfil de Google puede funcionar solo, pero una web con páginas por servicio, datos estructurados y contenido local refuerza la relevancia y capta búsquedas orgánicas que el mapa no cubre.
+
+### ¿Cuánto tarda en dar resultados?
+
+Un perfil bien configurado puede empezar a aparecer en semanas. Subir en búsquedas competidas lleva meses y depende sobre todo de las reseñas y de la competencia.
+
+## Posicionamos tu negocio en tu ciudad
+
+En Websy trabajamos SEO local para negocios de Salta y de toda Latinoamérica. Mira el servicio de [SEO y marketing digital](/servicios/seo-marketing), la [guía de SEO para pymes](/blog/guia-seo-y-marketing-digital-para-pymes) o [escríbenos](/contacto).

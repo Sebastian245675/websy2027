@@ -41,12 +41,13 @@ export const designAndUserExperiencePosts = [
   {
     id: 704,
     slug: 'cro-conversion-rate-optimization-guia-testing-ab',
-    title: 'Guía de Testing A/B y CRO: Cómo duplicar las conversiones de tu Web',
-    seoTitle: 'Testing A/B y Optimización CRO para Sitios Web | Websy',
-    seoDescription: 'Estrategias científicas de Testing A/B para comparar variantes de encabezados, llamados a la acción (CTA) y formularios para aumentar ventas.',
+    title: 'Qué es CRO: cómo aumentar la conversión de tu web con datos y tests A/B',
+    seoTitle: 'Qué es CRO y cómo aumentar la conversión de tu web',
+    seoDescription: 'Qué es la optimización de la conversión, cómo calcularla, el proceso paso a paso, tests A/B confiables, ideas que funcionan y qué hacer con poco tráfico.',
     seoKeywords: 'testing ab cro conversion, optimizar formulario de contacto, aumentar conversiones landing page, ux orientado a ventas',
     category: 'UI/UX Design',
     date: '2026-07-11',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [701, 702, 703]

@@ -1,44 +1,96 @@
-Tener un sitio web sin medir sus resultados es como manejar un auto con los ojos cerrados. Google Analytics 4 es tu tablero de instrumentos: te dice cuántas personas visitan tu web, de dónde vienen, qué hacen y si se convierten en clientes.
+**Las métricas de un sitio web que realmente importan para una empresa son: impresiones, clics y posición en Google (Search Console); visitas por canal y conversiones (Google Analytics 4); tasa de conversión; costo por consulta o por venta si inviertes en publicidad; y ventas generadas por la web (CRM o tienda).** Las métricas de vanidad, como "me gusta" o páginas vistas sin contexto, no dicen si la web trae clientes.
 
----
+En esta guía verás qué métricas mirar según el tipo de web, cómo configurar Google Analytics 4 y Search Console, cómo armar un tablero simple, cómo interpretar los números y los errores de medición más comunes.
 
-## Los 10 KPIs que todo dueño de empresa debe monitorear
+## Las métricas por etapa
 
-### 1. Usuarios (Users)
-Cantidad de personas únicas que visitaron tu web en un período determinado. Es tu indicador de alcance.
+| Etapa | Métrica | Qué responde | Herramienta |
+| --- | --- | --- | --- |
+| Visibilidad | Impresiones y posición media | ¿Me ven en Google? | Search Console |
+| Atracción | Clics y CTR en Google | ¿Me eligen en los resultados? | Search Console |
+| Tráfico | Usuarios por canal | ¿De dónde vienen? | Google Analytics 4 |
+| Interés | Interacción y páginas clave vistas | ¿Les interesa lo que ven? | Google Analytics 4 |
+| Conversión | Consultas, reservas, compras | ¿Hacen lo que necesito? | Google Analytics 4 |
+| Negocio | Ventas, ingresos, costo por cliente | ¿Se paga la web? | CRM, tienda, plataforma de anuncios |
 
-### 2. Sesiones (Sessions)
-Cantidad total de visitas (un usuario puede tener múltiples sesiones).
+## KPIs según el tipo de web
 
-### 3. Tasa de Rebote (Bounce Rate)
-Porcentaje de usuarios que entraron a tu web y se fueron sin interactuar con nada. Si es mayor al 70%, tu contenido no está enganchando.
+| Tipo de web | KPIs principales |
+| --- | --- |
+| Servicios | Consultas por WhatsApp y formulario, tasa de conversión, consultas por canal |
+| Tienda online | Ventas, tasa de conversión, ticket promedio, abandono de carrito |
+| Turnos | Reservas, tasa de ausencias, ocupación |
+| Contenido o blog | Clics desde Google, artículos que generan consultas |
 
-### 4. Duración Promedio de Sesión
-Cuánto tiempo permanece el usuario en tu web. Más de 2 minutos es buena señal. Menos de 30 segundos indica un problema grave.
+Elige 3 a 5 KPIs y revísalos todos los meses. Más que eso termina en tableros que nadie mira.
 
-### 5. Páginas por Sesión
-Cuántas páginas visita el usuario en promedio. Si es 1, solo ve la página de entrada y se va. Si es 3+, está navegando tu contenido.
+## Configurar Google Analytics 4
 
-### 6. Fuentes de Tráfico
-De dónde vienen tus visitantes:
-- **Orgánico**: Google (SEO).
-- **Directo**: Escriben tu URL directamente.
-- **Redes Sociales**: Instagram, Facebook, LinkedIn.
-- **Referido**: Desde otros sitios web que te enlazan.
-- **Pagado**: Google Ads, Facebook Ads.
+1. **Crea la propiedad** e instala la etiqueta en la web (directamente o con Google Tag Manager).
+2. **Define los eventos clave** (conversiones): clic en WhatsApp, envío de formulario, compra, reserva.
+3. **Marca esos eventos como clave** en la configuración de GA4.
+4. **Conecta Google Ads y Search Console** si los usas.
+5. **Excluye el tráfico interno** (tu equipo).
+6. **Revisa el consentimiento de cookies** según la ley de tu país y las exigencias de las plataformas.
 
-### 7. Tasa de Conversión
-Porcentaje de visitantes que realizan la acción objetivo (llenar formulario, hacer una compra, agendar llamada). Es la métrica más importante de todas.
+En la mayoría de las webs de servicio, el clic en el botón de WhatsApp es la conversión más importante y la que más se olvida de medir.
 
-### 8. Top Landing Pages
-Las páginas por las que más gente entra a tu web. Si tu blog trae el 60% del tráfico, invertí en más contenido.
+## Configurar Google Search Console
 
-### 9. Dispositivos (Mobile vs Desktop)
-Qué porcentaje de tu tráfico viene de celulares vs computadoras. Si el 75% es mobile y tu web mobile es mala, estás perdiendo clientes.
+1. Verifica el dominio (preferentemente como propiedad de dominio).
+2. Envía el sitemap.
+3. Revisa cada mes: rendimiento (consultas, páginas, posición, CTR) e indexación (informe "Páginas").
 
-### 10. Velocidad de Carga
-Google Analytics reporta el tiempo de carga promedio. Si supera los 3 segundos, necesitás optimizar urgentemente.
+Search Console muestra lo que pasa antes de que alguien entre a tu web: por qué búsquedas apareces y en qué posición. Ver [cómo mejorar el posicionamiento](/blog/como-mejorar-posicionamiento-google-sitio-web-existente).
 
----
+## Un tablero mensual simple
 
-En [Websy configuramos Google Analytics 4 profesionalmente en todos nuestros proyectos web](/servicios/desarrollo-web). [Medí los resultados de tu web](/contacto).
+| Métrica | Mes anterior | Este mes | Variación |
+| --- | --- | --- | --- |
+| Impresiones en Google | | | |
+| Clics desde Google | | | |
+| Usuarios totales | | | |
+| Consultas (WhatsApp + formulario) | | | |
+| Tasa de conversión | | | |
+| Ventas originadas en la web | | | |
+| Inversión en anuncios | | | |
+| Costo por consulta | | | |
+
+Looker Studio permite armar este tablero conectado a GA4 y Search Console de forma gratuita.
+
+## Cómo interpretar los números
+
+- **Suben las impresiones y no los clics**: apareces, pero lejos o con títulos poco atractivos.
+- **Suben las visitas y no las consultas**: llega tráfico que no es tu cliente o la web no convierte. Ver [qué es CRO](/blog/cro-conversion-rate-optimization-guia-testing-ab).
+- **Muchas consultas, pocas ventas**: problema de calidad de las consultas o del proceso comercial.
+- **Bajan las visitas en una época del año**: compara con el mismo mes del año anterior antes de preocuparte.
+
+## Errores de medición comunes
+
+- **No medir los clics en WhatsApp**.
+- **Contar las visitas del propio equipo**.
+- **Mirar solo el total** sin separar por canal.
+- **Cambiar la web y no anotar cuándo**: después no sabes qué causó el cambio en los números.
+- **Comparar períodos distintos** (una semana con feriado contra una normal).
+
+## Preguntas frecuentes
+
+### ¿Qué métricas debo medir en mi página web?
+
+Impresiones, clics y posición en Google; visitas por canal; conversiones (consultas, reservas, compras); tasa de conversión; y, si haces publicidad, costo por consulta.
+
+### ¿Qué es un KPI de un sitio web?
+
+Un indicador clave que mide si la web cumple su objetivo de negocio, como la cantidad de consultas mensuales o la tasa de conversión.
+
+### ¿Cómo mido los clics en WhatsApp?
+
+Con un evento en Google Analytics 4 (directamente o con Google Tag Manager) que se dispare al hacer clic en los enlaces de WhatsApp, marcado como evento clave.
+
+### ¿Search Console y Analytics son lo mismo?
+
+No. Search Console muestra cómo apareces en Google antes del clic; Analytics muestra qué hacen los visitantes dentro de tu web.
+
+## Medimos lo que importa
+
+En Websy configuramos la medición de tu web y armamos tableros con los KPIs de tu negocio. Mira la [guía de SEO y marketing digital](/blog/guia-seo-y-marketing-digital-para-pymes) o [escríbenos](/contacto).

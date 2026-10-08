@@ -1,82 +1,118 @@
-Si tu negocio no aparece en Google cuando un cliente potencial busca lo que vendés, **estás regalando dinero a tu competencia cada hora del día**.
+**Para aparecer en Google con un negocio o una web nueva: crea tu Perfil de empresa en Google, asegúrate de que tu web esté indexada (Google Search Console), arma una página por cada servicio con el nombre del servicio y la ciudad en el título, responde en cada página las preguntas que hacen tus clientes, haz que cargue rápido en el celular y consigue que otros sitios te mencionen.** Los primeros resultados suelen verse entre 2 y 4 meses; las primeras posiciones en búsquedas competidas, entre 6 y 12.
 
-El 93% de las experiencias en internet comienzan con una búsqueda en Google. Y el 75% de los usuarios nunca pasan de la primera página de resultados. Si tu empresa está en la página 2 o más abajo, para efectos prácticos **no existís en internet**.
+En esta guía tienes el paso a paso completo para empezar desde cero: cómo funciona Google, qué hacer en la primera semana, cómo elegir las palabras clave, cómo escribir cada página, qué es lo técnico imprescindible y cómo medir el avance.
 
-En esta guía te revelamos el proceso exacto que usamos en Websy para posicionar sitios web de empresas en el puesto #1 de Google en menos de 90 días.
+## Cómo decide Google qué mostrar
 
----
+Simplificando, Google hace tres cosas:
 
-## 1. Entender cómo funciona el algoritmo de Google en 2026
+1. **Rastrea**: sus robots descubren tus páginas siguiendo enlaces y leyendo tu sitemap.
+2. **Indexa**: guarda y entiende el contenido de cada página.
+3. **Ordena**: ante cada búsqueda, muestra las páginas que mejor responden, considerando relevancia, calidad, experiencia de uso, confianza y ubicación del usuario.
 
-Google utiliza más de 200 factores de ranking para decidir qué página mostrar primero. Sin embargo, en 2026 los 5 factores con mayor peso son:
+Si tu web no está indexada, no hay nada que posicionar. Si está indexada pero no responde bien la búsqueda, aparece lejos.
 
-1. **Contenido de Alta Calidad y Profundidad (E-E-A-T)**: Google premia páginas escritas por expertos reales que demuestran Experiencia, Expertise, Autoridad y Confiabilidad.
-2. **Core Web Vitals (Velocidad de Carga)**: Tu página debe cargar en menos de 2.5 segundos. Si tarda más, Google la penaliza automáticamente.
-3. **Backlinks de Calidad**: Enlaces desde otros sitios web relevantes que apuntan al tuyo funcionan como "votos de confianza".
-4. **Intención de Búsqueda (Search Intent)**: Google analiza si tu contenido realmente responde lo que el usuario está buscando.
-5. **Experiencia Móvil (Mobile-First Indexing)**: Google indexa y rankea basándose exclusivamente en la versión móvil de tu sitio.
+## Primera semana: lo imprescindible
 
----
-
-## 2. SEO On-Page: Lo que debés optimizar dentro de tu sitio web
-
-### A. Etiqueta Title (Título SEO)
-Es el texto azul clickeable que aparece en los resultados de Google. Debe contener tu palabra clave principal al inicio y tener entre 50 y 60 caracteres.
-
-**Ejemplo Malo**: "Inicio - Mi Empresa SRL"
-**Ejemplo Optimizado**: "Desarrollo Web Profesional en Argentina | Mi Empresa"
-
-### B. Meta Description
-Es el texto gris debajo del título en Google. No afecta directamente al ranking, pero un buen texto aumenta drásticamente el porcentaje de clics (CTR). Debe tener entre 150 y 160 caracteres e incluir un llamado a la acción.
-
-### C. Etiquetas de Encabezado (H1, H2, H3)
-- Solo un H1 por página (el título principal).
-- Usa H2 para las secciones principales.
-- Incluye variaciones de tu palabra clave de forma natural.
-
-### D. URLs Amigables (Slugs)
-- **Malo**: `/pagina?id=38274&cat=servicios`
-- **Bueno**: `/servicios/desarrollo-web-profesional`
-
----
-
-## 3. SEO Técnico: Lo que tu desarrollador debe configurar
-
-1. **Sitemap XML**: Archivo que le dice a Google exactamente qué páginas debe rastrear. Debe enviarse en Google Search Console.
-2. **Robots.txt**: Archivo que controla qué secciones de tu web puede o no puede ver Google.
-3. **Datos Estructurados (Schema.org)**: Código JSON-LD que permite a Google entender el tipo de contenido (Artículo, Producto, FAQ, Organización) y mostrar resultados enriquecidos.
-4. **Certificado SSL (HTTPS)**: Obligatorio. Google marca como "No Seguro" los sitios sin SSL y los penaliza en el ranking.
-5. **Velocidad de Carga**: Optimización de imágenes en formato WebP, lazy loading, minificación de CSS/JS y CDN.
-
----
-
-## 4. SEO Off-Page: Construir autoridad fuera de tu sitio
-
-### Estrategia de Link Building Ético
-- **Directorios Empresariales**: Registrar tu negocio en Google My Business, Yelp, Clutch.co y directorios locales del país.
-- **Guest Posting**: Publicar artículos de invitado en blogs del sector con un enlace de retorno hacia tu web.
-- **Relaciones Públicas Digitales**: Que medios de comunicación o portales de noticias mencionen tu empresa con un enlace.
-
-> **Advertencia**: NUNCA compres enlaces masivos baratos. Google detecta esquemas de link building artificial y puede penalizar tu dominio permanentemente.
-
----
-
-## 5. ¿Cuánto tiempo tarda en funcionar el SEO?
-
-| Tipo de Palabra Clave | Competencia | Tiempo Estimado para Top 10 |
+| Tarea | Para qué | Dónde |
 | --- | --- | --- |
-| **Cola Larga** ("software de turnos para clínicas en Salta") | Baja | 2 a 4 semanas |
-| **Media** ("desarrollo web Argentina") | Media | 2 a 4 meses |
-| **Alta Competencia** ("desarrollo de software") | Alta | 6 a 12 meses |
+| Crear el Perfil de empresa en Google | Aparecer en Google Maps y en búsquedas locales | business.google.com |
+| Verificar la web en Google Search Console | Ver si Google indexa tus páginas y por qué búsquedas apareces | search.google.com/search-console |
+| Enviar el sitemap | Avisar a Google qué páginas tienes | Search Console |
+| Instalar Google Analytics 4 | Medir visitas y consultas | analytics.google.com |
+| Revisar que la web cargue rápido en el celular | Experiencia de uso | PageSpeed Insights |
 
----
+Ver [cómo aparecer en Google Maps](/blog/google-my-business-como-aparecer-en-google-maps-gratis).
 
-## 6. Herramientas Gratuitas para Monitorear tu SEO
+## Elegir las búsquedas que te traen clientes
 
-- **Google Search Console**: Muestra las consultas por las que aparecés en Google, las impresiones y los clics reales.
-- **Google PageSpeed Insights**: Analiza la velocidad de carga y Core Web Vitals de tu web.
-- **Ubersuggest / Google Keyword Planner**: Investigación de palabras clave y volumen de búsqueda mensual.
+No apuntes a "abogado" o "zapatillas": son búsquedas enormes, con competencia nacional. Apunta a búsquedas específicas que indican intención de contratar o comprar:
 
----
+| Tipo de búsqueda | Ejemplo | Intención |
+| --- | --- | --- |
+| Servicio + ciudad | "abogado laboral en Salta" | Contratar |
+| Producto + característica | "zapatillas de trail para mujer" | Comprar |
+| Pregunta de precio | "cuánto cuesta una página web" | Comparar antes de contratar |
+| Problema | "mi página no aparece en Google" | Resolver, posible cliente |
+| Comparación | "Tiendanube o Shopify" | Decidir |
 
-En [Websy implementamos estrategias de SEO técnico y de contenido que generan resultados medibles](/servicios/desarrollo-web). Pasamos de 0 a más de 1.000 impresiones en Google en solo semanas. ¿Querés que tu empresa aparezca en el primer lugar? [Solicitá tu auditoría SEO gratuita en 2 minutos](/contacto?plan=Auditoría+Gratuita).
+Para encontrarlas: escribe en Google el inicio de la búsqueda y mira el autocompletado, revisa "Otras preguntas de los usuarios" y, cuando tu web ya tenga datos, las consultas de Search Console.
+
+## Cómo escribir cada página
+
+1. **Una página por búsqueda principal**: una para cada servicio, producto o pregunta importante.
+2. **Título (etiqueta title)** con la búsqueda al principio y menos de 60 caracteres: "Abogado laboral en Salta | Estudio X".
+3. **Descripción** de menos de 155 caracteres que invite a hacer clic.
+4. **Primer párrafo que responda directamente**: qué haces, para quién, dónde, cuánto, en cuánto tiempo.
+5. **Subtítulos con las preguntas reales** de tus clientes y sus respuestas.
+6. **Pruebas**: casos, reseñas, fotos reales.
+7. **Llamado a la acción** claro: WhatsApp, turno, presupuesto.
+8. **Enlaces internos** a páginas relacionadas de tu web.
+
+## Lo técnico que no puede faltar
+
+- **Web indexable**: que Google pueda leer el contenido (cuidado con webs que solo muestran contenido después de ejecutar JavaScript).
+- **Una URL limpia por página** y una versión única (con o sin barra final, con www o sin www, no las dos).
+- **HTTPS** con certificado válido.
+- **Velocidad en el celular**.
+- **Datos estructurados** de tu tipo de negocio (LocalBusiness, Service, Product, FAQ).
+- **Sitemap** actualizado.
+
+Todo esto está en detalle en [SEO técnico](/blog/guia-seo-tecnico-para-sitios-web-2026).
+
+## Autoridad: que otros hablen de ti
+
+Google confía más en los sitios que otros sitios mencionan. Formas legítimas de conseguir menciones:
+
+- Directorios de tu rubro y de tu ciudad.
+- Proveedores y clientes que enlazan a sus socios.
+- Cámaras de comercio y asociaciones profesionales.
+- Notas en medios locales.
+- Contenido útil que otros quieran citar (guías, precios reales, datos propios).
+
+Evita comprar enlaces en masa: Google lo detecta y puede penalizar.
+
+## Aparecer también en las respuestas de IA
+
+En muchas búsquedas, Google muestra un resumen generado con IA arriba de los resultados. Para que tu página sea una de las fuentes, responde la pregunta en el primer párrafo, usa tablas y listas, publica datos propios y mantén la información de tu empresa coherente en todas partes. Lo explicamos en la [guía de SEO y marketing digital](/blog/guia-seo-y-marketing-digital-para-pymes).
+
+## Cómo medir el avance
+
+En Google Search Console mira, cada mes:
+
+- **Páginas indexadas** y errores de indexación.
+- **Impresiones**: cuántas veces apareciste.
+- **Clics y CTR**: cuántas personas entraron.
+- **Posición media** por consulta.
+
+Las impresiones crecen primero; los clics, después, cuando subes a la primera página. Si una página aparece en el top 3 y casi nadie hace clic, mejora su título y su descripción.
+
+## Errores al empezar
+
+- **Una sola página para todo**: con todos los servicios en la portada, ninguno posiciona.
+- **Títulos genéricos** como "Inicio" o "Servicios".
+- **Copiar textos de proveedores o de la competencia**: Google muestra el original.
+- **Cambiar de dominio o de URLs sin redirecciones**: se pierde lo ganado.
+- **Esperar resultados en dos semanas** y abandonar: el SEO se mide en meses.
+
+## Preguntas frecuentes
+
+### ¿Cómo hago para que mi página aparezca en Google?
+
+Verifica la web en Google Search Console, envía el sitemap, crea una página por servicio con la búsqueda y la ciudad en el título, responde las preguntas de tus clientes, haz que cargue rápido y consigue menciones en otros sitios. Para búsquedas locales, crea tu Perfil de empresa en Google.
+
+### ¿Cuánto tarda en aparecer una web nueva en Google?
+
+Indexarla puede llevar días o semanas. Posicionar en las primeras posiciones suele llevar de 2 a 4 meses para búsquedas poco competidas y de 6 a 12 meses para las competidas.
+
+### ¿Es gratis aparecer en Google?
+
+Aparecer en los resultados orgánicos y en Google Maps no tiene costo por clic. Requiere trabajo de contenido y técnica. Los anuncios de Google Ads sí se pagan.
+
+### ¿Por qué aparezco en Google con mi nombre pero no con mi servicio?
+
+Porque buscar tu marca tiene poca competencia. Para el servicio, necesitas una página dedicada, contenido que responda la búsqueda y autoridad frente a la competencia.
+
+## Te ayudamos a aparecer
+
+En Websy trabajamos SEO técnico, contenido y SEO local para pymes. Mira el servicio de [SEO y marketing digital](/servicios/seo-marketing) o [escríbenos](/contacto).

@@ -164,12 +164,13 @@ export const businessTechPosts = [
   {
     id: 1113,
     slug: 'mejores-herramientas-gratis-emprendedores-productividad',
-    title: 'Las 20 Mejores Herramientas Gratuitas para Emprendedores en 2026 (Productividad, Diseño y Marketing)',
-    seoTitle: '20 Herramientas Gratis para Emprendedores 2026 | Websy',
-    seoDescription: 'Lista curada de las 20 mejores herramientas gratuitas para emprendedores: productividad, diseño, marketing, comunicación, finanzas y desarrollo.',
+    title: 'Herramientas gratis para emprendedores: las mejores por área en 2026',
+    seoTitle: 'Herramientas gratis para emprendedores (2026)',
+    seoDescription: 'Las mejores herramientas gratis para emprendedores: presencia, diseño, organización, ventas, medición, IA y automatización, y cuándo pasar a planes pagos.',
     seoKeywords: 'herramientas gratis emprendedores, herramientas productividad gratis, apps para emprendedores, recursos gratuitos emprendedores, herramientas marketing gratis',
     category: 'SEO & Marketing',
     date: '2026-07-21',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [1102, 906, 1012]

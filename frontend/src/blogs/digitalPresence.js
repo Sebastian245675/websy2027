@@ -67,12 +67,13 @@ export const digitalPresencePosts = [
   {
     id: 1006,
     slug: 'como-hacer-publicidad-en-google-ads-guia-principiantes',
-    title: 'Cómo hacer publicidad en Google Ads: Guía para Principiantes con Presupuesto Bajo',
-    seoTitle: 'Google Ads para Principiantes: Guía Paso a Paso 2026 | Websy',
-    seoDescription: 'Aprendé a crear tu primera campaña de Google Ads paso a paso. Configuración, palabras clave, anuncios y cómo optimizar con un presupuesto de $5 USD/día.',
+    title: 'Cómo hacer publicidad en Google Ads: guía para principiantes',
+    seoTitle: 'Cómo hacer publicidad en Google Ads: guía básica',
+    seoDescription: 'Cómo funciona Google Ads, qué campaña elegir, palabras clave y concordancias, anuncios, medición de conversiones, cuánto invertir y errores comunes.',
     seoKeywords: 'como hacer publicidad en google, google ads principiantes, anuncios en google, publicidad google ads, como anunciar en google, sem google',
     category: 'SEO & Marketing',
     date: '2026-07-27',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [901, 906, 905]
@@ -94,12 +95,13 @@ export const digitalPresencePosts = [
   {
     id: 1008,
     slug: 'como-vender-por-instagram-tienda-online-estrategia',
-    title: 'Cómo vender por Instagram en 2026: Estrategia Completa para convertir seguidores en compradores',
-    seoTitle: 'Cómo Vender por Instagram: Estrategia Completa 2026 | Websy',
-    seoDescription: 'Aprendé a convertir tu perfil de Instagram en un canal de ventas efectivo. Estrategia de contenido, Instagram Shopping, Reels y cómo llevar tráfico a tu web.',
+    title: 'Cómo vender por Instagram: cuenta, contenido, catálogo y camino a la compra',
+    seoTitle: 'Cómo vender por Instagram: guía paso a paso',
+    seoDescription: 'Cómo configurar tu cuenta para vender por Instagram, qué contenido funciona, catálogo, llevar a la compra, anuncios, calendario semanal y métricas.',
     seoKeywords: 'como vender por instagram, vender en instagram, instagram shopping, estrategia instagram ventas, tienda instagram, marketing instagram',
     category: 'SEO & Marketing',
     date: '2026-07-25',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [906, 905, 901]

@@ -2,12 +2,13 @@ export const localBusinessPosts = [
   {
     id: 1201,
     slug: 'como-posicionar-mi-negocio-local-en-google-seo-local',
-    title: 'Cómo Posicionar mi Negocio Local en Google: SEO Local para PyMEs en Argentina, Colombia y México',
-    seoTitle: 'SEO Local para PyMEs: Posicionar Negocio en Google | Websy',
-    seoDescription: 'Estrategia completa de SEO local para que tu negocio aparezca en el Top 3 de Google Maps. Google My Business, reseñas, citas NAP y contenido local.',
+    title: 'SEO local: cómo posicionar tu negocio en Google y Google Maps en tu ciudad',
+    seoTitle: 'SEO local: cómo posicionar tu negocio en tu ciudad',
+    seoDescription: 'Cómo decide Google qué negocios locales mostrar, paso a paso de SEO local, reseñas, qué poner en tu web, varias ciudades sin páginas puerta y checklist.',
     seoKeywords: 'seo local, posicionar negocio en google, seo local argentina, google maps mi negocio, marketing local pymes',
     category: 'SEO & Marketing',
     date: '2026-08-02',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [908, 901, 906]
@@ -54,12 +55,13 @@ export const localBusinessPosts = [
   {
     id: 1205,
     slug: 'metricas-web-que-medir-google-analytics-kpis-sitio-web',
-    title: '¿Qué métricas debo medir en mi sitio web? Los 10 KPIs más importantes de Google Analytics',
-    seoTitle: 'Métricas Web: 10 KPIs Esenciales de Google Analytics | Websy',
-    seoDescription: 'Aprendé a interpretar las 10 métricas más importantes de Google Analytics: sesiones, tasa de rebote, conversiones, fuentes de tráfico y más.',
+    title: 'Métricas de un sitio web: qué medir en Google Analytics y Search Console',
+    seoTitle: 'Métricas de un sitio web: qué medir y cómo',
+    seoDescription: 'Las métricas que importan por etapa, KPIs según el tipo de web, cómo configurar GA4 y Search Console, un tablero mensual y cómo interpretar los números.',
     seoKeywords: 'metricas pagina web, google analytics metricas, kpi sitio web, que medir en mi web, analytics para empresas, tasa de rebote',
     category: 'SEO & Marketing',
     date: '2026-07-29',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [901, 903, 1015]

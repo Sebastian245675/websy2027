@@ -43,12 +43,13 @@ export const freelancerStartupPosts = [
   {
     id: 1305,
     slug: 'como-crear-un-blog-para-mi-empresa-que-genere-clientes',
-    title: 'Cómo crear un blog para tu empresa que realmente genere clientes (no solo visitas)',
-    seoTitle: 'Crear Blog Empresarial que Genere Clientes | Websy',
-    seoDescription: 'Aprendé a crear un blog corporativo estratégico que posicione en Google, atraiga tráfico cualificado y convierta lectores en clientes reales.',
+    title: 'Blog para empresas: cómo crear uno que traiga clientes desde Google',
+    seoTitle: 'Blog para empresas: cómo hacer que traiga clientes',
+    seoDescription: 'Qué temas elegir, cómo organizar el blog con páginas pilar, plantilla de artículo, frecuencia, uso de IA, cómo medir y los errores que lo hacen fallar.',
     seoKeywords: 'como crear blog empresa, blog corporativo, blog para generar clientes, contenido blog empresarial, marketing de contenidos blog',
     category: 'SEO & Marketing',
     date: '2026-07-29',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [901, 906, 1205]
@@ -96,12 +97,13 @@ export const freelancerStartupPosts = [
   {
     id: 1309,
     slug: 'marketing-digital-para-pymes-plan-estrategico-paso-a-paso',
-    title: 'Plan de Marketing Digital para PyMEs: Estrategia Paso a Paso con Presupuesto Real',
-    seoTitle: 'Marketing Digital PyMEs: Plan Paso a Paso 2026 | Websy',
-    seoDescription: 'Crea tu plan de marketing digital desde cero: presupuesto, canales, contenido, publicidad paga y métricas. Estrategia práctica para PyMEs en LATAM.',
+    title: 'Plan de marketing digital para pymes: plantilla en 7 pasos y calendario de 90 días',
+    seoTitle: 'Plan de marketing digital para pymes en 7 pasos',
+    seoDescription: 'Cómo armar un plan de marketing digital para tu pyme: objetivo, cliente, propuesta, canales, presupuesto, calendario de 90 días y métricas mensuales.',
     seoKeywords: 'marketing digital pymes, plan marketing digital, estrategia marketing digital, marketing online empresas, como hacer marketing digital',
     category: 'SEO & Marketing',
     date: '2026-07-25',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [906, 1305, 1006]

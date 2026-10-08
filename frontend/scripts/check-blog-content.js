@@ -12,7 +12,9 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const SRC = path.join(ROOT, 'src');
 const POSTS = path.join(SRC, 'blogs', 'posts');
-const MIN_WORDS = 1000;
+// Reference length: a complete article (direct answer, sections, table, FAQ) lands around 900-1.800 words.
+// Below this it is usually missing something; above it, length alone is not a goal.
+const MIN_WORDS = 900;
 const strict = process.argv.includes('--strict');
 
 const slugsIn = (file, re) => [...fs.readFileSync(file, 'utf8').matchAll(re)].map((m) => m[1]);

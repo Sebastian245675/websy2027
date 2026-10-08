@@ -68,12 +68,13 @@ export const webDevelopmentPosts = [
   {
     id: 104,
     slug: 'guia-seo-tecnico-para-sitios-web-2026',
-    title: 'Guía de SEO Técnico 2026: Cómo estructurar tu sitio para llegar al #1 de Google',
-    seoTitle: 'SEO Técnico 2026: Estrategias para el Puesto 1 en Google | Websy',
-    seoDescription: 'Manual paso a paso de SEO Técnico: Datos estructurados Schema.org, sitemaps XML, optimización de velocidad, etiquetas canonicals y jerarquía de contenidos.',
+    title: 'SEO técnico: checklist completo para auditar y corregir tu sitio',
+    seoTitle: 'SEO técnico: checklist completo para tu sitio web',
+    seoDescription: 'Checklist de SEO técnico: indexación, canonical, una versión por URL, 301 y 404, sitemap, renderizado, Core Web Vitals, datos estructurados y enlaces.',
     seoKeywords: 'seo tecnico 2026, posicionamiento web google puesto 1, schema org datos estructurados, sitemap xml seo, auditoria seo argentina',
     category: 'Desarrollo Web',
     date: '2026-07-20',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [1, 6, 102]

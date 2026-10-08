@@ -69,12 +69,13 @@ export const advancedGuidePosts = [
   {
     id: 1406,
     slug: 'como-mejorar-posicionamiento-google-sitio-web-existente',
-    title: 'Tu web ya está online pero no genera clientes: 12 Acciones para mejorar tu posicionamiento en Google',
-    seoTitle: 'Mejorar Posicionamiento Google: 12 Acciones | Websy',
-    seoDescription: 'Si tu sitio web existe pero no aparece en Google ni genera contactos, estas 12 acciones concretas van a cambiar la situación en 30-90 días.',
+    title: 'Cómo mejorar el posicionamiento en Google de una web que ya tienes',
+    seoTitle: 'Cómo mejorar el posicionamiento en Google de tu web',
+    seoDescription: 'Método en 4 etapas con Search Console: aprovechar las páginas en posición 4 a 20, corregir lo técnico, unificar duplicados y un plan de 90 días.',
     seoKeywords: 'mejorar posicionamiento google, como subir en google, mejorar seo pagina web, posicionar web en google, mi web no genera clientes',
     category: 'SEO & Marketing',
     date: '2026-07-28',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [901, 903, 1305]

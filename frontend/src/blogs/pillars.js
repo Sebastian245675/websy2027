@@ -38,4 +38,16 @@ export const pillarPosts = [
     author: 'Sebastian Aguirre',
     pillar: true,
   },
+  {
+    id: 9007,
+    slug: 'guia-seo-y-marketing-digital-para-pymes',
+    title: 'SEO y marketing digital para pymes: guía para conseguir clientes por internet',
+    seoTitle: 'SEO y marketing digital para pymes: guía completa',
+    seoDescription: 'Cómo aparecer en Google, en Google Maps y en las respuestas con IA, qué canales pagos convienen y cómo convertir visitas en clientes. Guía para pymes de LATAM.',
+    seoKeywords: 'seo para pymes, marketing digital pymes, como aparecer en google, conseguir clientes por internet',
+    date: '2026-10-08',
+    image: null,
+    author: 'Sebastian Aguirre',
+    pillar: true,
+  },
 ];
