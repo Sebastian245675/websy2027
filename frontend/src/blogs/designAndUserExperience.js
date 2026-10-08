@@ -42,7 +42,7 @@ En Websy prototipamos todas las interfaces en **Figma** antes de escribir una so
 
 ---
 
-En [Websy creamos interfaces UI/UX de impacto que multiplican tus ventas](/servicios/desarrollo-web). ¿Querés auditar el diseño de tu web actual? [Solicitá tu auditoría en 2 minutos](/contacto?plan=Auditoría+Gratuita).`,
+En [Websy creamos interfaces UI/UX de impacto que multiplican tus ventas](/servicios/ui-ux). ¿Querés auditar el diseño de tu web actual? [Solicitá tu auditoría en 2 minutos](/contacto?plan=Auditoría+Gratuita).`,
     relatedPosts: [702, 703, 704]
   },
   {
@@ -136,7 +136,7 @@ Un **Design System (Sistema de Diseño)** es una biblioteca centralizada de est�
 
 ---
 
-En [Websy construimos sistemas de diseño escalables para startups y empresas](/servicios/desarrollo-web). [Consultá con nuestro equipo](/contacto).`,
+En [Websy construimos sistemas de diseño escalables para startups y empresas](/servicios/ui-ux). [Consultá con nuestro equipo](/contacto).`,
     relatedPosts: [701, 702, 704]
   },
   {
@@ -204,7 +204,7 @@ El 85% de los compradores afirma que el color es la razón principal por la que 
 
 ---
 
-En [Websy diseñamos identidades digitales alineadas con la psicología del consumidor](/servicios/desarrollo-web). [Consultá con nuestros diseñadores UI/UX](/contacto).`,
+En [Websy diseñamos identidades digitales alineadas con la psicología del consumidor](/servicios/ui-ux). [Consultá con nuestros diseñadores UI/UX](/contacto).`,
     relatedPosts: [701, 702, 704]
   },
   {

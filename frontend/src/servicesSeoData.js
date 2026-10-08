@@ -30,6 +30,12 @@ const IconDatabase = ({ size = 20 }) => (
   </svg>
 );
 
+const IconLayout = ({ size = 20 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>
+  </svg>
+);
+
 export const servicesData = {
   'desarrollo-web': {
     slug: 'desarrollo-web',
@@ -67,6 +73,45 @@ Ya sea que necesites una landing page para captar leads, un sitio corporativo pa
     priceRange: 'Desde USD 800',
     ctaText: 'Cotizá tu página web',
     relatedServices: ['ecommerce', 'seo-marketing', 'sistemas-gestion']
+  },
+
+  'ui-ux': {
+    slug: 'ui-ux',
+    title: 'Diseño UI/UX',
+    seoTitle: 'Diseño UI/UX para Páginas Web, Apps y Sistemas | Websy',
+    seoDescription: 'Diseño de interfaces y experiencia de usuario en Figma antes de programar: investigación, wireframes, prototipos, design system y accesibilidad WCAG para webs, apps y sistemas.',
+    icon: IconLayout,
+    color: '#8b5cf6',
+    heroTitle: 'Diseño',
+    heroHighlight: 'UI/UX',
+    heroSubtitle: 'Interfaces claras que guían a cada visitante hasta la consulta o la compra.',
+    description: `El diseño UI/UX define qué ve una persona al entrar a tu web o tu sistema, en qué orden lo ve y qué tan fácil le resulta hacer lo que vino a hacer: pedir un turno, comprar, cotizar o escribirte. Un sitio puede estar bien programado y aun así perder clientes porque el botón importante no se ve o el formulario pide demasiado.
+
+En Websy diseñamos todas las interfaces en Figma antes de escribir una línea de código. Empezamos por entender a quién le habla tu negocio y qué tiene que lograr cada pantalla; después armamos wireframes, el diseño visual y un prototipo navegable que revisás y aprobás antes del desarrollo.
+
+Trabajamos el diseño pensando primero en el celular, con criterios de accesibilidad WCAG y un design system de componentes reutilizables que después se implementa en React y Tailwind CSS. Así el diseño aprobado es exactamente lo que se publica.`,
+    features: [
+      'Relevamiento de objetivos, público y competencia',
+      'Arquitectura de información y flujos de usuario',
+      'Wireframes de cada pantalla clave',
+      'Diseño visual alineado a tu marca',
+      'Prototipo navegable en Figma para aprobar antes de programar',
+      'Diseño mobile-first para celular, tablet y escritorio',
+      'Accesibilidad según WCAG: contraste, tamaños y navegación por teclado',
+      'Design system con componentes reutilizables',
+      'Rediseño de sitios y sistemas existentes',
+      'Implementación fiel en React y Tailwind CSS'
+    ],
+    technologies: ['Figma', 'React', 'Tailwind CSS', 'Shadcn UI'],
+    faqs: [
+      { question: '¿Qué diferencia hay entre UI y UX?', answer: 'UX (experiencia de usuario) es cómo funciona el recorrido: qué pasos sigue una persona, en qué orden y con cuánto esfuerzo. UI (interfaz de usuario) es cómo se ve cada pantalla: colores, tipografías, botones y espaciado. Un buen proyecto necesita las dos: una interfaz linda con un recorrido confuso no convierte.' },
+      { question: '¿Veo el diseño antes de que empiecen a programar?', answer: 'Sí. Diseñamos en Figma y te compartimos un prototipo navegable para que lo pruebes desde tu computadora o tu celular. Se programa recién cuando aprobás el diseño, así los cambios se hacen cuando todavía son rápidos.' },
+      { question: '¿Pueden rediseñar mi web o mi sistema actual?', answer: 'Sí. Revisamos dónde se traban hoy tus usuarios (formularios largos, botones que no se ven, pasos de más) y proponemos un rediseño que conserva lo que ya funciona. Se puede rediseñar sin cambiar de tecnología o como parte de una migración.' },
+      { question: '¿El diseño UI/UX se contrata aparte?', answer: 'Está incluido en cada página web, tienda online, app o sistema que desarrollamos. También lo hacemos como servicio independiente cuando tu equipo o tu proveedor actual se encarga de la programación.' }
+    ],
+    priceRange: 'Cotización a medida',
+    ctaText: 'Pedí tu propuesta de diseño',
+    relatedServices: ['desarrollo-web', 'aplicaciones-moviles', 'ecommerce']
   },
 
   'ecommerce': {

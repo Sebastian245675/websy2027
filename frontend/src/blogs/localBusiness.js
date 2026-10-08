@@ -431,7 +431,7 @@ El contenido debe ser interpretable por diferentes tecnologías asistivas.
 
 ---
 
-En [Websy todos nuestros proyectos cumplen las directrices WCAG 2.2 de accesibilidad](/servicios/desarrollo-web). [Consultá sobre accesibilidad web](/contacto).`,
+En [Websy todos nuestros proyectos cumplen las directrices WCAG 2.2 de accesibilidad](/servicios/ui-ux). [Consultá sobre accesibilidad web](/contacto).`,
     relatedPosts: [706, 1108, 1010]
   },
   {

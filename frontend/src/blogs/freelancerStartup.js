@@ -426,7 +426,7 @@ No. Figma tiene miles de **templates gratuitos** y kits de componentes (botones,
 
 ---
 
-En [Websy diseñamos todas las interfaces en Figma antes de programar](/servicios/desarrollo-web). [Pedí tu diseño profesional](/contacto).`,
+En [Websy diseñamos todas las interfaces en Figma antes de programar](/servicios/ui-ux). [Pedí tu diseño profesional](/contacto).`,
     relatedPosts: [706, 704, 1010]
   },
   {

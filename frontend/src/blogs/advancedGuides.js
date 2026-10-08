@@ -166,7 +166,7 @@ Cuando el usuario hace clic, algo debe pasar visiblemente (animación, color, me
 
 ---
 
-En [Websy el diseño UX/UI es parte fundamental de cada proyecto](/servicios/desarrollo-web). [Mejorá la experiencia de tu web](/contacto).`,
+En [Websy el diseño UX/UI es parte fundamental de cada proyecto](/servicios/ui-ux). [Mejorá la experiencia de tu web](/contacto).`,
     relatedPosts: [706, 704, 1010]
   },
   {

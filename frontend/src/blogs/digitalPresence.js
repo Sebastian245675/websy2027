@@ -464,7 +464,7 @@ Nunca uses tipografías gratuitas genéricas. Invertí en una tipografía premiu
 
 ---
 
-En [Websy diseñamos identidad visual y branding completo para empresas](/servicios/desarrollo-web). [Solicitá tu diseño de marca](/contacto).`,
+En [Websy diseñamos identidad visual y branding completo para empresas](/servicios/ui-ux). [Solicitá tu diseño de marca](/contacto).`,
     relatedPosts: [706, 704, 705]
   },
   {
