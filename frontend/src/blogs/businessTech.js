@@ -128,12 +128,13 @@ export const businessTechPosts = [
   {
     id: 1110,
     slug: 'pagina-web-para-contadores-estudios-contables-profesional',
-    title: 'Página Web para Contadores y Estudios Contables: Captá más clientes con presencia digital',
-    seoTitle: 'Página Web para Contadores: Captar Clientes Online | Websy',
-    seoDescription: 'Diseñamos páginas web profesionales para contadores y estudios contables con sistema de turnos, blog fiscal SEO y portal de clientes.',
+    title: 'Página web para contadores y estudios contables: guía completa',
+    seoTitle: 'Página web para contadores: qué debe tener',
+    seoDescription: 'Servicios por tipo de cliente, área de clientes, vencimientos, SEO local, seguridad y precios de la web de un estudio contable.',
     seoKeywords: 'pagina web para contadores, web estudio contable, diseño web contadores, marketing digital contadores, pagina contador publico',
     category: 'Industrias & Tech',
     date: '2026-07-24',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [1002, 908, 1009]
@@ -183,12 +184,13 @@ export const businessTechPosts = [
   {
     id: 1114,
     slug: 'pagina-web-para-arquitectos-portafolio-profesional-online',
-    title: 'Página Web para Arquitectos: Portafolio Profesional que consigue proyectos',
-    seoTitle: 'Página Web para Arquitectos: Portafolio Profesional | Websy',
-    seoDescription: 'Diseñamos sitios web para arquitectos y estudios de arquitectura con galería de proyectos, renders 3D y formulario de consulta profesional.',
+    title: 'Página web para arquitectos: portafolio que consigue clientes',
+    seoTitle: 'Página web para arquitectos: portafolio online',
+    seoDescription: 'Portafolio, ficha de proyecto, imágenes rápidas, cómo conseguir clientes y precios de la web de un estudio de arquitectura, con un ejemplo.',
     seoKeywords: 'pagina web para arquitectos, portafolio arquitecto online, web estudio arquitectura, diseño web arquitectos, galeria proyectos arquitectura',
     category: 'Industrias & Tech',
     date: '2026-07-20',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [706, 1010, 905]

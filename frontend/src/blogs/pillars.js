@@ -98,4 +98,16 @@ export const pillarPosts = [
     author: 'Sebastian Aguirre',
     pillar: true,
   },
+  {
+    id: 9009,
+    slug: 'paginas-web-por-rubro-que-necesita-cada-negocio',
+    title: 'Páginas web por rubro: qué necesita la web de cada tipo de negocio',
+    seoTitle: 'Páginas web por rubro: qué necesita cada negocio',
+    seoDescription: 'Qué tiene que tener la página web de un estudio jurídico, un consultorio, un restaurante, un hotel, una inmobiliaria o un gimnasio, con ejemplos reales.',
+    seoKeywords: 'pagina web por rubro, pagina web para negocios, que debe tener una pagina web',
+    date: '2026-10-08',
+    image: null,
+    author: 'Sebastian Aguirre',
+    pillar: true,
+  },
 ];

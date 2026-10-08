@@ -170,12 +170,13 @@ export const freelancerStartupPosts = [
   {
     id: 1314,
     slug: 'pagina-web-para-constructoras-inmobiliarias-obras-proyectos',
-    title: 'Página Web para Constructoras: Mostrá tus Obras, Proyectos y Captá Inversores Online',
-    seoTitle: 'Página Web para Constructoras: Obras y Proyectos | Websy',
-    seoDescription: 'Diseñamos sitios web para constructoras e inmobiliarias con galería de obras, proyectos en desarrollo, cotizador online y formulario para inversores.',
+    title: 'Página web para constructoras: obras, desarrollos y avance',
+    seoTitle: 'Página web para constructoras y desarrolladoras',
+    seoDescription: 'Portafolio de obras, desarrollos en venta con planos y avance de obra, clientes corporativos y precios de la web de una constructora.',
     seoKeywords: 'pagina web constructora, web empresa constructora, web constructora obras, diseño web constructoras, pagina web empresa construccion',
     category: 'Industrias & Tech',
     date: '2026-07-20',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [1114, 1004, 706]

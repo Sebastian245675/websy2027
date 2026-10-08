@@ -86,12 +86,13 @@ export const advancedGuidePosts = [
   {
     id: 1407,
     slug: 'pagina-web-para-escuelas-colegios-institutos-educativos',
-    title: 'Página Web para Escuelas, Colegios e Institutos: Portal Educativo con Aula Virtual y Comunicación',
-    seoTitle: 'Página Web para Escuelas y Colegios: Portal Educativo | Websy',
-    seoDescription: 'Creamos portales web educativos con aula virtual, comunicados a padres, inscripción online y galería institucional para escuelas y colegios.',
+    title: 'Página web para colegios: admisiones y comunicación',
+    seoTitle: 'Página web para colegios e institutos educativos',
+    seoDescription: 'Propuesta educativa, inscripciones online, comunicación con familias, datos de menores y precios de la web de una escuela o instituto.',
     seoKeywords: 'pagina web para escuelas, web colegio, portal educativo, web instituto educativo, pagina web escuela, plataforma educativa online',
     category: 'Industrias & Tech',
     date: '2026-07-27',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [804, 1003, 501]
@@ -113,12 +114,13 @@ export const advancedGuidePosts = [
   {
     id: 1409,
     slug: 'pagina-web-para-agencias-viajes-turismo-reservas',
-    title: 'Página Web para Agencias de Viajes y Turismo: Paquetes, Reservas Online y Blog de Destinos',
-    seoTitle: 'Página Web para Agencias de Viajes: Reservas Online | Websy',
-    seoDescription: 'Creamos sitios web para agencias de viajes con catálogo de paquetes turísticos, reservas online, blog de destinos SEO y galería inmersiva.',
+    title: 'Página web para agencias de viajes: paquetes y reservas',
+    seoTitle: 'Página web para agencias de viajes y turismo',
+    seoDescription: 'Paquetes que venden, registro turístico, pagos online, cómo competir con las plataformas y precios de la web de una agencia de viajes.',
     seoKeywords: 'pagina web agencia viajes, web turismo, web agencia turismo, diseño web turismo, sistema reservas turismo, pagina web turismo',
     category: 'Industrias & Tech',
     date: '2026-07-25',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [1203, 908, 1001]
