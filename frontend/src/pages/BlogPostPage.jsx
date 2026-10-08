@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { SEOHead } from '../components/SEOHead';
 import { blogPosts } from '../blogData';
+import { EMBED_ID, embedJson, loadPostContent, readEmbeddedContent } from '../blogs/postContent';
+import postStats from '../blogs/postStats.json';
 
 // Inline SVG icons
 const FiClock = ({ size = 16 }) => (
@@ -205,6 +207,20 @@ const MarkdownContent = ({ content }) => {
 export const BlogPostPage = () => {
   const { slug } = useParams();
   const post = blogPosts.find(p => p.slug === slug);
+  const [content, setContent] = useState(() => (post ? readEmbeddedContent(post.slug) : null));
+
+  useEffect(() => {
+    if (!post) return undefined;
+    let active = true;
+    const embedded = readEmbeddedContent(post.slug);
+    if (embedded) {
+      setContent(embedded);
+      return undefined;
+    }
+    setContent(null);
+    loadPostContent(post.slug).then((md) => { if (active) setContent(md); });
+    return () => { active = false; };
+  }, [post]);
 
   if (!post) {
     return (
@@ -308,7 +324,7 @@ export const BlogPostPage = () => {
             </span>
             <span className="flex items-center gap-1 text-xs text-gray-400">
               <FiClock size={11} />
-              {post.readTime}
+              {(postStats[post.slug] || {}).readTime || post.readTime}
             </span>
             <span className="flex items-center gap-1 text-xs text-gray-400">
               <FiCalendar size={11} />
@@ -353,7 +369,15 @@ export const BlogPostPage = () => {
       {/* Article Content */}
       <article className="py-12 md:py-16">
         <div className="container mx-auto px-4 max-w-3xl">
-          <MarkdownContent content={post.content} />
+          {content ? (
+            <>
+              <MarkdownContent content={content} />
+              {/* Markdown embedded in the prerendered HTML so hydration has it synchronously */}
+              <script type="application/json" id={EMBED_ID} data-slug={post.slug} dangerouslySetInnerHTML={{ __html: embedJson(content) }} />
+            </>
+          ) : (
+            <div className="min-h-[60vh]" aria-busy="true" />
+          )}
         </div>
       </article>
 

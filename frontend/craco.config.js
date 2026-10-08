@@ -13,6 +13,11 @@ module.exports = {
       '@': path.resolve(__dirname, 'src'),
     },
     configure: (webpackConfig, { env }) => {
+      // Blog posts live in src/blogs/posts/*.md and are imported as plain strings: each post is its own
+      // chunk, loaded only when that post is opened (see src/blogs/postContent.js)
+      const oneOfRule = webpackConfig.module.rules.find((rule) => Array.isArray(rule.oneOf));
+      oneOfRule.oneOf.unshift({ test: /\.md$/, type: 'asset/source' });
+
 
       // Optimizaciones de producción
       if (env === 'production') {

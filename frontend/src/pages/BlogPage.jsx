@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
 import { blogPosts, blogCategories } from '../blogData';
+import postStats from '../blogs/postStats.json';
 
 // Posts have no images, so each category gets a branded cover (icon + accent color)
 const CATEGORY_STYLE = {
@@ -162,7 +163,7 @@ export const BlogPage = () => {
     return sortedPosts.filter((post) => {
       if (activeCategory !== 'Todos' && post.category !== activeCategory) return false;
       if (!q) return true;
-      return [post.title, post.seoDescription, post.seoKeywords, post.category, post.content]
+      return [post.title, post.seoDescription, post.seoKeywords, post.category]
         .some((field) => field && field.toLowerCase().includes(q));
     });
   }, [sortedPosts, activeCategory, searchQuery]);
@@ -301,7 +302,7 @@ export const BlogPage = () => {
               <p className="mt-4 text-slate-600 leading-relaxed line-clamp-3">{featured.seoDescription}</p>
               <div className="mt-6 flex items-center gap-5 text-sm text-slate-500">
                 <span className="flex items-center gap-1.5"><Calendar size={15} /> {formatDate(featured.date)}</span>
-                <span className="flex items-center gap-1.5"><Clock size={15} /> {featured.readTime} de lectura</span>
+                <span className="flex items-center gap-1.5"><Clock size={15} /> {(postStats[featured.slug] || {}).readTime || featured.readTime} de lectura</span>
               </div>
             </div>
           </Link>
@@ -338,7 +339,7 @@ export const BlogPage = () => {
                         <div className="mt-4 flex items-center gap-4 text-[13px] text-slate-500">
                           <span>{formatDate(post.date)}</span>
                           <span className="w-1 h-1 rounded-full bg-slate-300" />
-                          <span>{post.readTime} de lectura</span>
+                          <span>{(postStats[post.slug] || {}).readTime || post.readTime} de lectura</span>
                         </div>
                       </div>
                     </Link>

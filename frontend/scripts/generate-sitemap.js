@@ -118,6 +118,22 @@ for (const file of fs.readdirSync(blogDir).filter((f) => f.endsWith('.js') && f 
   });
 }
 
+// Real length of every post (src/blogs/posts/<slug>.md): words and reading time at 200 words/min.
+// Written to src/blogs/postStats.json, which the blog pages show instead of a hand-typed readTime.
+const postsDir = path.join(blogDir, 'posts');
+const postStats = {};
+for (const { slug } of blogPosts) {
+  const mdFile = path.join(postsDir, `${slug}.md`);
+  if (!fs.existsSync(mdFile)) {
+    console.error(`generate-sitemap: post ${slug} has no content file (src/blogs/posts/${slug}.md)`);
+    process.exit(1);
+  }
+  const words = fs.readFileSync(mdFile, 'utf8').replace(/```[\s\S]*?```/g, ' ').split(/\s+/).filter((w) => /[\p{L}\d]/u.test(w)).length;
+  postStats[slug] = { words, readTime: `${Math.max(1, Math.round(words / 200))} min` };
+}
+fs.writeFileSync(path.join(blogDir, 'postStats.json'), `${JSON.stringify(postStats, null, 1)}
+`);
+
 const seen = new Set();
 const uniquePosts = blogPosts
   .filter((p) => !seen.has(p.slug) && seen.add(p.slug))
