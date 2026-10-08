@@ -1,7 +1,7 @@
 import React, { useMemo, useRef } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import {
-  Search, X, ChevronLeft, ChevronRight, ArrowRight, Calendar, Clock,
+  Search, X, ChevronLeft, ChevronRight, ArrowRight, Clock,
   Code2, Smartphone, ShoppingCart, Bot, Database, ShieldCheck,
   Building2, TrendingUp, FileText,
 } from 'lucide-react';
@@ -32,7 +32,9 @@ const MOST_READ_SLUGS = [
   'como-crear-una-tienda-online-desde-cero-paso-a-paso',
 ];
 
-const PAGE_SIZES = [10, 20, 50];
+// Even sizes so the two-column grid always closes its last row
+const PAGE_SIZES = [12, 24, 48];
+const DEFAULT_PAGE_SIZE = PAGE_SIZES[0];
 
 // Real URLs for pagination and categories, so crawlers can follow them as <a href>
 const blogUrl = (params, changes) => {
@@ -48,41 +50,56 @@ const blogUrl = (params, changes) => {
 const formatDate = (date) =>
   new Date(`${date}T12:00:00`).toLocaleDateString('es-AR', { day: 'numeric', month: 'long', year: 'numeric' });
 
-const PostCover = ({ category, size = 'md', className = '' }) => {
-  const { icon: Icon, accent } = styleFor(category);
-  const iconBox = { sm: 'w-9 h-9 rounded-lg', md: 'w-14 h-14 rounded-2xl', lg: 'w-20 h-20 rounded-3xl' }[size];
-  const iconSize = { sm: 18, md: 26, lg: 38 }[size];
+const readTimeOf = (post) => (postStats[post.slug] || {}).readTime || post.readTime;
+
+// Short headline for the cover: the SEO title is already ≤60 characters
+const coverTitle = (post) => (post.seoTitle || post.title).replace(/\s*[|—-]\s*Websy\s*$/i, '');
+
+const COVER_SIZES = {
+  sm: { pad: 'p-0', title: '', pill: '', ring: 'border-[6px]' },
+  md: { pad: 'p-5', title: 'text-[19px] leading-[1.15]', pill: 'text-[10px] px-2 py-0.5', ring: 'border-[22px]' },
+  lg: { pad: 'p-7 md:p-10', title: 'text-[21px] sm:text-[28px] md:text-[38px] leading-[1.08]', pill: 'text-[11px] md:text-xs px-3 py-1', ring: 'border-[34px] md:border-[44px]' },
+};
+
+// Editorial cover in the style of a designed blog thumbnail: brand mark, category pill and headline
+const PostCover = ({ post, size = 'md', className = '' }) => {
+  const { icon: Icon, accent } = styleFor(post.category);
+  const s = COVER_SIZES[size];
   return (
     <div className={`relative overflow-hidden bg-[#182A2C] ${className}`} aria-hidden="true">
-      <div
-        className="absolute inset-0 opacity-[0.07]"
-        style={{
-          backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
-          backgroundSize: size === 'sm' ? '10px 10px' : '24px 24px',
-        }}
-      />
+      <div className={`absolute -top-[38%] -left-[16%] w-[58%] aspect-square rounded-full ${s.ring}`} style={{ borderColor: accent }} />
+      <div className={`absolute -bottom-[52%] -right-[18%] w-[44%] aspect-square rounded-full ${s.ring} opacity-90`} style={{ borderColor: accent }} />
       <Icon
-        className="absolute -right-[8%] -bottom-[18%] w-[62%] h-auto opacity-[0.12]"
-        style={{ color: accent }}
+        className="absolute right-[6%] top-1/2 -translate-y-1/2 w-[30%] h-auto opacity-[0.14] text-white"
         strokeWidth={1.25}
       />
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className={`${iconBox} flex items-center justify-center`} style={{ backgroundColor: accent }}>
-          <Icon size={iconSize} className="text-[#182A2C]" strokeWidth={2} />
+      {size === 'sm' ? (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <Icon size={20} className="text-white" strokeWidth={2} />
         </div>
-      </div>
-      {size !== 'sm' && (
-        <span className="absolute left-4 bottom-3 text-[10px] font-bold uppercase tracking-[0.18em] text-white/70">
-          {category}
-        </span>
+      ) : (
+        <div className={`absolute inset-0 flex flex-col justify-between ${s.pad}`}>
+          <span className="self-start text-white font-extrabold tracking-tight text-sm md:text-base">
+            websy<span style={{ color: accent }}>.</span>
+          </span>
+          <div className="relative max-w-[72%]">
+            <span className={`inline-block rounded-full font-bold uppercase tracking-[0.12em] text-[#182A2C] ${s.pill}`} style={{ backgroundColor: accent }}>
+              {post.category}
+            </span>
+            <p className={`mt-2.5 font-extrabold text-white tracking-tight line-clamp-3 ${s.title}`}>
+              {coverTitle(post)}
+            </p>
+          </div>
+        </div>
       )}
     </div>
   );
 };
 
-const CategoryLabel = ({ category }) => (
-  <span className="text-xs font-bold uppercase tracking-[0.12em]" style={{ color: '#556902' }}>
-    {category}
+const ReadMore = ({ label = 'Leer artículo' }) => (
+  <span className="inline-flex items-center gap-1.5 text-sm font-bold text-[#182A2C] underline decoration-[#d9fb06] decoration-[3px] underline-offset-4">
+    {label}
+    <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
   </span>
 );
 
@@ -98,7 +115,7 @@ const Pagination = ({ page, totalPages, hrefFor, onNavigate }) => {
   const arrow = (target, label, Icon) => (target < 1 || target > totalPages ? (
     <span className={`${btn} text-[#182A2C] opacity-30`} aria-hidden="true"><Icon size={18} /></span>
   ) : (
-    <Link to={hrefFor(target)} onClick={onNavigate} className={`${btn} text-[#182A2C] hover:bg-slate-100`} aria-label={label}>
+    <Link to={hrefFor(target)} onClick={onNavigate} className={`${btn} text-[#182A2C] hover:bg-white`} aria-label={label}>
       <Icon size={18} />
     </Link>
   ));
@@ -113,7 +130,7 @@ const Pagination = ({ page, totalPages, hrefFor, onNavigate }) => {
           to={hrefFor(p)}
           onClick={onNavigate}
           aria-current={p === page ? 'page' : undefined}
-          className={`${btn} ${p === page ? 'bg-[#182A2C] text-white' : 'text-[#182A2C] hover:bg-slate-100'}`}
+          className={`${btn} ${p === page ? 'bg-[#182A2C] text-white' : 'text-[#182A2C] hover:bg-white'}`}
         >
           {p}
         </Link>
@@ -129,7 +146,7 @@ export const BlogPage = () => {
 
   const activeCategory = params.get('categoria') || 'Todos';
   const searchQuery = params.get('q') || '';
-  const pageSize = PAGE_SIZES.includes(Number(params.get('mostrar'))) ? Number(params.get('mostrar')) : 10;
+  const pageSize = PAGE_SIZES.includes(Number(params.get('mostrar'))) ? Number(params.get('mostrar')) : DEFAULT_PAGE_SIZE;
 
   const updateParams = (changes) => {
     const next = new URLSearchParams(params);
@@ -166,8 +183,8 @@ export const BlogPage = () => {
     });
   }, [sortedPosts, activeCategory, searchQuery]);
 
-  const isDefaultView = activeCategory === 'Todos' && !searchQuery;
-  const featured = isDefaultView ? filteredPosts[0] : null;
+  // The newest post of the current view (all posts or one category) leads the page, as in an editorial home
+  const featured = !searchQuery ? filteredPosts[0] : null;
   const listPosts = featured ? filteredPosts.slice(1) : filteredPosts;
 
   const totalPages = Math.max(1, Math.ceil(listPosts.length / pageSize));
@@ -189,6 +206,12 @@ export const BlogPage = () => {
   const rangeStart = listPosts.length ? (page - 1) * pageSize + 1 : 0;
   const rangeEnd = Math.min(page * pageSize, listPosts.length);
 
+  const listTitle = searchQuery
+    ? `Resultados para "${searchQuery}"`
+    : activeCategory === 'Todos' ? 'Lo más reciente' : `Lo más reciente en ${activeCategory}`;
+
+  const categoryLinks = blogCategories.filter((c) => c !== 'Todos');
+
   return (
     <div className="min-h-screen bg-white pt-[110px] md:pt-[115px]" style={{ overflowX: 'hidden' }}>
       <SEOHead
@@ -197,49 +220,246 @@ export const BlogPage = () => {
         url="https://www.websysrl.com/blog"
       />
 
-      {/* Header */}
-      <section className="bg-[#f8fafc] border-b border-slate-200">
+      {/* Top bar: breadcrumb, title and search */}
+      <section className="pt-6 md:pt-8">
         <div className="container mx-auto px-5 lg:px-8 max-w-7xl">
-          <div className="pt-8 pb-8 md:pt-12 md:pb-10">
-          <nav className="flex items-center gap-2 text-sm text-slate-500 mb-5" aria-label="Breadcrumb">
-            <Link to="/" className="hover:text-[#182A2C] transition-colors">Inicio</Link>
-            <ChevronRight size={14} className="text-slate-300" />
-            <span className="text-[#182A2C] font-semibold">Blog</span>
-          </nav>
+        <nav className="flex items-center gap-1.5 text-[13px] text-slate-500 mb-4" aria-label="Breadcrumb">
+          <Link to="/" className="hover:text-[#182A2C] transition-colors">Inicio</Link>
+          <ChevronRight size={13} className="text-slate-400" />
+          {activeCategory === 'Todos' ? (
+            <span className="text-[#182A2C] font-bold">Blog</span>
+          ) : (
+            <>
+              <Link to="/blog" className="hover:text-[#182A2C] transition-colors">Blog</Link>
+              <ChevronRight size={13} className="text-slate-400" />
+              <span className="text-[#182A2C] font-bold">{activeCategory}</span>
+            </>
+          )}
+        </nav>
 
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-            <div className="max-w-2xl">
-              <h1 className="text-[34px] md:text-[44px] font-extrabold text-[#182A2C] leading-[1.1] tracking-tight">
-                Blog de desarrollo web, apps e inteligencia artificial para empresas
-              </h1>
-              <p className="mt-3 text-base md:text-lg text-slate-600 leading-relaxed">
-                Guías prácticas sobre desarrollo web, apps, e-commerce, inteligencia artificial y tecnología para hacer crecer tu empresa.
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <h1 className="text-[26px] md:text-[32px] font-extrabold text-[#182A2C] leading-tight tracking-tight">
+            Blog de desarrollo web, apps e IA para empresas
+          </h1>
+          <div className="relative w-full md:w-[340px] shrink-0">
+            <Search size={17} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+            <input
+              type="search"
+              value={searchQuery}
+              onChange={(e) => updateParams({ q: e.target.value, pagina: null })}
+              placeholder="Buscar artículos…"
+              aria-label="Buscar artículos del blog"
+              className="w-full h-11 pl-11 pr-11 bg-white text-[#182A2C] placeholder-slate-400 text-[15px] rounded-full border border-slate-200 focus:outline-none focus:border-[#182A2C] focus:ring-4 focus:ring-[#d9fb06]/40 transition-all"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => updateParams({ q: null, pagina: null })}
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-[#182A2C]"
+                aria-label="Limpiar búsqueda"
+              >
+                <X size={18} />
+              </button>
+            )}
+          </div>
+        </div>
+        </div>
+      </section>
+
+      {/* Featured post */}
+      {showFeatured && (
+        <section className="pt-7 md:pt-8 pb-12 md:pb-16">
+          <div className="container mx-auto px-5 lg:px-8 max-w-7xl">
+          <Link to={`/blog/${featured.slug}`} className="group grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
+            <PostCover post={featured} size="lg" className="lg:col-span-7 aspect-[16/9.5] rounded-2xl shadow-sm" />
+            <div className="lg:col-span-5">
+              <h2 className="text-[28px] md:text-[36px] font-extrabold text-[#182A2C] leading-[1.12] tracking-tight group-hover:underline decoration-[#d9fb06] decoration-4 underline-offset-[6px]">
+                {featured.title}
+              </h2>
+              <p className="mt-4 text-[16px] text-slate-600 leading-relaxed line-clamp-4">{featured.seoDescription}</p>
+              <p className="mt-5 flex items-center gap-3 text-sm text-slate-400">
+                <span>{formatDate(featured.date)}</span>
+                <span className="w-1 h-1 rounded-full bg-slate-300" />
+                <span className="flex items-center gap-1"><Clock size={14} /> {readTimeOf(featured)}</span>
               </p>
+              <div className="mt-5"><ReadMore /></div>
             </div>
+          </Link>
+          </div>
+        </section>
+      )}
 
-            <div className="relative w-full lg:w-[400px]">
-              <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
-              <input
-                type="search"
-                value={searchQuery}
-                onChange={(e) => updateParams({ q: e.target.value, pagina: null })}
-                placeholder="Buscar artículos…"
-                aria-label="Buscar artículos del blog"
-                className="w-full h-12 pl-11 pr-11 bg-white text-[#182A2C] placeholder-slate-400 text-[15px] rounded-xl border border-slate-200 focus:outline-none focus:border-[#182A2C] focus:ring-4 focus:ring-[#d9fb06]/40 transition-all"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => updateParams({ q: null, pagina: null })}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-[#182A2C]"
-                  aria-label="Limpiar búsqueda"
-                >
-                  <X size={18} />
-                </button>
+      {/* Latest posts + sidebar */}
+      <section className="bg-[#f4f7f9] border-t border-slate-100">
+        <div className="py-12 md:py-16">
+        <div className="container mx-auto px-5 lg:px-8 max-w-7xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
+            <div className="lg:col-span-8 min-w-0 lg:border-r lg:border-slate-200 lg:pr-12" ref={listTopRef} style={{ scrollMarginTop: '135px' }}>
+              <div className="flex flex-wrap items-end justify-between gap-3 mb-7">
+                <h2 className="text-[28px] md:text-[34px] font-extrabold text-[#182A2C] tracking-tight leading-tight">{listTitle}</h2>
+                {(searchQuery || activeCategory !== 'Todos') && (
+                  <button onClick={resetFilters} className="text-sm font-semibold text-slate-500 hover:text-[#182A2C] underline underline-offset-4">
+                    Ver todos los artículos
+                  </button>
+                )}
+              </div>
+
+              {/* Categories as chips on small screens; the sidebar holds them on desktop */}
+              <div className="lg:hidden flex gap-2 overflow-x-auto scrollbar-hide -mx-5 px-5 mb-7">
+                {['Todos', ...categoryLinks].map((cat) => (
+                  <Link
+                    key={cat}
+                    to={blogUrl(params, { categoria: cat, pagina: null })}
+                    replace
+                    aria-current={activeCategory === cat ? 'page' : undefined}
+                    className={`shrink-0 rounded-full px-4 py-2 text-sm font-semibold border transition-colors ${
+                      activeCategory === cat ? 'bg-[#182A2C] border-[#182A2C] text-white' : 'bg-white border-slate-200 text-[#182A2C]'
+                    }`}
+                  >
+                    {cat}
+                  </Link>
+                ))}
+              </div>
+
+              {pagePosts.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-7">
+                  {pagePosts.map((post) => (
+                    <article key={post.slug} className="h-full">
+                      <Link
+                        to={`/blog/${post.slug}`}
+                        className="group flex flex-col h-full bg-white rounded-2xl overflow-hidden border border-slate-200/70 shadow-[0_1px_2px_rgba(16,24,40,0.04)] hover:shadow-[0_12px_30px_-12px_rgba(16,24,40,0.25)] hover:-translate-y-0.5 transition-all duration-200"
+                      >
+                        <PostCover post={post} className="aspect-[16/9.5]" />
+                        <div className="flex flex-col flex-1 p-6">
+                          <h3 className="text-[19px] md:text-[21px] font-bold text-[#182A2C] leading-snug tracking-tight line-clamp-3">
+                            {post.title}
+                          </h3>
+                          <p className="mt-3 text-[15px] text-slate-600 leading-relaxed line-clamp-3">{post.seoDescription}</p>
+                          <div className="mt-auto pt-5">
+                            <p className="text-sm text-slate-400">
+                              {formatDate(post.date)} · {readTimeOf(post)} de lectura
+                            </p>
+                            <div className="mt-3"><ReadMore /></div>
+                          </div>
+                        </div>
+                      </Link>
+                    </article>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-16 px-6 bg-white rounded-2xl border border-dashed border-slate-300">
+                  <Search size={28} className="mx-auto mb-4 text-slate-400" />
+                  <h3 className="text-xl font-bold text-[#182A2C] mb-2">No encontramos artículos</h3>
+                  <p className="text-slate-500 text-sm max-w-md mx-auto mb-6">
+                    Probá con otra palabra, por ejemplo React, WhatsApp, SEO o e-commerce.
+                  </p>
+                  <button onClick={resetFilters} className="bg-[#182A2C] text-white font-semibold text-sm px-6 py-3 rounded-full hover:bg-black transition-colors">
+                    Ver todos los artículos
+                  </button>
+                </div>
+              )}
+
+              {/* Pagination footer */}
+              {listPosts.length > 0 && (
+                <div className="mt-10 pt-8 border-t border-slate-200 flex flex-col md:flex-row items-center justify-between gap-5">
+                  <p className="text-sm text-slate-500">
+                    Mostrando <strong className="text-[#182A2C]">{rangeStart} - {rangeEnd}</strong> de <strong className="text-[#182A2C]">{listPosts.length}</strong> artículos
+                  </p>
+                  <Pagination page={page} totalPages={totalPages} hrefFor={(p) => blogUrl(params, { pagina: p })} onNavigate={scrollToList} />
+                  <label className="flex items-center gap-2 text-sm text-slate-500">
+                    Mostrar
+                    <select
+                      value={pageSize}
+                      onChange={(e) => updateParams({ mostrar: Number(e.target.value) === DEFAULT_PAGE_SIZE ? null : e.target.value, pagina: null })}
+                      className="h-10 px-3 rounded-lg border border-slate-200 bg-white text-[#182A2C] font-semibold focus:outline-none focus:border-[#182A2C]"
+                    >
+                      {PAGE_SIZES.map((n) => <option key={n} value={n}>{n}</option>)}
+                    </select>
+                  </label>
+                </div>
               )}
             </div>
-          </div>
 
-          <div className="mt-6 max-w-3xl space-y-3 text-[15px] md:text-base text-slate-600 leading-relaxed">
+            {/* Sidebar */}
+            <aside className="lg:col-span-4 min-w-0">
+              <div className="space-y-10">
+                <div className="hidden lg:block">
+                  <h2 className="text-[28px] md:text-[34px] font-extrabold text-[#182A2C] tracking-tight leading-tight mb-7">Categorías</h2>
+                  <ul className="bg-white rounded-2xl border border-slate-200/70 py-3">
+                    {categoryLinks.map((cat) => {
+                      const isActive = activeCategory === cat;
+                      return (
+                        <li key={cat}>
+                          <Link
+                            to={blogUrl(params, { categoria: cat, pagina: null })}
+                            replace
+                            onClick={scrollToList}
+                            aria-current={isActive ? 'page' : undefined}
+                            className={`flex items-center justify-between gap-3 px-7 py-3 text-[15px] font-semibold transition-colors ${
+                              isActive ? 'text-[#182A2C] bg-[#d9fb06]/30' : 'text-[#182A2C]/80 hover:text-[#182A2C] hover:bg-slate-50'
+                            }`}
+                          >
+                            <span className="flex items-center gap-3">
+                              <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: styleFor(cat).accent }} />
+                              {cat}
+                            </span>
+                            <span className="text-xs font-semibold text-slate-400">{categoryCounts[cat] || 0}</span>
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+
+                <div>
+                  <h2 className="text-[28px] md:text-[34px] font-extrabold text-[#182A2C] tracking-tight leading-tight mb-7">Lo más leído</h2>
+                  {mostRead[0] && (
+                    <Link to={`/blog/${mostRead[0].slug}`} className="group block bg-white rounded-2xl overflow-hidden border border-slate-200/70 mb-5">
+                      <PostCover post={mostRead[0]} className="aspect-[16/10]" />
+                      <h3 className="p-5 text-[17px] font-bold text-[#182A2C] leading-snug group-hover:underline decoration-[#d9fb06] decoration-[3px] underline-offset-4">
+                        {mostRead[0].title}
+                      </h3>
+                    </Link>
+                  )}
+                  <ol className="bg-white rounded-2xl border border-slate-200/70 divide-y divide-slate-100">
+                    {mostRead.slice(1).map((post, i) => (
+                      <li key={post.slug}>
+                        <Link to={`/blog/${post.slug}`} className="group flex gap-4 p-5">
+                          <span className="text-2xl font-extrabold text-[#182A2C]/20 leading-none w-6 shrink-0">{i + 2}</span>
+                          <h3 className="text-[15px] font-semibold text-[#182A2C] leading-snug line-clamp-3 group-hover:underline decoration-[#d9fb06] decoration-2 underline-offset-2">
+                            {post.title}
+                          </h3>
+                        </Link>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+
+                <div className="rounded-2xl bg-[#182A2C] p-7 text-white">
+                  <h2 className="text-xl font-bold">¿Tenés un proyecto en mente?</h2>
+                  <p className="mt-2 text-sm text-slate-300 leading-relaxed">
+                    Contanos tu idea y te enviamos un presupuesto sin costo en menos de 24 horas.
+                  </p>
+                  <Link
+                    to="/contacto"
+                    className="group mt-5 inline-flex items-center gap-2 rounded-full bg-[#d9fb06] px-5 py-3 text-sm font-bold text-[#182A2C] hover:bg-white transition-colors"
+                  >
+                    Solicitar cotización
+                    <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+        </div>
+      </section>
+
+      <div className="py-14 md:py-20">
+      <div className="container mx-auto px-5 lg:px-8 max-w-7xl">
+        {/* About the blog */}
+        <section aria-labelledby="sobre-el-blog" className="max-w-3xl">
+          <h2 id="sobre-el-blog" className="text-2xl md:text-3xl font-extrabold text-[#182A2C] tracking-tight mb-4">Sobre este blog</h2>
+          <div className="space-y-3 text-[15px] md:text-base text-slate-600 leading-relaxed">
             <p>
               En este blog explicamos lo que una empresa necesita saber antes de invertir en tecnología: cuánto cuesta una página web o una app, cómo aparecer en Google, qué conviene automatizar con inteligencia artificial y cómo elegir entre opciones como WordPress o React, una plataforma de e-commerce o una tienda a medida, Make o n8n.
             </p>
@@ -247,208 +467,13 @@ export const BlogPage = () => {
               Lo escribe el equipo de Websy, una agencia de desarrollo web de Salta, Argentina, que trabaja con pymes y profesionales de Argentina, Colombia, México y Estados Unidos. Por eso los ejemplos, los precios y las herramientas son de Latinoamérica: Mercado Pago, facturación electrónica, WhatsApp Business.
             </p>
             <p>
-              Los artículos están organizados por categoría: desarrollo web, apps móviles, e-commerce, IA y automatización, sistemas de gestión, APIs y cloud, ciberseguridad, diseño UX/UI, SaaS, soluciones por industria y SEO. Si recién empezás, te sirven las guías de costos y la de SEO local; si ya tenés una web, las de velocidad y conversión. Al final de la página está el <a href="#indice-de-articulos" className="font-semibold text-[#182A2C] underline decoration-[#d9fb06] decoration-2 underline-offset-4">índice con todos los artículos</a>.
+              Los artículos están organizados por categoría: desarrollo web, apps móviles, e-commerce, IA y automatización, sistemas de gestión, APIs y cloud, ciberseguridad, diseño UX/UI, SaaS, soluciones por industria y SEO. Si recién empezás, te sirven las guías de costos y la de SEO local; si ya tenés una web, las de velocidad y conversión. Abajo está el <a href="#indice-de-articulos" className="font-semibold text-[#182A2C] underline decoration-[#d9fb06] decoration-2 underline-offset-4">índice con todos los artículos</a>.
             </p>
           </div>
-          </div>
-        </div>
-
-        {/* Category tabs */}
-        <div className="container mx-auto px-5 lg:px-8 max-w-7xl">
-          <div className="flex gap-1 overflow-x-auto scrollbar-hide -mb-px">
-            {blogCategories.map((cat) => {
-              const isActive = activeCategory === cat;
-              return (
-                <Link
-                  key={cat}
-                  to={blogUrl(params, { categoria: cat, pagina: null })}
-                  replace
-                  aria-current={isActive ? 'page' : undefined}
-                  className={`px-4 py-3.5 text-sm font-semibold whitespace-nowrap border-b-2 transition-colors ${
-                    isActive
-                      ? 'border-[#182A2C] text-[#182A2C]'
-                      : 'border-transparent text-slate-500 hover:text-[#182A2C]'
-                  }`}
-                >
-                  {cat}
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <div className="container mx-auto px-5 lg:px-8 max-w-7xl">
-        <div className="py-10 md:py-14">
-        {/* Featured post */}
-        {showFeatured && (
-          <Link
-            to={`/blog/${featured.slug}`}
-            className="group grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center mb-14 pb-14 border-b border-slate-200"
-          >
-            <PostCover category={featured.category} size="lg" className="aspect-[16/10] rounded-2xl" />
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-[11px] font-bold uppercase tracking-[0.14em] bg-[#d9fb06] text-[#182A2C] px-2.5 py-1 rounded">
-                  Destacado
-                </span>
-                <CategoryLabel category={featured.category} />
-              </div>
-              <h2 className="text-2xl md:text-[32px] font-extrabold text-[#182A2C] leading-[1.15] tracking-tight group-hover:underline decoration-[#d9fb06] decoration-4 underline-offset-4">
-                {featured.title}
-              </h2>
-              <p className="mt-4 text-slate-600 leading-relaxed line-clamp-3">{featured.seoDescription}</p>
-              <div className="mt-6 flex items-center gap-5 text-sm text-slate-500">
-                <span className="flex items-center gap-1.5"><Calendar size={15} /> {formatDate(featured.date)}</span>
-                <span className="flex items-center gap-1.5"><Clock size={15} /> {(postStats[featured.slug] || {}).readTime || featured.readTime} de lectura</span>
-              </div>
-            </div>
-          </Link>
-        )}
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          {/* Main list */}
-          <div className="lg:col-span-8 min-w-0" ref={listTopRef} style={{ scrollMarginTop: '135px' }}>
-            <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-              <h2 className="text-xl font-bold text-[#182A2C]">
-                {searchQuery
-                  ? `Resultados para "${searchQuery}"`
-                  : activeCategory === 'Todos' ? 'Artículos recientes' : activeCategory}
-              </h2>
-              {(searchQuery || activeCategory !== 'Todos') && (
-                <button onClick={resetFilters} className="text-sm font-semibold text-slate-500 hover:text-[#182A2C] underline underline-offset-4">
-                  Ver todos los artículos
-                </button>
-              )}
-            </div>
-
-            {pagePosts.length > 0 ? (
-              <div className="divide-y divide-slate-200">
-                {pagePosts.map((post) => (
-                  <article key={post.slug} className="py-7 first:pt-0">
-                    <Link to={`/blog/${post.slug}`} className="group flex flex-col sm:flex-row gap-5 sm:gap-7">
-                      <PostCover category={post.category} className="sm:w-[240px] shrink-0 aspect-[16/10] rounded-xl" />
-                      <div className="flex-1 min-w-0">
-                        <CategoryLabel category={post.category} />
-                        <h3 className="mt-2 text-lg md:text-xl font-bold text-[#182A2C] leading-snug group-hover:underline decoration-[#d9fb06] decoration-[3px] underline-offset-4">
-                          {post.title}
-                        </h3>
-                        <p className="mt-2.5 text-[15px] text-slate-600 leading-relaxed line-clamp-2">{post.seoDescription}</p>
-                        <div className="mt-4 flex items-center gap-4 text-[13px] text-slate-500">
-                          <span>{formatDate(post.date)}</span>
-                          <span className="w-1 h-1 rounded-full bg-slate-300" />
-                          <span>{(postStats[post.slug] || {}).readTime || post.readTime} de lectura</span>
-                        </div>
-                      </div>
-                    </Link>
-                  </article>
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-16 px-6 bg-[#f8fafc] rounded-2xl border border-dashed border-slate-300">
-                <Search size={28} className="mx-auto mb-4 text-slate-400" />
-                <h3 className="text-xl font-bold text-[#182A2C] mb-2">No encontramos artículos</h3>
-                <p className="text-slate-500 text-sm max-w-md mx-auto mb-6">
-                  Probá con otra palabra, por ejemplo React, WhatsApp, SEO o e-commerce.
-                </p>
-                <button onClick={resetFilters} className="bg-[#182A2C] text-white font-semibold text-sm px-6 py-3 rounded-full hover:bg-black transition-colors">
-                  Ver todos los artículos
-                </button>
-              </div>
-            )}
-
-            {/* Pagination footer */}
-            {listPosts.length > 0 && (
-              <div className="mt-10 pt-8 border-t border-slate-200 flex flex-col md:flex-row items-center justify-between gap-5">
-                <p className="text-sm text-slate-500">
-                  Mostrando <strong className="text-[#182A2C]">{rangeStart} - {rangeEnd}</strong> de <strong className="text-[#182A2C]">{listPosts.length}</strong> artículos
-                </p>
-                <Pagination page={page} totalPages={totalPages} hrefFor={(p) => blogUrl(params, { pagina: p })} onNavigate={scrollToList} />
-                <label className="flex items-center gap-2 text-sm text-slate-500">
-                  Mostrar
-                  <select
-                    value={pageSize}
-                    onChange={(e) => updateParams({ mostrar: e.target.value === '10' ? null : e.target.value, pagina: null })}
-                    className="h-10 px-3 rounded-lg border border-slate-200 bg-white text-[#182A2C] font-semibold focus:outline-none focus:border-[#182A2C]"
-                  >
-                    {PAGE_SIZES.map((n) => <option key={n} value={n}>{n}</option>)}
-                  </select>
-                </label>
-              </div>
-            )}
-          </div>
-
-          {/* Sidebar */}
-          <aside className="lg:col-span-4 min-w-0">
-            <div className="lg:sticky lg:top-[135px] space-y-8">
-              <div className="rounded-2xl border border-slate-200 p-6">
-                <h2 className="text-lg font-bold text-[#182A2C] mb-5">Lo más leído</h2>
-                <ol className="space-y-5">
-                  {mostRead.map((post) => (
-                    <li key={post.slug}>
-                      <Link to={`/blog/${post.slug}`} className="group flex gap-4">
-                        <PostCover category={post.category} size="sm" className="w-[72px] h-[56px] shrink-0 rounded-lg" />
-                        <div className="min-w-0">
-                          <h3 className="text-sm font-semibold text-[#182A2C] leading-snug line-clamp-2 group-hover:underline decoration-[#d9fb06] decoration-2 underline-offset-2">
-                            {post.title}
-                          </h3>
-                          <span className="mt-1 block text-xs text-slate-500">{formatDate(post.date)}</span>
-                        </div>
-                      </Link>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-
-              <div className="rounded-2xl border border-slate-200 p-6">
-                <h2 className="text-lg font-bold text-[#182A2C] mb-4">Categorías</h2>
-                <ul className="space-y-1">
-                  {blogCategories.filter((c) => c !== 'Todos').map((cat) => {
-                    const { icon: Icon } = styleFor(cat);
-                    const isActive = activeCategory === cat;
-                    return (
-                      <li key={cat}>
-                        <Link
-                          to={blogUrl(params, { categoria: cat, pagina: null })}
-                          replace
-                          onClick={scrollToList}
-                          className={`w-full flex items-center justify-between gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
-                            isActive ? 'bg-[#182A2C] text-white' : 'text-[#334155] hover:bg-slate-100'
-                          }`}
-                        >
-                          <span className="flex items-center gap-2.5 font-medium">
-                            <Icon size={16} className={isActive ? 'text-[#d9fb06]' : 'text-slate-400'} />
-                            {cat}
-                          </span>
-                          <span className={`text-xs font-semibold ${isActive ? 'text-white/70' : 'text-slate-400'}`}>
-                            {categoryCounts[cat] || 0}
-                          </span>
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-
-              <div className="rounded-2xl bg-[#182A2C] p-6 text-white">
-                <h2 className="text-lg font-bold">¿Tenés un proyecto en mente?</h2>
-                <p className="mt-2 text-sm text-slate-300 leading-relaxed">
-                  Contanos tu idea y te enviamos un presupuesto sin costo en menos de 24 horas.
-                </p>
-                <Link
-                  to="/contacto"
-                  className="group mt-5 inline-flex items-center gap-2 rounded-full bg-[#d9fb06] px-5 py-3 text-sm font-bold text-[#182A2C] hover:bg-white transition-colors"
-                >
-                  Solicitar cotización
-                  <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-                </Link>
-              </div>
-            </div>
-          </aside>
-        </div>
+        </section>
 
         {/* Índice completo: todos los artículos enlazados con <a href>, sin depender de la paginación */}
-        <section id="indice-de-articulos" aria-labelledby="indice-titulo" className="mt-16 pt-12 border-t border-slate-200" style={{ scrollMarginTop: '135px' }}>
+        <section id="indice-de-articulos" aria-labelledby="indice-titulo" className="mt-14 pt-12 border-t border-slate-200" style={{ scrollMarginTop: '135px' }}>
           <h2 id="indice-titulo" className="text-2xl md:text-3xl font-extrabold text-[#182A2C] tracking-tight mb-2">Índice de artículos</h2>
           <p className="text-slate-600 mb-10">Los {blogPosts.length} artículos del blog, por categoría.</p>
           <div className="grid gap-10 md:grid-cols-2">
@@ -468,7 +493,7 @@ export const BlogPage = () => {
             ))}
           </div>
         </section>
-        </div>
+      </div>
       </div>
 
       <style>{`
