@@ -26,21 +26,16 @@
   <meta name="geo.position" content="-24.7821;-65.4232" />
   <meta name="ICBM" content="-24.7821, -65.4232" />
 
-  <!-- Hreflang Tags - Critical for LATAM targeting -->
-  <link rel="alternate" hreflang="es" href="https://www.websysrl.com/" />
-  <link rel="alternate" hreflang="es-AR" href="https://www.websysrl.com/" />
-  <link rel="alternate" hreflang="es-419" href="https://www.websysrl.com/" />
-  <link rel="alternate" hreflang="x-default" href="https://www.websysrl.com/" />
-
   <!-- Social Media Links for SEO -->
   <link rel="me" href="https://www.facebook.com/websyar" />
   <link rel="me" href="https://www.tiktok.com/@websyar" />
   <link rel="me" href="https://www.instagram.com/websyar" />
   <link rel="me" href="https://www.linkedin.com/company/websy-dev" />
 
+  <!-- canonical, hreflang, og:url y twitter:url los pone cada página (SEOHead) con su propia URL:
+       si estuvieran fijos acá, toda URL no prerenderizada declararía la home como canónica. -->
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.websysrl.com/" />
   <meta property="og:title" content="Websy — Desarrollo Web, E-commerce & Automatizaciones IA | Argentina" />
   <meta property="og:description"
     content="Agencia de desarrollo web en Salta, Argentina. Páginas web profesionales, tiendas online, apps móviles, automatizaciones con IA y chatbots WhatsApp para toda Latinoamérica." />
@@ -54,7 +49,6 @@
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:url" content="https://www.websysrl.com/" />
   <meta name="twitter:title" content="Websy — Desarrollo Web, E-commerce & Automatizaciones IA" />
   <meta name="twitter:description"
     content="Agencia de desarrollo web en Salta, Argentina. Páginas web profesionales, tiendas online, apps y automatizaciones con IA para toda Latinoamérica." />
@@ -236,9 +230,6 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="/websy-logo.png" />
   <link rel="shortcut icon" href="/websy-logo.png" />
-
-  <!-- Canonical URL -->
-  <link rel="canonical" href="https://www.websysrl.com/" />
 
   <!-- Critical CSS - Inlined for FCP optimization -->
   <style>

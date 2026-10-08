@@ -118,11 +118,17 @@ export const SEOHead = ({
 
     document.documentElement.setAttribute('lang', currentLanguage === 'es' ? 'es' : 'en');
 
-    // Canonical + hreflang must point to THIS page, otherwise Google treats subpages as duplicates of the home
-    upsertLink('link[rel="canonical"]', { rel: 'canonical', href: canonicalUrl });
-    ['es', 'es-AR', 'es-419', 'x-default'].forEach((lang) => {
-      upsertLink(`link[rel="alternate"][hreflang="${lang}"]`, { rel: 'alternate', hreflang: lang, href: canonicalUrl });
-    });
+    // Canonical + hreflang must point to THIS page, otherwise Google treats subpages as duplicates of the home.
+    // A noindex page (404, not found) declares no canonical: "don't index" + "this is the canonical" contradict each other.
+    const hreflangs = ['es', 'es-AR', 'es-419', 'x-default'];
+    if (noindex) {
+      document.head.querySelectorAll('link[rel="canonical"], link[rel="alternate"][hreflang]').forEach((el) => el.remove());
+    } else {
+      upsertLink('link[rel="canonical"]', { rel: 'canonical', href: canonicalUrl });
+      hreflangs.forEach((lang) => {
+        upsertLink(`link[rel="alternate"][hreflang="${lang}"]`, { rel: 'alternate', hreflang: lang, href: canonicalUrl });
+      });
+    }
 
     // Page-specific structured data: breadcrumbs + any schema passed by the page
     const graph = [breadcrumbs && buildBreadcrumbs(pathname, finalTitle), ...(jsonLdString ? [].concat(JSON.parse(jsonLdString)) : [])]
@@ -142,23 +148,4 @@ export const SEOHead = ({
   }, [finalTitle, finalDescription, finalImage, canonicalUrl, type, noindex, jsonLdString, breadcrumbs, pathname, currentLanguage]);
 
   return null;
-};
-
-// Hook for dynamic SEO updates
-export const useSEO = (seoData) => {
-  useEffect(() => {
-    if (seoData.title) {
-      document.title = seoData.title;
-    }
-
-    Object.entries(seoData).forEach(([key, value]) => {
-      if (key !== 'title' && value) {
-        const metaTag = document.querySelector(`meta[name="${key}"]`) ||
-                        document.querySelector(`meta[property="${key}"]`);
-        if (metaTag) {
-          metaTag.setAttribute('content', value);
-        }
-      }
-    });
-  }, [seoData]);
 };
