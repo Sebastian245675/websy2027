@@ -4,7 +4,7 @@ export const customSystemsAndEnterprisePosts = [
     slug: 'por-que-tu-empresa-necesita-un-crm-erp-a-medida',
     title: 'Por qué tu empresa necesita un sistema CRM/ERP a medida y no un software genérico',
     seoTitle: 'Sistema CRM / ERP a medida vs Genérico en 2026 | Websy',
-    seoDescription: 'Descubre las ventajas de desarrollar un sistema de gestión (CRM/ERP) 100% adaptable a los procesos reales de tu empresa en lugar de pagar licencias mensuales eternas.',
+    seoDescription: 'Descubrí las ventajas de desarrollar un sistema de gestión (CRM/ERP) 100% adaptable a los procesos reales de tu empresa en lugar de pagar licencias mensuales eternas.',
     seoKeywords: 'sistema crm a medida, desarrollo erp personalizado, crm para pymes argentina, software de gestion empresas',
     category: 'Sistemas & ERP',
     date: '2026-07-08',
@@ -56,7 +56,7 @@ En [Websy desarrollamos sistemas CRM/ERP a medida](/servicios/sistemas-gestion) 
     slug: 'desarrollo-de-apis-rest-graphql-microservicios',
     title: 'Desarrollo de APIs REST y GraphQL: Cómo conectar tus aplicaciones y sistemas',
     seoTitle: 'APIs REST vs GraphQL: Arquitectura e Integración de Sistemas | Websy',
-    seoDescription: 'Aprende las diferencias entre arquitecturas REST y GraphQL. Descubre cómo integrar aplicaciones web, móviles y bases de datos mediante APIs robustas.',
+    seoDescription: 'Aprendé las diferencias entre arquitecturas REST y GraphQL. Descubrí cómo integrar aplicaciones web, móviles y bases de datos mediante APIs robustas.',
     seoKeywords: 'desarrollo apis rest graphql, microservicios arquitectura, conectar sistemas web app, desarrollo backend nodejs python',
     category: 'APIs & Cloud',
     date: '2026-06-22',
@@ -190,7 +190,7 @@ Emitir comprobantes manualmente ingresando al portal de comprobantes en línea d
 La arquitectura de comunicación con AFIP se divide en dos fases obligatorias: **WSAA (Autenticación)** y **WSFE (Facturación)**.
 
 \`\`\`
-[ Sistema de Gestión Web ] ──► (Solicita Ticket de Acceso TA al WSAA con Certificado X.509)
+[ Sistema de Gestión Web ] ──► (Solicitá Ticket de Acceso TA al WSAA con Certificado X.509)
                                                         │
                                                         ▼
 [ Token y Sign Recibido ] ───► (Consulta a WSFE v1 enviando CUIT y detalles del comprobante)
@@ -248,7 +248,7 @@ En [Websy realizamos integraciones directas con los Web Services de AFIP para si
     slug: 'desarrollo-de-software-a-medida-para-logistica-y-distribucion',
     title: 'Software de Logística y Control de Flotas a Medida: Trazabilidad y Rutas en Tiempo Real',
     seoTitle: 'Software para Logística, Distribución y Flotas a Medida | Websy',
-    seoDescription: 'Descubre cómo un sistema logístico a medida optimiza rutas de entrega, control de inventario en depósitos, seguimiento GPS de envíos y prueba de entrega.',
+    seoDescription: 'Descubrí cómo un sistema logístico a medida optimiza rutas de entrega, control de inventario en depósitos, seguimiento GPS de envíos y prueba de entrega.',
     seoKeywords: 'software logistica a medida, sistema control de flotas gps, trazabilidad envios web, software distribuidoras argentina, optimizacion de rutas entrega',
     category: 'Sistemas & ERP',
     date: '2026-07-13',
@@ -290,7 +290,7 @@ En [Websy desarrollamos sistemas a medida para logística, transporte y distribu
     slug: 'sistema-de-gestion-de-stock-e-inventario-multideposito-web',
     title: 'Sistema de Gestión de Stock e Inventario Multi-Depósito en la Nube',
     seoTitle: 'Sistema de Control de Stock Multi-Depósito Web | Websy',
-    seoDescription: 'Aprende a estructurar un sistema web de control de inventario en tiempo real: transferencias entre depósitos, lector de códigos QR/Barra y alertas de re-stock.',
+    seoDescription: 'Aprendé a estructurar un sistema web de control de inventario en tiempo real: transferencias entre depósitos, lector de códigos QR/Barra y alertas de re-stock.',
     seoKeywords: 'sistema control de stock web, inventario multi deposito software, software gestion de stock argentina, control inventario qr barras',
     category: 'Sistemas & ERP',
     date: '2026-07-29',
@@ -305,7 +305,7 @@ Un **Sistema de Gestión de Stock e Inventario Multi-Depósito en la Nube** brin
 
 ## 1. Módulos Clave de un Sistema de Stock Profesional
 
-- **Gestión Multi-Sucursal y Multi-Depósito**: Conoce la ubicación exacta de cada unidad de producto en cada depósito o local comercial.
+- **Gestión Multi-Sucursal y Multi-Depósito**: Conocé la ubicación exacta de cada unidad de producto en cada depósito o local comercial.
 - **Escaneo con Código de Barras / QR Móvil**: Los empleados escanean mercadería directamente desde el celular para ingresos, egresos o transferencias entre sucursales.
 - **Alertas de Re-Stock Automáticas**: Notificaciones por WhatsApp o email cuando un producto alcanza el punto mínimo de pedido.
 

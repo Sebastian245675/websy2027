@@ -1,12 +1,19 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
+import { trackPageView } from '../lib/tracking';
 
 // Google Analytics 4
 export const useAnalytics = () => {
   const location = useLocation();
+  const isFirstLoad = useRef(true);
 
   useEffect(() => {
-    // Track page views
+    // The first page view is sent by the GA4 / pixel snippets in index.html; only track SPA navigations here
+    if (isFirstLoad.current) {
+      isFirstLoad.current = false;
+      return;
+    }
+    trackPageView();
     if (window.gtag) {
       window.gtag('config', process.env.REACT_APP_GA_TRACKING_ID, {
         page_path: location.pathname + location.search,

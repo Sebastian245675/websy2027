@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../LanguageContext';
 import { saveCotizacion, sendCotizacionEmail } from '../firebase';
+import { trackFormSubmit } from '../lib/tracking';
+import { CONTACT, CONTACT_PHOTO, COUNTRIES, whatsappUrl } from '../siteConfig';
 
 export const ContactSection = () => {
   const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
+    country: 'AR',
     email: '',
     message: ''
   });
@@ -19,10 +22,12 @@ export const ContactSection = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    const dial = (COUNTRIES.find((c) => c.code === formData.country) || COUNTRIES[0]).dial;
+    const phone = formData.phone ? `${dial} ${formData.phone}`.trim() : '';
     try {
       const docId = await saveCotizacion({
         name: formData.name,
-        phone: formData.phone,
+        phone,
         email: formData.email,
         message: formData.message,
         projectType: 'Quick Contact (Home)'
@@ -32,7 +37,7 @@ export const ContactSection = () => {
         await sendCotizacionEmail({
           cotizacionId: docId,
           name: formData.name,
-          phone: formData.phone,
+          phone,
           email: formData.email,
           projectType: 'Quick Contact (Home)',
           message: formData.message
@@ -41,11 +46,30 @@ export const ContactSection = () => {
         console.error('Failed to send email notification:', fnErr);
       }
 
-      alert('¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.');
-      setFormData({ name: '', phone: '', email: '', message: '' });
+      // ENVIAR A CRM WEBSY
+      try {
+        await fetch('https://backend.websysrl.com/api/public/forms/websy-contacto-landing/submissions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            formData: {
+              name: formData.name,
+              email: formData.email,
+              phone,
+              message: formData.message
+            }
+          })
+        });
+      } catch (crmErr) {
+        console.error('Failed to send to CRM:', crmErr);
+      }
+
+      trackFormSubmit('contacto_rapido');
+      alert('¡Mensaje enviado! Te contactamos en menos de 24 horas.');
+      setFormData({ name: '', phone: '', country: 'AR', email: '', message: '' });
     } catch (err) {
       console.error(err);
-      alert('Error al enviar el mensaje.');
+      alert('No pudimos enviar el mensaje. Probá de nuevo o escribinos por WhatsApp.');
     } finally {
       setIsSubmitting(false);
     }
@@ -68,9 +92,9 @@ export const ContactSection = () => {
               Tu negocio está a un mensaje de transformarse
             </h2>
             <p className="text-gray-400 text-sm md:text-base leading-loose mb-16 max-w-xl font-medium opacity-80">
-              Cada consulta que recibimos la tratamos con compromiso y detalle: entendemos tu empresa, tus metas y tus desafíos para brindarte la estrategia exacta que necesitas para crecer.
+              Cada consulta que recibimos la tratamos con compromiso y detalle: entendemos tu empresa, tus metas y tus desafíos para darte la estrategia exacta que necesitás para crecer.
               <br /><br />
-              Danos un mensaje y nosotros nos encargamos del resto.
+              Dejanos un mensaje y nosotros nos encargamos del resto.
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-12">
@@ -91,17 +115,23 @@ export const ContactSection = () => {
               <div className="flex flex-col md:flex-row gap-12">
                 <div className="flex-1 relative group">
                   <div className="flex items-center border-b border-gray-600 focus-within:border-[#d9fb06] transition-all duration-300">
-                     <div className="flex items-center gap-3 pr-4 py-4">
-                        {/* Placeholder Flag Icon */}
-                        <div className="w-5 h-3 bg-gray-500 rounded-sm"></div>
-                        <span className="text-[11px] font-bold text-gray-300 uppercase tracking-widest">ARG (+54)</span>
-                     </div>
+                     <select
+                      name="country"
+                      value={formData.country}
+                      onChange={handleChange}
+                      aria-label="País"
+                      className="bg-transparent pr-2 py-4 text-[11px] font-bold text-gray-300 uppercase tracking-widest focus:outline-none cursor-pointer"
+                     >
+                      {COUNTRIES.filter((c) => c.dial).map((c) => (
+                        <option key={c.code} value={c.code} className="text-[#182A2C] normal-case">{c.code} ({c.dial})</option>
+                      ))}
+                     </select>
                      <input
                       type="tel"
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      placeholder="+54"
+                      placeholder="WhatsApp"
                       className="w-full bg-transparent py-4 text-white text-lg placeholder-gray-400 focus:outline-none"
                     />
                   </div>
@@ -147,41 +177,28 @@ export const ContactSection = () => {
           </div>
         </div>
 
-        {/* Right Side: Image Overlay Area - Decreased to 30% */}
-        <div className="w-full lg:w-[30%] relative min-h-[500px]">
-          {/* Real Team Image */}
-          <div className="absolute inset-0 overflow-hidden">
-            <img 
-              src="/contact_team.webp" 
-              alt="Websy Team" 
-              className="w-full h-full object-cover grayscale opacity-50"
-            />
-          </div>
-          
-          {/* VIBRANT CYAN OVERLAY - Restored as requested */}
-          <div className="absolute inset-0 bg-[#35affb]/80 mix-blend-multiply transition-opacity duration-1000 group-hover:bg-[#35affb]/70"></div>
-          
-          {/* Subtle Soft Glow */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a]/60 flex items-center justify-center p-12">
-             {/* Pattern over the blue overlay */}
-             <div className="w-full h-full border border-white/10 opacity-30 relative overflow-hidden pointer-events-none">
-                {/* Zig Zag CSS Pattern */}
-                <div className="absolute inset-0" style={{ 
-                  backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', 
-                  backgroundSize: '24px 24px' 
-                }}></div>
-                {/* Larger SVG Zig Zag */}
-                <div className="absolute top-10 left-10 opacity-20">
-                   <svg width="80" height="40" viewBox="0 0 80 40" stroke="white" strokeWidth="2" fill="none">
-                     <path d="M0 20 L20 0 L40 20 L60 0 L80 20" />
-                   </svg>
-                </div>
-                <div className="absolute bottom-10 right-10 opacity-20 rotate-180">
-                   <svg width="80" height="40" viewBox="0 0 80 40" stroke="white" strokeWidth="2" fill="none">
-                     <path d="M0 20 L20 0 L40 20 L60 0 L80 20" />
-                   </svg>
-                </div>
-             </div>
+        {/* Right Side: real photo of the team once available (siteConfig.CONTACT_PHOTO), otherwise direct contact data */}
+        <div className="w-full lg:w-[30%] relative min-h-[420px] bg-[#35affb]/80">
+          {CONTACT_PHOTO && (
+            <>
+              <img src={CONTACT_PHOTO} alt="Equipo de Websy" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a]/85 via-[#1a1a1a]/20 to-transparent" />
+            </>
+          )}
+          {!CONTACT_PHOTO && (
+            <div className="absolute inset-0 opacity-30 pointer-events-none" style={{
+              backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
+              backgroundSize: '24px 24px'
+            }} />
+          )}
+          <div className="relative h-full flex flex-col justify-end p-10 lg:p-12 lg:pb-48 text-white">
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] mb-6 text-white/80">Contacto directo</p>
+            <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" data-wa-location="inicio_contacto" className="block text-2xl font-black tracking-tight mb-1 hover:underline">
+              {CONTACT.phoneDisplay}
+            </a>
+            <p className="text-sm text-white/80 mb-6">WhatsApp · respondemos en menos de 24 horas</p>
+            <a href={`mailto:${CONTACT.email}`} className="block text-lg font-bold mb-1 break-words hover:underline">{CONTACT.email}</a>
+            <p className="text-sm text-white/80">{CONTACT.location}</p>
           </div>
         </div>
       </div>

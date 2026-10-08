@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fetchGooglePlacesReviews } from '../services/googleReviewsService';
+import { clientTestimonials } from '../mockData';
 
 // Official Google 'G' Multi-color Logo
 const GoogleGLogo = ({ size = 26 }) => (
@@ -90,16 +91,30 @@ export const TestimonialsSection = () => {
             </div>
           </div>
 
-          {/* Boton negro Escribe una reseña */}
+          {/* Boton negro Escribí una reseña */}
           <a
             href={writeReviewUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="bg-black text-white hover:bg-gray-800 font-bold text-xs px-6 py-3 rounded-lg transition-all shadow-sm self-stretch sm:self-auto text-center"
           >
-            Escribe una reseña
+            Escribí una reseña
           </a>
         </div>
+
+        {clientTestimonials.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+            {clientTestimonials.map((item) => (
+              <figure key={item.name} className="rounded-2xl border border-gray-200 p-6">
+                <blockquote className="text-sm text-gray-700 leading-relaxed">"{item.text}"</blockquote>
+                <figcaption className="mt-4">
+                  <span className="block font-bold text-gray-900 text-sm">{item.name}</span>
+                  <span className="block text-xs text-gray-500">{item.company}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        )}
 
         {/* CONTENEDOR DE TARJETAS DE COMENTARIOS SOBRE FONDO BLANCO */}
         <div className="relative group">

@@ -1,254 +1,104 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../LanguageContext';
+import { CONTACT, SOCIAL, whatsappUrl } from '../siteConfig';
 
 // SVG icons inline
-const LinkedinIcon = ({ size = 20 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" />
-  </svg>
-);
-
-const TwitterIcon = ({ size = 20 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
-  </svg>
-);
-
-const FacebookIcon = ({ size = 20 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-  </svg>
-);
-
-const YoutubeIcon = ({ size = 20 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" /><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" />
-  </svg>
-);
+const icons = {
+  Instagram: (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+    </svg>
+  ),
+  Facebook: (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+    </svg>
+  ),
+  TikTok: (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.06-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.9-.32-1.98-.23-2.81.31-.75.42-1.24 1.25-1.33 2.1-.04.7.06 1.42.45 2.01.39.73 1.15 1.19 1.98 1.25 1.32.1 2.59-.88 2.89-2.1.02-.31.01-.62.01-.93V.02z" />
+    </svg>
+  ),
+  LinkedIn: (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" />
+    </svg>
+  ),
+};
 
 export const Footer = () => {
   const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
-  const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+  const siteLinks = [
+    { name: t('footer.links.services'), to: '/servicios' },
+    { name: t('footer.links.cases'), to: '/casos-de-exito' },
+    { name: t('footer.links.investment'), to: '/planes' },
+    { name: t('footer.links.blog'), to: '/blog' },
+    { name: t('footer.links.contact'), to: '/contacto' },
+  ];
 
-  const scrollToSection = (href) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const headingCls = 'text-sm font-semibold mb-3 text-[#333]';
+  const linkCls = 'text-xs hover:underline transition-colors text-[#666] leading-[1.5]';
 
   return (
-    <footer style={{ backgroundColor: '#f5f5f5', borderTop: '1px solid #e0e0e0', paddingTop: '0', paddingBottom: isMobile ? '0' : '2rem' }}>
-      <div className="flex flex-col md:block">
-        {/* Mobile Layout - Two columns */}
-        <div className="grid grid-cols-2 md:hidden">
-          {/* Left Column - Dark Navy background */}
-          <div style={{ backgroundColor: '#182A2C', padding: '2rem 1.5rem' }}>
-            <h3 className="text-base font-bold mb-2 uppercase tracking-tighter" style={{ color: '#ffffff' }}>
-              {t('footer.discoverMore')}
-            </h3>
-            <p className="text-sm mb-4 opacity-70" style={{ color: '#ffffff' }}>
-              {t('footer.stayInformed')}
-            </p>
-            <button
-              className="w-full py-3 px-4 rounded-lg font-black text-sm transition-all uppercase tracking-widest hover:bg-white hover:text-[#182A2C]"
-              style={{
-                backgroundColor: '#d9fb06',
-                color: '#182A2C',
-                border: 'none'
-              }}
-            >
-              {t('footer.subscribe')}
-            </button>
+    <footer className="bg-[#f5f5f5] border-t border-[#e0e0e0]">
+      <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+        {/* Brand + WhatsApp */}
+        <div className="bg-[#182A2C] px-6 py-10 md:px-10 lg:px-14">
+          <div className="text-xl font-black uppercase tracking-tighter text-white">Websy</div>
+          <p className="mt-2 text-sm text-white/70 max-w-xs">{t('footer.description')}</p>
 
-            <h3 className="text-base font-bold mt-8 mb-4 uppercase tracking-tighter" style={{ color: '#ffffff' }}>
-              {t('footer.followUs')}
-            </h3>
-            <div className="flex gap-4">
-              <span className="inline-block hover:text-[#d9fb06] transition-colors" style={{ color: '#ffffff' }}><FacebookIcon size={24} /></span>
-              <span className="inline-block hover:text-[#d9fb06] transition-colors" style={{ color: '#ffffff' }}><LinkedinIcon size={24} /></span>
-              <span className="inline-block hover:text-[#d9fb06] transition-colors" style={{ color: '#ffffff' }}><TwitterIcon size={24} /></span>
-              <span className="inline-block hover:text-[#d9fb06] transition-colors" style={{ color: '#ffffff' }}><YoutubeIcon size={24} /></span>
-            </div>
-          </div>
+          <a
+            href={whatsappUrl()}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-wa-location="pie"
+            className="mt-6 inline-flex items-center justify-center py-3 px-5 rounded-lg font-black text-xs uppercase tracking-widest bg-[#d9fb06] text-[#182A2C] hover:bg-white transition-colors"
+          >
+            {t('footer.whatsappCta')}
+          </a>
 
-          {/* Right Column - White background */}
-          <div style={{ backgroundColor: '#fff', padding: '2rem 1.5rem' }}>
-            {/* Compañía */}
-            <div className="mb-6">
-              <h4 className="text-sm font-semibold mb-3" style={{ color: '#333' }}>
-                {t('footer.company.title')}
-              </h4>
-              <ul className="space-y-2">
-                {[
-                  { name: t('footer.company.about'), href: '#nosotros' },
-                  { name: t('footer.company.esg'), href: '#' },
-                  { name: t('footer.company.news'), href: '#' },
-                  { name: t('footer.company.offices'), href: '#' }
-                ].map((item) => (
-                  <li key={item.name}>
-                    <button
-                      onClick={() => scrollToSection(item.href)}
-                      className="text-xs hover:underline transition-colors text-left"
-                      style={{ color: '#666', lineHeight: '1.5' }}
-                    >
-                      {item.name}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Centro de Recursos */}
-            <div className="mb-6">
-              <h4 className="text-sm font-semibold mb-3" style={{ color: '#333' }}>
-                {t('footer.resources.title')}
-              </h4>
-              <ul className="space-y-2">
-                {[
-                  { name: t('footer.resources.articles'), href: '#' },
-                  { name: t('footer.resources.blogs'), href: '#' },
-                  { name: t('footer.resources.successCases'), href: '#portfolio' },
-                  { name: t('footer.resources.seeMore'), href: '#' }
-                ].map((item) => (
-                  <li key={item.name}>
-                    <button
-                      onClick={() => scrollToSection(item.href)}
-                      className="text-xs hover:underline transition-colors text-left"
-                      style={{ color: '#666', lineHeight: '1.5' }}
-                    >
-                      {item.name}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Ayuda */}
-            <div>
-              <h4 className="text-sm font-semibold mb-3" style={{ color: '#333' }}>
-                {t('footer.help.title')}
-              </h4>
-              <ul className="space-y-2">
-                {[
-                  { name: t('footer.help.accessibility'), href: '#' },
-                  { name: t('footer.help.legal'), href: '#' },
-                  { name: t('footer.help.privacy'), href: '#' }
-                ].map((item) => (
-                  <li key={item.name}>
-                    <button
-                      onClick={() => scrollToSection(item.href)}
-                      className="text-xs hover:underline transition-colors text-left"
-                      style={{ color: '#666', lineHeight: '1.5' }}
-                    >
-                      {item.name}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <p className="mt-8 mb-3 text-xs font-bold uppercase tracking-widest text-white/60">{t('footer.followUs')}</p>
+          <div className="flex gap-4">
+            {SOCIAL.map((s) => (
+              <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer" aria-label={`${s.name} de Websy`} className="text-white hover:text-[#d9fb06] transition-colors">
+                {icons[s.name]}
+              </a>
+            ))}
           </div>
         </div>
 
-        {/* Desktop Layout - Original */}
-        <div className="container px-4 md:px-6 lg:px-8 hidden md:block" style={{ paddingTop: '2rem' }}>
-          {/* Main Footer Grid - Compact CGI Style */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-8">
-            {/* Company Info - Left Column */}
-            <div className="sm:col-span-2 lg:col-span-2">
-              <div className="text-xl font-bold mb-2 uppercase tracking-tighter" style={{ color: '#182A2C', letterSpacing: '0.5px' }}>
-                Websy Desarrollo & Tecnología®
-              </div>
-              <p className="text-xs leading-relaxed mb-4" style={{ color: '#666', lineHeight: '1.5' }}>
-                {t('footer.description')}
-              </p>
-              <p className="text-[10px] uppercase font-black tracking-widest mt-4" style={{ color: '#182A2C', opacity: 0.5 }}>
-                © {currentYear} {t('footer.copyright')}
-              </p>
-            </div>
+        {/* Site links */}
+        <div className="bg-white md:bg-transparent px-6 py-8 md:py-10">
+          <h4 className={headingCls}>{t('footer.sitemap')}</h4>
+          <ul className="space-y-2">
+            {siteLinks.map((item) => (
+              <li key={item.to}><Link to={item.to} className={linkCls}>{item.name}</Link></li>
+            ))}
+          </ul>
+        </div>
 
-            {/* Compañía */}
-            <div>
-              <h4 className="text-sm font-semibold mb-3" style={{ color: '#333' }}>
-                {t('footer.company.title')}
-              </h4>
-              <ul className="space-y-1.5">
-                {[
-                  { name: t('footer.company.about'), href: '#nosotros' },
-                  { name: t('footer.company.esg'), href: '#' },
-                  { name: t('footer.company.news'), href: '#' },
-                  { name: t('footer.company.offices'), href: '#' }
-                ].map((item) => (
-                  <li key={item.name}>
-                    <button
-                      onClick={() => scrollToSection(item.href)}
-                      className="text-xs hover:underline transition-colors text-left"
-                      style={{ color: '#666', lineHeight: '1.5' }}
-                    >
-                      {item.name}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
+        {/* Contact data */}
+        <div className="bg-white md:bg-transparent px-6 pb-8 md:py-10">
+          <h4 className={headingCls}>{t('footer.contactTitle')}</h4>
+          <ul className="space-y-2">
+            <li><a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" data-wa-location="pie_telefono" className={linkCls}>{CONTACT.phoneDisplay}</a></li>
+            <li><a href={`mailto:${CONTACT.email}`} className={linkCls}>{CONTACT.email}</a></li>
+            <li className="text-xs text-[#666]">{CONTACT.location}</li>
+          </ul>
+        </div>
 
-            {/* Centro de Recursos */}
-            <div>
-              <h4 className="text-sm font-semibold mb-3" style={{ color: '#333' }}>
-                {t('footer.resources.title')}
-              </h4>
-              <ul className="space-y-1.5">
-                {[
-                  { name: t('footer.resources.articles'), href: '#' },
-                  { name: t('footer.resources.blogs'), href: '#' },
-                  { name: t('footer.resources.successCases'), href: '#portfolio' },
-                  { name: t('footer.resources.seeMore'), href: '#' }
-                ].map((item) => (
-                  <li key={item.name}>
-                    <button
-                      onClick={() => scrollToSection(item.href)}
-                      className="text-xs hover:underline transition-colors text-left"
-                      style={{ color: '#666', lineHeight: '1.5' }}
-                    >
-                      {item.name}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Ayuda */}
-            <div>
-              <h4 className="text-sm font-semibold mb-3" style={{ color: '#333' }}>
-                {t('footer.help.title')}
-              </h4>
-              <ul className="space-y-1.5">
-                {[
-                  { name: t('footer.help.accessibility'), href: '#' },
-                  { name: t('footer.help.legal'), href: '#' },
-                  { name: t('footer.help.privacy'), href: '#' }
-                ].map((item) => (
-                  <li key={item.name}>
-                    <button
-                      onClick={() => scrollToSection(item.href)}
-                      className="text-xs hover:underline transition-colors text-left"
-                      style={{ color: '#666', lineHeight: '1.5' }}
-                    >
-                      {item.name}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+        {/* Legal */}
+        <div className="bg-white md:bg-transparent px-6 pb-10 md:py-10">
+          <h4 className={headingCls}>{t('footer.legalTitle')}</h4>
+          <ul className="space-y-2">
+            <li><Link to="/politica-de-privacidad" className={linkCls}>{t('footer.links.privacy')}</Link></li>
+          </ul>
+          <p className="mt-8 text-[10px] uppercase font-black tracking-widest text-[#182A2C]/50">
+            © {currentYear} {t('footer.copyright')}
+          </p>
         </div>
       </div>
     </footer>

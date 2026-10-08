@@ -223,7 +223,7 @@ En [Websy diseñamos y desarrollamos APIs REST robustas para todo tipo de integr
     slug: 'metricas-web-que-medir-google-analytics-kpis-sitio-web',
     title: '¿Qué métricas debo medir en mi sitio web? Los 10 KPIs más importantes de Google Analytics',
     seoTitle: 'Métricas Web: 10 KPIs Esenciales de Google Analytics | Websy',
-    seoDescription: 'Aprende a interpretar las 10 métricas más importantes de Google Analytics: sesiones, tasa de rebote, conversiones, fuentes de tráfico y más.',
+    seoDescription: 'Aprendé a interpretar las 10 métricas más importantes de Google Analytics: sesiones, tasa de rebote, conversiones, fuentes de tráfico y más.',
     seoKeywords: 'metricas pagina web, google analytics metricas, kpi sitio web, que medir en mi web, analytics para empresas, tasa de rebote',
     category: 'SEO & Marketing',
     date: '2026-07-29',
@@ -374,7 +374,7 @@ En [Websy operamos en toda Latinoamérica y conectamos talento tech de primer ni
     slug: 'accesibilidad-web-wcag-que-es-como-implementarla',
     title: 'Accesibilidad Web (WCAG): Qué es, por qué importa y cómo hacer tu web accesible para todos',
     seoTitle: 'Accesibilidad Web WCAG: Guía de Implementación | Websy',
-    seoDescription: 'Guía sobre accesibilidad web WCAG 2.2. Aprende por qué tu web debe ser accesible, los 4 principios POUR y cómo implementar mejoras concretas.',
+    seoDescription: 'Guía sobre accesibilidad web WCAG 2.2. Aprendé por qué tu web debe ser accesible, los 4 principios POUR y cómo implementar mejoras concretas.',
     seoKeywords: 'accesibilidad web, wcag, web accesible, accesibilidad digital, diseño inclusivo, wcag 2.2, web para personas con discapacidad',
     category: 'UI/UX Design',
     date: '2026-07-26',
@@ -431,7 +431,7 @@ El contenido debe ser interpretable por diferentes tecnologías asistivas.
 
 ---
 
-En [Websy todos nuestros proyectos cumplen las directrices WCAG 2.2 de accesibilidad](/servicios/diseno-ux-ui). [Consultá sobre accesibilidad web](/contacto).`,
+En [Websy todos nuestros proyectos cumplen las directrices WCAG 2.2 de accesibilidad](/servicios/desarrollo-web). [Consultá sobre accesibilidad web](/contacto).`,
     relatedPosts: [706, 1108, 1010]
   },
   {
@@ -481,7 +481,7 @@ En [Websy creamos soluciones digitales para el sector veterinario](/servicios/de
     slug: 'errores-comunes-al-crear-pagina-web-empresa-como-evitarlos',
     title: 'Los 15 Errores más Comunes al Crear una Página Web para tu Empresa (y cómo evitarlos)',
     seoTitle: '15 Errores Comunes al Crear una Web: Cómo Evitarlos | Websy',
-    seoDescription: 'Descubre los 15 errores más frecuentes que cometen las empresas al hacer su sitio web: diseño, contenido, SEO, velocidad y experiencia de usuario.',
+    seoDescription: 'Descubrí los 15 errores más frecuentes que cometen las empresas al hacer su sitio web: diseño, contenido, SEO, velocidad y experiencia de usuario.',
     seoKeywords: 'errores pagina web, errores al crear web, errores diseño web, como no hacer pagina web, errores comunes sitio web empresas',
     category: 'Desarrollo Web',
     date: '2026-07-24',

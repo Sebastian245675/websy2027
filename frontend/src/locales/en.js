@@ -4,6 +4,7 @@ export const en = {
         home: 'Home',
         services: 'Services',
         portfolio: 'Portfolio',
+        plans: 'Pricing',
         about: 'About',
         testimonials: 'Testimonials',
         contact: 'Contact'
@@ -210,30 +211,6 @@ export const en = {
         }
     },
 
-    // Testimonials
-    testimonials: {
-        title: 'Testimonials',
-        items: [
-            {
-                name: 'María González',
-                company: 'Restaurante La Cabaña',
-                position: 'General Manager',
-                text: 'To be honest, at first I had my doubts because we had never worked with a local agency. But from day one they were super clear about everything. They built our website and reservation system, and now we have many more online reservations. Before, people would call us and it was complicated to organize everything, now it\'s all automated. I totally recommend them.'
-            },
-            {
-                name: 'Carlos Rodríguez',
-                company: 'Distribuidora R&S',
-                position: 'Commercial Director',
-                text: 'We worked with Websy because we needed something specific for our business. We didn\'t want a generic system that wouldn\'t adapt to what we do. They took the time to understand how we work and built something that really works. Now everything is more organized and we waste less time on manual tasks. The team is very professional and always available when we need something.'
-            },
-            {
-                name: 'Ana Martínez',
-                company: 'Consultoría AM',
-                position: 'Founder',
-                text: 'I needed a website for my consulting business and had no idea where to start. I contacted Websy and they explained everything step by step. The best part is that they listened and understood what I needed, they didn\'t sell me something I didn\'t need. The site turned out great, looks professional and I\'ve already been contacted by several new clients through it. I\'m very happy with the result.'
-            }
-        ]
-    },
 
     // Contact
     contact: {
@@ -286,10 +263,10 @@ export const en = {
             consulting: 'Consulting'
         },
         budgetRanges: {
-            range1: 'Standard Plan 300 to 450',
-            range2: 'Commerce Plan 500 to 700',
-            range3: 'SME Plan 700 to 1200 usd',
-            range4: 'Corporate Plan from 1500 usd',
+            range1: 'Standard Plan 800 to 1500 usd',
+            range2: 'Commerce Plan 1800 to 3500 usd',
+            range3: 'SME Plan 4000 to 8000 usd',
+            range4: 'Corporate Plan from 10000 usd',
             aCotizar: 'Request quote'
         },
         sending: 'Sending...',
@@ -337,30 +314,19 @@ export const en = {
 
     // Footer
     footer: {
-        discoverMore: 'Discover more about Websy',
-        stayInformed: 'Stay informed',
-        subscribe: 'Subscribe',
-        followUs: 'Follow us on',
-        description: 'Founded in 2025, Websy is a web development and automation agency in Salta. We rely on knowledge and results to help accelerate the performance of your investments.',
-        copyright: 'Websy Inc.',
-        company: {
-            title: 'Company',
-            about: 'About us',
-            esg: 'ESG',
-            news: 'News',
-            offices: 'Offices'
-        },
-        resources: {
-            title: 'Resource Center',
-            articles: 'Articles',
-            blogs: 'Blogs',
-            successCases: 'Success stories',
-            seeMore: 'See more'
-        },
-        help: {
-            title: 'Help',
-            accessibility: 'Accessibility',
-            legal: 'Legal notice',
+        description: 'Web development and automation agency in Salta, Argentina.',
+        copyright: 'Websy',
+        followUs: 'Follow us',
+        whatsappCta: 'Message us on WhatsApp',
+        sitemap: 'Site',
+        contactTitle: 'Contact',
+        legalTitle: 'Legal',
+        links: {
+            services: 'Services',
+            cases: 'Success stories',
+            investment: 'Pricing',
+            blog: 'Blog',
+            contact: 'Contact',
             privacy: 'Privacy policy'
         }
     }

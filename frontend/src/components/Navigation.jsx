@@ -2,6 +2,7 @@ import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useLanguage } from '../LanguageContext';
 import { useScrollSpy } from '../hooks/useScrollSpy';
+import { CONTACT, whatsappUrl } from '../siteConfig';
 
 // SVG icons inline
 const MenuIcon = ({ size = 24 }) => (
@@ -80,7 +81,7 @@ export const Navigation = () => {
     { name: t('nav.home'), href: '/', isRoute: true },
     { name: t('nav.services'), href: '/servicios', isRoute: true },
     { name: t('nav.portfolio'), href: '/casos-de-exito', isRoute: true },
-    { name: t('nav.plans') || 'Planes', href: '/planes', isRoute: true },
+    { name: t('nav.plans') || 'Inversión', href: '/planes', isRoute: true },
     { name: 'Blog', href: '/blog', isRoute: true }
   ], [t]);
 
@@ -168,23 +169,23 @@ export const Navigation = () => {
 
         <div className="container relative z-20 h-full flex justify-between items-center text-[10px] md:text-[11px] font-black tracking-tighter sm:tracking-wider">
           <div className="flex items-center space-x-2 pl-2 sm:pl-4 text-[#182A2C]">
-            <a href="https://wa.me/5493884846695" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" data-wa-location="encabezado" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
               <div className="bg-[#182A2C]/10 p-1.5 rounded-full">
                 <PhoneIcon size={12} />
               </div>
               <div className="flex flex-col leading-[1.1]">
                 <span className="opacity-70 text-[8px]">WHATSAPP</span>
-                <span className="font-bold">+54 9 388 4846695</span>
+                <span className="font-bold">{CONTACT.phoneDisplay}</span>
               </div>
             </a>
           </div>
 
           <div className="flex items-center space-x-3 text-[#182A2C] pr-2 sm:pr-4">
             <div className="flex items-center space-x-2.5 border-r border-gray-300/80 pr-3">
-              <a href="https://www.instagram.com/websyar" target="_blank" rel="noopener noreferrer" className="hover:text-[#556902] transition-colors"><InstagramIcon size={14} /></a>
-              <a href="https://www.facebook.com/share/18nU64kL9y/" target="_blank" rel="noopener noreferrer" className="hover:text-[#556902] transition-colors"><FacebookIcon size={14} /></a>
-              <a href="https://www.tiktok.com/@websyar" target="_blank" rel="noopener noreferrer" className="hover:text-[#556902] transition-colors"><TikTokIcon size={14} /></a>
-              <a href="#" className="hover:text-[#556902] transition-colors"><LinkedInIcon size={14} /></a>
+              <a href="https://www.instagram.com/websyar" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Websy" className="hover:text-[#556902] transition-colors"><InstagramIcon size={14} /></a>
+              <a href="https://www.facebook.com/share/18nU64kL9y/" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Websy" className="hover:text-[#556902] transition-colors"><FacebookIcon size={14} /></a>
+              <a href="https://www.tiktok.com/@websyar" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Websy" className="hover:text-[#556902] transition-colors"><TikTokIcon size={14} /></a>
+              <a href="https://www.linkedin.com/company/websy-dev" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de Websy" className="hover:text-[#556902] transition-colors"><LinkedInIcon size={14} /></a>
             </div>
 
             {/* Language Selector Dropdown */}
@@ -254,27 +255,37 @@ export const Navigation = () => {
                   const isActive = activeSection === sectionId || (item.isRoute && location.pathname === item.href);
 
                   return (
-                    <button
+                    <a
                       key={item.name}
-                      onClick={() => scrollToSection(item.href, item.isRoute)}
+                      href={item.href}
+                      title={`Ir a ${item.name}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        scrollToSection(item.href, item.isRoute);
+                      }}
                       className={`relative transition-all duration-300 font-bold text-sm px-4 py-3 group ${isActive ? 'text-[#d9fb06]' : 'text-[#182A2C] hover:text-[#d9fb06]'
                         }`}
                     >
                       {item.name}
                       <span className={`absolute bottom-2 left-4 right-4 h-0.5 bg-[#d9fb06] transition-transform duration-300 ${isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
                         }`} />
-                    </button>
+                    </a>
                   );
                 })}
               </div>
 
               {/* Contact Button - Square Lime like CIMA */}
-              <button
-                onClick={() => scrollToSection(contactItem.href, contactItem.isRoute)}
-                className="ml-6 bg-[#d9fb06] hover:bg-[#aeca04] text-[#182A2C] px-8 py-4 rounded-none font-bold text-sm transition-all shadow-lg hover:shadow-lime-100 tracking-wide"
+              <a
+                href={contactItem.href}
+                title="Contacto y presupuesto"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection(contactItem.href, contactItem.isRoute);
+                }}
+                className="ml-6 flex items-center justify-center bg-[#d9fb06] hover:bg-[#aeca04] text-[#182A2C] px-8 py-4 rounded-none font-bold text-sm transition-all shadow-lg hover:shadow-lime-100 tracking-wide"
               >
                 {contactItem.name.toUpperCase()}
-              </button>
+              </a>
             </div>
 
             {/* Mobile/Tablet Menu Button - CIMA Style but Websy Colors */}
@@ -319,9 +330,11 @@ export const Navigation = () => {
                   const isActive = activeSection === sectionId;
 
                   return (
-                    <button
+                    <a
                       key={item.name}
+                      href={item.href}
                       onClick={(e) => {
+                        e.preventDefault();
                         e.stopPropagation();
                         scrollToSection(item.href, item.isRoute);
                       }}
@@ -335,7 +348,7 @@ export const Navigation = () => {
                       }}
                     >
                       {item.name}
-                    </button>
+                    </a>
                   );
                 })}
 
@@ -345,9 +358,11 @@ export const Navigation = () => {
                   const isActive = activeSection === sectionId;
 
                   return (
-                    <button
+                    <a
                       key={contactItem.name}
+                      href={contactItem.href}
                       onClick={(e) => {
+                        e.preventDefault();
                         e.stopPropagation();
                         scrollToSection(contactItem.href, contactItem.isRoute);
                       }}
@@ -361,7 +376,7 @@ export const Navigation = () => {
                       }}
                     >
                       {contactItem.name}
-                    </button>
+                    </a>
                   );
                 })()}
               </div>

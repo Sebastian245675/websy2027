@@ -205,26 +205,37 @@ window.addEventListener('load', () => {
   }, 3000);
 });
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const container = document.getElementById("root");
 
-// Use scheduler to break up long tasks
-if ('scheduler' in window && 'yield' in window.scheduler) {
-  // Use native scheduler if available (Chrome 94+)
-  (async () => {
-    await window.scheduler.yield();
-    root.render(
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>,
-    );
-  })();
+if (container.hasChildNodes()) {
+  ReactDOM.hydrateRoot(
+    container,
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
 } else {
-  // Fallback: use setTimeout to break up rendering task
-  setTimeout(() => {
-    root.render(
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>,
-    );
-  }, 0);
+  const root = ReactDOM.createRoot(container);
+  
+  // Use scheduler to break up long tasks
+  if ('scheduler' in window && 'yield' in window.scheduler) {
+    // Use native scheduler if available (Chrome 94+)
+    (async () => {
+      await window.scheduler.yield();
+      root.render(
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      );
+    })();
+  } else {
+    // Fallback: use setTimeout to break up rendering task
+    setTimeout(() => {
+      root.render(
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      );
+    }, 0);
+  }
 }

@@ -209,6 +209,7 @@ export const BlogPostPage = () => {
   if (!post) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white pt-[100px]">
+        <SEOHead title="Artículo no encontrado | Websy" noindex breadcrumbs={false} />
         <div className="text-center">
           <h1 className="text-4xl font-black text-[#182A2C] mb-4">Artículo no encontrado</h1>
           <Link to="/blog" className="text-[#d9fb06] bg-[#182A2C] px-6 py-3 font-bold inline-block">
@@ -278,9 +279,9 @@ export const BlogPostPage = () => {
       <SEOHead
         title={post.seoTitle}
         description={post.seoDescription}
-        keywords={post.seoKeywords}
         url={`https://www.websysrl.com/blog/${post.slug}`}
         type="article"
+        breadcrumbs={false}
       />
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
@@ -326,7 +327,7 @@ export const BlogPostPage = () => {
               </div>
               <div>
                 <p className="text-white text-sm font-bold">{post.author}</p>
-                <p className="text-gray-400 text-xs">Websy - Desarrollo & Tecnología</p>
+                <p className="text-gray-400 text-xs">Websy</p>
                 <a 
                   href={`https://wa.me/573186218792?text=Hola%20${encodeURIComponent(post.author)},%20le%C3%AD%20el%20art%C3%ADculo%20"${encodeURIComponent(post.title)}"%20en%20el%20blog%20de%20Websy%20y%20quiero%20m%C3%A1s%20informaci%C3%B3n.`}
                   target="_blank" 

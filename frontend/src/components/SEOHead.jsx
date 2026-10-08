@@ -1,146 +1,147 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useLanguage } from '../LanguageContext';
+
+const SITE_URL = 'https://www.websysrl.com';
+const SITE_NAME = 'Websy';
+const DEFAULT_IMAGE = '/websy-logo.png';
+
+// Readable breadcrumb names for known first-level paths
+const SECTION_NAMES = {
+  servicios: 'Servicios',
+  planes: 'Inversión',
+  blog: 'Blog',
+  contacto: 'Contacto',
+  'casos-de-exito': 'Casos de Éxito',
+};
+
+// Canonical URL: always www, no query string, no hash, no trailing slash (except root)
+const buildCanonical = (url, pathname) => {
+  if (url) {
+    const clean = url.replace('https://websysrl.com', SITE_URL).split(/[?#]/)[0];
+    return clean.length > SITE_URL.length + 1 ? clean.replace(/\/$/, '') : `${SITE_URL}/`;
+  }
+  const path = pathname.replace(/\/+$/, '');
+  return path ? `${SITE_URL}${path}` : `${SITE_URL}/`;
+};
+
+const buildBreadcrumbs = (pathname, title) => {
+  const segments = pathname.split('/').filter(Boolean);
+  if (segments.length === 0) return null;
+
+  const items = [{ name: 'Inicio', item: `${SITE_URL}/` }];
+  segments.forEach((segment, i) => {
+    const isLast = i === segments.length - 1;
+    const name = isLast && i > 0
+      ? title.split('|')[0].trim()
+      : SECTION_NAMES[segment] || segment.replace(/-/g, ' ');
+    items.push({ name, item: `${SITE_URL}/${segments.slice(0, i + 1).join('/')}` });
+  });
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((entry, i) => ({ '@type': 'ListItem', position: i + 1, ...entry })),
+  };
+};
+
+const upsertMeta = (name, content, property = false) => {
+  const attribute = property ? 'property' : 'name';
+  let element = document.querySelector(`meta[${attribute}="${name}"]`);
+  if (!element) {
+    element = document.createElement('meta');
+    element.setAttribute(attribute, name);
+    document.head.appendChild(element);
+  }
+  element.setAttribute('content', content);
+};
+
+const upsertLink = (selector, attrs) => {
+  let element = document.head.querySelector(selector);
+  if (!element) {
+    element = document.createElement('link');
+    document.head.appendChild(element);
+  }
+  Object.entries(attrs).forEach(([key, value]) => element.setAttribute(key, value));
+};
+
+// Page-level JSON-LD lives in its own script tag so it never overwrites the site-wide schemas in index.html
+const PAGE_JSONLD_ID = 'seo-page-jsonld';
 
 export const SEOHead = ({
   title,
   description,
-  keywords,
-  image = '/websy-logo.png',
+  image = DEFAULT_IMAGE,
   url,
-  type = 'website'
+  type = 'website',
+  noindex = false,
+  breadcrumbs = true,
+  jsonLd,
 }) => {
   const { currentLanguage } = useLanguage();
+  const { pathname } = useLocation();
 
-  const siteName = 'Websy';
   const defaultDescription = currentLanguage === 'es'
     ? 'Agencia de desarrollo web en Salta. Creamos landing pages, e-commerce, CRM/ERP y SEO. Diseño responsivo y soluciones a medida para tu negocio.'
     : 'Web development agency in Salta. We create landing pages, e-commerce, CRM/ERP and SEO. Responsive design and custom solutions for your business.';
 
-  const finalTitle = title || siteName;
+  const finalTitle = title || SITE_NAME;
   const finalDescription = description || defaultDescription;
-  const finalUrl = url || window.location.href;
-  const finalImage = image.startsWith('http') ? image : `${window.location.origin}${image}`;
+  const canonicalUrl = buildCanonical(url, pathname);
+  const finalImage = image.startsWith('http') ? image : `${SITE_URL}${image}`;
+  const jsonLdString = jsonLd ? JSON.stringify(jsonLd) : '';
 
   useEffect(() => {
-    // Update document title
     document.title = finalTitle;
 
-    // Update meta tags
-    const updateMetaTag = (name, content, property = false) => {
-      const attribute = property ? 'property' : 'name';
-      let element = document.querySelector(`meta[${attribute}="${name}"]`);
+    upsertMeta('description', finalDescription);
+    upsertMeta('robots', noindex
+      ? 'noindex, nofollow'
+      : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
 
-      if (element) {
-        element.setAttribute('content', content);
-      } else {
-        element = document.createElement('meta');
-        element.setAttribute(attribute, name);
-        element.setAttribute('content', content);
-        document.head.appendChild(element);
-      }
-    };
+    // Open Graph
+    upsertMeta('og:title', finalTitle, true);
+    upsertMeta('og:description', finalDescription, true);
+    upsertMeta('og:image', finalImage, true);
+    upsertMeta('og:url', canonicalUrl, true);
+    upsertMeta('og:type', type, true);
+    upsertMeta('og:site_name', SITE_NAME, true);
+    upsertMeta('og:locale', currentLanguage === 'es' ? 'es_AR' : 'en_US', true);
 
-    // Basic meta tags
-    updateMetaTag('description', finalDescription);
-    updateMetaTag('keywords', keywords || 'desarrollo web, aplicaciones móviles, sistemas personalizados, agencia digital');
-    updateMetaTag('author', 'Websy');
-    updateMetaTag('robots', 'index, follow');
-    updateMetaTag('language', currentLanguage === 'es' ? 'es' : 'en');
-    
-    // Add http-equiv content-language for better language specification
-    let httpEquivLang = document.querySelector('meta[http-equiv="content-language"]');
-    if (!httpEquivLang) {
-      httpEquivLang = document.createElement('meta');
-      httpEquivLang.setAttribute('http-equiv', 'content-language');
-      document.head.appendChild(httpEquivLang);
-    }
-    httpEquivLang.setAttribute('content', currentLanguage === 'es' ? 'es' : 'en');
+    // Twitter
+    upsertMeta('twitter:card', image === DEFAULT_IMAGE ? 'summary' : 'summary_large_image');
+    upsertMeta('twitter:title', finalTitle);
+    upsertMeta('twitter:description', finalDescription);
+    upsertMeta('twitter:image', finalImage);
+    upsertMeta('twitter:url', canonicalUrl);
+    upsertMeta('twitter:site', '@websyar');
 
-    // Open Graph tags
-    updateMetaTag('og:title', finalTitle, true);
-    updateMetaTag('og:description', finalDescription, true);
-    updateMetaTag('og:image', finalImage, true);
-    updateMetaTag('og:url', finalUrl, true);
-    updateMetaTag('og:type', type, true);
-    updateMetaTag('og:site_name', siteName, true);
-    updateMetaTag('og:locale', currentLanguage === 'es' ? 'es_ES' : 'en_US', true);
-    
-    // Update HTML lang attribute
     document.documentElement.setAttribute('lang', currentLanguage === 'es' ? 'es' : 'en');
 
-    // Twitter Card tags
-    updateMetaTag('twitter:card', 'summary_large_image');
-    updateMetaTag('twitter:title', finalTitle);
-    updateMetaTag('twitter:description', finalDescription);
-    updateMetaTag('twitter:image', finalImage);
-    updateMetaTag('twitter:site', '@websy_agency');
+    // Canonical + hreflang must point to THIS page, otherwise Google treats subpages as duplicates of the home
+    upsertLink('link[rel="canonical"]', { rel: 'canonical', href: canonicalUrl });
+    ['es', 'es-AR', 'es-419', 'x-default'].forEach((lang) => {
+      upsertLink(`link[rel="alternate"][hreflang="${lang}"]`, { rel: 'alternate', hreflang: lang, href: canonicalUrl });
+    });
 
-    // Additional meta tags
-    updateMetaTag('viewport', 'width=device-width, initial-scale=1.0');
-    updateMetaTag('theme-color', '#d9fb06');
-
-    // Canonical URL - Ensure it uses www
-    let canonicalLink = document.querySelector('link[rel="canonical"]');
-    const canonicalUrl = finalUrl.replace('https://websysrl.com', 'https://www.websysrl.com');
-    if (canonicalLink) {
-      canonicalLink.setAttribute('href', canonicalUrl);
-    } else {
-      canonicalLink = document.createElement('link');
-      canonicalLink.setAttribute('rel', 'canonical');
-      canonicalLink.setAttribute('href', canonicalUrl);
-      document.head.appendChild(canonicalLink);
+    // Page-specific structured data: breadcrumbs + any schema passed by the page
+    const graph = [breadcrumbs && buildBreadcrumbs(pathname, finalTitle), ...(jsonLdString ? [].concat(JSON.parse(jsonLdString)) : [])]
+      .filter(Boolean);
+    let script = document.getElementById(PAGE_JSONLD_ID);
+    if (graph.length) {
+      if (!script) {
+        script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.id = PAGE_JSONLD_ID;
+        document.head.appendChild(script);
+      }
+      script.textContent = JSON.stringify(graph.length === 1 ? graph[0] : graph);
+    } else if (script) {
+      script.remove();
     }
+  }, [finalTitle, finalDescription, finalImage, canonicalUrl, type, noindex, jsonLdString, breadcrumbs, pathname, currentLanguage]);
 
-    // Structured Data (JSON-LD)
-    const structuredData = {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Websy",
-      "description": finalDescription,
-      "url": window.location.origin,
-      "logo": `${window.location.origin}/websy-logo.png`,
-      "sameAs": [
-        "https://www.facebook.com/websyar",
-        "https://www.youtube.com/@websyar",
-        "https://www.instagram.com/websyar",
-        "https://x.com/websyar",
-        "https://www.linkedin.com/company/websy-dev"
-      ],
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+54-9-388-484-6695",
-        "contactType": "customer service",
-        "availableLanguage": ["Spanish", "English", "Chinese", "Japanese"]
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "AR",
-        "addressRegion": "Salta"
-      },
-      "foundingDate": "2023",
-      "knowsAbout": [
-        "Web Development",
-        "Mobile Applications",
-        "Custom Software",
-        "E-commerce",
-        "SEO",
-        "Digital Marketing"
-      ]
-    };
-
-    let jsonLdScript = document.querySelector('script[type="application/ld+json"]');
-    if (jsonLdScript) {
-      jsonLdScript.textContent = JSON.stringify(structuredData);
-    } else {
-      jsonLdScript = document.createElement('script');
-      jsonLdScript.type = 'application/ld+json';
-      jsonLdScript.textContent = JSON.stringify(structuredData);
-      document.head.appendChild(jsonLdScript);
-    }
-
-  }, [finalTitle, finalDescription, finalImage, finalUrl, type, keywords, currentLanguage]);
-
-  return null; // This component doesn't render anything
+  return null;
 };
 
 // Hook for dynamic SEO updates

@@ -10,15 +10,19 @@ import {
   MessageSquare
 } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
+import { HIGHLIGHTED_PLAN_ID } from '../siteConfig';
+import { openWhatsApp } from '../lib/tracking';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 
+// example: proyecto real ya entregado en ese nivel (punto 6). Sugeridos a partir del portfolio:
+// la lista definitiva la pasa Agustín. null = no se muestra.
 const planes = [
   {
     id: 'estandar',
     name: 'Plan Estándar',
-    price: 'USD 300 - 450',
+    price: 'USD 800 - 1.500',
     icon: Sparkles,
     ideal: 'Emprendedores, profesionales independientes, marcas personales',
     description: 'Tener presencia digital profesional sin complejidad operativa',
@@ -30,13 +34,13 @@ const planes = [
       'Optimización básica para Google',
       'Capacitación corta de uso'
     ],
-    highlighted: false,
+    example: { name: 'Jujuy MultiServicios', detail: 'Sitio institucional', url: 'https://jujuymultiservicios.com.ar/' },
     color: 'from-[#182A2C] to-[#2a4548]'
   },
   {
     id: 'comercio',
     name: 'Plan Comercio',
-    price: 'USD 500 - 700',
+    price: 'USD 1.800 - 3.500',
     icon: Store,
     ideal: 'Comercios físicos, tiendas online, emprendimientos que ya venden',
     description: 'Vender online y ordenar la operatoria básica del negocio',
@@ -49,13 +53,13 @@ const planes = [
       'Reportes simples de ventas',
       'Estructura pensada para escalar'
     ],
-    highlighted: false,
+    example: { name: 'VISFUM Perfumería', detail: 'Tienda online', url: 'https://visfum.com/' },
     color: 'from-[#182A2C] to-[#2a4548]'
   },
   {
     id: 'pymes',
     name: 'Plan PYMES',
-    price: 'USD 700 - 1.200',
+    price: 'USD 4.000 - 8.000',
     icon: TrendingUp,
     ideal: 'Pymes, empresas chicas, negocios en crecimiento',
     description: 'Ordenar el negocio, los números y la información en un solo sistema',
@@ -68,14 +72,13 @@ const planes = [
       'Indicadores básicos de rentabilidad',
       'Sistema pensado con lógica contable'
     ],
-    highlighted: true,
-    color: 'from-[#d9fb06] to-[#aeca04]',
-    badge: 'Recomendado'
+    example: { name: 'Bicicletería en México', detail: 'Sistema para 4 sucursales + tienda online', url: null },
+    color: 'from-[#d9fb06] to-[#aeca04]'
   },
   {
     id: 'corpo',
     name: 'Plan Corpo',
-    price: 'Desde USD 1.500',
+    price: 'Desde USD 10.000',
     icon: Building2,
     ideal: 'Empresas medianas, negocios consolidados',
     description: 'Centralizar operaciones, información y control del negocio digital',
@@ -88,10 +91,12 @@ const planes = [
       'Soporte prioritario',
       'Análisis profundo del modelo de negocio'
     ],
-    highlighted: false,
+    example: null,
     color: 'from-[#1a1a1a] to-black'
   }
-];
+].map((plan) => (
+  plan.id === HIGHLIGHTED_PLAN_ID ? { ...plan, highlighted: true, badge: 'El más elegido' } : { ...plan, highlighted: false }
+));
 
 export const SolucionesWebsySection = () => {
   const { t } = useLanguage();
@@ -209,6 +214,27 @@ export const SolucionesWebsySection = () => {
                   ))}
                 </ul>
 
+                {/* Proyecto real entregado en este nivel */}
+                {plan.example && (
+                  <div className="mb-6 rounded-lg bg-[#f8fafc] border border-slate-200 px-4 py-3">
+                    <p className="text-[10px] font-black uppercase tracking-[.16em] text-slate-400 mb-1">Ejemplo entregado</p>
+                    {plan.example.url ? (
+                      <a
+                        href={plan.example.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="text-sm font-bold text-[#182A2C] underline decoration-[#d9fb06] decoration-2 underline-offset-4"
+                      >
+                        {plan.example.name}
+                      </a>
+                    ) : (
+                      <span className="text-sm font-bold text-[#182A2C]">{plan.example.name}</span>
+                    )}
+                    <span className="block text-xs text-slate-500 mt-0.5">{plan.example.detail}</span>
+                  </div>
+                )}
+
                 {/* Botón */}
                 <button
                   className="w-full py-3.5 rounded-lg font-semibold text-sm transition-all duration-300 uppercase tracking-wider"
@@ -297,7 +323,7 @@ export const SolucionesWebsySection = () => {
 
               <div className="border-t-2 pt-6" style={{ borderColor: 'var(--border-medium)' }}>
                 <p className="text-center text-lg mb-4 font-medium" style={{ color: 'var(--text-primary)' }}>
-                  ¿Te interesa este plan? Contáctanos para más información
+                  ¿Te interesa este plan? Escribinos y te pasamos una cotización a medida.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <Button
@@ -311,8 +337,7 @@ export const SolucionesWebsySection = () => {
                   <Button
                     variant="outline"
                     onClick={() => {
-                      const text = encodeURIComponent(`¡Hola Websy! Me interesa solicitar información sobre el ${selectedPlan ? selectedPlan.name : 'desarrollo de mi sitio web'} (${selectedPlan ? selectedPlan.price : ''}).`);
-                      window.open(`https://wa.me/5493884846695?text=${text}`, '_blank');
+                      openWhatsApp(`¡Hola Websy! Me interesa pedir información sobre el ${selectedPlan ? selectedPlan.name : 'desarrollo de mi sitio web'} (${selectedPlan ? selectedPlan.price : ''}).`, `inversion_${selectedPlan ? selectedPlan.id : 'modal'}`);
                     }}
                     className="flex items-center text-base px-8 py-4 border-2 font-bold"
                     style={{

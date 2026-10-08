@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, memo, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
 import { LanguageProvider } from "./LanguageContext";
 import { ScrollToTopOnRouteChange } from "./components/ScrollToTopOnRouteChange";
@@ -7,20 +7,13 @@ import { SEOHead } from "./components/SEOHead";
 import { SkipLinks } from "./components/Accessibility";
 import { LoadingProvider, ErrorBoundary, ToastProvider } from "./components/UXEnhancements";
 import useAdminPanel from "./hooks/useAdminPanel";
+import { installWhatsAppLinkTracking } from "./lib/tracking";
 
 // Critical path - HomePage loads eagerly for fast FCP/LCP
 import { HomePage } from "./pages/HomePage";
+import { Navigation } from "./components/Navigation"; // Eagerly load Navigation to fix CLS/LCP
 
-// Lazy load Navigation and Footer (non-blocking)
-const Navigation = lazy(() => {
-  const start = performance.now();
-  console.log('📥 [LAZY] Starting to load Navigation...');
-  return import("./components/Navigation").then(module => {
-    const end = performance.now();
-    console.log('✅ [LAZY] Navigation loaded in', Math.round(end - start), 'ms');
-    return { default: module.Navigation };
-  });
-});
+// Lazy load Footer (non-blocking)
 
 const Footer = lazy(() => {
   const start = performance.now();
@@ -87,6 +80,10 @@ const SuccessStoriesPage = lazy(() => {
   });
 });
 
+const CaseStudyPage = lazy(() =>
+  import("./pages/CaseStudyPage").then(module => ({ default: module.CaseStudyPage }))
+);
+
 const ServiceDetailPage = lazy(() => {
   return import("./pages/ServiceDetailPage").then(module => {
     return { default: module.ServiceDetailPage };
@@ -105,6 +102,24 @@ const BlogPostPage = lazy(() => {
   });
 });
 
+const PrivacyPolicyPage = lazy(() =>
+  import("./pages/PrivacyPolicyPage").then(module => ({ default: module.PrivacyPolicyPage }))
+);
+
+const NotFoundPage = lazy(() =>
+  import("./pages/NotFoundPage").then(module => ({ default: module.NotFoundPage }))
+);
+
+const NicheLandingPage = lazy(() =>
+  import("./pages/NicheLandingPage").then(module => ({ default: module.NicheLandingPage }))
+);
+
+// Paid-ads landing pages (/lp/...) render without the site menu and footer
+const SiteChrome = ({ children }) => {
+  const { pathname } = useLocation();
+  return pathname.startsWith('/lp/') ? null : children;
+};
+
 // Lazy load non-critical components
 const WhatsAppButton = lazy(() => {
   const start = performance.now();
@@ -114,13 +129,6 @@ const WhatsAppButton = lazy(() => {
   });
 });
 
-const LanguageFloatingButton = lazy(() => {
-  const start = performance.now();
-  return import("./components/LanguageFloatingButton").then(module => {
-    console.log('✅ [LAZY] LanguageFloatingButton loaded in', Math.round(performance.now() - start), 'ms');
-    return { default: module.LanguageFloatingButton };
-  });
-});
 
 const AdminLogin = lazy(() => {
   const start = performance.now();
@@ -138,14 +146,7 @@ const AdminPanel = lazy(() => {
   });
 });
 
-// Minimal navigation placeholder to prevent CLS - EXACT same height as real nav
-const NavPlaceholder = memo(() => (
-  <nav className="fixed top-0 w-full bg-white z-50 border-b" style={{ height: window.innerWidth < 1024 ? '68px' : '100px', borderColor: '#e0e0e0', minHeight: window.innerWidth < 1024 ? '68px' : '100px' }}>
-    <div className="container flex justify-between items-center" style={{ height: '68px', padding: '0 1rem' }}>
-      <div className="h-10 w-32 bg-gray-100 rounded" style={{ opacity: 0 }} />
-    </div>
-  </nav>
-));
+
 
 function App() {
   const appStart = performance.now();
@@ -159,6 +160,8 @@ function App() {
     closeLogin,
     closePanel
   } = useAdminPanel();
+
+  useEffect(() => installWhatsAppLinkTracking(), []);
 
   useEffect(() => {
     const appEnd = performance.now();
@@ -176,18 +179,13 @@ function App() {
             <Router>
               <ScrollToTopOnRouteChange />
               <div className="App" id="main-content">
-                <SEOHead
-                  title="Websy"
-                  description="Agencia de desarrollo web y automatizaciones en Salta. Creamos landing pages, e-commerce, CRM/ERP y SEO. Diseño responsivo y soluciones a medida."
-                  keywords="desarrollo web, diseño web, e-commerce, sistemas de gestión, SEO, automatizaciones, landing pages, páginas web profesionales, desarrollo react, Salta Argentina"
-                  type="website"
-                />
+                {/* Each page sets its own <SEOHead>; a global one here would overwrite the home title with just "Websy" */}
 
                 <SkipLinks />
 
-                <Suspense fallback={<NavPlaceholder />}>
+                <SiteChrome>
                   <Navigation />
-                </Suspense>
+                </SiteChrome>
 
                 <main>
                   <Routes>
@@ -209,12 +207,18 @@ function App() {
                     } />
                     <Route path="/panel-cotizaciones" element={
                       <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
+                        <SEOHead title="Panel de cotizaciones | Websy" noindex />
                         <CotizacionesView />
                       </Suspense>
                     } />
                     <Route path="/casos-de-exito" element={
                       <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
                         <SuccessStoriesPage />
+                      </Suspense>
+                    } />
+                    <Route path="/casos-de-exito/:slug" element={
+                      <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
+                        <CaseStudyPage />
                       </Suspense>
                     } />
                     <Route path="/servicios/:slug" element={
@@ -227,24 +231,39 @@ function App() {
                         <BlogPage />
                       </Suspense>
                     } />
+                    <Route path="/politica-de-privacidad" element={
+                      <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
+                        <PrivacyPolicyPage />
+                      </Suspense>
+                    } />
+                    <Route path="/lp/:slug" element={
+                      <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
+                        <NicheLandingPage />
+                      </Suspense>
+                    } />
                     <Route path="/blog/:slug" element={
                       <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
                         <BlogPostPage />
                       </Suspense>
                     } />
+                    <Route path="*" element={
+                      <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
+                        <NotFoundPage />
+                      </Suspense>
+                    } />
                   </Routes>
                 </main>
 
-                <Suspense fallback={null}>
-                  <Footer />
-                </Suspense>
+                <SiteChrome>
+                  <Suspense fallback={null}>
+                    <Footer />
+                  </Suspense>
+                </SiteChrome>
 
                 <Suspense fallback={null}>
                   <WhatsAppButton />
                 </Suspense>
-                <Suspense fallback={null}>
-                  <LanguageFloatingButton />
-                </Suspense>
+
                 <Suspense fallback={null}>
                   <ScrollToTop />
                 </Suspense>

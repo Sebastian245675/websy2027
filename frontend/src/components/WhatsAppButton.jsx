@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { companyInfo } from '../mockData';
+import { openWhatsApp } from '../lib/tracking';
 
 // Ícono oficial de WhatsApp
 const WhatsAppIcon = ({ size = 24, className = "" }) => (
@@ -18,10 +18,7 @@ export const WhatsAppButton = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleWhatsAppClick = () => {
-    const phone = companyInfo.whatsapp.replace(/[^0-9]/g, '');
-    const message = encodeURIComponent('¡Hola! Me interesa conocer más sobre sus servicios de desarrollo de software. ¿Podrían darme más información?');
-    const whatsappUrl = `https://wa.me/${phone}?text=${message}`;
-    window.open(whatsappUrl, '_blank');
+    openWhatsApp('¡Hola! Me interesa conocer más sobre sus servicios. ¿Me pasan más información?', 'boton_flotante');
   };
 
   return (
@@ -45,7 +42,7 @@ export const WhatsAppButton = () => {
         <div className="flex items-center justify-center transform group-hover:rotate-12 transition-transform shrink-0">
           <WhatsAppIcon size={28} />
         </div>
-        <span className="tracking-wide hidden md:inline whitespace-nowrap">Solicitar Información</span>
+        <span className="tracking-wide hidden md:inline whitespace-nowrap">Escribinos por WhatsApp</span>
         
         {/* Particle effect on hover */}
         {isHovered && (

@@ -1,93 +1,62 @@
 // Mock data for the software agency landing page
-
-export const services = [
-  {
-    id: 1,
-    title: "Diseño Web",
-    description: "Creamos sitios web profesionales desde landing pages hasta sitios corporativos avanzados con bases de datos y automatizaciones. Cada proyecto incluye diseño responsivo y optimización SEO.",
-    icon: "Globe",
-    features: [
-      "Landing Page sencilla (2 páginas) con enfoque en conversión",
-      "Sitio web medio (5 páginas) con estructura completa",
-      "Sitio avanzado con base de datos + automatizaciones",
-      "Panel administrativo con bots y sistemas de retención",
-      "Diseño responsivo optimizado para móviles",
-      "Integración con Google Analytics y herramientas SEO"
-    ]
-  },
-  {
-    id: 2,
-    title: "E-commerce Avanzado",
-    description: "Plataformas de comercio electrónico completas con panel de administración central de hasta 20 módulos. Incluye gestión de productos, inventario, facturación y análisis estadístico detallado.",
-    icon: "ShoppingCart",
-    features: [
-      "Panel básico hasta 5 funciones administrativas",
-      "Panel medio con 10 funciones de gestión",
-      "Panel completo con todas las funciones + IA",
-      "Gestión integral de productos, ventas y facturación",
-      "Control de inventario y stock en tiempo real",
-      "Análisis estadístico con métricas de ventas y márgenes"
-    ]
-  },
-  {
-    id: 3,
-    title: "Sistemas de Gestión",
-    description: "Desarrollamos CRM a medida y sistemas ERP para optimizar la gestión interna de tu empresa. Soluciones personalizadas que integran todas las áreas de negocio.",
-    icon: "Settings",
-    features: [
-      "CRM personalizado para gestión de clientes",
-      "Sistema ERP con módulos comercial y contabilidad",
-      "Integración de recursos humanos y logística",
-      "Módulos de producción y compras",
-      "Automatización de procesos internos",
-      "Reportes y análisis en tiempo real"
-    ]
-  },
-  {
-    id: 4,
-    title: "SEO y Posicionamiento",
-    description: "Estrategias completas de SEO para posicionar tu negocio en los primeros resultados de Google. Desde optimización básica hasta auditorías avanzadas con plan de crecimiento.",
-    icon: "Lightbulb",
-    features: [
-      "SEO básico: títulos, descripciones y estructura",
-      "Auditoría completa del sitio y competencia",
-      "Investigación avanzada de palabras clave",
-      "Estrategia de contenidos y plan de acción",
-      "Seguimiento y métricas de posicionamiento",
-      "Optimización de velocidad y experiencia de usuario"
-    ]
-  },
-  {
-    id: 5,
-    title: "Automatizaciones",
-    description: "Automatizamos WhatsApp y correos electrónicos para optimizar tu atención al cliente. Desde chatbots básicos hasta sistemas avanzados con IA y call center integrado.",
-    icon: "Wrench",
-    features: [
-      "WhatsApp básico con respuestas automatizadas + IA",
-      "Panel medio con flujos y gestión de mensajes",
-      "Plan premium con hasta 10 números de empleados",
-      "Sistema a medida con call center integrado + IA",
-      "Automatización de correos con segmentación",
-      "Soporte mensual y mantenimiento del sistema"
-    ]
-  },
-  {
-    id: 6,
-    title: "E-Learning",
-    description: "Plataformas educativas completas para ofrecer cursos y formación online. Incluye herramientas para estudiantes, docentes y administradores con clases sincrónicas y asincrónicas.",
-    icon: "Lightbulb",
-    features: [
-      "Plataforma de cursos online completa",
-      "Sistema de clases en vivo y grabadas",
-      "Panel para estudiantes, docentes y administradores",
-      "Gestión de evaluaciones y certificaciones",
-      "Seguimiento de progreso del estudiante",
-      "Integración con sistemas de pago"
-    ]
-  }
-];
+import { CONTACT } from './siteConfig';
 
 export const portfolio = [
+  {
+    id: 'bicicletas-mx',
+    title: "Bicicletería en México",
+    description: "Sistema de gestión para una cadena de bicicletas con 4 sucursales en México, más una tienda online conectada al mismo sistema.",
+    image: null,
+    url: "",
+    category: "Sistema de gestión + E-commerce · México",
+    technologies: [],
+    client: "Bicicletería en México",
+    year: ""
+  },
+  {
+    id: 'visfum-perfumeria',
+    title: "VISFUM Perfumería",
+    description: "Tienda online de perfumería, regalería y productos para el hogar. Reúne catálogo por categorías, búsqueda de productos, carrito y flujo de compra, además de registro e inicio de sesión para clientes. Desarrollada con React, Vite y Supabase, con diseño adaptable y metadatos para buscadores.",
+    image: "/visfum/portada.png",
+    url: "https://visfum.com/",
+    category: "E-commerce · Perfumería y regalería",
+    technologies: ["React", "Vite", "Supabase", "E-commerce", "SEO on-page"],
+    client: "VISFUM",
+    year: "2026"
+  },
+  {
+    id: 'jujuy-multiservicios',
+    title: "Jujuy MultiServicios",
+    description: "Sitio corporativo para una empresa de ingeniería y seguridad contra incendios que opera en Jujuy y el NOA. Presenta servicios de auditoría, ingeniería, montaje, mantenimiento NFPA y capacitación; organiza soluciones por sector y facilita consultas por WhatsApp y formulario. Desarrollado con React y CSS, con contenido servido por API, envío de solicitudes mediante API REST, metadatos SEO y datos estructurados locales.",
+    image: "/jujuy-multiservicios/portada.jpg",
+    url: "https://jujuymultiservicios.com.ar/",
+    category: "Sitio web corporativo · Seguridad industrial",
+    technologies: ["React", "JavaScript", "CSS", "API REST", "SEO técnico"],
+    client: "Jujuy MultiServicios",
+    year: "2026"
+  },
+  {
+    id: 'casamax-inmobiliaria',
+    title: "CASAMAX Inmobiliaria",
+    description: "Plataforma inmobiliaria para descubrir propiedades con filtros de operación y tipo, fichas de detalle y acceso a favoritos, alertas e historial. Incluye recorridos para tasar o publicar una propiedad y contacto directo con asesores. Interfaz desarrollada con React y Vite, adaptable a móviles y con contenidos en español e inglés.",
+    image: "/casamax/portada.webp",
+    url: "https://inmobiliariacasamax.com/",
+    category: "Plataforma inmobiliaria",
+    technologies: ["React", "Vite", "JavaScript", "Búsqueda y filtros", "SEO on-page"],
+    client: "CASAMAX Inmobiliaria",
+    year: "2026"
+  },
+  {
+    id: 'demo-nordica-arquitectos',
+    title: "Nórdica arquitectos — Demo Websy",
+    description: "Demo de sitio web para estudio de arquitectura con identidad visual editorial, presentación de servicios integrales, galería de proyectos y contacto directo por WhatsApp. Implementación con HTML, CSS y JavaScript nativo, con contenido organizado en una configuración JavaScript editable.",
+    image: "/demos/nordica/portada.jpg",
+    url: "https://websyarg.com/",
+    category: "Demo · Sitio web para arquitectura",
+    technologies: ["HTML", "CSS", "JavaScript", "SEO on-page"],
+    client: "Demo Websy",
+    year: "2026"
+  },
   {
     id: 1,
     title: "M Logística y Distribución SRL",
@@ -126,7 +95,7 @@ export const portfolio = [
     title: "NUVO Perfumería",
     description: "Landing page elegante para perfumería de alta calidad con toque personal. Diseño sofisticado enfocado en la experiencia del cliente y personalización de fragancias.",
     image: "/Captura-de-pantalla-2025-09-13-195842.webp",
-    url: "https://nuvo.website/",
+    url: "", // nuvo.website no responde (revisado 2026-10-07)
     category: "Landing Page",
     technologies: ["React", "CSS3", "JavaScript", "UX Design"],
     client: "NUVO Perfumería",
@@ -137,7 +106,7 @@ export const portfolio = [
     title: "Che Carreta Restaurante",
     description: "Landing demostrativa realizada en 2 días para destacar los mejores platos con sabor argentino servidos en Perú. Diseñada para captar reservas y mostrar la esencia del restaurante.",
     image: "/Captura%20de%20pantalla%202025-10-11%20150742.webp",
-    url: "https://checarretaperu.com/",
+    url: "", // checarretaperu.com no responde (revisado 2026-10-07)
     category: "Landing Page",
     technologies: ["WordPress", "Elementor", "SEO Local", "UX"],
     client: "Che Carreta Restaurante",
@@ -175,7 +144,6 @@ export const portfolio = [
     technologies: ["HTML", "CSS", "JavaScript"],
     client: "ABO Colombia",
     year: "2025",
-    copyright: "© Sebastian Aguirre"
   },
   {
     id: 9,
@@ -187,7 +155,6 @@ export const portfolio = [
     technologies: ["HTML", "CSS", "JavaScript", "Firebase"],
     client: "STL Gold Landscaping",
     year: "2025",
-    copyright: "© Sebastian Aguirre"
   },
   {
     id: 10,
@@ -199,7 +166,6 @@ export const portfolio = [
     technologies: ["React", "Supabase"],
     client: "Koziura",
     year: "2025",
-    copyright: "© Sebastian Aguirre"
   },
   {
     id: 11,
@@ -255,103 +221,144 @@ export const portfolio = [
     technologies: ["React", "Tailwind CSS", "Vite", "SEO"],
     client: "Konnect",
     year: "2026"
+  },
+  {
+    id: 'hotel-palmalinda-demo',
+    title: "Plantilla Web Hotel Boutique",
+    description: "Demo de sitio web para hoteles campestres y hospedajes turísticos. Presenta habitaciones, tarifas y servicios, con un flujo de reservas directo por WhatsApp y estructura preparada para SEO local.",
+    image: "/mv-portfolio/hotel-palmalinda.png",
+    url: "", // la demo en Vercel devuelve 404 (revisado 2026-10-07)
+    category: "Demo · Hotelería y turismo",
+    technologies: ["React", "Next.js", "Tailwind CSS", "SEO Local", "WhatsApp Booking"],
+    client: "Demo Websy",
+    year: "2026"
+  },
+  {
+    id: 'semillamind',
+    title: "SemillaMind Psicoterapia",
+    description: "Sitio web informativo para un consultorio de psicología en Bogotá. Presenta consultas presenciales y virtuales, al equipo terapéutico y accesos directos para agendar, con diseño adaptable y optimización de imágenes.",
+    image: "/mv-portfolio/semillamind.png",
+    url: "https://semillamind.com.co/",
+    category: "Salud mental y bienestar · Bogotá",
+    technologies: ["React", "Vite", "Tailwind CSS", "SEO On-Page", "Accesibilidad"],
+    client: "SemillaMind",
+    year: "2026"
+  },
+  {
+    id: 'entre-relatos-psicoterapia',
+    title: "Entre Relatos Psicoterapia",
+    description: "Sitio web para un consultorio de psicoterapia en Bogotá. Incluye un selector de sedes —La Castellana, Galerías o modalidad virtual— y contacto directo por WhatsApp para agendar la primera cita.",
+    image: "/mv-portfolio/entre-relatos.png",
+    url: "https://entrerelatospsicologia.com/",
+    category: "Salud mental y psicoterapia · Bogotá",
+    technologies: ["React", "Vite", "Tailwind CSS", "SEO On-Page", "Accesibilidad"],
+    client: "Entre Relatos",
+    year: "2026"
+  },
+  {
+    id: 'farmadesk',
+    title: "FarmaDesk Pharmacy System",
+    description: "Sistema web para farmacias con punto de venta, control de inventario de medicamentos, alertas por stock bajo y reportes diarios. Incluye backend en Node.js y Express y base de datos PostgreSQL.",
+    image: "/mv-portfolio/farmadesk.png",
+    url: "https://cozy-eclair-1d409d.netlify.app/",
+    category: "Sistema de gestión · Farmacias",
+    technologies: ["React", "Node.js", "Express", "PostgreSQL", "Tailwind CSS"],
+    client: "FarmaDesk",
+    year: "2026"
+  },
+  {
+    id: 'psicologa-estefany-lozano',
+    title: "Psicóloga Estefany Lozano",
+    description: "Plataforma para atención psicoterapéutica en línea por videollamada, dirigida a pacientes hispanohablantes. Presenta las áreas terapéuticas y facilita el agendamiento por WhatsApp, con SEO internacional y datos estructurados.",
+    image: "/mv-portfolio/estefany-lozano.png",
+    url: "https://psicologaestefanylozano.com/",
+    category: "Terapia en línea · Internacional",
+    technologies: ["React", "Next.js", "Tailwind CSS", "SEO Internacional", "Schema.org"],
+    client: "Psicóloga Estefany Lozano",
+    year: "2026"
+  },
+  {
+    id: 'lm-asociados-abogados-penalistas',
+    title: "LM & Asociados Abogados Penalistas",
+    description: "Sitio web para una firma penal con sede en Bogotá y cobertura nacional. Presenta servicios de defensa penal y consultas urgentes, con contacto por WhatsApp y SEO local respaldado por datos estructurados.",
+    image: "/mv-portfolio/lm-asociados.png",
+    url: "https://abogadopenalistacol.com/",
+    category: "Servicios jurídicos · Derecho penal",
+    technologies: ["React", "Next.js", "Tailwind CSS", "SEO Local", "Schema.org"],
+    client: "LM & Asociados",
+    year: "2026"
+  },
+  {
+    id: 'dra-nancy-melo',
+    title: "Dra. Nancy Aseneth Melo — Despacho Jurídico",
+    description: "Sitio web para un despacho jurídico en Cali con asesoría presencial y virtual. Expone sus servicios en derecho penal, justicia penal militar y derechos humanos, e incorpora un canal directo de consulta.",
+    image: "/mv-portfolio/nancy-melo.png",
+    url: "https://abogadanancymelo.com/",
+    category: "Servicios jurídicos · Cali",
+    technologies: ["React", "Next.js", "Tailwind CSS", "SEO Local", "WhatsApp"],
+    client: "Dra. Nancy Melo",
+    year: "2026"
   }
 ];
 
-export const team = [
+// Casos con resultados medibles: inicio (tarjetas) y /casos-de-exito (por portfolioId).
+// Pendiente de confirmar con Agustín: período del resultado de STL Gold, resultado del caso México
+// y rubro de Konnect (en el portfolio figura como conectividad e internet).
+export const caseResults = [
   {
-    id: 1,
-    name: "Agustín Dávila",
-    position: "Fundador",
-    description: "Especialista en gestión de negocios y análisis financieros. 3 años de experiencia en contabilidad empresarial, gestión presupuestaria y puesta en marcha de negocios.",
-    image: "/WhatsApp%20Image%202025-10-11%20at%203.26.00%20PM.webp",
-    skills: ["Contabilidad", "Análisis Financiero", "Gestión de Negocios", "Presupuestos", "Auditoría"]
+    id: 'stl-gold',
+    portfolioId: 9,
+    client: 'STL Gold Landscaping',
+    rubro: 'Paisajismo · Estados Unidos',
+    what: 'Web de servicios con automatización para responder consultas',
+    metric: '+USD 5.000',
+    metricLabel: 'de aumento en facturación neta',
+    period: null, // ej. 'en 3 meses' (lo pasa Agustín)
+    details: ['40 consultas calificadas por mes', '5 clientes cerrados por mes'],
+    url: 'https://stlgoldlandscaping.com/'
   },
   {
-    id: 2,
-    name: "Sebastian Aguirre",
-    position: "Líder Técnico",
-    description: "Tecnólogo en Análisis y Desarrollo de Software, especializado en IA y automatizaciones. 3 años de experiencia como desarrollador Full Stack.",
-    image: "/WhatsApp%20Image%202025-10-11%20at%203.18.05%20PM.webp",
-    skills: ["IA", "Automatizaciones", "Full Stack", "Python", "React"]
+    id: 'regala-algo',
+    portfolioId: 3,
+    client: 'Regala Algo',
+    rubro: 'E-commerce de regalos',
+    what: 'Tienda online con panel de stock, pedidos y ventas',
+    metric: '$2M ARS/mes',
+    metricLabel: 'en ventas (~USD 1.000 por mes)',
+    details: ['+3.000 productos activos en la tienda', 'Inversión inicial de USD 600'],
+    url: 'https://regalaalgosrl.com/'
   },
   {
-    id: 3,
-    name: "Daniel Montaño",
-    position: "Desarrollador Backend",
-    description: "Especialista en desarrollo backend y arquitectura de APIs. Experto en optimización de performance y seguridad.",
-    image: "/WhatsApp%20Image%202025-10-11%20at%203.30.19%20PM.webp",
-    skills: ["Python", "Node.js", "PostgreSQL", "Docker"]
+    id: 'konnect',
+    portfolioId: 15,
+    client: 'Konnect',
+    rubro: 'Importación y distribución Latam',
+    what: 'Plataforma web y canal de venta digital',
+    metric: 'ROI en 2 semanas',
+    metricLabel: 'recuperaron la inversión inicial',
+    details: ['+100 productos traídos a Latinoamérica'],
+    url: 'https://konnectoficial.com/'
   },
   {
-    id: 5,
-    name: "Daniela Castañeda",
-    position: "Desarrolladora Full Stack",
-    description: "Desarrolladora Full Stack especializada en crear soluciones web completas y eficientes. Experiencia en tecnologías modernas de frontend y backend.",
-    image: "/daniela.webp",
-    skills: ["React", "Node.js", "JavaScript", "Full Stack", "TypeScript"]
+    id: 'bicicletas-mx',
+    portfolioId: 'bicicletas-mx',
+    client: 'Bicicletería en México',
+    rubro: 'Bicicletas · México',
+    what: 'Sistema de gestión para 4 sucursales + tienda online',
+    metric: '4 sucursales',
+    metricLabel: 'en un solo sistema, con tienda online integrada',
+    details: ['Sistema de gestión compartido por las 4 sucursales', 'Tienda online conectada al sistema'],
+    url: null
   }
 ];
 
-export const testimonials = [
-  {
-    id: 1,
-    name: "Miguel Fernández",
-    position: "Director General",
-    company: "M Logística y Distribución SRL",
-    text: "Websy creó un sitio web profesional que refleja perfectamente nuestra especialización en transporte de litio. El diseño es elegante y la optimización SEO nos ha traído nuevos clientes.",
-    rating: 5,
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-  },
-  {
-    id: 2,
-    name: "Carlos Mendoza",
-    position: "Gerente Comercial",
-    company: "Covenant",
-    text: "La plataforma de e-commerce que desarrolló Websy revolucionó nuestra forma de vender. El sistema Odoo integrado nos permite gestionar inventario, pedidos y clientes de manera eficiente.",
-    rating: 5,
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-  },
-  {
-    id: 3,
-    name: "Leandro García",
-    position: "Propietario",
-    company: "Regala Algo SRL",
-    text: "El e-commerce y panel administrativo que nos desarrolló Websy superó nuestras expectativas. Podemos gestionar todo nuestro inventario y pedidos de manera muy eficiente desde el panel.",
-    rating: 5,
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-  },
-  {
-    id: 4,
-    name: "Sofia Martínez",
-    position: "Fundadora",
-    company: "NUVO Perfumería",
-    text: "La landing page que creó Websy captura perfectamente la elegancia y sofisticación de nuestra marca. El diseño es impresionante y ha aumentado considerablemente nuestras consultas.",
-    rating: 5,
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-  }
-];
+// Testimonios de clientes reales (los pasa Agustín). Se muestran junto a las reseñas de Google en el inicio.
+// Formato: { name: 'Nombre Apellido', company: 'Empresa · Rubro', text: 'Testimonio textual' }
+export const clientTestimonials = [];
 
+// Datos de contacto que usa /contacto (la fuente es CONTACT en siteConfig.js)
 export const companyInfo = {
-  name: "Websy",
-  tagline: "Hacemos páginas Web que no solo se ven bien…funcionan",
-  description: "En Websy ayudamos a emprendedores, profesionales y pymes a tener presencia digital de manera simple, accesible y profesional. Creemos que una página web no es sólo un escaparate, sino una herramienta estratégica para crecer, generar confianza y atraer clientes.",
-  experience: "1+ año de experiencia",
-  projects: "5+ proyectos completados",
-  clients: "100% clientes satisfechos",
-  location: "Argentina",
-  email: "websyar@gmail.com",
-  phone: "+54 9 3884 84-6695",
-  whatsapp: "+5493884846695",
-  instagram: "https://www.instagram.com/websyar?igsh=ams4empjbzA1cWJ1",
-  founded: "2025",
-  mission: "Brindar soluciones digitales ágiles, estéticas y funcionales que impulsen a nuestros clientes a destacarse en internet y alcanzar sus objetivos de negocio. Siempre priorizando sus necesidades y adecuando los diseños a su nicho estratégico.",
-  vision: "Convertirnos en un referente regional en desarrollo web, reconocido por la innovación, la cercanía con nuestros clientes y la calidad de nuestras soluciones.",
-  values: [
-    "Innovación constante: buscamos siempre nuevas ideas y tecnologías para mejorar",
-    "Compromiso real: tratamos cada proyecto como si fuera propio",
-    "Transparencia: comunicación clara y directa con nuestros clientes",
-    "Calidad accesible: soluciones profesionales sin costos excesivos",
-    "Crecimiento conjunto: creemos en relaciones a largo plazo, donde ganamos todos"
-  ]
+  location: CONTACT.location,
+  email: CONTACT.email,
+  phone: CONTACT.phoneDisplay,
 };

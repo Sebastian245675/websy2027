@@ -4,7 +4,7 @@ export const businessTechPosts = [
     slug: 'como-elegir-empresa-de-desarrollo-de-software-sin-ser-estafado',
     title: 'Cómo elegir una empresa de desarrollo de software sin ser estafado: 10 Señales de Alerta',
     seoTitle: 'Elegir Empresa de Software sin ser Estafado: 10 Alertas | Websy',
-    seoDescription: 'Aprende a identificar las 10 señales de alerta de empresas de software fraudulentas y los 7 criterios para elegir un proveedor confiable.',
+    seoDescription: 'Aprendé a identificar las 10 señales de alerta de empresas de software fraudulentas y los 7 criterios para elegir un proveedor confiable.',
     seoKeywords: 'elegir empresa desarrollo software, como contratar programador, empresa software confiable, desarrollo software estafa, contratar desarrollo web',
     category: 'Desarrollo Web',
     date: '2026-08-02',
@@ -231,7 +231,7 @@ En [Websy desarrollamos tanto apps nativas como PWAs según lo que tu negocio re
   {
     id: 1105,
     slug: 'proteger-pagina-web-de-hackers-seguridad-web-basica',
-    title: 'Cómo proteger tu página web de hackers: 10 Medidas de Seguridad Web que debes implementar HOY',
+    title: 'Cómo proteger tu página web de hackers: 10 Medidas de Seguridad Web que debés implementar HOY',
     seoTitle: 'Seguridad Web: Proteger tu Página de Hackers | Websy',
     seoDescription: 'Las 10 medidas de seguridad web esenciales para proteger tu sitio de hackers, malware e inyecciones SQL. Implementalas hoy y dormí tranquilo.',
     seoKeywords: 'seguridad web, proteger pagina web hackers, hackeo pagina web, seguridad sitio web, como proteger mi web, ciberseguridad web',
@@ -359,7 +359,7 @@ En [Websy desarrollamos aplicaciones móviles con React Native para cubrir iOS y
     slug: 'email-marketing-automatizado-guia-pymes-herramientas',
     title: 'Email Marketing Automatizado: La Máquina de Ventas que trabaja mientras dormís',
     seoTitle: 'Email Marketing Automatizado para PyMEs: Guía 2026 | Websy',
-    seoDescription: 'Aprende a crear campañas de email marketing automatizadas que nutran leads y generen ventas en piloto automático. Herramientas, templates y estrategias.',
+    seoDescription: 'Aprendé a crear campañas de email marketing automatizadas que nutran leads y generen ventas en piloto automático. Herramientas, templates y estrategias.',
     seoKeywords: 'email marketing automatizado, email marketing para empresas, campañas email automaticas, newsletter estrategia, herramientas email marketing',
     category: 'SEO & Marketing',
     date: '2026-07-27',
@@ -394,7 +394,7 @@ Es una secuencia de emails que se envían automáticamente cuando un usuario rea
 ## Anatomía de un Email que Vende
 
 1. **Asunto irresistible** (máximo 50 caracteres): "3 errores que están matando tus ventas online"
-2. **Primera línea que enganche**: "Si tu web tiene más de 3 meses y no genera consultas, hay algo que debes cambiar urgente."
+2. **Primera línea que enganche**: "Si tu web tiene más de 3 meses y no genera consultas, hay algo que debés cambiar urgente."
 3. **Cuerpo con valor real**: No vendas en cada email. Proporcioná valor genuino en el 80% y vendé en el 20%.
 4. **CTA claro y único**: Un solo botón de acción. No 5 links diferentes.
 5. **Firma personal**: Los emails de una persona real (no "info@empresa.com") tienen 26% más apertura.
@@ -772,7 +772,7 @@ Con campos específicos: tipo de proyecto, ubicación del terreno, superficie es
 
 ---
 
-En [Websy creamos portafolios web premium para arquitectos y diseñadores](/servicios/diseno-ux-ui). [Mostrá tus proyectos al mundo](/contacto).`,
+En [Websy creamos portafolios web premium para arquitectos y diseñadores](/casos-de-exito/paginas-web-para-inmobiliarias). [Mostrá tus proyectos al mundo](/contacto).`,
     relatedPosts: [706, 1010, 905]
   },
   {
@@ -780,7 +780,7 @@ En [Websy creamos portafolios web premium para arquitectos y diseñadores](/serv
     slug: 'base-de-datos-postgresql-vs-mysql-vs-mongodb-cual-elegir',
     title: 'PostgreSQL vs MySQL vs MongoDB: ¿Cuál Base de Datos necesita tu proyecto?',
     seoTitle: 'PostgreSQL vs MySQL vs MongoDB: Cuál Elegir | Websy',
-    seoDescription: 'Comparativa técnica entre PostgreSQL, MySQL y MongoDB. Descubre cuál base de datos es mejor para tu proyecto web, e-commerce o sistema empresarial.',
+    seoDescription: 'Comparativa técnica entre PostgreSQL, MySQL y MongoDB. Descubrí cuál base de datos es mejor para tu proyecto web, e-commerce o sistema empresarial.',
     seoKeywords: 'postgresql vs mysql, mongodb vs postgresql, que base de datos usar, base de datos web, comparar bases de datos, sql vs nosql',
     category: 'APIs & Cloud',
     date: '2026-07-19',

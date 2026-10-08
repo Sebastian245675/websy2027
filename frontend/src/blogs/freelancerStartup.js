@@ -4,7 +4,7 @@ export const freelancerStartupPosts = [
     slug: 'como-empezar-a-vender-por-internet-desde-cero-guia-completa',
     title: 'Cómo empezar a vender por internet desde cero: Guía Completa para principiantes 2026',
     seoTitle: 'Cómo Vender por Internet desde Cero: Guía 2026 | Websy',
-    seoDescription: 'Aprende paso a paso cómo empezar a vender por internet: elegir producto, crear tienda online, configurar pagos y atraer tus primeros clientes.',
+    seoDescription: 'Aprendé paso a paso cómo empezar a vender por internet: elegir producto, crear tienda online, configurar pagos y atraer tus primeros clientes.',
     seoKeywords: 'como vender por internet, vender online desde cero, empezar a vender por internet, como vender productos online, vender por internet argentina colombia',
     category: 'E-commerce',
     date: '2026-08-02',
@@ -195,7 +195,7 @@ Si tu web es para un **negocio real que genera dinero**, invertir $300-$1.000 US
 
 ---
 
-En [Websy creamos páginas web profesionales desde $300 USD con dominio, hosting y SEO incluido](/servicios/desarrollo-web). [Invertí bien desde el principio](/contacto).`,
+En [Websy creamos páginas web profesionales desde USD 800 con dominio, hosting y SEO incluido](/servicios/desarrollo-web). [Invertí bien desde el principio](/contacto).`,
     relatedPosts: [902, 1011, 1210]
   },
   {
@@ -262,7 +262,7 @@ En [Websy implementamos automatizaciones a medida que eliminan tareas manuales d
     slug: 'como-crear-un-blog-para-mi-empresa-que-genere-clientes',
     title: 'Cómo crear un blog para tu empresa que realmente genere clientes (no solo visitas)',
     seoTitle: 'Crear Blog Empresarial que Genere Clientes | Websy',
-    seoDescription: 'Aprende a crear un blog corporativo estratégico que posicione en Google, atraiga tráfico cualificado y convierta lectores en clientes reales.',
+    seoDescription: 'Aprendé a crear un blog corporativo estratégico que posicione en Google, atraiga tráfico cualificado y convierta lectores en clientes reales.',
     seoKeywords: 'como crear blog empresa, blog corporativo, blog para generar clientes, contenido blog empresarial, marketing de contenidos blog',
     category: 'SEO & Marketing',
     date: '2026-07-29',
@@ -380,7 +380,7 @@ En [Websy implementamos seguridad y cumplimiento de protección de datos en todo
     slug: 'figma-que-es-como-usar-para-disenar-paginas-web-apps',
     title: '¿Qué es Figma y cómo se usa para diseñar páginas web y apps? Guía para no-diseñadores',
     seoTitle: 'Qué es Figma: Guía para Diseñar Web y Apps | Websy',
-    seoDescription: 'Aprende qué es Figma, por qué es la herramienta #1 de diseño web/app y cómo usarla para crear prototipos profesionales sin ser diseñador.',
+    seoDescription: 'Aprendé qué es Figma, por qué es la herramienta #1 de diseño web/app y cómo usarla para crear prototipos profesionales sin ser diseñador.',
     seoKeywords: 'que es figma, como usar figma, figma diseño web, figma para principiantes, diseñar pagina web figma, prototipo figma',
     category: 'UI/UX Design',
     date: '2026-07-27',
@@ -426,7 +426,7 @@ No. Figma tiene miles de **templates gratuitos** y kits de componentes (botones,
 
 ---
 
-En [Websy diseñamos todas las interfaces en Figma antes de programar](/servicios/diseno-ux-ui). [Pedí tu diseño profesional](/contacto).`,
+En [Websy diseñamos todas las interfaces en Figma antes de programar](/servicios/desarrollo-web). [Pedí tu diseño profesional](/contacto).`,
     relatedPosts: [706, 704, 1010]
   },
   {

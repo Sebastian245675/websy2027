@@ -43,6 +43,7 @@ export const ServiceDetailPage = () => {
   if (!service) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white pt-[100px]">
+        <SEOHead title="Servicio no encontrado | Websy" noindex breadcrumbs={false} />
         <div className="text-center">
           <h1 className="text-4xl font-black text-[#182A2C] mb-4">Servicio no encontrado</h1>
           <Link to="/servicios" className="text-[#d9fb06] bg-[#182A2C] px-6 py-3 font-bold">
@@ -107,8 +108,8 @@ export const ServiceDetailPage = () => {
       <SEOHead
         title={service.seoTitle}
         description={service.seoDescription}
-        keywords={service.seoKeywords}
         url={`https://www.websysrl.com/servicios/${service.slug}`}
+        breadcrumbs={false}
       />
 
       {/* Inject schemas */}

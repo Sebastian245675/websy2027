@@ -1,6 +1,10 @@
 import React, { Suspense } from "react";
 import { HeroSection } from "../components/HeroSection";
 import { LazyRenderSection } from "../components/LazyRenderSection";
+import { ArchitectureDemoSection } from "../components/ArchitectureDemoSection";
+import { SEOHead } from "../components/SEOHead";
+import { RubrosStrip } from "../components/RubrosStrip";
+import { FAQSection, HOME_FAQ, faqSchema } from "../components/FAQSection";
 
 // Lazy load todos los componentes excepto Hero para mejor performance - con logs
 const PortfolioSection = React.lazy(() => {
@@ -50,6 +54,13 @@ const ContactSection = React.lazy(() => {
   });
 });
 
+const WebsyVsEmployeeSection = React.lazy(() =>
+  import('../components/WebsyVsEmployeeSection').then(module => ({ default: module.WebsyVsEmployeeSection }))
+);
+
+// FAQ schema only on the home page, generated from the same questions shown in the FAQ section
+const homeFaqSchema = faqSchema(HOME_FAQ);
+
 const SectionLoader = () => (
   <div className="w-full flex items-center justify-center py-20 bg-white">
     <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-primary"></div>
@@ -67,11 +78,27 @@ export const HomePage = () => {
 
   return (
     <>
+      <SEOHead
+        title="Desarrollo Web, E-commerce y Apps en Salta, Argentina | Websy"
+        description="Agencia de desarrollo web en Salta, Argentina. Páginas web profesionales, tiendas online, apps móviles, CRM/ERP y automatizaciones con IA para empresas de toda Latinoamérica. Cotización gratis en 24 hs."
+        url="https://www.websysrl.com/"
+        jsonLd={homeFaqSchema}
+      />
       <HeroSection />
+
+      <ArchitectureDemoSection />
 
       <LazyRenderSection rootMargin="100px" height="600px">
         <Suspense fallback={<SectionLoader />}>
           <AboutSection />
+        </Suspense>
+      </LazyRenderSection>
+
+      <RubrosStrip />
+
+      <LazyRenderSection rootMargin="100px" height="300px">
+        <Suspense fallback={<SectionLoader />}>
+          <TestimonialsSection />
         </Suspense>
       </LazyRenderSection>
 
@@ -81,7 +108,11 @@ export const HomePage = () => {
         </Suspense>
       </LazyRenderSection>
 
-
+      <LazyRenderSection rootMargin="50px" height="600px">
+        <Suspense fallback={<SectionLoader />}>
+          <WebsyVsEmployeeSection />
+        </Suspense>
+      </LazyRenderSection>
 
       <LazyRenderSection rootMargin="50px" height="600px">
         <Suspense fallback={<SectionLoader />}>
@@ -89,15 +120,11 @@ export const HomePage = () => {
         </Suspense>
       </LazyRenderSection>
 
+      <FAQSection items={HOME_FAQ} />
+
       <LazyRenderSection rootMargin="50px" height="600px">
         <Suspense fallback={<SectionLoader />}>
           <ContactSection />
-        </Suspense>
-      </LazyRenderSection>
-
-      <LazyRenderSection rootMargin="50px" height="300px">
-        <Suspense fallback={<SectionLoader />}>
-          <TestimonialsSection />
         </Suspense>
       </LazyRenderSection>
     </>

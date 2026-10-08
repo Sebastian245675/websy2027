@@ -206,7 +206,7 @@ En [Websy creamos plataformas digitales para el sector fitness](/servicios/desar
     slug: 'como-hacer-publicidad-en-google-ads-guia-principiantes',
     title: 'Cómo hacer publicidad en Google Ads: Guía para Principiantes con Presupuesto Bajo',
     seoTitle: 'Google Ads para Principiantes: Guía Paso a Paso 2026 | Websy',
-    seoDescription: 'Aprende a crear tu primera campaña de Google Ads paso a paso. Configuración, palabras clave, anuncios y cómo optimizar con un presupuesto de $5 USD/día.',
+    seoDescription: 'Aprendé a crear tu primera campaña de Google Ads paso a paso. Configuración, palabras clave, anuncios y cómo optimizar con un presupuesto de $5 USD/día.',
     seoKeywords: 'como hacer publicidad en google, google ads principiantes, anuncios en google, publicidad google ads, como anunciar en google, sem google',
     category: 'SEO & Marketing',
     date: '2026-07-27',
@@ -311,7 +311,7 @@ En [Websy desarrollamos chatbots inteligentes para WhatsApp Business con integra
     slug: 'como-vender-por-instagram-tienda-online-estrategia',
     title: 'Cómo vender por Instagram en 2026: Estrategia Completa para convertir seguidores en compradores',
     seoTitle: 'Cómo Vender por Instagram: Estrategia Completa 2026 | Websy',
-    seoDescription: 'Aprende a convertir tu perfil de Instagram en un canal de ventas efectivo. Estrategia de contenido, Instagram Shopping, Reels y cómo llevar tráfico a tu web.',
+    seoDescription: 'Aprendé a convertir tu perfil de Instagram en un canal de ventas efectivo. Estrategia de contenido, Instagram Shopping, Reels y cómo llevar tráfico a tu web.',
     seoKeywords: 'como vender por instagram, vender en instagram, instagram shopping, estrategia instagram ventas, tienda instagram, marketing instagram',
     category: 'SEO & Marketing',
     date: '2026-07-25',
@@ -427,7 +427,7 @@ En [Websy desarrollamos sistemas de turnos online a medida con notificaciones au
     slug: 'como-disenar-logo-profesional-para-empresa-guia-branding',
     title: 'Cómo diseñar un logo profesional para tu empresa: Guía de Branding que transmite confianza',
     seoTitle: 'Diseño de Logo Profesional: Guía de Branding | Websy',
-    seoDescription: 'Aprende los principios de diseño de logos profesionales, psicología del color y cómo tu identidad visual impacta directamente en las ventas de tu empresa.',
+    seoDescription: 'Aprendé los principios de diseño de logos profesionales, psicología del color y cómo tu identidad visual impacta directamente en las ventas de tu empresa.',
     seoKeywords: 'como diseñar un logo, diseño logo profesional, logo para empresa, branding empresa, identidad visual, logo negocio',
     category: 'UI/UX Design',
     date: '2026-07-23',
@@ -464,66 +464,15 @@ Nunca uses tipografías gratuitas genéricas. Invertí en una tipografía premiu
 
 ---
 
-En [Websy diseñamos identidad visual y branding completo para empresas](/servicios/diseno-ux-ui). [Solicitá tu diseño de marca](/contacto).`,
+En [Websy diseñamos identidad visual y branding completo para empresas](/servicios/desarrollo-web). [Solicitá tu diseño de marca](/contacto).`,
     relatedPosts: [706, 704, 705]
-  },
-  {
-    id: 1011,
-    slug: 'wordpress-vs-react-cual-es-mejor-para-mi-pagina-web',
-    title: 'WordPress vs React: ¿Cuál es mejor para la página web de mi empresa en 2026?',
-    seoTitle: 'WordPress vs React: Cuál Elegir para tu Web 2026 | Websy',
-    seoDescription: 'Comparativa definitiva entre WordPress y React/Next.js. Descubre cuál tecnología es mejor para tu proyecto web según tipo de negocio, presupuesto y objetivos.',
-    seoKeywords: 'wordpress vs react, que es mejor wordpress o react, wordpress o desarrollo web, pagina web wordpress react, mejor tecnologia web 2026',
-    category: 'Desarrollo Web',
-    date: '2026-07-22',
-    readTime: '13 min',
-    image: null,
-    author: 'Sebastian Aguirre',
-    content: `Esta es una de las preguntas que más recibimos en Websy. La respuesta corta: **depende de tu proyecto**. La respuesta completa está a continuación.
-
----
-
-## Comparativa Directa: WordPress vs React
-
-| Criterio | WordPress | React / Next.js |
-| --- | --- | --- |
-| **Tipo de Proyecto Ideal** | Blog, sitio corporativo simple | Web apps, sitios de alta performance |
-| **Facilidad de Uso** | ⭐⭐⭐⭐⭐ (panel visual) | ⭐⭐ (requiere programador) |
-| **Velocidad de Carga** | ⭐⭐⭐ (depende de plugins) | ⭐⭐⭐⭐⭐ (ultra rápido) |
-| **SEO** | ⭐⭐⭐⭐ (con Yoast/RankMath) | ⭐⭐⭐⭐⭐ (control total, SSR/SSG) |
-| **Seguridad** | ⭐⭐ (plugins = vulnerabilidades) | ⭐⭐⭐⭐⭐ (no hay plugins terceros) |
-| **Costo Desarrollo** | $300 - $1.500 USD | $800 - $5.000 USD |
-| **Costo Hosting Mensual** | $5 - $30 USD/mes | $0 - $20 USD/mes (Vercel gratis) |
-| **Personalización** | Limitada a plantillas/plugins | Ilimitada (código a medida) |
-| **Escalabilidad** | Baja (se vuelve lento con tráfico) | Alta (CDN global, serverless) |
-
----
-
-## ¿Cuándo elegir WordPress?
-
-- Necesitás un blog o sitio corporativo simple y **vas a administrarlo vos mismo** sin programador.
-- Tu presupuesto es muy limitado (menos de $500 USD).
-- No necesitás funcionalidades interactivas complejas.
-
-## ¿Cuándo elegir React / Next.js?
-
-- Querés un sitio web **ultra rápido** que cargue en menos de 1 segundo.
-- Necesitás funcionalidades a medida (calculadoras, paneles, integraciones API).
-- La **seguridad** es crítica (no querés preocuparte por hackeos de WordPress).
-- Querés el **máximo control SEO** para posicionar en Google.
-- Tu sitio debe manejar **alto tráfico** sin caerse.
-
----
-
-En [Websy desarrollamos con React y Next.js para máximo rendimiento y SEO](/servicios/desarrollo-web). [Consultá cuál tecnología es ideal para tu proyecto](/contacto).`,
-    relatedPosts: [1, 101, 104]
   },
   {
     id: 1012,
     slug: 'que-es-un-crm-y-como-ayuda-a-vender-mas-a-mi-empresa',
     title: '¿Qué es un CRM y cómo ayuda a mi empresa a vender más? Guía Práctica para PyMEs',
     seoTitle: 'Qué es un CRM: Guía Práctica para PyMEs 2026 | Websy',
-    seoDescription: 'Aprende qué es un CRM, cómo funciona y por qué las empresas que usan CRM venden un 29% más. Comparativa de HubSpot, Salesforce y CRM a medida.',
+    seoDescription: 'Aprendé qué es un CRM, cómo funciona y por qué las empresas que usan CRM venden un 29% más. Comparativa de HubSpot, Salesforce y CRM a medida.',
     seoKeywords: 'que es un crm, crm para pymes, crm ventas, sistema crm empresa, como usar crm, crm para pequeñas empresas',
     category: 'Sistemas & ERP',
     date: '2026-07-21',
@@ -555,7 +504,7 @@ Si respondiste "sí" a cualquiera, necesitás un CRM urgentemente.
 | **HubSpot** (Plan Gratis) | $0 USD (hasta 1.000 contactos) | Equipos chicos, primer CRM | Fácil |
 | **Pipedrive** | Desde $15 USD/mes | Equipos de ventas B2B | Media |
 | **Salesforce** | Desde $25 USD/mes | Empresas medianas/grandes | Alta |
-| **CRM a Medida (Websy)** | Desde $3.000 USD (pago único) | Negocios con procesos únicos | Baja (diseñado para vos) |
+| **CRM a Medida (Websy)** | Desde USD 4.000 (pago único) | Negocios con procesos únicos | Baja (diseñado para vos) |
 
 ---
 
@@ -669,7 +618,7 @@ En [Websy integramos facturación electrónica AFIP en sistemas web y e-commerce
     slug: 'velocidad-de-carga-web-como-optimizar-pagespeed-100',
     title: 'Velocidad de Carga Web: Cómo conseguir 100/100 en PageSpeed y no perder visitantes',
     seoTitle: 'Optimizar Velocidad Web: 100/100 en PageSpeed | Websy',
-    seoDescription: 'Aprende a optimizar la velocidad de carga de tu web para obtener 100/100 en Google PageSpeed. Técnicas: WebP, lazy loading, CDN, code splitting y caché.',
+    seoDescription: 'Aprendé a optimizar la velocidad de carga de tu web para obtener 100/100 en Google PageSpeed. Técnicas: WebP, lazy loading, CDN, code splitting y caché.',
     seoKeywords: 'velocidad de carga web, optimizar pagespeed, web lenta como arreglar, mejorar rendimiento pagina web, core web vitals, pagespeed 100',
     category: 'Desarrollo Web',
     date: '2026-07-18',

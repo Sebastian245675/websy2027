@@ -75,7 +75,7 @@ En [Websy diseñamos la arquitectura en la nube ideal para tu empresa](/servicio
     slug: 'ciberseguridad-web-owasp-top-10-como-proteger-tu-pagina-o-app',
     title: 'Ciberseguridad Web (OWASP Top 10): Cómo proteger tu sitio y la información de tus clientes',
     seoTitle: 'Ciberseguridad Web y OWASP Top 10: Protege tu App | Websy',
-    seoDescription: 'Conoce las vulnerabilidades web más peligrosas (SQL Injection, XSS, CSRF) y cómo blindar tu plataforma frente a ciberataques.',
+    seoDescription: 'Conocé las vulnerabilidades web más peligrosas (SQL Injection, XSS, CSRF) y cómo blindar tu plataforma frente a ciberataques.',
     seoKeywords: 'ciberseguridad web owasp top 10, proteger pagina web ataques, inyeccion sql xss seguridad, desarrollo web seguro',
     category: 'Ciberseguridad',
     date: '2026-06-14',
@@ -124,7 +124,7 @@ En [Websy auditamos y desarrollamos software bajo estrictos estándares de ciber
     slug: 'ci-cd-pipelines-github-actions-docker-deployment-web',
     title: 'Pipelines CI/CD con GitHub Actions y Docker: Automatización de despliegues en 2026',
     seoTitle: 'CI/CD Pipelines con GitHub Actions y Docker | Websy',
-    seoDescription: 'Aprende a configurar integración y despliegue continuo (CI/CD) para enviar actualizaciones a producción sin caídas del servicio.',
+    seoDescription: 'Aprendé a configurar integración y despliegue continuo (CI/CD) para enviar actualizaciones a producción sin caídas del servicio.',
     seoKeywords: 'ci cd github actions docker, automatizar despliegues devops, integracion continua web, dockerize react nodejs',
     category: 'APIs & Cloud',
     date: '2026-07-21',
@@ -137,7 +137,7 @@ Un flujo **CI/CD (Continuous Integration / Continuous Deployment)** automatiza l
 
 ---
 
-## 1. ¿Qué es CI/CD y por qué lo necesitas?
+## 1. ¿Qué es CI/CD y por qué lo necesitás?
 
 - **CI (Integración Continua)**: Ejecuta automáticamente linters y pruebas unitarias (Jest, Vitest) para verificar que el nuevo código no rompa funcionalidades existentes.
 - **CD (Despliegue Continuo)**: Construye la imagen Docker o bundle optimizado y lo actualiza en los servidores de producción sin interrumpir el tráfico de los usuarios.
@@ -237,7 +237,7 @@ En [Websy optimizamos la infraestructura web con HTTP/3 y cifrado de vanguardia]
     slug: 'cloudflare-vs-cloudfront-cdn-para-acelerar-y-proteger-tu-web',
     title: 'Cloudflare vs. AWS CloudFront: Cómo acelerar y blindar tu sitio web con una CDN',
     seoTitle: 'Cloudflare vs AWS CloudFront 2026: Comparativa CDN | Websy',
-    seoDescription: 'Comparativa de redes de distribución de contenido (CDN). Descubre cómo reducir la latencia global y detener ataques DDoS con Cloudflare y CloudFront.',
+    seoDescription: 'Comparativa de redes de distribución de contenido (CDN). Descubrí cómo reducir la latencia global y detener ataques DDoS con Cloudflare y CloudFront.',
     seoKeywords: 'cloudflare vs cloudfront, cdn acelerar velocidad web, proteccion ddos cloudflare, hosting cdn react nextjs, seguridad web cdn',
     category: 'APIs & Cloud',
     date: '2026-07-29',

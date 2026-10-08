@@ -1,14 +1,17 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { portfolio as defaultPortfolio } from '../mockData';
+import { Link, useNavigate } from 'react-router-dom';
 import { LazyImage } from './LazyImage';
+import { caseForPortfolio } from '../caseStudies';
 
 export const PortfolioSection = () => {
-  const [projects, setProjects] = useState(defaultPortfolio);
+  const [projects, setProjects] = useState(() => defaultPortfolio.filter((p) => p.image));
   const scrollRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
   const [dragMoved, setDragMoved] = useState(false);
+  const navigate = useNavigate();
 
   // Sync with local storage
   useEffect(() => {
@@ -16,7 +19,7 @@ export const PortfolioSection = () => {
       const rawPortfolio = localStorage.getItem('websy_portfolio');
       if (rawPortfolio) {
         const parsed = JSON.parse(rawPortfolio);
-        if (Array.isArray(parsed) && parsed.length > 0) setProjects(parsed);
+        if (Array.isArray(parsed) && parsed.length > 0) setProjects(parsed.filter((p) => p.image));
       }
     } catch (e) {
       console.error('Error reading data from localStorage', e);
@@ -47,10 +50,12 @@ export const PortfolioSection = () => {
     scrollRef.current.scrollLeft = scrollLeft - walk;
   };
 
-  const handleCardClick = (url) => {
-    if (!dragMoved && url) {
-      window.open(url, '_blank', 'noopener,noreferrer');
-    }
+  // Con página de caso se abre el caso (enlace interno); si no, el sitio del cliente
+  const handleCardClick = (project) => {
+    if (dragMoved) return;
+    const study = caseForPortfolio(project.id);
+    if (study) navigate(`/casos-de-exito/${study.slug}`);
+    else if (project.url) window.open(project.url, '_blank', 'noopener,noreferrer');
   };
 
   const nextSlide = () => {
@@ -66,11 +71,11 @@ export const PortfolioSection = () => {
       {/* 1. Header always aligned with the standard site container - ULTRA COMPACT */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-8 md:mb-12">
         <span className="text-[#182A2C] font-black tracking-[0.25em] uppercase text-[10px] mb-6 inline-block bg-[#d9fb06] px-2 py-1 animate-fade-in-up">
-          ¡CASOS DE ÉXITO!
+          PROYECTOS
         </span>
-        <h2 className="text-4xl md:text-6xl font-black text-[#182A2C] leading-[1.1] mb-8 tracking-tighter max-w-4xl mx-auto">
-          ¿Cómo es trabajar con <br className="hidden md:block" />
-          <span className="text-[#182A2C] bg-[#d9fb06] px-2">Websy Soluciones Digitales®?</span>
+        <h2 className="text-4xl md:text-6xl font-black text-[#182A2C] leading-[1.2] mb-8 tracking-tighter max-w-4xl mx-auto">
+          ¿Cómo es trabajar con{' '}
+          <span className="inline-block text-[#182A2C] bg-[#d9fb06] px-3 py-1 mt-2 leading-none">Websy?</span>
         </h2>
         <div className="max-w-2xl mx-auto space-y-4">
           <p className="text-gray-600 text-base md:text-lg leading-relaxed font-medium">
@@ -103,7 +108,7 @@ export const PortfolioSection = () => {
               <div
                 key={`${project.id}-${idx}`}
                 className="flex-shrink-0 w-[85vw] sm:w-[500px] lg:w-[460px] flex flex-col group"
-                onClick={() => handleCardClick(project.url)}
+                onClick={() => handleCardClick(project)}
               >
                 <div className="bg-white rounded-none overflow-hidden aspect-video relative transition-all duration-700 group-hover:shadow-[0_45px_100px_rgba(0,0,0,0.15)]">
                   <LazyImage
@@ -120,13 +125,23 @@ export const PortfolioSection = () => {
                     {project.category}
                   </span>
                   <h3 className="text-3xl md:text-3xl font-extrabold text-[#182A2C] transition-all duration-300 leading-tight mb-2 tracking-tight group-hover:text-[#d9fb06]">
-                    {project.title}
+                    {caseForPortfolio(project.id) ? (
+                      <Link to={`/casos-de-exito/${caseForPortfolio(project.id).slug}`} onClick={(e) => e.preventDefault()} draggable={false}>
+                        {project.title}
+                      </Link>
+                    ) : project.title}
                   </h3>
                 </div>
               </div>
             ))}
           </div>
         </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 text-center md:text-left">
+        <Link to="/casos-de-exito" className="text-base font-bold text-[#182A2C] underline decoration-[#d9fb06] decoration-4 underline-offset-4">
+          Ver los {defaultPortfolio.length} proyectos con su caso completo
+        </Link>
       </div>
 
       {/* 3. Navigation Controls */}

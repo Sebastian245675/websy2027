@@ -59,12 +59,12 @@ Ya sea que necesites una landing page para captar leads, un sitio corporativo pa
     ],
     technologies: ['React', 'Next.js', 'Node.js', 'Tailwind CSS', 'Firebase', 'Vercel'],
     faqs: [
-      { question: '¿Cuánto cuesta desarrollar una página web profesional?', answer: 'Nuestros planes arrancan desde USD 300 para landing pages sencillas hasta USD 1.200+ para sitios web complejos con múltiples secciones y funcionalidades avanzadas. El precio exacto depende del alcance del proyecto. Ofrecemos cotización gratuita en 24 horas.' },
+      { question: '¿Cuánto cuesta desarrollar una página web profesional?', answer: 'Nuestros planes arrancan desde USD 800 para landing pages y sitios institucionales, y llegan a USD 3.500 o más para sitios complejos con tienda online, integraciones y funcionalidades avanzadas. El precio exacto depende del alcance del proyecto. Ofrecemos cotización gratuita en 24 horas.' },
       { question: '¿Cuánto tiempo tarda en estar lista mi página web?', answer: 'Una landing page puede estar lista en 5-7 días hábiles. Un sitio web corporativo completo toma entre 2-3 semanas. Trabajamos con metodología ágil, así que verás avances incrementales durante todo el proceso.' },
       { question: '¿Mi página web se verá bien en celulares?', answer: 'Sí, todas nuestras páginas web son 100% responsivas. Se adaptan perfectamente a celulares, tablets y computadoras de escritorio. Más del 70% del tráfico web viene desde dispositivos móviles, así que esto es una prioridad para nosotros.' },
       { question: '¿Incluye hosting y dominio?', answer: 'El hosting está incluido en nuestros planes con servidores optimizados para máxima velocidad. El dominio (.com, .com.ar) se gestiona aparte pero te asesoramos en la compra y configuración.' }
     ],
-    priceRange: 'Desde USD 300',
+    priceRange: 'Desde USD 800',
     ctaText: 'Cotizá tu página web',
     relatedServices: ['ecommerce', 'seo-marketing', 'sistemas-gestion']
   },
@@ -103,7 +103,7 @@ Optimizamos cada tienda para SEO, velocidad de carga y conversión. Porque no ba
       { question: '¿Cuántos productos puedo cargar en mi tienda?', answer: 'No hay límite de productos. Podés cargar desde 10 hasta miles de productos con sus variantes (talle, color, etc). El panel administrativo te permite gestionar todo fácilmente.' },
       { question: '¿Mi tienda online será segura para los compradores?', answer: 'Absolutamente. Todas nuestras tiendas incluyen certificado SSL, procesamiento seguro de pagos a través de pasarelas certificadas y protección contra fraudes. Cumplimos con los estándares PCI DSS.' }
     ],
-    priceRange: 'Desde USD 500',
+    priceRange: 'Desde USD 1.800',
     ctaText: 'Creá tu tienda online',
     relatedServices: ['desarrollo-web', 'seo-marketing', 'automatizaciones-ia']
   },
@@ -263,7 +263,7 @@ Cada sistema incluye panel administrativo intuitivo, reportes en tiempo real, pe
       { question: '¿Puedo acceder al sistema desde el celular?', answer: 'Sí, todos nuestros sistemas son 100% web y responsivos. Podés acceder desde cualquier dispositivo con internet: celular, tablet o computadora. También podemos desarrollar una app móvil complementaria.' },
       { question: '¿Se integra con mi sistema actual?', answer: 'Sí, desarrollamos integraciones con sistemas existentes, incluyendo software contable, bancos, pasarelas de pago, servicios de correo y más. Analizamos tu infraestructura actual para garantizar una transición fluida.' }
     ],
-    priceRange: 'Desde USD 1.500',
+    priceRange: 'Desde USD 4.000',
     ctaText: 'Digitalizá tu empresa',
     relatedServices: ['desarrollo-web', 'automatizaciones-ia', 'aplicaciones-moviles']
   }

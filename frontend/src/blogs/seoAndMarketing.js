@@ -4,7 +4,7 @@ export const seoAndMarketingPosts = [
     slug: 'como-aparecer-en-google-primeros-resultados-guia-seo-2026',
     title: '¿Cómo aparecer en los primeros resultados de Google? Guía SEO Definitiva 2026',
     seoTitle: 'Cómo Aparecer en Google: Guía SEO para Empresas 2026 | Websy',
-    seoDescription: 'Aprende paso a paso cómo posicionar tu página web en el puesto #1 de Google. Estrategias de SEO On-Page, Link Building y contenido que realmente funcionan.',
+    seoDescription: 'Aprendé paso a paso cómo posicionar tu página web en el puesto #1 de Google. Estrategias de SEO On-Page, Link Building y contenido que realmente funcionan.',
     seoKeywords: 'como aparecer en google, posicionar pagina web en google, seo para empresas, aparecer primero en google, posicionamiento web google 2026',
     category: 'SEO & Marketing',
     date: '2026-08-01',
@@ -31,7 +31,7 @@ Google utiliza más de 200 factores de ranking para decidir qué página mostrar
 
 ---
 
-## 2. SEO On-Page: Lo que debes optimizar dentro de tu sitio web
+## 2. SEO On-Page: Lo que debés optimizar dentro de tu sitio web
 
 ### A. Etiqueta Title (Título SEO)
 Es el texto azul clickeable que aparece en los resultados de Google. Debe contener tu palabra clave principal al inicio y tener entre 50 y 60 caracteres.
@@ -96,68 +96,11 @@ En [Websy implementamos estrategias de SEO técnico y de contenido que generan r
     relatedPosts: [104, 105, 1]
   },
   {
-    id: 902,
-    slug: 'cuanto-cuesta-una-pagina-web-para-mi-negocio-precios-reales',
-    title: '¿Cuánto cuesta una página web para mi negocio en 2026? Precios Reales y sin Letra Chica',
-    seoTitle: '¿Cuánto Cuesta una Página Web? Precios Reales 2026 | Websy',
-    seoDescription: 'Tabla de precios actualizada para páginas web en Latinoamérica: landing page, sitio corporativo, e-commerce y web app a medida. Sin costos ocultos.',
-    seoKeywords: 'cuanto cuesta una pagina web, precio pagina web, cuanto sale hacer una web, costo diseño web argentina colombia mexico, presupuesto pagina web',
-    category: 'Desarrollo Web',
-    date: '2026-08-01',
-    readTime: '14 min',
-    image: null,
-    author: 'Sebastian Aguirre',
-    content: `Esta es la pregunta que más nos hacen los emprendedores y dueños de empresas: **"¿Cuánto me va a costar mi página web?"**. Y la respuesta honesta es: depende del tipo de proyecto, pero en esta guía te damos rangos reales basados en precios de mercado actualizados a 2026.
-
----
-
-## 1. Tabla de Precios de Referencia por Tipo de Proyecto Web
-
-| Tipo de Proyecto | Rango de Precio (USD) | Tiempo de Entrega | Incluye |
-| --- | --- | --- | --- |
-| **Landing Page (1 página)** | $200 - $600 | 3 a 7 días | Diseño responsive, formulario de contacto, WhatsApp, SEO básico |
-| **Sitio Corporativo (5-8 páginas)** | $600 - $1.800 | 2 a 4 semanas | Diseño premium, animaciones, blog, SEO avanzado, Google Analytics |
-| **Tienda E-commerce (hasta 100 productos)** | $1.200 - $3.500 | 3 a 6 semanas | Carrito de compras, MercadoPago/Stripe, panel de admin |
-| **Web App a Medida (CRM, ERP, Sistema)** | $3.000 - $15.000+ | 2 a 4 meses | Desarrollo Full-Stack, base de datos, autenticación, hosting |
-| **Marketplace / Plataforma SaaS** | $8.000 - $30.000+ | 3 a 8 meses | Multi-tenant, roles, pasarelas de pago, APIs |
-
----
-
-## 2. ¿Qué factores determinan el precio de una web?
-
-1. **Cantidad de Páginas y Secciones**: No es lo mismo una landing page de 1 página que un sitio corporativo con blog, portafolio y sistema de citas.
-2. **Diseño Personalizado vs. Plantilla**: Un diseño 100% original hecho en Figma cuesta más que adaptar una plantilla premium, pero convierte significativamente más.
-3. **Funcionalidades Interactivas**: Formularios inteligentes, calculadoras de presupuesto, chatbots con IA, pasarelas de pago, paneles administrativos.
-4. **SEO y Optimización para Google**: Incluir estrategia de posicionamiento desde el día 1 tiene un costo adicional pero genera retorno de inversión exponencial.
-
----
-
-## 3. ¿Por qué algunas agencias cobran $100 y otras $5.000 por "lo mismo"?
-
-La diferencia es brutal y se resume en:
-
-- **$100-$300 (Freelancers Básicos)**: Instalan WordPress con una plantilla gratuita, sin optimización SEO, sin velocidad de carga profesional, sin soporte post-entrega. El sitio se ve genérico y no convierte visitantes en clientes.
-- **$600-$3.000 (Agencias Profesionales como Websy)**: Diseño personalizado en Figma, desarrollo con código limpio (React/Next.js), optimización de velocidad (100/100 en PageSpeed), SEO técnico integrado, capacitación y soporte continuo.
-
----
-
-## 4. ¿Cómo calcular el Retorno de Inversión (ROI) de tu web?
-
-Si invertís $1.200 USD en un sitio web profesional y este te genera **5 clientes nuevos por mes** con un ticket promedio de $500 USD, tu facturación adicional es de **$2.500 USD mensuales**. Eso significa que recuperás la inversión en **menos de 15 días**.
-
-Una web profesional no es un gasto: es la inversión con mayor ROI que puede hacer una PyME.
-
----
-
-En [Websy cotizamos proyectos web a medida de forma transparente y sin sorpresas](/contacto). [Pedí tu presupuesto personalizado en menos de 24 horas](/contacto?plan=Cotización+Web).`,
-    relatedPosts: [1, 6, 101]
-  },
-  {
     id: 903,
     slug: 'por-que-mi-pagina-web-no-aparece-en-google-7-errores-fatales',
-    title: '¿Por qué mi página web no aparece en Google? 7 Errores Fatales que debes corregir YA',
+    title: '¿Por qué mi página web no aparece en Google? 7 Errores Fatales que debés corregir YA',
     seoTitle: 'Mi Web No Aparece en Google: 7 Errores y Soluciones | Websy',
-    seoDescription: 'Descubre los 7 errores técnicos más comunes por los que Google ignora tu sitio web y cómo solucionarlos paso a paso para empezar a recibir visitas orgánicas.',
+    seoDescription: 'Descubrí los 7 errores técnicos más comunes por los que Google ignora tu sitio web y cómo solucionarlos paso a paso para empezar a recibir visitas orgánicas.',
     seoKeywords: 'mi pagina no aparece en google, por que google no muestra mi web, errores seo pagina web, no aparezco en google, indexar pagina web en google',
     category: 'SEO & Marketing',
     date: '2026-07-31',
@@ -220,7 +163,7 @@ En [Websy diagnosticamos y corregimos estos 7 errores en tiempo récord](/servic
     slug: 'como-crear-una-tienda-online-desde-cero-paso-a-paso',
     title: 'Cómo crear una tienda online desde cero en 2026: Guía Paso a Paso para vender por internet',
     seoTitle: 'Cómo Crear una Tienda Online Paso a Paso 2026 | Websy',
-    seoDescription: 'Aprende a montar tu tienda online desde cero: elegir plataforma, subir productos, configurar pagos con MercadoPago y empezar a vender por internet hoy.',
+    seoDescription: 'Aprendé a montar tu tienda online desde cero: elegir plataforma, subir productos, configurar pagos con MercadoPago y empezar a vender por internet hoy.',
     seoKeywords: 'como crear una tienda online, vender por internet, crear ecommerce desde cero, montar tienda online argentina, vender productos por internet',
     category: 'E-commerce',
     date: '2026-07-31',
@@ -249,7 +192,7 @@ Antes de tocar cualquier herramienta tecnológica, necesitás responder:
 | **Tiendanube** | PyMEs Argentina/Brasil (inicio rápido) | Desde $0 (plan gratuito) | 2% en plan gratis |
 | **Shopify** | Negocios con proyección internacional | Desde $29 USD/mes | 0% con Shopify Payments |
 | **WooCommerce** | Quien ya tiene WordPress | Gratis (plugin) + hosting | 0% (solo comisión de pasarela) |
-| **Desarrollo a Medida (Websy)** | Negocios que necesitan diferenciarse | Desde $1.200 USD (pago único) | 0% (solo comisión de pasarela) |
+| **Desarrollo a Medida (Websy)** | Negocios que necesitan diferenciarse | Desde USD 1.800 (pago único) | 0% (solo comisión de pasarela) |
 
 ---
 
@@ -286,7 +229,7 @@ En [Websy creamos tiendas online profesionales que realmente venden](/servicios/
     slug: 'landing-page-que-es-y-como-crear-una-que-convierta-clientes',
     title: '¿Qué es una Landing Page y cómo crear una que convierta visitantes en clientes?',
     seoTitle: 'Landing Page: Qué es y Cómo Crear Una que Venda | Websy',
-    seoDescription: 'Aprende qué es una landing page, por qué es diferente a un sitio web y las 7 reglas de diseño para que convierta el máximo de visitantes en contactos de venta.',
+    seoDescription: 'Aprendé qué es una landing page, por qué es diferente a un sitio web y las 7 reglas de diseño para que convierta el máximo de visitantes en contactos de venta.',
     seoKeywords: 'que es una landing page, como crear landing page, landing page para ventas, pagina de aterrizaje, diseño landing page profesional',
     category: 'SEO & Marketing',
     date: '2026-07-30',
@@ -335,7 +278,7 @@ En [Websy diseñamos Landing Pages de alta conversión que generan resultados re
     slug: 'como-conseguir-clientes-por-internet-para-mi-negocio',
     title: 'Cómo conseguir clientes por internet para mi negocio: 5 Estrategias que funcionan en 2026',
     seoTitle: 'Cómo Conseguir Clientes por Internet: 5 Estrategias | Websy',
-    seoDescription: 'Descubre 5 estrategias probadas para atraer clientes desde internet: SEO, redes sociales, Google Ads, email marketing y WhatsApp Business.',
+    seoDescription: 'Descubrí 5 estrategias probadas para atraer clientes desde internet: SEO, redes sociales, Google Ads, email marketing y WhatsApp Business.',
     seoKeywords: 'como conseguir clientes por internet, atraer clientes online, conseguir clientes para mi negocio, marketing digital pymes, vender servicios por internet',
     category: 'SEO & Marketing',
     date: '2026-07-29',
@@ -391,7 +334,7 @@ En [Websy te ayudamos a construir un sistema completo de captación de clientes 
     slug: 'diferencia-entre-pagina-web-y-aplicacion-web-cual-necesito',
     title: '¿Cuál es la diferencia entre una Página Web y una Aplicación Web? ¿Cuál necesita mi negocio?',
     seoTitle: 'Página Web vs Aplicación Web: Diferencias y Cuál Elegir | Websy',
-    seoDescription: 'Entiende la diferencia técnica entre un sitio web informativo y una aplicación web interactiva. Descubre cuál es la mejor opción para tu negocio.',
+    seoDescription: 'Entiende la diferencia técnica entre un sitio web informativo y una aplicación web interactiva. Descubrí cuál es la mejor opción para tu negocio.',
     seoKeywords: 'diferencia pagina web aplicacion web, que es una web app, sitio web vs aplicacion, necesito pagina web o app, desarrollo web app a medida',
     category: 'Desarrollo Web',
     date: '2026-07-28',

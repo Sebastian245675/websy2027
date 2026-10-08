@@ -1,0 +1,63 @@
+# Websy
+
+> Websy es una agencia de desarrollo web y software de Salta, Argentina, que trabaja a distancia con empresas de toda Latinoamérica y Estados Unidos. Hace páginas web, tiendas online, sistemas de gestión a medida, aplicaciones móviles y automatizaciones con IA. Tiene proyectos publicados en Argentina, Colombia, México y Estados Unidos.
+
+## Datos clave
+
+- Ubicación: Salta, Argentina. Atiende a distancia en Argentina, México, Colombia, Chile, Perú, Uruguay, el resto de Latinoamérica y Estados Unidos.
+- Precios orientativos: sitios institucionales y landing pages desde USD 800; tiendas online de USD 1.800 a 3.500; sistemas de gestión para pymes de USD 4.000 a 8.000.
+- Plazos habituales: landing page en 5 a 7 días hábiles; sitio institucional en 2 a 3 semanas; tienda online en 3 a 6 semanas.
+- Forma de pago: 30% al inicio, 30% a mitad del proyecto y 40% en la entrega. Argentina: Naranja X o Mercado Pago. Exterior: Dólar App o Binance.
+- Rubros con proyectos publicados: estudios jurídicos, psicología, tiendas online, sistemas de gestión, industria y servicios, hotelería, inmobiliarias.
+- Contacto: WhatsApp +54 9 388 484-6695 · https://www.websysrl.com/contacto
+- Precios y planes: https://www.websysrl.com/planes
+
+## Servicios
+
+- [Desarrollo Web Profesional](https://www.websysrl.com/servicios/desarrollo-web)
+- [Tiendas E-commerce](https://www.websysrl.com/servicios/ecommerce)
+- [Aplicaciones Móviles](https://www.websysrl.com/servicios/aplicaciones-moviles)
+- [Automatizaciones con IA](https://www.websysrl.com/servicios/automatizaciones-ia)
+- [SEO & Marketing Digital](https://www.websysrl.com/servicios/seo-marketing)
+- [Sistemas CRM, ERP & Gestión](https://www.websysrl.com/servicios/sistemas-gestion)
+
+## Ejemplos por rubro
+
+- [Páginas web para abogados: ejemplos reales y qué tiene que tener la tuya](https://www.websysrl.com/casos-de-exito/paginas-web-para-abogados)
+- [Páginas web para psicólogos: ejemplos reales de consultorios](https://www.websysrl.com/casos-de-exito/paginas-web-para-psicologos)
+- [Ejemplos de tiendas online hechas a medida](https://www.websysrl.com/casos-de-exito/ejemplos-de-tiendas-online)
+- [Ejemplos de sistemas de gestión a medida para pymes](https://www.websysrl.com/casos-de-exito/ejemplos-de-sistemas-de-gestion-a-medida)
+- [Páginas web para empresas e industria: ejemplos reales](https://www.websysrl.com/casos-de-exito/paginas-web-para-empresas)
+- [Páginas web para hoteles y glamping: ejemplos reales](https://www.websysrl.com/casos-de-exito/paginas-web-para-hoteles)
+- [Páginas web para inmobiliarias y arquitectos: ejemplos reales](https://www.websysrl.com/casos-de-exito/paginas-web-para-inmobiliarias)
+
+## Casos de éxito
+
+- [Página web para abogados penalistas en Bogotá: LM & Asociados](https://www.websysrl.com/casos-de-exito/pagina-web-abogados-penalistas-bogota-lm-asociados): Sitio para una firma de derecho penal con sede en Bogotá y cobertura nacional.
+- [Página web para abogada penalista en Cali: Dra. Nancy Melo](https://www.websysrl.com/casos-de-exito/pagina-web-abogada-penalista-cali-nancy-melo): Sitio para un despacho jurídico de Cali con asesoría presencial y virtual en derecho penal, justicia penal militar y derechos humanos.
+- [Página web para estudio jurídico en Salta: Ruarte & Ruarte](https://www.websysrl.com/casos-de-exito/pagina-web-estudio-juridico-salta-ruarte): Landing page para un estudio de abogados de Salta que trabaja derecho penal y derecho canábico.
+- [Página web para consultorio de psicoterapia en Bogotá: Entre Relatos](https://www.websysrl.com/casos-de-exito/pagina-web-psicologos-bogota-entre-relatos): Sitio para un consultorio de psicoterapia con dos sedes en Bogotá (La Castellana y Galerías) y modalidad virtual, para adolescentes, adultos y parejas.
+- [Página web para psicóloga en Bogotá: SemillaMind](https://www.websysrl.com/casos-de-exito/pagina-web-psicologa-bogota-semillamind): Sitio informativo para un consultorio de psicología en Bogotá con terapia presencial y online.
+- [Página web para psicóloga online internacional: Estefany Lozano](https://www.websysrl.com/casos-de-exito/pagina-web-psicologa-online-estefany-lozano): Plataforma para atención psicoterapéutica por videollamada dirigida a hispanohablantes de cualquier país.
+- [Tienda online para perfumería y regalería: VISFUM](https://www.websysrl.com/casos-de-exito/tienda-online-perfumeria-visfum): Tienda online de perfumería, regalería y productos para el hogar, hecha a medida.
+- [Tienda online con panel de administración: Regala Algo](https://www.websysrl.com/casos-de-exito/tienda-online-regalos-panel-admin-regala-algo): Tienda online de regalería y electrodomésticos con un panel administrativo propio para gestionar inventario, pedidos y análisis de ventas.
+- [E-commerce B2B de materiales eléctricos en Odoo: Covenant](https://www.websysrl.com/casos-de-exito/ecommerce-materiales-electricos-odoo-covenant): E-commerce de materiales eléctricos e iluminación profesional construido sobre Odoo.
+- [Tienda online para veterinaria y productos para mascotas: Animal Path](https://www.websysrl.com/casos-de-exito/tienda-online-veterinaria-animal-path): Sitio web de una clínica veterinaria con tienda online de productos para mascotas: collares, correas, pretales y ropa.
+- [Sistema de gestión para 4 sucursales con tienda online: bicicletería en México](https://www.websysrl.com/casos-de-exito/sistema-gestion-sucursales-tienda-online-bicicleteria-mexico): Sistema de gestión para una cadena de bicicletas con 4 sucursales en México, más una tienda online conectada al mismo sistema.
+- [Software de gestión ganadera a medida: Koziura](https://www.websysrl.com/casos-de-exito/software-gestion-ganadera-tambo-koziura): Sistema de gestión hecho a medida para una granja, con módulos de partos, registro de leche, control de movimientos, proveedores y otras funciones para administrar una operación ganadera completa.
+- [Sistema para farmacias con punto de venta e inventario: FarmaDesk](https://www.websysrl.com/casos-de-exito/sistema-farmacia-punto-de-venta-inventario-farmadesk): Sistema web para farmacias con punto de venta, control de inventario de medicamentos, alertas cuando un producto baja de su stock mínimo y reportes diarios.
+- [Página web para empresa de seguridad contra incendios: Jujuy MultiServicios](https://www.websysrl.com/casos-de-exito/pagina-web-seguridad-contra-incendios-jujuy-multiservicios): Sitio corporativo para una empresa de ingeniería y seguridad contra incendios que opera en Jujuy y el NOA. Presenta auditoría, ingeniería, montaje, mantenimiento NFPA y capacitación; organiza las soluciones por sector y recibe consultas por WhatsApp y formulario.
+- [Página web para empresa de logística minera: M Logística y Distribución](https://www.websysrl.com/casos-de-exito/pagina-web-empresa-logistica-litio-m-logistica): Sitio web corporativo para una empresa de Salta especializada en el transporte premium de litio, hidróxido y carbonato para exportación.
+- [Página web para productora de eventos con SEO local: Remix Producciones](https://www.websysrl.com/casos-de-exito/pagina-web-productora-eventos-manizales-remix): Plataforma oficial de una productora con más de 20 años de experiencia en Manizales y el Eje Cafetero.
+- [Página web para fábrica de protección industrial: ABO Colombia](https://www.websysrl.com/casos-de-exito/pagina-web-fabrica-forros-industriales-abo-colombia): Sitio web para una empresa colombiana que fabrica forros y protección industrial y comercial.
+- [Web con automatización para empresa de paisajismo en Estados Unidos: STL Gold Landscaping](https://www.websysrl.com/casos-de-exito/web-y-automatizacion-paisajismo-estados-unidos-stl-gold): Sitio de servicios para una empresa de paisajismo y mantenimiento de jardines en St. Louis, con una automatización para responder consultas.
+- [Plataforma web para agencia de importación desde China: Konnect](https://www.websysrl.com/casos-de-exito/plataforma-web-importacion-china-konnect): Plataforma web y canal de venta digital para Konnect, empresa de agenciamiento y logística que importa productos de China a Latinoamérica.
+- [Página web para glamping y hotel boutique: Mágica Luna](https://www.websysrl.com/casos-de-exito/pagina-web-glamping-hotel-colombia-magica-luna): Sitio oficial de un hotel glamping de alta gama en Colombia, con una experiencia inmersiva que refleja la marca del lugar, reservas por WhatsApp y una optimización SEO pensada para que Google muestre el alojamiento con sus servicios y valoraciones.
+- [Plataforma web para inmobiliaria con buscador de propiedades: CASAMAX](https://www.websysrl.com/casos-de-exito/plataforma-inmobiliaria-propiedades-casamax): Plataforma inmobiliaria para descubrir propiedades con filtros por operación y tipo, fichas de detalle, favoritos, alertas e historial.
+- [Ejemplo de página web para estudio de arquitectura: Nórdica](https://www.websysrl.com/casos-de-exito/demo-pagina-web-estudio-arquitectura-nordica): Demo de sitio web para un estudio de arquitectura, diseño y construcción, con identidad visual editorial, servicios integrales, galería de proyectos y contacto directo por WhatsApp. Sirve como punto de partida para estudios que quieren ver cómo quedaría su web antes de encargarla.
+- [Landing page para servicios online: Cuervo Tarot](https://www.websysrl.com/casos-de-exito/landing-page-tarot-online-cuervo-tarot): Landing page para un servicio de lecturas de tarot y runas online.
+
+## Más
+
+- [Todos los casos de éxito](https://www.websysrl.com/casos-de-exito)
+- [Blog](https://www.websysrl.com/blog): guías sobre desarrollo web, e-commerce, SEO y automatización para pymes de Latinoamérica.

@@ -4,16 +4,16 @@ export const es = {
         home: 'Inicio',
         services: 'Servicios',
         portfolio: 'Casos de Éxito',
-        plans: 'Planes',
+        plans: 'Inversión',
         about: 'Nosotros',
         testimonials: 'Testimonios',
-        contact: 'CONTÁCTANOS'
+        contact: 'CONTACTO'
     },
 
     // Hero Section
     hero: {
         title: 'Agencia de Desarrollo de Software',
-        subtitle: 'Impulsa el crecimiento de tu negocio con desarrollo a la medida',
+        subtitle: 'Impulsá el crecimiento de tu negocio con desarrollo a medida',
         description: '',
         cta: 'Solicitar Cotización',
         viewPortfolio: 'Ver Portfolio',
@@ -60,7 +60,7 @@ export const es = {
                 title: 'Soluciones',
                 description: 'Nuestras soluciones propias (IPs) te ayudan a acelerar la innovación e impulsar la excelencia operativa.',
                 tags: ['Plataforma de Pagos Integrada', 'Estudio de Crédito Digital', 'Escaneo Inteligente 360'],
-                linkText: 'Explora todas las soluciones'
+                linkText: 'Explorá todas las soluciones'
             }
         },
         webDesign: {
@@ -211,34 +211,10 @@ export const es = {
         }
     },
 
-    // Testimonials
-    testimonials: {
-        title: 'Testimonios',
-        items: [
-            {
-                name: 'María González',
-                company: 'Restaurante La Cabaña',
-                position: 'Gerente General',
-                text: 'La verdad que al principio tenía mis dudas porque nunca habíamos trabajado con una agencia de acá. Pero desde el primer día fueron súper claros con todo. Nos hicieron el sitio y el sistema de reservas, y ahora tenemos muchísimas más reservas por internet. Antes nos llamaban por teléfono y se nos complicaba organizar todo, ahora está todo automatizado. Los recomiendo totalmente.'
-            },
-            {
-                name: 'Carlos Rodríguez',
-                company: 'Distribuidora R&S',
-                position: 'Director Comercial',
-                text: 'Trabajamos con Websy porque necesitábamos algo específico para nuestro negocio. No queríamos un sistema genérico que no se adaptara a lo que hacemos. Se tomaron el tiempo de entender cómo trabajamos y armaron algo que realmente funciona. Ahora todo está más organizado y perdemos menos tiempo con cosas manuales. El equipo es muy profesional y siempre están disponibles cuando necesitamos algo.'
-            },
-            {
-                name: 'Ana Martínez',
-                company: 'Consultoría AM',
-                position: 'Fundadora',
-                text: 'Necesitaba una página web para mi consultoría y no tenía idea por dónde empezar. Me contacté con Websy y me explicaron todo paso a paso. Lo mejor es que me escucharon y entendieron qué necesitaba, no me vendieron algo que no me servía. La página quedó genial, se ve profesional y ya me contactaron varios clientes nuevos por ahí. Estoy muy contenta con el resultado.'
-            }
-        ]
-    },
 
     // Contacto
     contact: {
-        title: 'Contáctanos',
+        title: 'Contacto',
         subtitle: '¿Cómo podemos ayudarte?',
         mainHeading: '¿Cómo podemos ayudarte?',
         description: '',
@@ -275,7 +251,7 @@ export const es = {
             fullName: 'Tu nombre completo',
             email: 'tu@email.com',
             companyName: 'Nombre de tu empresa',
-            projectDetails: 'Cuéntanos más detalles sobre tu proyecto, funcionalidades requeridas, plazos, etc.'
+            projectDetails: 'Contanos más sobre tu proyecto: qué necesitás, funcionalidades, plazos, etc.'
         },
         selectOptions: {
             select: 'Seleccionar',
@@ -307,7 +283,7 @@ export const es = {
     about: {
         title: 'Quiénes Somos',
         subtitle: 'Hacemos páginas Web que no solo se ven bien…funcionan',
-        description: 'En Websy ayudamos a emprendedores, profesionales y pymes a tener presencia digital de manera simple, accesible y profesional. Hoy en día tu página web es un activo más ya que ayuda a expandir tus fronteras, escala tu negocio y trabaja para ti 24/7.',
+        description: 'En Websy ayudamos a emprendedores, profesionales y pymes a tener presencia digital de manera simple, accesible y profesional. Hoy en día tu página web es un activo más ya que ayuda a expandir tus fronteras, escala tu negocio y trabaja para vos 24/7.',
         mission: 'Nuestra Misión',
         vision: 'Nuestra Visión',
         values: 'Nuestros Valores',
@@ -337,30 +313,19 @@ export const es = {
 
     // Footer
     footer: {
-        discoverMore: 'Descubre más sobre Websy',
-        stayInformed: 'Mantente informado',
-        subscribe: 'Suscríbete',
-        followUs: 'Síguenos en',
-        description: 'Fundada en 2025, Websy es una agencia de desarrollo web y automatizaciones en Salta. Nos basamos en conocimientos y resultados para ayudar a acelerar el rendimiento de tus inversiones.',
-        copyright: 'Websy Inc.',
-        company: {
-            title: 'Compañía',
-            about: 'Sobre nosotros',
-            esg: 'ESG',
-            news: 'Noticias',
-            offices: 'Oficinas'
-        },
-        resources: {
-            title: 'Centro de Recursos',
-            articles: 'Artículos',
-            blogs: 'Blogs',
-            successCases: 'Casos de éxito',
-            seeMore: 'Ver más'
-        },
-        help: {
-            title: 'Ayuda',
-            accessibility: 'Accesibilidad',
-            legal: 'Aviso legal',
+        description: 'Agencia de desarrollo web y automatizaciones en Salta, Argentina.',
+        copyright: 'Websy',
+        followUs: 'Seguinos',
+        whatsappCta: 'Escribinos por WhatsApp',
+        sitemap: 'Sitio',
+        contactTitle: 'Contacto',
+        legalTitle: 'Legal',
+        links: {
+            services: 'Servicios',
+            cases: 'Casos de éxito',
+            investment: 'Inversión',
+            blog: 'Blog',
+            contact: 'Contacto',
             privacy: 'Política de privacidad'
         }
     }

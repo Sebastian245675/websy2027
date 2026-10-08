@@ -64,7 +64,7 @@ En [Websy migramos sitios de WordPress a React/Next.js sin perder SEO](/servicio
     slug: 'inteligencia-artificial-chatgpt-como-usarlo-en-tu-empresa-ejemplos',
     title: 'ChatGPT para Empresas: 15 Formas Prácticas de usar IA para ahorrar tiempo y ganar más',
     seoTitle: 'ChatGPT para Empresas: 15 Usos Prácticos | Websy',
-    seoDescription: 'Descubre 15 formas concretas de usar ChatGPT y la IA en tu empresa: atención al cliente, ventas, marketing, RRHH, operaciones y más.',
+    seoDescription: 'Descubrí 15 formas concretas de usar ChatGPT y la IA en tu empresa: atención al cliente, ventas, marketing, RRHH, operaciones y más.',
     seoKeywords: 'chatgpt para empresas, como usar chatgpt en mi negocio, inteligencia artificial empresas, ia para negocios, chatgpt uso empresarial',
     category: 'IA & Automatización',
     date: '2026-08-01',
@@ -166,7 +166,7 @@ Cuando el usuario hace clic, algo debe pasar visiblemente (animación, color, me
 
 ---
 
-En [Websy el diseño UX/UI es parte fundamental de cada proyecto](/servicios/diseno-ux-ui). [Mejorá la experiencia de tu web](/contacto).`,
+En [Websy el diseño UX/UI es parte fundamental de cada proyecto](/servicios/desarrollo-web). [Mejorá la experiencia de tu web](/contacto).`,
     relatedPosts: [706, 704, 1010]
   },
   {

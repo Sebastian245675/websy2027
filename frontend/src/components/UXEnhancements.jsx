@@ -70,7 +70,7 @@ export class ErrorBoundary extends React.Component {
               ¡Ups! Algo salió mal
             </h2>
             <p className="mb-6" style={{ color: 'var(--text-secondary)' }}>
-              Ha ocurrido un error inesperado. Por favor, intenta recargar la página.
+              Ocurrió un error inesperado. Probá recargar la página.
             </p>
             <button
               onClick={() => window.location.reload()}

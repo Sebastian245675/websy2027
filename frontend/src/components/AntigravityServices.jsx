@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { openWhatsApp } from '../lib/tracking';
 import {
   Globe,
   Smartphone,
@@ -25,17 +26,26 @@ const serviceCategories = [
     description: 'Creamos soluciones web de alto rendimiento orientadas a conversiones, ventas y automatización operativa.',
     services: [
       {
+        id: 'web-institucional',
+        title: 'Sitios Institucionales',
+        description: 'La web de tu empresa: quiénes son, qué servicios ofrecen, casos y contacto directo por WhatsApp. Pensada para generar confianza y convertir visitas en consultas.',
+        tags: ['Diseño a medida de tu marca', 'Carga rápida en celular', 'Posicionamiento en Google'],
+        type: 'web',
+        plan: 'Sitio Institucional',
+        cta: 'Cotizar mi sitio institucional'
+      },
+      {
         id: 'web-landing',
         title: 'Landing Pages de Alta Conversión',
         description: 'Páginas de aterrizaje optimizadas para campañas publicitarias, diseñadas para captar leads y cerrar ventas velozmente.',
-        tags: ['Diseño Responsivo', 'Velocidad Carga < 1s', 'Integración WhatsApp & CRM'],
+        tags: ['Diseño Responsivo', 'Carga rápida en celular', 'Integración WhatsApp & CRM'],
         type: 'web',
         plan: 'Landing Page'
       },
       {
         id: 'web-ecommerce',
         title: 'E-Commerce & Tiendas Online',
-        description: 'Plataformas de comercio electrónico completas con carrito,pasarelas de pago (Mercado Pago, Stripe), inventario en tiempo real y facturación.',
+        description: 'Plataformas de comercio electrónico completas con carrito, pasarelas de pago (Mercado Pago, Stripe), inventario en tiempo real y facturación.',
         tags: ['Mercado Pago / Stripe', 'Gestión de Stock', 'Facturación Automática'],
         type: 'web',
         plan: 'E-Commerce'
@@ -149,11 +159,11 @@ const serviceCategories = [
     services: [
       {
         id: 'seo-google',
-        title: 'SEO & Posicionamiento en Buscadores (Google Top 1)',
-        description: 'Optimización técnica y estructural de tu web para escalar a las primeras posiciones orgánicas de Google y superar a tu competencia.',
+        title: 'SEO y Posicionamiento en Google',
+        description: 'Optimización técnica y de contenidos para que tu web gane posiciones en Google y te encuentren antes que a tu competencia.',
         tags: ['Google Search Console', 'Palabras Clave', 'SEO Local & Mapa'],
         type: 'seo',
-        plan: 'Estrategia SEO Google Top 1'
+        plan: 'Posicionamiento en Google (SEO)'
       },
       {
         id: 'seo-ads',
@@ -176,8 +186,7 @@ export const AntigravityServices = () => {
   };
 
   const handleWhatsApp = (service) => {
-    const text = encodeURIComponent(`¡Hola Websy! Me interesa solicitar información sobre el servicio: ${service.title}.`);
-    window.open(`https://wa.me/5493884846695?text=${text}`, '_blank');
+    openWhatsApp(`¡Hola Websy! Me interesa pedir información sobre el servicio: ${service.title}.`, `servicios_${service.id}`);
   };
 
   const filteredCategories = activeTab === 'all'
@@ -294,7 +303,7 @@ export const AntigravityServices = () => {
                           onClick={() => handleConsultar(service)}
                           className="flex items-center justify-center gap-3 px-6 py-3.5 bg-[#182A2C] hover:bg-black text-white font-bold text-xs uppercase tracking-widest transition-all duration-300 group-hover:bg-[#182A2C]"
                         >
-                          <span>Solicitar Cotización</span>
+                          <span>{service.cta || 'Solicitar Cotización'}</span>
                           <ArrowRight size={16} className="text-[#d9fb06] group-hover:translate-x-1 transition-transform" />
                         </button>
                         
@@ -334,7 +343,7 @@ export const AntigravityServices = () => {
                 Hablar con un Especialista
               </button>
               <button
-                onClick={() => window.open('https://wa.me/5493884846695?text=Hola%20Websy,%20quiero%20consultar%20por%20un%20proyecto%20a%20medida.', '_blank')}
+                onClick={() => openWhatsApp('Hola Websy, quiero consultar por un proyecto a medida.', 'servicios_banner')}
                 className="bg-white/10 hover:bg-white/20 text-white font-black px-8 py-4 uppercase text-xs tracking-widest border border-white/20 transition-all flex items-center justify-center gap-2"
               >
                 <MessageSquare size={16} />

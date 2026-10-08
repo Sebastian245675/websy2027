@@ -54,51 +54,11 @@ En [Websy desarrollamos aplicaciones móviles en React Native de alto rendimient
     relatedPosts: [202, 203, 205]
   },
   {
-    id: 202,
-    slug: 'cuanto-cuesta-desarrollar-una-app-movil-argentina-latam',
-    title: '¿Cuánto cuesta desarrollar una aplicación móvil en Argentina y LATAM en 2026?',
-    seoTitle: '¿Cuánto cuesta crear una App móvil en 2026? Guía de precios | Websy',
-    seoDescription: 'Conoce los precios reales de desarrollo de aplicaciones móviles en Argentina y Latinoamérica. Rangos de costos para apps MVP, corporativas y complejas.',
-    seoKeywords: 'cuanto cuesta crear una app, precio desarrollo app movil argentina, costo app ios android, presupuesto aplicacion movil',
-    category: 'Apps Móviles',
-    date: '2026-06-20',
-    readTime: '11 min',
-    image: null,
-    author: 'Sebastian Aguirre',
-    content: `Crear una aplicación móvil profesional es una decisión de inversión que transforma el modelo de negocio de una empresa. La pregunta recurrente de emprendedores y gerentes es: **¿cuánto presupuesto se necesita y de qué depende ese valor?**
-
-En esta guía desglosamos los costos reales de desarrollo de apps móviles en Argentina y Latinoamérica actualizados a 2026.
-
----
-
-## 1. Factores que Determinan el Costo de una App
-
-1. **Plataformas Soportadas**: Desarrollar en código multiplataforma (**React Native**) reduce los costos en hasta un 40% al compartir el 90% del código entre iOS y Android.
-2. **Complejidad del Backend y APIs**: Una app de catálogo es más económica que una plataforma de reservas en tiempo real con pasarelas de pago y mapas.
-3. **Notificaciones Push y Geolocalización en Tiempo Real**: Requieren servicios Serverless y bases de datos optimizadas.
-4. **Publicación en Tiendas**: Tarifas oficiales de Apple Developer Program (USD 99/año) y Google Play Console (USD 25 tarifa única).
-
----
-
-## 2. Rangos de Precios Estimados en LATAM (2026)
-
-| Tipo de Aplicación | Precio Estimado (USD) | Tiempo de Desarrollo | Ejemplos de Funcionalidades |
-| --- | --- | --- | --- |
-| **App MVP / Catálogo / Servicios** | USD 1.200 - 2.200 | 20 a 30 días | Catálogo, autenticación, envío a WhatsApp, panel admin |
-| **App Comercial / E-commerce / Citas** | USD 2.200 - 4.500 | 30 a 45 días | Pasarela MercadoPago/Stripe, reservas, notificaciones push |
-| **App Avanzada (Uber / Marketplace / Fintech)** | USD 4.500 - 8.500+ | 60 a 90 días | Mapas GPS en vivo, billetera digital, chat seguro, IA |
-
----
-
-En [Websy desarrollamos apps móviles ágiles y cotizamos proyectos a medida](/servicios/aplicaciones-moviles). [Contactate con nuestro equipo técnico](/contacto).`,
-    relatedPosts: [201, 203, 205]
-  },
-  {
     id: 203,
     slug: 'publicar-app-app-store-google-play-guia-paso-a-paso',
     title: 'Guía Completa para Publicar tu App en Apple App Store y Google Play Store sin Rechazos',
     seoTitle: 'Cómo publicar una App en App Store y Google Play paso a paso | Websy',
-    seoDescription: 'Aprende los requisitos técnicos y legales indispensables para aprobar y publicar tu aplicación móvil en iOS App Store y Google Play Console sin rechazos.',
+    seoDescription: 'Aprendé los requisitos técnicos y legales indispensables para aprobar y publicar tu aplicación móvil en iOS App Store y Google Play Console sin rechazos.',
     seoKeywords: 'publicar app app store google play, subir aplicacion play store, aprobar app ios apple, desarrollo apps moviles, politica de privacidad app',
     category: 'Apps Móviles',
     date: '2026-06-05',
@@ -113,7 +73,7 @@ El 40% de las aplicaciones subidas por primera vez son rechazadas por los reviso
 
 ## 1. Requisitos Previos e Cuentas de Desarrollador
 
-Antes de compilar tu proyecto para producción, debes dar de alta las cuentas oficiales de organización o desarrollador independiente en ambas plataformas.
+Antes de compilar tu proyecto para producción, debés dar de alta las cuentas oficiales de organización o desarrollador independiente en ambas plataformas.
 
 ### A. Google Play Console (Android)
 - **Costo**: $25 USD (pago único por cuenta).
@@ -169,8 +129,8 @@ Apple realiza una **revisión manual rigurosa** de cada aplicación ejecutada po
 
 ### Checklist Antirechazo para iOS (App Store Guidelines):
 - **Cero Enlaces Rotos o Contenido de Prueba**: No subas una app con botones que digan "próximamente" o imágenes tipo *Lorem Ipsum*.
-- **Credenciales de Prueba para Revisores**: Si tu app requiere inicio de sesión, debes crear una cuenta de usuario demo válida y proporcionar el usuario y contraseña en App Store Connect en el campo *Notes for Reviewer*.
-- **Compras dentro de la App (In-App Purchases)**: Si vendes productos digitales o suscripciones, debes usar obligatoriamente el SDK de Apple (In-App Purchase) y no un formulario web externo de tarjeta de crédito (salvo excepciones reguladas).
+- **Credenciales de Prueba para Revisores**: Si tu app requiere inicio de sesión, debés crear una cuenta de usuario demo válida y proporcionar el usuario y contraseña en App Store Connect en el campo *Notes for Reviewer*.
+- **Compras dentro de la App (In-App Purchases)**: Si vendés productos digitales o suscripciones, debés usar obligatoriamente el SDK de Apple (In-App Purchase) y no un formulario web externo de tarjeta de crédito (salvo excepciones reguladas).
 
 ---
 
@@ -198,7 +158,7 @@ En [Websy nos encargamos del desarrollo completo y la gestión de aprobación en
     slug: 'app-store-optimization-aso-como-posicionar-tu-app',
     title: 'ASO (App Store Optimization): Guía Definitiva para conseguir miles de descargas orgánicas',
     seoTitle: 'Guía de ASO (App Store Optimization): Posiciona tu App | Websy',
-    seoDescription: 'Descubre las estrategias de ASO indispensables para ubicar tu app móvil en los primeros puestos de búsqueda en App Store y Google Play sin gastar en anuncios.',
+    seoDescription: 'Descubrí las estrategias de ASO indispensables para ubicar tu app móvil en los primeros puestos de búsqueda en App Store y Google Play sin gastar en anuncios.',
     seoKeywords: 'aso app store optimization, posicionar app google play, conseguir descargas app, seo para aplicaciones moviles, palabras clave app store',
     category: 'Apps Móviles',
     date: '2026-05-22',
@@ -221,7 +181,7 @@ Las variables On-Metadata son los textos, imágenes y elementos que configuras e
 - **Límite**: 30 caracteres en ambas tiendas.
 
 ### B. Campo de Keywords Oculto (Exclusivo iOS App Store)
-- Apple ofrece un campo privado de 100 caracteres donde debes ingresar palabras clave separadas por comas.
+- Apple ofrece un campo privado de 100 caracteres donde debés ingresar palabras clave separadas por comas.
 - **Regla de Oro ASO**: No repitas palabras que ya estén en el Título o Subtítulo, no uses espacios después de las comas y evita incluir la palabra "app" o nombres de competidores registrados.
 
 ### C. Descripción y Palabras Clave (Google Play Store)
@@ -385,7 +345,7 @@ En [Websy ofrecemos planes de mantenimiento integral para apps móviles](/servic
     slug: 'seguridad-en-aplicaciones-moviles-cifrado-jwt-y-biometria',
     title: 'Seguridad en Aplicaciones Móviles: Cifrado de Datos, JWT y Autenticación Biométrica',
     seoTitle: 'Seguridad en Apps Móviles: Cifrado y Biometría | Websy',
-    seoDescription: 'Aprende a proteger tu aplicación móvil contra ingeniería inversa, robo de tokens de sesión y ataques a APIs con autenticación biométrica y cifrado.',
+    seoDescription: 'Aprendé a proteger tu aplicación móvil contra ingeniería inversa, robo de tokens de sesión y ataques a APIs con autenticación biométrica y cifrado.',
     seoKeywords: 'seguridad aplicaciones moviles, autenticacion biometrica react native, cifrado datos app ios android, jwt seguridad tokens mobile',
     category: 'Apps Móviles',
     date: '2026-07-31',

@@ -8,7 +8,6 @@ export const ServicesPage = () => {
       <SEOHead
         title="Servicios de Desarrollo Web, Apps Android & IA | Websy"
         description="Servicios completos de desarrollo web, tiendas e-commerce, apps móviles Android/iOS, automatizaciones con Inteligencia Artificial y sistemas a medida."
-        keywords="desarrollo web, e-commerce, apps android, aplicaciones moviles, chatbots whatsapp, inteligencia artificial, automatizaciones, CRM, ERP, SEO"
       />
       {/* Antigravity Services Section */}
       <AntigravityServices />

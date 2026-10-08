@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { companyInfo } from '../mockData';
 import { useLanguage } from '../LanguageContext';
 import { SEOHead } from '../components/SEOHead';
 // Use lazy Firebase loader - only loads Firebase when form is submitted
 import { saveCotizacion, sendCotizacionEmail } from '../firebaseLazy';
+import { AuditForm } from '../components/AuditForm';
+import { trackFormSubmit } from '../lib/tracking';
+import { whatsappUrl } from '../siteConfig';
 
 // SVG icons inline
 const SendIcon = ({ size = 20 }) => (
@@ -38,6 +41,13 @@ export const ContactPage = () => {
   const initialPlan = searchParams.get('plan') || '';
   const initialBudget = searchParams.get('budget') || '';
   const initialType = searchParams.get('type') || '';
+  const wantsAudit = searchParams.get('tipo') === 'auditoria' || /auditor/i.test(initialPlan);
+  const [activeTab, setActiveTab] = useState(wantsAudit ? 'auditoria' : 'cotizacion');
+
+  // Si ya estás en /contacto y llegás desde otro botón de auditoría, cambiar de pestaña
+  useEffect(() => {
+    if (wantsAudit) setActiveTab('auditoria');
+  }, [wantsAudit]);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -45,10 +55,8 @@ export const ContactPage = () => {
     company: '',
     projectType: initialType || (initialPlan ? 'web' : ''),
     budget: initialBudget || '',
-    message: initialPlan
-      ? (initialPlan.toLowerCase().includes('auditoría') || initialPlan.toLowerCase().includes('auditoria')
-          ? '¡Hola! Me gustaría solicitar mi Auditoría Web Gratuita (SEO, UX y Conversión) en tan solo 2 minutos para mi sitio web actual.'
-          : `¡Hola! Me interesa solicitar presupuesto sobre el servicio/plan: ${initialPlan}.`)
+    message: initialPlan && !wantsAudit
+      ? `¡Hola! Me interesa pedir presupuesto por el servicio/plan: ${initialPlan}.`
       : ''
   });
 
@@ -66,7 +74,7 @@ export const ContactPage = () => {
     setIsSubmitting(true);
 
     if (!formData.name || !formData.email || !formData.message || !formData.projectType) {
-      alert('Por favor completa todos los campos requeridos');
+      alert('Completá todos los campos obligatorios.');
       setIsSubmitting(false);
       return;
     }
@@ -95,7 +103,28 @@ export const ContactPage = () => {
         console.error('Failed to call sendCotizacionEmail function:', fnErr);
       }
 
-      alert('¡Gracias por tu consulta! Te contactaremos pronto.');
+      // ENVIAR A CRM WEBSY
+      try {
+        await fetch('https://backend.websysrl.com/api/public/forms/websy-contacto-landing/submissions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            formData: {
+              name: formData.name,
+              email: formData.email,
+              company: formData.company,
+              projectType: formData.projectType,
+              budget: formData.budget,
+              message: formData.message
+            }
+          })
+        });
+      } catch (crmErr) {
+        console.error('Failed to send to CRM:', crmErr);
+      }
+
+      trackFormSubmit('contacto');
+      alert('¡Gracias por tu consulta! Te contactamos en menos de 24 horas.');
       setFormData({
         name: '',
         email: '',
@@ -106,7 +135,7 @@ export const ContactPage = () => {
       });
     } catch (err) {
       console.error('Error saving cotizacion:', err);
-      alert('Error al enviar el mensaje. Por favor intenta nuevamente.');
+      alert('No pudimos enviar el mensaje. Probá de nuevo o escribinos por WhatsApp.');
     } finally {
       setIsSubmitting(false);
     }
@@ -117,15 +146,47 @@ export const ContactPage = () => {
       <SEOHead
         title="Contacto y Cotización Gratuita | Websy"
         description="Solicitá una cotización personalizada sin compromiso en 24hs para tu proyecto de desarrollo web, app móvil o automatización con IA."
-        keywords="contacto websy, cotización pagina web, desarrollo web Salta, presupuesto software, consulta desarrollo web"
       />
       {/* Contact Form Section - Clean CGI Style */}
       <section id="contact-form" className="py-8 sm:py-12 md:py-24 lg:py-32" style={{ backgroundColor: 'var(--bg-page)' }}>
         <div className="container px-4 md:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#182A2C] tracking-tight mb-3">Hablemos de tu proyecto</h1>
+            <p className="text-base sm:text-lg text-gray-600 mb-8 max-w-2xl">Pedí una auditoría gratuita de tu web o una cotización a medida. Respondemos en menos de 24 horas.</p>
+
+            <div role="tablist" aria-label="Tipo de consulta" className="inline-flex flex-wrap gap-2 mb-8 sm:mb-10">
+              {[
+                { id: 'auditoria', label: 'Auditoría web gratuita' },
+                { id: 'cotizacion', label: 'Pedir cotización' },
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  role="tab"
+                  type="button"
+                  aria-selected={activeTab === tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`px-5 py-3 text-xs sm:text-sm font-black uppercase tracking-[0.12em] border-2 transition-colors ${
+                    activeTab === tab.id ? 'bg-[#182A2C] border-[#182A2C] text-[#d9fb06]' : 'bg-white border-gray-200 text-[#182A2C] hover:border-[#182A2C]'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 lg:gap-16">
 
-              {/* Contact Form */}
+              {activeTab === 'auditoria' ? (
+                <div id="auditoria">
+                  <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+                    Auditoría web gratuita
+                  </h2>
+                  <p className="text-sm sm:text-base text-gray-600 mb-6">
+                    Revisamos tu web (o tu negocio, si todavía no tenés) y te mandamos por WhatsApp 3 mejoras concretas para conseguir más clientes.
+                  </p>
+                  <AuditForm source="auditoria" />
+                </div>
+              ) : (
               <div>
                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6 md:mb-8" style={{ color: 'var(--text-primary)', fontWeight: 600 }}>
                   {t('contact.requestQuote')}
@@ -281,6 +342,7 @@ export const ContactPage = () => {
                   </button>
                 </form>
               </div>
+              )}
 
               {/* Contact Information */}
               <div className="mt-6 sm:mt-8 lg:mt-0">
@@ -311,9 +373,9 @@ export const ContactPage = () => {
                       <h3 className="text-base sm:text-lg font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>
                         Teléfono
                       </h3>
-                      <p className="text-sm sm:text-base" style={{ color: 'var(--text-secondary)' }}>
-                        {companyInfo.phone}
-                      </p>
+                      <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" data-wa-location="contacto_datos" className="text-sm sm:text-base hover:underline" style={{ color: 'var(--text-secondary)' }}>
+                        {companyInfo.phone} (WhatsApp)
+                      </a>
                     </div>
                   </div>
 
@@ -325,9 +387,9 @@ export const ContactPage = () => {
                       <h3 className="text-base sm:text-lg font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>
                         Email
                       </h3>
-                      <p className="text-sm sm:text-base break-words" style={{ color: 'var(--text-secondary)' }}>
+                      <a href={`mailto:${companyInfo.email}`} className="text-sm sm:text-base break-words hover:underline" style={{ color: 'var(--text-secondary)' }}>
                         {companyInfo.email}
-                      </p>
+                      </a>
                     </div>
                   </div>
                 </div>
