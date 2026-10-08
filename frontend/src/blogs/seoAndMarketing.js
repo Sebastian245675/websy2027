@@ -167,6 +167,7 @@ En [Websy diagnosticamos y corregimos estos 7 errores en tiempo récord](/servic
     seoKeywords: 'como crear una tienda online, vender por internet, crear ecommerce desde cero, montar tienda online argentina, vender productos por internet',
     category: 'E-commerce',
     date: '2026-07-31',
+    updated: '2026-10-07',
     readTime: '16 min',
     image: null,
     author: 'Sebastian Aguirre',

@@ -66,6 +66,7 @@
       "/blog",
       "/politica-de-privacidad",
       "/servicios/desarrollo-web",
+      "/servicios/ui-ux",
       "/servicios/ecommerce",
       "/servicios/aplicaciones-moviles",
       "/servicios/automatizaciones-ia",
@@ -114,7 +115,6 @@
       "/blog/inteligencia-artificial-chatgpt-como-usarlo-en-tu-empresa-ejemplos",
       "/blog/transformacion-digital-pymes-que-es-como-empezar-guia",
       "/blog/pagina-web-para-restaurantes-carta-digital-pedidos-online",
-      "/blog/cuanto-cuesta-desarrollar-una-aplicacion-movil-precios-reales",
       "/blog/tendencias-desarrollo-web-2026-tecnologias-frameworks",
       "/blog/como-aparecer-en-google-primeros-resultados-guia-seo-2026",
       "/blog/diseno-ux-ui-que-es-por-que-importa-para-tu-negocio",
@@ -226,6 +226,7 @@
       "/blog/desarrollo-web-para-inmobiliarias-y-proptech-catalogos-interactivos",
       "/blog/desarrollo-web-react-vs-wordpress-guia-comparativa",
       "/blog/desarrollo-de-apis-rest-graphql-microservicios",
+      "/blog/cuanto-cuesta-desarrollar-una-app-movil-argentina-latam",
       "/blog/core-web-vitals-como-optimizar-velocidad-web-posicionamiento-google",
       "/blog/tendencias-diseno-web-2026-glassmorphism-microinteracciones-modo-oscuro",
       "/blog/que-es-rag-retrieval-augmented-generation-ia-empresas",
@@ -235,7 +236,8 @@
       "/blog/como-migrar-un-sistema-legacy-excel-a-un-sistema-web-moderno",
       "/blog/publicar-app-app-store-google-play-guia-paso-a-paso",
       "/blog/desarrollo-de-software-fintech-pasarelas-prestamos-billeteras-virtuales",
-      "/blog/app-store-optimization-aso-como-posicionar-tu-app"
+      "/blog/app-store-optimization-aso-como-posicionar-tu-app",
+      "/404"
     ]
   }
 }

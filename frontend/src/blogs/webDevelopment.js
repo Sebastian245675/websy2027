@@ -8,6 +8,7 @@ export const webDevelopmentPosts = [
     seoKeywords: 'cuanto cuesta pagina web argentina, precio web argentina, costo desarrollo web, presupuesto pagina web, diseño web precios argentina 2026, cuanto cobra un programador web',
     category: 'Desarrollo Web',
     date: '2026-07-15',
+    updated: '2026-10-07',
     readTime: '15 min',
     image: null,
     author: 'Sebastian Aguirre',

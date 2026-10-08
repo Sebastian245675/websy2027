@@ -92,6 +92,7 @@ En [Websy te ayudamos a crear tu tienda online profesional y empezar a vender en
     seoKeywords: 'hacer pagina web gratis, crear web gratis, pagina web gratis para mi negocio, hacer web sin pagar, crear sitio web gratis 2026',
     category: 'Desarrollo Web',
     date: '2026-07-31',
+    updated: '2026-10-07',
     readTime: '12 min',
     image: null,
     author: 'Sebastian Aguirre',

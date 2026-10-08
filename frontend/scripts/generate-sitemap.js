@@ -1,21 +1,91 @@
 // Regenerates public/sitemap.xml from the real routes, services and blog posts.
 // Also keeps package.json "reactSnap.include" in sync. Runs automatically before every build ("prebuild").
+//
+// lastmod is the real date of the last change, never the build date (Google ignores lastmod when it is
+// always "today"):
+//   - pages: last git commit that touched the page file or any local module it imports (followed
+//     recursively), ignoring site-wide plumbing listed in SHARED_MODULES. Uncommitted changes count as today.
+//   - blog posts: `updated` if the post has it, otherwise `date`.
 const fs = require('fs');
 const path = require('path');
+const { execFileSync } = require('child_process');
 
 const SITE_URL = 'https://www.websysrl.com';
-const SRC = path.join(__dirname, '..', 'src');
+const ROOT = path.join(__dirname, '..');
+const SRC = path.join(ROOT, 'src');
 const today = new Date().toISOString().slice(0, 10);
 
+// Each indexable static route and the page component that renders it
 const staticPages = [
-  { loc: '/', changefreq: 'weekly', priority: '1.0' },
-  { loc: '/servicios', changefreq: 'monthly', priority: '0.9' },
-  { loc: '/planes', changefreq: 'weekly', priority: '0.9' },
-  { loc: '/casos-de-exito', changefreq: 'weekly', priority: '0.8' },
-  { loc: '/contacto', changefreq: 'monthly', priority: '0.9' },
-  { loc: '/blog', changefreq: 'daily', priority: '0.9' },
-  { loc: '/politica-de-privacidad', changefreq: 'yearly', priority: '0.2' },
+  { loc: '/', page: 'pages/HomePage.jsx', changefreq: 'weekly', priority: '1.0' },
+  { loc: '/servicios', page: 'pages/ServicesPage.jsx', changefreq: 'monthly', priority: '0.9' },
+  { loc: '/planes', page: 'pages/PlansPage.jsx', changefreq: 'monthly', priority: '0.9' },
+  { loc: '/casos-de-exito', page: 'pages/SuccessStoriesPage.jsx', changefreq: 'monthly', priority: '0.8' },
+  { loc: '/contacto', page: 'pages/ContactPage.jsx', changefreq: 'monthly', priority: '0.9' },
+  { loc: '/blog', page: 'pages/BlogPage.jsx', changefreq: 'weekly', priority: '0.9' },
+  { loc: '/politica-de-privacidad', page: 'pages/PrivacyPolicyPage.jsx', changefreq: 'yearly', priority: '0.2' },
 ];
+// Routes in App.js that are deliberately not in the sitemap
+const NOT_IN_SITEMAP = ['/panel-cotizaciones', '/lp/:slug', '*'];
+// Dynamic routes; their URLs come from services, case studies and blog posts below
+const DYNAMIC_ROUTES = ['/servicios/:slug', '/casos-de-exito/:slug', '/blog/:slug'];
+
+// A new public route in App.js must be added to staticPages (or to one of the lists above)
+const appRoutes = [...fs.readFileSync(path.join(SRC, 'App.js'), 'utf8').matchAll(/<Route path="([^"]+)"/g)].map((m) => m[1]);
+const unlisted = appRoutes.filter((r) => !staticPages.some((p) => p.loc === r) && !NOT_IN_SITEMAP.includes(r) && !DYNAMIC_ROUTES.includes(r));
+if (unlisted.length) {
+  console.error(`generate-sitemap: routes in App.js missing from the sitemap config: ${unlisted.join(', ')}`);
+  process.exit(1);
+}
+
+// Site-wide plumbing: changing these does not change what a page says
+const SHARED_MODULES = new Set([
+  'components/SEOHead.jsx', 'LanguageContext.js', 'translations.js', 'locales/es.js', 'locales/en.js',
+  'lib/tracking.js', 'firebase.js', 'firebaseLazy.js', 'components/UXEnhancements.jsx', 'components/LazyImage.jsx',
+  'components/LazyRenderSection.jsx', 'siteConfig.js',
+  'blogData.js', // posts carry their own dates; /blog adds the newest post date below
+]);
+
+const resolveImport = (from, spec) => {
+  const base = path.resolve(path.dirname(from), spec);
+  return ['', '.js', '.jsx', '/index.js'].map((ext) => base + ext).find((f) => fs.existsSync(f) && fs.statSync(f).isFile());
+};
+
+// The page file plus every local module it imports, recursively
+const sourcesOf = (file, seen = new Set()) => {
+  const rel = path.relative(SRC, file).split(path.sep).join('/');
+  if (seen.has(file) || SHARED_MODULES.has(rel)) return seen;
+  seen.add(file);
+  const code = fs.readFileSync(file, 'utf8');
+  for (const [, spec] of code.matchAll(/(?:from\s+|import\(\s*)['"](\.{1,2}\/[^'"]+)['"]/g)) {
+    const dep = resolveImport(file, spec);
+    if (dep) sourcesOf(dep, seen);
+  }
+  return seen;
+};
+
+const git = (args) => {
+  try {
+    return execFileSync('git', args, { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+  } catch {
+    return null;
+  }
+};
+
+// null when git is not available: the <lastmod> tag is then omitted rather than faked
+const lastmodOf = (files) => {
+  const rel = [...files].map((f) => path.relative(ROOT, f));
+  const dirty = git(['status', '--porcelain', '--', ...rel]);
+  if (dirty === null) return null;
+  if (dirty) return today;
+  return git(['log', '-1', '--format=%cs', '--', ...rel]) || null;
+};
+
+const pageLastmod = (...pageFiles) => {
+  const files = new Set();
+  pageFiles.forEach((f) => sourcesOf(path.join(SRC, f), files));
+  return lastmodOf(files);
+};
 
 // Paid-ads landing pages: prerendered for speed but kept out of the sitemap (they are noindex)
 const landingSlugs = [...fs.readFileSync(path.join(SRC, 'landingPages.js'), 'utf8')
@@ -30,16 +100,21 @@ const caseSlugs = [...casesSrc.matchAll(/^\s{4}slug:\s*'([^']+)'/gm)].map((m) =>
 const hubPaths = [...hubsSrc.matchAll(/^\s{4}path:\s*'([^']+)'/gm)].map((m) => m[1]);
 const casePages = [...hubPaths, ...caseSlugs].map((slug) => `/casos-de-exito/${slug}`);
 
-// Each post object declares `slug` before `date`; pair every slug with the first date that follows it
+// Each post object declares `slug`, then `date` and optionally `updated`, before the next post's `slug`
 const blogPosts = [];
 const blogDir = path.join(SRC, 'blogs');
 for (const file of fs.readdirSync(blogDir).filter((f) => f.endsWith('.js') && f !== 'index.js')) {
   const content = fs.readFileSync(path.join(blogDir, file), 'utf8');
-  const tokens = [...content.matchAll(/^\s*(slug|date):\s*['"]([^'"]+)['"]/gm)];
+  const tokens = [...content.matchAll(/^\s*(slug|date|updated):\s*['"]([^'"]+)['"]/gm)];
   tokens.forEach(([, key, value], i) => {
     if (key !== 'slug') return;
-    const next = tokens[i + 1];
-    blogPosts.push({ slug: value, date: next && next[1] === 'date' ? next[2] : today });
+    const post = { slug: value };
+    for (let j = i + 1; j < tokens.length && tokens[j][1] !== 'slug'; j++) post[tokens[j][1]] = tokens[j][2];
+    if (!post.date) {
+      console.error(`generate-sitemap: post ${value} (${file}) has no date`);
+      process.exit(1);
+    }
+    blogPosts.push(post);
   });
 }
 
@@ -49,17 +124,30 @@ const uniquePosts = blogPosts
   .sort((a, b) => b.date.localeCompare(a.date));
 
 const url = ({ loc, lastmod, changefreq, priority }) => `  <url>
-    <loc>${SITE_URL}${loc}</loc>
-    <lastmod>${lastmod}</lastmod>
+    <loc>${SITE_URL}${loc}</loc>${lastmod ? `
+    <lastmod>${lastmod}</lastmod>` : ''}
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>
   </url>`;
 
+const postLastmod = (p) => {
+  const d = p.updated && p.updated > p.date ? p.updated : p.date;
+  return d > today ? today : d;
+};
+const latest = (...dates) => dates.filter(Boolean).sort().pop() || null;
+const newestPost = latest(...uniquePosts.map(postLastmod));
+
+const servicesLastmod = pageLastmod('pages/ServiceDetailPage.jsx');
+const casesLastmod = pageLastmod('pages/CaseStudyPage.jsx');
+
 const entries = [
-  ...staticPages.map((p) => url({ ...p, lastmod: today })),
-  ...serviceSlugs.map((slug) => url({ loc: `/servicios/${slug}`, lastmod: today, changefreq: 'monthly', priority: '0.9' })),
-  ...casePages.map((loc) => url({ loc, lastmod: today, changefreq: 'monthly', priority: '0.8' })),
-  ...uniquePosts.map((p) => url({ loc: `/blog/${p.slug}`, lastmod: p.date > today ? today : p.date, changefreq: 'monthly', priority: '0.7' })),
+  ...staticPages.map((p) => url({
+    ...p,
+    lastmod: p.loc === '/blog' ? latest(pageLastmod(p.page), newestPost) : pageLastmod(p.page),
+  })),
+  ...serviceSlugs.map((slug) => url({ loc: `/servicios/${slug}`, lastmod: servicesLastmod, changefreq: 'monthly', priority: '0.9' })),
+  ...casePages.map((loc) => url({ loc, lastmod: casesLastmod, changefreq: 'monthly', priority: '0.8' })),
+  ...uniquePosts.map((p) => url({ loc: `/blog/${p.slug}`, lastmod: postLastmod(p), changefreq: 'monthly', priority: '0.7' })),
 ];
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>

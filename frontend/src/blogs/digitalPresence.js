@@ -476,6 +476,7 @@ En [Websy diseñamos identidad visual y branding completo para empresas](/servic
     seoKeywords: 'que es un crm, crm para pymes, crm ventas, sistema crm empresa, como usar crm, crm para pequeñas empresas',
     category: 'Sistemas & ERP',
     date: '2026-07-21',
+    updated: '2026-10-07',
     readTime: '12 min',
     image: null,
     author: 'Sebastian Aguirre',

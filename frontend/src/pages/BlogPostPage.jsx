@@ -244,7 +244,7 @@ export const BlogPostPage = () => {
       }
     },
     "datePublished": post.date,
-    "dateModified": post.date,
+    "dateModified": post.updated || post.date,
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": `https://www.websysrl.com/blog/${post.slug}`
