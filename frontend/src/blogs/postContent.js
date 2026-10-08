@@ -22,12 +22,19 @@ export const readEmbeddedContent = (slug) => {
   }
 };
 
+// With the asset/source rule from craco.config.js the import returns the markdown itself. If webpack runs
+// without that rule (for example a dev server started before the config changed) it returns the file's
+// URL instead: fetch it so the post still shows its content.
+const isAssetUrl = (value) => /^(\/|https?:)[^\n]*\.md$/.test(value.trim());
+
 export const loadPostContent = (slug) => {
   if (cache.has(slug)) return Promise.resolve(cache.get(slug));
-  return import(/* webpackChunkName: "post-[request]" */ `./posts/${slug}.md`).then((m) => {
-    cache.set(slug, m.default);
-    return m.default;
-  });
+  return import(/* webpackChunkName: "post-[request]" */ `./posts/${slug}.md`)
+    .then((m) => (isAssetUrl(m.default) ? fetch(m.default.trim()).then((r) => r.text()) : m.default))
+    .then((md) => {
+      cache.set(slug, md);
+      return md;
+    });
 };
 
 // JSON safe to put inside a <script> tag
