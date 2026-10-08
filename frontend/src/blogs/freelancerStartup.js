@@ -84,65 +84,6 @@ En [Websy te ayudamos a crear tu tienda online profesional y empezar a vender en
     relatedPosts: [904, 301, 1008]
   },
   {
-    id: 1302,
-    slug: 'cuanto-cuesta-desarrollar-una-aplicacion-movil-precios-reales',
-    title: '¿Cuánto cuesta desarrollar una aplicación móvil en 2026? Precios Reales por tipo de App',
-    seoTitle: 'Cuánto Cuesta Crear una App Móvil: Precios 2026 | Websy',
-    seoDescription: 'Tabla de precios actualizada para desarrollo de aplicaciones móviles en Latinoamérica. Apps simples, intermedias y complejas con costos desglosados.',
-    seoKeywords: 'cuanto cuesta una aplicacion movil, precio desarrollar app, costo crear app, cuanto sale hacer una app, presupuesto app movil, desarrollo app precio',
-    category: 'Apps Móviles',
-    date: '2026-08-01',
-    readTime: '14 min',
-    image: null,
-    author: 'Sebastian Aguirre',
-    content: `"¿Cuánto cuesta hacer una app?" es la pregunta que más recibimos después de "¿cuánto cuesta una página web?". Y la respuesta honesta es que el rango es enorme: desde $3.000 hasta $100.000+ USD dependiendo de la complejidad.
-
-En esta guía te damos precios reales de mercado actualizados a 2026, desglosados por tipo de app y funcionalidades.
-
----
-
-## Tabla de Precios por Complejidad
-
-| Tipo de App | Ejemplo | Funcionalidades | Tiempo | Precio (USD) |
-| --- | --- | --- | --- | --- |
-| **App Simple** | App de recetas, calculadora, informativa | 5-8 pantallas, sin backend | 1-2 meses | $3.000 - $8.000 |
-| **App con Login + CRUD** | App de tareas, diario personal | Login, base de datos, CRUD | 2-3 meses | $8.000 - $15.000 |
-| **App de E-commerce** | Tienda online con carrito y pagos | Catálogo, carrito, pagos, admin | 3-4 meses | $15.000 - $30.000 |
-| **App con Chat + Notificaciones** | App de delivery, mensajería | Real-time, push notifications, GPS | 4-6 meses | $25.000 - $50.000 |
-| **Marketplace / Red Social** | Tipo Airbnb, Uber | Multi-rol, matching, reviews, pagos | 6-12 meses | $50.000 - $150.000 |
-
----
-
-## ¿Qué incluye (y qué NO incluye) el precio?
-
-### Generalmente INCLUYE:
-- Diseño UX/UI en Figma
-- Desarrollo frontend (lo que ve el usuario)
-- Desarrollo backend (servidor, base de datos, APIs)
-- Testing y QA
-- Publicación en App Store y Google Play
-
-### Generalmente NO incluye:
-- **Hosting del servidor** ($10-100 USD/mes según tráfico)
-- **Cuenta de desarrollador Apple** ($99 USD/año)
-- **Cuenta de desarrollador Google** ($25 USD única vez)
-- **Mantenimiento post-lanzamiento** ($200-1.000 USD/mes)
-- **Marketing y adquisición de usuarios**
-
----
-
-## ¿Cómo reducir costos sin sacrificar calidad?
-
-1. **Empezar con un MVP**: Lanzar con las funcionalidades mínimas y agregar features según el feedback de usuarios reales.
-2. **Usar React Native o Flutter**: Cubrir iOS y Android con un solo desarrollo (ahorro del 40-60%).
-3. **Backend-as-a-Service**: Usar Firebase o Supabase en vez de un backend custom para features estándar (auth, storage, database).
-
----
-
-En [Websy desarrollamos apps móviles con React Native a precios competitivos](/servicios/aplicaciones-moviles). [Pedí tu presupuesto personalizado](/contacto).`,
-    relatedPosts: [1106, 201, 1104]
-  },
-  {
     id: 1303,
     slug: 'como-hacer-una-pagina-web-gratis-opciones-reales-ventajas-desventajas',
     title: '¿Se puede hacer una página web GRATIS? Opciones reales, ventajas y desventajas brutales',

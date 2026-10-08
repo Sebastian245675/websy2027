@@ -29,7 +29,7 @@ const MOST_READ_SLUGS = [
   'cuanto-cuesta-pagina-web-argentina-2026',
   'como-aparecer-en-google-primeros-resultados-guia-seo-2026',
   'chatbot-whatsapp-business-automatizar-respuestas-clientes',
-  'cuanto-cuesta-desarrollar-una-aplicacion-movil-precios-reales',
+  'cuanto-cuesta-desarrollar-una-app-movil-argentina-latam',
   'como-crear-una-tienda-online-desde-cero-paso-a-paso',
 ];
 
