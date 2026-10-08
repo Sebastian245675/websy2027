@@ -1,86 +1,83 @@
-Publicar una aplicación móvil en las dos tiendas principales — **Google Play Store** (para Android) y **Apple App Store** (para iOS)— requiere cumplir con un protocolo estricto de normativas de seguridad, políticas de privacidad, guías de diseño y requisitos técnicos.
+**Para publicar una app necesitas una cuenta de desarrollador en cada tienda (Google Play Console por USD 25 una sola vez y Apple Developer Program por USD 99 al año), la app compilada y firmada, una ficha con nombre, descripción, capturas e ícono, una política de privacidad y la declaración de qué datos usa la app; después la envías a revisión.** Google suele aprobar en pocos días; Apple revisa con más detalle y puede pedir cambios antes de publicar.
 
-El 40% de las aplicaciones subidas por primera vez son rechazadas por los revisores de Apple o Google por faltas de documentación o fallas en el flujo de autenticación. En este manual guía paso a paso te explicamos cómo preparar y subir tu app para garantizar una aprobación ágil y sin fricciones.
+En esta guía tienes el paso a paso para cada tienda, los requisitos que más rechazos generan, cómo preparar la ficha para que la app se descargue y qué hacer después del lanzamiento.
 
----
+## Antes de empezar: cuentas a nombre de la empresa
 
-## 1. Requisitos Previos e Cuentas de Desarrollador
-
-Antes de compilar tu proyecto para producción, debés dar de alta las cuentas oficiales de organización o desarrollador independiente en ambas plataformas.
-
-### A. Google Play Console (Android)
-- **Costo**: $25 USD (pago único por cuenta).
-- **Formato del Ejecutable**: En la actualidad Google exige el formato **Android App Bundle (.aab)** en lugar del antiguo .apk.
-- **Requisito de Pruebas (Google Play 2024/2026)**: Para cuentas personales creadas recientemente, Google exige que la app pase por un proceso de prueba cerrada con **al menos 20 testers durante 14 días continuos** antes de habilitar la publicación en producción.
-
-### B. Apple Developer Program (iOS)
-- **Costo**: $99 USD al año (suscripción renovable).
-- **Entorno Compilación**: Requiere una computadora macOS física o en la nube para ejecutar **Xcode** y firmar los certificados de distribución con tu ID de Apple.
-- **Identificador DUNS**: Si registras una cuenta de Empresa/Organización, Apple exige tramitar previamente el número DUNS internacional para verificar la existencia legal de la compañía.
-
----
-
-## 2. Documentos y Requisitos Legales Obligatorios
-
-Ambas tiendas rechazarán tu aplicación de forma inmediata si no proporcionas los siguientes enlaces públicos en la ficha de la tienda:
-
-1. **Política de Privacidad (Privacy Policy URL)**: Debe detallar explícitamente qué datos captura la app (geolocalización, contactos, almacenamiento, cámara), cómo se cifran y cómo el usuario puede solicitar la eliminación de su cuenta y datos.
-2. **URL de Soporte y Contacto**: Enlace a tu sitio web o email institucional de atención al cliente.
-3. **Mecanismo de Eliminación de Cuenta en la App**: Apple exige que si tu app permite crear una cuenta de usuario, debe ofrecer un botón visible dentro de la app para **borrar la cuenta y sus datos** sin obligar al usuario a enviar un correo.
-
----
-
-## 3. Guía Paso a Paso para la Publicación en Google Play Store
-
-```
-[ Compilar proyecto React Native / Flutter ] ──► (Generar bundle release .aab firmado)
-                                                        │
-                                                        ▼
-[ Cargar .aab en Google Play Console ] ───────► (Completar ficha de la tienda y screenshots)
-                                                        │
-                                                        ▼
-[ Enviar a Revisión Automática y Manual ] ────► (Aprobación entre 24 horas y 4 días)
-```
-
-### Paso 1: Configurar la Ficha de la Tienda (Store Listing)
-- **Título**: Máximo 30 caracteres (debe incluir la palabra clave principal de tu negocio).
-- **Descripción Corta**: Máximo 80 caracteres.
-- **Descripción Larga**: Hasta 4.000 caracteres optimizados para SEO interno (ASO).
-- **Recursos Gráficos**:
-  - Ícono en alta resolución (512x512 px PNG transparente).
-  - Gráfico de funciones promocional (1024x500 px).
-  - Al menos 4 capturas de pantalla por cada formato de dispositivo (Teléfono y Tablet).
-
-### Paso 2: Declaración de Permisos de Seguridad
-Debes justificar por qué tu app solicita acceso a la ubicación en segundo plano, cámara o almacenamiento. Solicitudes de permisos innecesarios provocan el rechazo automático.
-
----
-
-## 4. Guía Paso a Paso para la Publicación en Apple App Store
-
-Apple realiza una **revisión manual rigurosa** de cada aplicación ejecutada por ingenieros de la compañía en Cupertino.
-
-### Checklist Antirechazo para iOS (App Store Guidelines):
-- **Cero Enlaces Rotos o Contenido de Prueba**: No subas una app con botones que digan "próximamente" o imágenes tipo *Lorem Ipsum*.
-- **Credenciales de Prueba para Revisores**: Si tu app requiere inicio de sesión, debés crear una cuenta de usuario demo válida y proporcionar el usuario y contraseña en App Store Connect en el campo *Notes for Reviewer*.
-- **Compras dentro de la App (In-App Purchases)**: Si vendés productos digitales o suscripciones, debés usar obligatoriamente el SDK de Apple (In-App Purchase) y no un formulario web externo de tarjeta de crédito (salvo excepciones reguladas).
-
----
-
-## 5. Matriz Comparativa de Tiempos y Procesos
-
-| Característica | Google Play Store | Apple App Store |
+| Tienda | Costo | Requisitos para empresas |
 | --- | --- | --- |
-| **Costo de Registro** | $25 USD (Único) | $99 USD / año |
-| **Formato de Entrega** | Android App Bundle (.aab) | iOS App Archive (.ipa via Xcode) |
-| **Tiempo Medio de Revisión** | 24 horas a 4 días | 24 a 48 horas |
-| **Requisito de Testers** | 20 testers (14 días en cuentas nuevas) | Opcional (TestFlight) |
-| **Revisión de Contenido** | Algorítmico + Manual | 100% Manual por Ingeniero |
+| Google Play Console | USD 25, pago único | Datos de la organización y verificación de identidad |
+| Apple Developer Program | USD 99 por año | Número D-U-N-S de la empresa, sitio web y datos legales |
 
----
+Abre las cuentas a nombre de tu empresa, no del desarrollador. Si la relación con el proveedor termina, la app sigue siendo tuya. El número D-U-N-S para Apple es gratuito pero puede tardar en emitirse: pídelo con anticipación.
 
-## 6. Recomendaciones Post-Lanzamiento de Websy
+## Paso a paso en Google Play
 
-Una vez aprobada tu app en ambas tiendas, asegúrate de monitorear las métricas de rendimiento y fallos (Crashes) usando herramientas como **Firebase Crashlytics**. Responder a las primeras reseñas de los usuarios en menos de 24 horas aumenta significativamente la puntuación y el posicionamiento en los rankings orgánicos.
+1. **Crea la app** en Play Console: nombre, idioma, si es app o juego, gratuita o paga.
+2. **Completa el contenido de la app**: política de privacidad, acceso para revisión (usuario de prueba si hay login), anuncios, clasificación de contenido, público objetivo y la sección de seguridad de datos.
+3. **Sube la app** en formato Android App Bundle (AAB), firmada.
+4. **Prueba** en un canal interno o cerrado. Las cuentas personales nuevas deben hacer una prueba cerrada con un grupo de testers durante un período mínimo antes de poder publicar en producción; revisa el requisito vigente.
+5. **Prepara la ficha**: título, descripción breve, descripción completa, ícono, imagen destacada y capturas.
+6. **Envía a revisión** y publica en producción (completa o gradual).
 
-En [Websy nos encargamos del desarrollo completo y la gestión de aprobación en App Store y Google Play sin complicaciones](/servicios/aplicaciones-moviles). ¿Tenés un proyecto de app móvil y querés lanzarlo al mercado con éxito? [Contactate con nuestro equipo técnico](/contacto).
+## Paso a paso en App Store
+
+1. **Registra el identificador de la app** (bundle ID) y crea la app en App Store Connect.
+2. **Sube la compilación** desde Xcode o un servicio de compilación en la nube.
+3. **Prueba con TestFlight**, con testers internos y externos.
+4. **Completa la ficha**: nombre, subtítulo, palabras clave, descripción, capturas para los tamaños requeridos, ícono.
+5. **Completa la privacidad**: política de privacidad y las etiquetas de privacidad (qué datos recolecta la app y para qué).
+6. **Indica cómo revisar la app**: usuario de prueba y notas para el revisor.
+7. **Envía a revisión** y elige si publicar automáticamente al aprobarse.
+
+## Requisitos que más rechazos generan
+
+| Motivo | Cómo evitarlo |
+| --- | --- |
+| La app falla o tiene funciones incompletas | Probar todos los flujos antes de enviar |
+| Falta un usuario de prueba para entrar | Incluirlo en las notas de revisión |
+| Permisos sin justificación | Pedir solo los necesarios y explicar para qué |
+| No permite eliminar la cuenta | Si la app permite crear cuenta, debe permitir borrarla desde la app |
+| Política de privacidad ausente o incompleta | Enlace accesible y coherente con lo declarado |
+| La app es solo una web dentro de un contenedor | Aportar funciones propias de app (en App Store es motivo frecuente de rechazo) |
+| Pagos de contenido digital fuera del sistema de la tienda | Usar las compras dentro de la app cuando corresponde |
+| Datos declarados que no coinciden con lo que hace la app | Revisar las etiquetas de privacidad y la sección de seguridad de datos |
+
+## Cómo preparar una ficha que se descargue
+
+- **Nombre** con la marca y, si suma, la función principal.
+- **Capturas que cuenten una historia**: el beneficio principal primero, con textos cortos.
+- **Descripción** que empiece por lo que resuelve la app.
+- **Ícono simple** y reconocible en tamaño chico.
+- **Palabras clave** (en App Store) y descripción (en Google Play) con las búsquedas de tus usuarios.
+
+Ver [qué es ASO](/blog/app-store-optimization-aso-como-posicionar-tu-app).
+
+## Después del lanzamiento
+
+- **Responde las reseñas**, sobre todo las negativas.
+- **Monitorea errores y cierres** con herramientas de reporte de fallos.
+- **Publica actualizaciones** con correcciones y mejoras.
+- **Cumple los requisitos anuales**: Google exige compilar para versiones recientes de Android y Apple para versiones recientes de iOS. Ver [cuánto cuesta mantener una app](/blog/cuanto-cuesta-mantener-una-aplicacion-movil-servidores-y-licencias).
+
+## Preguntas frecuentes
+
+### ¿Cuánto cuesta publicar una app?
+
+USD 25 por única vez en Google Play y USD 99 por año en App Store.
+
+### ¿Cuánto tarda la revisión?
+
+Google suele aprobar en pocos días. Apple también responde en general en pocos días, pero es más estricto y puede pedir cambios que demoran la publicación.
+
+### ¿Puedo publicar una app a mi nombre y después pasarla a la empresa?
+
+Se puede transferir, pero es un trámite. Es más simple crear las cuentas a nombre de la empresa desde el inicio.
+
+### ¿Por qué Apple rechazó mi app?
+
+Los motivos más comunes son errores, funciones incompletas, falta de usuario de prueba, permisos injustificados, privacidad incompleta, no permitir eliminar la cuenta o ser solo una web dentro de una app.
+
+## Publicamos tu app
+
+En Websy desarrollamos y publicamos apps en Google Play y App Store, con las cuentas a nombre de tu empresa. Mira la [guía de desarrollo de apps](/blog/guia-desarrollo-de-aplicaciones-moviles-para-empresas) o [escríbenos](/contacto).

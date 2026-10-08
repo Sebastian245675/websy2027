@@ -50,4 +50,16 @@ export const pillarPosts = [
     author: 'Sebastian Aguirre',
     pillar: true,
   },
+  {
+    id: 9004,
+    slug: 'guia-desarrollo-de-aplicaciones-moviles-para-empresas',
+    title: 'Desarrollo de aplicaciones móviles para empresas: guía de principio a fin',
+    seoTitle: 'Desarrollo de apps móviles para empresas: guía 2026',
+    seoDescription: 'Cuándo conviene una app, qué tecnología elegir, cuánto cuesta, cómo se publica en Google Play y App Store y cómo se mantiene. Guía para empresas de LATAM.',
+    seoKeywords: 'desarrollo de aplicaciones moviles, empresa de aplicaciones moviles, crear app para empresa',
+    date: '2026-10-08',
+    image: null,
+    author: 'Sebastian Aguirre',
+    pillar: true,
+  },
 ];

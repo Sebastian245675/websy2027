@@ -44,12 +44,13 @@ export const businessTechPosts = [
   {
     id: 1104,
     slug: 'aplicaciones-moviles-vs-web-apps-progresivas-pwa-cual-elegir',
-    title: 'App Nativa vs Progressive Web App (PWA): ¿Cuál conviene más para tu negocio?',
-    seoTitle: 'App Nativa vs PWA: Cuál Elegir para tu Negocio | Websy',
-    seoDescription: 'Comparativa entre aplicaciones móviles nativas (iOS/Android) y Progressive Web Apps (PWA). Costos, ventajas, desventajas y cuándo usar cada una.',
+    title: 'App nativa o PWA: diferencias y cuál conviene para tu proyecto',
+    seoTitle: 'App nativa o PWA: diferencias y cuál elegir',
+    seoDescription: 'App nativa vs PWA comparadas: instalación, Google, costos, notificaciones en iPhone, sin conexión y cuándo conviene cada una, con casos de uso.',
     seoKeywords: 'app nativa vs pwa, progressive web app, que es pwa, app movil o web app, desarrollo app movil vs pwa, pwa vs nativa',
     category: 'Apps Móviles',
     date: '2026-07-30',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [201, 202, 203]
@@ -70,12 +71,13 @@ export const businessTechPosts = [
   {
     id: 1106,
     slug: 'como-crear-una-aplicacion-movil-desde-cero-guia-completa',
-    title: 'Cómo Crear una Aplicación Móvil desde Cero: Guía Completa de Costos, Tiempos y Tecnologías',
-    seoTitle: 'Crear App Móvil desde Cero: Guía de Costos 2026 | Websy',
-    seoDescription: 'Todo lo que necesitás saber para crear tu app móvil: costos reales, tiempos de desarrollo, tecnologías (React Native, Flutter, Nativo) y proceso paso a paso.',
+    title: 'Cómo crear una aplicación móvil desde cero: guía en 8 pasos',
+    seoTitle: 'Cómo crear una aplicación móvil desde cero: 8 pasos',
+    seoDescription: 'Cómo crear una app: definir el problema, validar, MVP, prototipo, tecnología, desarrollo, publicación y medición, con plazos de referencia.',
     seoKeywords: 'como crear una aplicacion movil, cuanto cuesta crear una app, desarrollo app movil precio, crear app desde cero, desarrollo aplicaciones moviles',
     category: 'Apps Móviles',
     date: '2026-07-28',
+    updated: '2026-10-08',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [201, 1104, 202]

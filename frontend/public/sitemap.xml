@@ -295,6 +295,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.websysrl.com/blog/guia-desarrollo-de-aplicaciones-moviles-para-empresas</loc>
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.websysrl.com/blog/como-migrar-de-wordpress-a-react-nextjs-guia-completa</loc>
     <lastmod>2026-08-02</lastmod>
     <changefreq>monthly</changefreq>
@@ -386,7 +392,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/seguridad-en-aplicaciones-moviles-cifrado-jwt-y-biometria</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -416,7 +422,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/aplicaciones-moviles-vs-web-apps-progresivas-pwa-cual-elegir</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -560,7 +566,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/como-crear-una-aplicacion-movil-desde-cero-guia-completa</loc>
-    <lastmod>2026-07-28</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -806,7 +812,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/como-monetizar-una-app-movil-suscripciones-anuncios-in-app-purchases</loc>
-    <lastmod>2026-07-21</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -860,7 +866,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/desarrollo-apps-nativas-swift-kotlin-vs-cross-platform</loc>
-    <lastmod>2026-07-19</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -920,7 +926,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/desarrollo-apps-moviles-react-native-vs-flutter-2026</loc>
-    <lastmod>2026-07-12</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -1052,7 +1058,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/publicar-app-app-store-google-play-guia-paso-a-paso</loc>
-    <lastmod>2026-06-05</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -1064,7 +1070,7 @@
   </url>
   <url>
     <loc>https://www.websysrl.com/blog/app-store-optimization-aso-como-posicionar-tu-app</loc>
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
