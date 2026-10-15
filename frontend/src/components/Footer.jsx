@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../LanguageContext';
 import { CONTACT, SOCIAL, whatsappUrl } from '../siteConfig';
+import { countryPages } from '../countryPages';
 
 // SVG icons inline
 const icons = {
@@ -35,8 +36,12 @@ export const Footer = () => {
     { name: t('footer.links.services'), to: '/servicios' },
     { name: t('footer.links.cases'), to: '/casos-de-exito' },
     { name: t('footer.links.investment'), to: '/planes' },
+    { name: 'Quiénes somos', to: '/quienes-somos' },
+    { name: 'Cotizador', to: '/cotizador' },
+    { name: 'Auditoría web gratis', to: '/auditoria-gratis' },
     { name: t('footer.links.blog'), to: '/blog' },
     { name: 'Diseño web en Salta', to: '/diseno-web-salta' },
+    ...countryPages.map((c) => ({ name: `Websy ${c.code === 'US' ? 'EE. UU.' : c.name}`, to: c.path })),
     { name: t('footer.links.contact'), to: '/contacto' },
   ];
 

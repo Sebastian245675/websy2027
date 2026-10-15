@@ -42,7 +42,9 @@ export const TestimonialsSection = () => {
 
   const reviews = googleData?.reviews || [];
   const rating = googleData?.rating ? googleData.rating.toFixed(1) : '5.0';
-  const totalReviews = googleData?.userRatingsTotal || reviews.length || 1;
+  const totalReviews = googleData?.userRatingsTotal || reviews.length || 0;
+  // Con pocas reseñas, "5.0 · 1 reseña" resta más de lo que suma: el puntaje se muestra desde 10
+  const showScore = totalReviews >= 10;
   const writeReviewUrl = `https://search.google.com/local/writereview?placeid=${placeId}`;
 
   const scrollContainer = (direction) => {
@@ -78,7 +80,7 @@ export const TestimonialsSection = () => {
               <GoogleGLogo size={26} />
               <span className="font-extrabold text-2xl text-gray-900 tracking-tight">Reseñas</span>
             </div>
-            <div className="flex items-center gap-2">
+            {showScore && <div className="flex items-center gap-2">
               <span className="font-black text-xl text-gray-900">{rating}</span>
               <div className="flex items-center gap-0.5">
                 {Array.from({ length: 5 }).map((_, i) => (
@@ -86,9 +88,9 @@ export const TestimonialsSection = () => {
                 ))}
               </div>
               <span className="text-xs text-gray-500 font-medium ml-1">
-                {totalReviews} {totalReviews === 1 ? 'reseña' : 'reseñas'}
+                {totalReviews} reseñas
               </span>
-            </div>
+            </div>}
           </div>
 
           {/* Boton negro Escribí una reseña */}

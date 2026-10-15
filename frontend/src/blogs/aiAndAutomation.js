@@ -8,7 +8,7 @@ export const aiAndAutomationPosts = [
     seoKeywords: 'automatizar whatsapp negocios, chatbot whatsapp ia, whatsapp business api, integracion whatsapp crm, chatbot inteligencia artificial',
     category: 'IA & Automatización',
     date: '2026-07-05',
-    updated: '2026-10-08',
+    updated: '2026-10-15',
     image: null,
     author: 'Sebastian Aguirre',
     relatedPosts: [401, 402, 403]
@@ -108,7 +108,7 @@ export const aiAndAutomationPosts = [
     date: '2026-07-30',
     updated: '2026-10-08',
     image: null,
-    author: 'Sebastian Aguirre',
+    author: 'Agustín Dávila',
     relatedPosts: [403, 401, 402]
   }
 ];

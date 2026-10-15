@@ -19,7 +19,11 @@
     "dev": "craco start",
     "prebuild": "node scripts/generate-sitemap.js",
     "build": "cross-env GENERATE_SOURCEMAP=false craco build",
-    "postbuild": "react-snap && node scripts/finalize-build.js",
+    "postbuild": "react-snap && node scripts/finalize-build.js && node scripts/verify-build.js",
+    "predeploy": "npm run build",
+    "deploy": "node scripts/deploy-production.js",
+    "postdeploy": "node scripts/verify-seo.js --sitemap=live --verbose",
+    "verify:production": "node scripts/verify-seo.js --sitemap=live --verbose",
     "build:analyze": "cross-env GENERATE_SOURCEMAP=false craco build && npx source-map-explorer 'build/static/js/*.js'",
     "test": "craco test"
   },
@@ -52,7 +56,7 @@
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
   "reactSnap": {
     "skipThirdPartyRequests": true,
-    "concurrency": 2,
+    "concurrency": 1,
     "puppeteerArgs": [
       "--no-sandbox",
       "--disable-dev-shm-usage"
@@ -62,6 +66,12 @@
       "/servicios",
       "/planes",
       "/diseno-web-salta",
+      "/cotizador",
+      "/quienes-somos",
+      "/auditoria-gratis",
+      "/colombia",
+      "/mexico",
+      "/estados-unidos",
       "/casos-de-exito",
       "/contacto",
       "/blog",
@@ -103,6 +113,7 @@
       "/casos-de-exito/plataforma-inmobiliaria-propiedades-casamax",
       "/casos-de-exito/demo-pagina-web-estudio-arquitectura-nordica",
       "/casos-de-exito/landing-page-tarot-online-cuervo-tarot",
+      "/autores/agustin-davila",
       "/autores/sebastian-aguirre",
       "/lp/inmobiliarias",
       "/lp/inmobiliarias-mx",

@@ -70,6 +70,31 @@ Las tiendas también cobran comisión si vendes contenido digital dentro de la a
 4. **Define el alcance por escrito**: cada función nueva a mitad del proyecto cuesta más que si estaba prevista desde el inicio.
 5. **Diseña antes de programar**: un prototipo navegable permite probar la app con usuarios reales antes de invertir en desarrollo.
 
+## Cómo pedir un presupuesto de app y comparar cotizaciones
+
+Los precios entre desarrolladores varían mucho porque cada uno incluye cosas distintas. Para que las cotizaciones sean comparables, envía a todos la misma información y pide que respondan los mismos puntos.
+
+**Qué enviar al pedir el presupuesto:**
+
+1. Qué problema resuelve la app y quién la va a usar (clientes, tu equipo, repartidores).
+2. Las 5 a 10 funciones imprescindibles para la primera versión, separadas de las que pueden esperar.
+3. Si necesitas cobrar dentro de la app y con qué medio de pago.
+4. Si la app tiene que conectarse con algo que ya usas: tu sistema de gestión, tu web, tu CRM, tu facturación.
+5. Si ya tienes diseño, marca o un ejemplo de app parecida a lo que buscas.
+
+**Qué tiene que responder cada cotización:**
+
+| Punto | Por qué importa |
+| --- | --- |
+| ¿Incluye el panel de administración? | Sin panel, cada cambio de contenido depende del desarrollador |
+| ¿Incluye servidor y base de datos? | En muchas apps es la mitad del trabajo |
+| ¿Incluye la publicación en las dos tiendas? | La revisión de Apple puede pedir cambios |
+| ¿A nombre de quién quedan las cuentas y el código? | Si quedan a nombre del desarrollador, la app no es tuya |
+| ¿Qué pasa después de publicar? | Mantenimiento, correcciones y actualizaciones de Android e iOS |
+| ¿Cómo se paga? | Lo sano es pagar por etapas contra entregas que puedas probar |
+
+Si una cotización es mucho más barata que las demás, revisa cuál de estos puntos deja afuera. Tienes más criterios en [cómo elegir una empresa de desarrollo de software](/blog/como-elegir-empresa-de-desarrollo-de-software-sin-ser-estafado).
+
 ## Cuánto tarda desarrollar una app
 
 Una app sencilla suele estar lista en 4 a 6 semanas; una con pagos y operación en tiempo real, en 3 a 4 meses. A eso hay que sumar la revisión de las tiendas: Google suele aprobar en pocos días y Apple puede pedir cambios antes de publicar. Te contamos el proceso en [cómo publicar una app en Google Play y App Store](/blog/publicar-app-app-store-google-play-guia-paso-a-paso).
@@ -79,6 +104,10 @@ Una app sencilla suele estar lista en 4 a 6 semanas; una con pagos y operación 
 ### ¿Cuánto cuesta hacer una app sencilla?
 
 Una app informativa o de catálogo para Android e iOS arranca en unos USD 2.000, incluyendo el panel para administrar el contenido. A eso se suman USD 99 por año para publicar en App Store y USD 25 por única vez para Google Play.
+
+### ¿Cuánto cuesta crear una app web?
+
+Una aplicación web (un sistema que se usa desde el navegador, como un panel de turnos, de pedidos o de clientes) cuesta parecido a una app móvil del mismo alcance, pero no requiere cuentas en las tiendas ni su revisión. Un sistema de gestión para una pyme suele estar entre USD 4.000 y 8.000. Si no sabes cuál necesitas, mira la [diferencia entre página web y aplicación web](/blog/diferencia-entre-pagina-web-y-aplicacion-web-cual-necesito).
 
 ### ¿Cuánto cuesta una app como Uber o Rappi?
 
@@ -98,4 +127,4 @@ Sí. Se puede integrar Mercado Pago en Argentina y otros países de la región, 
 
 ## Cotiza tu app
 
-En Websy desarrollamos apps para Android e iOS con React Native, con su panel de administración y la publicación en las tiendas incluidos. [Mira el servicio de desarrollo de apps](/servicios/aplicaciones-moviles) o [cuéntanos tu idea](/contacto) y te enviamos una cotización por escrito en 24 horas. También tienes la guía completa de [precios de desarrollo web, apps y software](/blog/precios-desarrollo-web-apps-y-software-latam).
+En Websy desarrollamos apps para Android e iOS con React Native, con su panel de administración y la publicación en las tiendas incluidos. [Mira el servicio de desarrollo de apps](/servicios/aplicaciones-moviles) o [cuéntanos tu idea](/contacto) y te enviamos una cotización por escrito en el día hábil. También tienes la guía completa de [precios de desarrollo web, apps y software](/blog/precios-desarrollo-web-apps-y-software-latam).

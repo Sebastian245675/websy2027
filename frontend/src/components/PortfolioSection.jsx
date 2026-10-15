@@ -1,11 +1,18 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { portfolio as defaultPortfolio } from '../mockData';
+import { portfolio as defaultPortfolio, caseResults } from '../mockData';
 import { Link, useNavigate } from 'react-router-dom';
 import { LazyImage } from './LazyImage';
 import { caseForPortfolio } from '../caseStudies';
 
+// Primero los casos con resultados medidos (caseResults), después el resto y al final las demos y plantillas:
+// una pyme que entra al inicio tiene que ver primero lo que la web le hizo ganar a un cliente real.
+const isDemo = (p) => /demo|plantilla/i.test(`${p.id} ${p.title}`);
+const rank = (p) => (caseResults.some((r) => r.portfolioId === p.id) ? 0 : isDemo(p) ? 2 : 1);
+const ordered = (list) => list.filter((p) => p.image).map((p, i) => [p, i])
+  .sort(([a, i], [b, j]) => rank(a) - rank(b) || i - j).map(([p]) => p);
+
 export const PortfolioSection = () => {
-  const [projects, setProjects] = useState(() => defaultPortfolio.filter((p) => p.image));
+  const [projects, setProjects] = useState(() => ordered(defaultPortfolio));
   const scrollRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -19,7 +26,7 @@ export const PortfolioSection = () => {
       const rawPortfolio = localStorage.getItem('websy_portfolio');
       if (rawPortfolio) {
         const parsed = JSON.parse(rawPortfolio);
-        if (Array.isArray(parsed) && parsed.length > 0) setProjects(parsed.filter((p) => p.image));
+        if (Array.isArray(parsed) && parsed.length > 0) setProjects(ordered(parsed));
       }
     } catch (e) {
       console.error('Error reading data from localStorage', e);
@@ -140,7 +147,7 @@ export const PortfolioSection = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 text-center md:text-left">
         <Link to="/casos-de-exito" className="text-base font-bold text-[#182A2C] underline decoration-[#d9fb06] decoration-4 underline-offset-4">
-          Ver los {defaultPortfolio.length} proyectos con su caso completo
+          Ver todos los proyectos con su caso completo
         </Link>
       </div>
 

@@ -109,7 +109,7 @@ export const WebsyVsEmployeeSection = () => {
 
         <div className="mt-10 flex justify-center">
           <button
-            onClick={() => navigate('/contacto?tipo=auditoria')}
+            onClick={() => navigate('/auditoria-gratis')}
             className="group inline-flex items-center justify-center gap-3 rounded-full bg-[#182A2C] px-8 py-4 text-[15px] font-bold text-white transition-colors hover:bg-black"
           >
             Calcular cuánto ahorra mi empresa

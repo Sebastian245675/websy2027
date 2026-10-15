@@ -101,7 +101,9 @@ const CaseView = ({ study }) => {
             src={item.image}
             alt={`Captura de ${item.title}: ${study.type.toLowerCase()} en ${study.location}`}
             className="w-full aspect-[16/10] object-cover object-top shadow-2xl mb-16"
-            loading="lazy"
+            width="1280"
+            height="800"
+            fetchPriority="high"
           />
         )}
 

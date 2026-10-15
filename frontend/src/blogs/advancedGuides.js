@@ -45,7 +45,7 @@ export const advancedGuidePosts = [
     id: 1404,
     slug: 'stripe-vs-mercadopago-cual-pasarela-pagos-elegir-ecommerce',
     title: 'Stripe vs Mercado Pago: cuál conviene para cobrar en Latinoamérica',
-    seoTitle: 'Stripe vs Mercado Pago: cuál conviene en LATAM',
+    seoTitle: 'Stripe vs Mercado Pago: comisiones y cuál elegir (2026)',
     seoDescription: 'Stripe vs Mercado Pago: disponibilidad por país, medios de pago, cuotas, suscripciones, cobros internacionales e integración. Cuándo usar cada una.',
     seoKeywords: 'stripe vs mercadopago, mejor pasarela pagos, cobrar online argentina, stripe argentina, mercadopago vs stripe, pasarela pagos ecommerce',
     category: 'E-commerce',

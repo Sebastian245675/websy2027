@@ -69,7 +69,7 @@ const RUBROS = [
 
 const STEPS = [
   { title: 'Reunión', text: 'En nuestra oficina de San Luis 2105 o por videollamada. Nos contás qué vendés, a quién y qué tiene que lograr la web.' },
-  { title: 'Propuesta', text: 'En menos de 24 horas te mandamos el alcance, el precio cerrado y el plazo por escrito.' },
+  { title: 'Propuesta', text: 'En el día hábil te mandamos el alcance, el precio cerrado y el plazo por escrito.' },
   { title: 'Diseño', text: 'Te mostramos el diseño antes de programar y lo ajustamos con tus comentarios.' },
   { title: 'Desarrollo', text: 'Programamos la web rápida, adaptada al celular y preparada para Google desde el primer día.' },
   { title: 'Publicación', text: 'La publicamos con tu dominio, te enseñamos a usarla y seguimos disponibles por WhatsApp.' },
@@ -474,7 +474,7 @@ export const SaltaPage = () => (
       <div className="container mx-auto px-5 lg:px-8 max-w-4xl text-center">
         <h2 className="text-[30px] md:text-[44px] font-black text-[#182A2C] leading-[1.08] tracking-tight">¿Hacemos la web de tu negocio?</h2>
         <p className="mt-5 text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
-          Contanos qué hacés y te mandamos la propuesta con precio cerrado en menos de 24 horas. Si preferís, pasá por San Luis 2105 y lo charlamos en persona.
+          Contanos qué hacés y te mandamos la propuesta con precio cerrado en el día hábil. Si preferís, pasá por San Luis 2105 y lo charlamos en persona.
         </p>
         <div className="mt-8 flex justify-center"><WhatsAppCta dark /></div>
       </div>

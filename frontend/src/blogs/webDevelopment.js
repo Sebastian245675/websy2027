@@ -10,7 +10,7 @@ export const webDevelopmentPosts = [
     date: '2026-07-15',
     updated: '2026-10-08',
     image: null,
-    author: 'Sebastian Aguirre',
+    author: 'Agustín Dávila',
     relatedPosts: [6, 101, 104]
   },
   {

@@ -235,7 +235,7 @@ export const en = {
         phone: 'Phone',
         whyChooseUs: 'Why choose us?',
         freeConsultation: 'Free initial consultation',
-        detailedQuote24h: 'Detailed quote in 24 hours',
+        detailedQuote24h: 'Detailed written quote',
         agileMethodology: 'Agile and transparent methodology',
         postLaunchSupport: 'Post-launch support included',
         formLabels: {
@@ -274,7 +274,7 @@ export const en = {
         thankYouMessage: 'Thank you for your inquiry! We will contact you soon.',
         info: {
             response: 'Response in 24 hours',
-            quote: 'Detailed quote in 24 hours',
+            quote: 'Detailed written quote',
             consultation: 'Free consultation',
             support: 'Specialized technical support'
         }

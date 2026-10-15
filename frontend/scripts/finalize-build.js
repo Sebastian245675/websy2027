@@ -19,6 +19,13 @@ if (!fs.existsSync(notFoundSrc)) {
 fs.renameSync(notFoundSrc, path.join(BUILD, '404.html'));
 fs.rmSync(notFoundDir, { recursive: true, force: true });
 
+// 3) react-snap guarda en el HTML el <script> de Google Maps que la sección de reseñas agrega al montarse.
+//    Prerenderizado, el navegador lo descarga apenas abre la home (cientos de KB) aunque nadie llegue a las
+//    reseñas. Se quita: la sección lo vuelve a agregar cuando se muestra (src/services/googleReviewsService.js).
+const homeFile = path.join(BUILD, 'index.html');
+const homeHtml = fs.readFileSync(homeFile, 'utf8');
+fs.writeFileSync(homeFile, homeHtml.replace(/<script[^>]*id="google-maps-places-sdk"[^>]*><\/script>/g, ''));
+
 const routeFile = (route) => (route === '/' ? path.join(BUILD, 'index.html') : path.join(BUILD, route, 'index.html'));
 const missing = pkg.reactSnap.include.filter((route) => route !== '/404' && !fs.existsSync(routeFile(route)));
 if (missing.length) {

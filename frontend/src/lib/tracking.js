@@ -41,17 +41,36 @@ export const trackPageView = () => {
   if (window.ttq) window.ttq.page();
 };
 
-export const openWhatsApp = (text, location) => {
-  trackWhatsAppClick(location);
-  window.open(whatsappUrl(text), '_blank', 'noopener,noreferrer');
+// Todo mensaje de WhatsApp lleva la página desde donde se escribió: así cada consulta queda con su origen
+// aunque el visitante borre el texto sugerido, y se puede medir qué páginas traen clientes.
+const ORIGIN_MARK = '(Página: ';
+export const withOrigin = (url) => {
+  try {
+    const u = new URL(url);
+    const text = u.searchParams.get('text') || '';
+    if (text.includes(ORIGIN_MARK)) return url;
+    const page = `websysrl.com${window.location.pathname === '/' ? '' : window.location.pathname}`;
+    u.searchParams.set('text', `${text}${text ? '\n\n' : ''}${ORIGIN_MARK}${page})`);
+    return u.toString();
+  } catch {
+    return url;
+  }
 };
 
-// Cualquier <a href="https://wa.me/..."> del sitio (incluidos los del blog) cuenta como clic a WhatsApp.
+export const openWhatsApp = (text, location) => {
+  trackWhatsAppClick(location);
+  window.open(withOrigin(whatsappUrl(text)), '_blank', 'noopener,noreferrer');
+};
+
+// Cualquier <a href="https://wa.me/..."> del sitio (incluidos los del blog) cuenta como clic a WhatsApp
+// y se le agrega la página de origen al mensaje justo antes de abrirlo.
 // data-wa-location en el link indica dónde está; si no, se usa la ruta actual.
 export const installWhatsAppLinkTracking = () => {
   const handler = (e) => {
     const link = e.target.closest && e.target.closest('a[href*="wa.me/"]');
-    if (link) trackWhatsAppClick(link.dataset.waLocation || window.location.pathname);
+    if (!link) return;
+    trackWhatsAppClick(link.dataset.waLocation || window.location.pathname);
+    link.href = withOrigin(link.href);
   };
   document.addEventListener('click', handler, true);
   return () => document.removeEventListener('click', handler, true);

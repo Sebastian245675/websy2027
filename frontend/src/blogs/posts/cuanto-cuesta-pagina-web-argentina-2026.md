@@ -112,4 +112,4 @@ El hosting está incluido en los planes. El dominio se registra a tu nombre (por
 
 ## Pedí tu presupuesto
 
-Somos de Salta y trabajamos con empresas de todo el país. Mirá el servicio de [desarrollo web](/servicios/desarrollo-web), nuestros [casos de éxito](/casos-de-exito) o [pedí tu presupuesto](/contacto) y te respondemos en 24 horas.
+Somos de Salta y trabajamos con empresas de todo el país. Mirá el servicio de [desarrollo web](/servicios/desarrollo-web), nuestros [casos de éxito](/casos-de-exito) o [pedí tu presupuesto](/contacto) y te respondemos en el día hábil.

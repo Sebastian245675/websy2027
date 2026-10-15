@@ -5,6 +5,17 @@ import { ArchitectureDemoSection } from "../components/ArchitectureDemoSection";
 import { SEOHead } from "../components/SEOHead";
 import { RubrosStrip } from "../components/RubrosStrip";
 import { FAQSection, HOME_FAQ, faqSchema } from "../components/FAQSection";
+import { COUNTRY_ALTERNATES, countryPageByCode } from "../countryPages";
+import useVisitorCountry from "../hooks/useVisitorCountry";
+
+const HomeGuides = React.lazy(() =>
+  import('../components/HomeGuides').then(module => ({ default: module.HomeGuides }))
+);
+
+// Casos del país del visitante: solo se descarga si viene de un país con versión propia
+const CountryHighlight = React.lazy(() =>
+  import('../components/CountryHighlight').then(module => ({ default: module.CountryHighlight }))
+);
 
 // Lazy load todos los componentes excepto Hero para mejor performance - con logs
 const PortfolioSection = React.lazy(() => {
@@ -68,6 +79,7 @@ const SectionLoader = () => (
 );
 
 export const HomePage = () => {
+  const country = useVisitorCountry();
   const homeStart = performance.now();
   console.log('🏠 [HOME] HomePage rendering...');
 
@@ -80,11 +92,18 @@ export const HomePage = () => {
     <>
       <SEOHead
         title="Desarrollo Web, E-commerce y Apps en Salta, Argentina | Websy"
-        description="Agencia de desarrollo web en Salta, Argentina. Páginas web profesionales, tiendas online, apps móviles, CRM/ERP y automatizaciones con IA para empresas de toda Latinoamérica. Cotización gratis en 24 hs."
+        description="Agencia de desarrollo web en Salta: páginas web desde USD 800, tiendas online, apps, sistemas y automatización con IA. Respuesta en el día hábil."
         url="https://www.websysrl.com/"
         jsonLd={homeFaqSchema}
+        alternates={COUNTRY_ALTERNATES}
       />
-      <HeroSection />
+      <HeroSection country={country} />
+
+      {countryPageByCode(country) && (
+        <Suspense fallback={null}>
+          <CountryHighlight country={country} />
+        </Suspense>
+      )}
 
       <ArchitectureDemoSection />
 
@@ -117,6 +136,12 @@ export const HomePage = () => {
       <LazyRenderSection rootMargin="50px" height="600px">
         <Suspense fallback={<SectionLoader />}>
           <PortfolioSection />
+        </Suspense>
+      </LazyRenderSection>
+
+      <LazyRenderSection rootMargin="200px" height="600px">
+        <Suspense fallback={<SectionLoader />}>
+          <HomeGuides />
         </Suspense>
       </LazyRenderSection>
 

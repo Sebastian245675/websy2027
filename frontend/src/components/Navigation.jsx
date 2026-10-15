@@ -92,16 +92,13 @@ export const Navigation = () => {
     isRoute: true
   }), [t]);
 
-  // Memoize languages array - flagImg para escritorio (Windows no muestra bien emoji banderas)
+  // Sin banderas: el español del sitio es para toda Latinoamérica (una bandera de un país confunde al resto)
+  // y así no se descargan imágenes de un sitio externo en cada página
   const languages = useMemo(() => [
-    { code: 'es', name: 'Español (Latinoamérica)', flag: '🇲🇽', flagImg: 'https://flagcdn.com/w40/mx.png' },
-    { code: 'en', name: 'English', flag: '🇺🇸', flagImg: 'https://flagcdn.com/w40/us.png' }
+    { code: 'es', name: 'Español', short: 'ES' },
+    { code: 'en', name: 'English', short: 'EN' }
   ], []);
 
-  const currentLangObj = useMemo(() =>
-    languages.find(lang => lang.code === currentLanguage) || languages[0],
-    [languages, currentLanguage]
-  );
 
   // Performance logging
   useEffect(() => {
@@ -195,8 +192,7 @@ export const Navigation = () => {
                 className="flex items-center gap-1.5 font-extrabold text-[10px] md:text-[11px] text-[#182A2C] hover:opacity-80 transition-opacity cursor-pointer uppercase tracking-tight py-1"
                 aria-label="Seleccionar idioma"
               >
-                <img src={currentLangObj.flagImg} alt="" className="w-4 h-2.5 object-cover shrink-0 rounded-none" />
-                <span>{currentLanguage === 'es' ? 'Español (Latam)' : 'English'}</span>
+                <span>{currentLanguage === 'es' ? 'Español' : 'English'}</span>
                 <ChevronDownIcon size={12} className={`transition-transform duration-200 ${isLanguageOpen ? 'rotate-180' : ''}`} />
               </button>
 
@@ -210,7 +206,7 @@ export const Navigation = () => {
                         currentLanguage === lang.code ? 'text-[#182A2C] bg-gray-100 font-black' : 'text-gray-600'
                       }`}
                     >
-                      <img src={lang.flagImg} alt="" className="w-4 h-2.5 object-cover shrink-0 rounded-none" />
+                      <span aria-hidden="true" className="text-[10px] font-black tracking-wider shrink-0 w-5">{lang.short}</span>
                       <span>{lang.name}</span>
                     </button>
                   ))}

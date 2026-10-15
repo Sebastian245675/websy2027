@@ -235,7 +235,7 @@ export const es = {
         phone: 'Teléfono',
         whyChooseUs: '¿Por qué elegirnos?',
         freeConsultation: 'Consulta inicial gratuita',
-        detailedQuote24h: 'Cotización detallada en 24 horas',
+        detailedQuote24h: 'Cotización detallada por escrito',
         agileMethodology: 'Metodología ágil y transparente',
         postLaunchSupport: 'Soporte post-lanzamiento incluido',
         formLabels: {
@@ -263,17 +263,18 @@ export const es = {
             consulting: 'Consultoría'
         },
         budgetRanges: {
-            range1: 'Plan Básico - 320 USD/mes',
-            range2: 'Plan Estándar - 480 USD/mes',
-            range3: 'Plan Profesional - 680 USD/mes',
+            // Precios oficiales (los mismos de /planes); el formulario de /contacto usa BUDGET_RANGES de siteConfig
+            range1: 'Plan Estándar: USD 800 a 1.500',
+            range2: 'Plan Comercio: USD 1.800 a 3.500',
+            range3: 'Plan Pymes: USD 4.000 a 8.000',
             aCotizar: 'A cotizar / Proyecto a medida'
         },
         sending: 'Enviando...',
         sendRequest: 'Enviar Solicitud',
         thankYouMessage: '¡Gracias por tu consulta! Te contactaremos pronto.',
         info: {
-            response: 'Respuesta en 24 horas',
-            quote: 'Cotización detallada en 24 horas',
+            response: 'Respuesta en el día hábil',
+            quote: 'Cotización detallada por escrito',
             consultation: 'Consulta gratuita',
             support: 'Soporte técnico especializado'
         }

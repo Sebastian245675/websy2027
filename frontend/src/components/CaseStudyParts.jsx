@@ -50,7 +50,7 @@ export const CaseCard = ({ study }) => {
   return (
     <Link to={`/casos-de-exito/${study.slug}`} className="group flex flex-col bg-white border border-slate-200 hover:border-[#182A2C] transition-colors">
       {item?.image ? (
-        <img src={item.image} alt={`${item.title}: ${study.type}`} loading="lazy" className="w-full aspect-[16/10] object-cover object-top" />
+        <img src={item.image} alt={`${item.title}: ${study.type}`} width="640" height="400" loading="lazy" decoding="async" className="w-full aspect-[16/10] object-cover object-top" />
       ) : (
         <div className="aspect-[16/10] bg-[#182A2C] flex items-end p-6">
           <span className="text-3xl font-black text-[#d9fb06] tracking-tight">{result ? result.metric : study.type}</span>

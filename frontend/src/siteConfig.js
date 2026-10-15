@@ -1,7 +1,7 @@
 // Datos de negocio que se repiten en todo el sitio. Se cambian acá, no en cada componente.
 
 export const CONTACT = {
-  email: 'websy@gmail.com',
+  email: 'administracion@websysrl.com',
   phoneDisplay: '+54 9 388 484-6695',
   whatsapp: '5493884846695',
   location: 'Salta, Argentina',
@@ -36,6 +36,11 @@ export const COUNTRIES = [
   { code: 'US', name: 'Estados Unidos', dial: '+1' },
   { code: 'OT', name: 'Otro país', dial: '' },
 ];
+
+// Formulario de contacto de 4 campos (auditoría SEO y conversión, oct-2026): qué necesita y presupuesto
+// aproximado. El presupuesto filtra a las empresas que pueden pagar el proyecto.
+export const PROJECT_NEEDS = ['Página web', 'Tienda online', 'Sistema de gestión', 'Automatización con IA', 'App móvil', 'Otro'];
+export const BUDGET_RANGES = ['Menos de USD 800', 'USD 800 a 1.500', 'USD 1.500 a 3.500', 'Más de USD 3.500', 'Todavía no sé'];
 
 // Rubros reales trabajados (franja "Portafolio por rubro" y selector de la auditoría)
 export const RUBROS = [

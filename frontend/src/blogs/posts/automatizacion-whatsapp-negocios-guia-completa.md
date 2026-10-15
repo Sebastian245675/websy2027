@@ -30,6 +30,42 @@ Si recibes pocas consultas por día, la app alcanza y no cuesta nada. Configura 
 
 El límite de la app es que una persona sigue teniendo que responder cada mensaje.
 
+## Ejemplos de mensajes automáticos para WhatsApp Business
+
+Puedes copiar estos textos y adaptarlos a tu negocio. Funcionan mejor cuando le dicen al cliente qué datos mandar: así la primera respuesta humana ya puede ser una cotización y no otra pregunta.
+
+**Mensaje de bienvenida (comercio o tienda)**
+
+> ¡Hola! Gracias por escribir a [Negocio]. Para ayudarte más rápido, cuéntanos qué producto buscas y en qué ciudad estás. Mira el catálogo aquí: [enlace]. Te respondemos en minutos de lunes a sábado de 9 a 19 h.
+
+**Mensaje de bienvenida (servicios profesionales)**
+
+> Hola, soy [Nombre] de [Estudio]. Para orientarte, cuéntame en un mensaje cuál es tu situación y si ya tienes fecha de audiencia, turno o vencimiento. Te respondo hoy mismo.
+
+**Mensaje de ausencia (fuera de horario)**
+
+> Gracias por tu mensaje. Ahora estamos fuera de horario (atendemos de lunes a viernes de 9 a 18 h). Déjanos tu consulta con todos los detalles y mañana a primera hora te respondemos.
+
+**Respuestas rápidas que más tiempo ahorran**
+
+| Atajo | Texto |
+| --- | --- |
+| /precios | Estos son nuestros precios actualizados: [enlace o lista]. ¿Para cuántas unidades o personas lo necesitas? |
+| /envios | Enviamos a todo el país. El costo depende de tu código postal: pásamelo y te digo el valor exacto. |
+| /pago | Puedes pagar con transferencia, tarjeta o [medio local]. Te mando el enlace de pago cuando confirmes. |
+| /turno | Tengo estos horarios disponibles: [opciones]. ¿Cuál te queda mejor? |
+| /ubicacion | Estamos en [dirección]. Aquí tienes el mapa: [enlace]. |
+
+**Confirmación y recordatorio de turno**
+
+> Hola [Nombre], te confirmamos tu turno el [día] a las [hora] en [lugar]. Si no puedes venir, respóndenos este mensaje para reprogramarlo.
+
+**Seguimiento de un presupuesto enviado**
+
+> Hola [Nombre], ¿pudiste ver el presupuesto que te enviamos el [día]? Si tienes alguna duda, te la respondemos por aquí. El precio se mantiene hasta el [fecha].
+
+Con la app gratuita, la bienvenida y la ausencia salen solas, pero las respuestas rápidas, la confirmación y el seguimiento los envía una persona. Con la API, los recordatorios y los seguimientos se disparan automáticamente; los mensajes que inicias tú (fuera de una conversación abierta en las últimas 24 horas) tienen que ser plantillas aprobadas por Meta.
+
 ## Automatizar con la API oficial
 
 La API de WhatsApp Business no es una app que se descarga: es un servicio de Meta que se conecta a un sistema (un chatbot, un CRM, una plataforma de atención). Así funciona:

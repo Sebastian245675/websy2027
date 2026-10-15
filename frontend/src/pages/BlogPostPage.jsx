@@ -6,6 +6,8 @@ import { EMBED_ID, embedJson, loadPostContent, readEmbeddedContent } from '../bl
 import postStats from '../blogs/postStats.json';
 import { clusterOf } from '../blogs/clusters';
 import { authorByName } from '../blogs/authors';
+import ogImages from '../blogs/ogImages.json';
+import { whatsappUrl } from '../siteConfig';
 
 const SITE_URL = 'https://www.websysrl.com';
 
@@ -230,6 +232,34 @@ const MarkdownContent = ({ content }) => {
   return <div className="blog-content font-sans">{elements}</div>;
 };
 
+// Llamado a mitad del artículo según el tema: los de precios llevan al cotizador, el resto a la auditoría
+// gratis. El lector del blog llega con una duda; al terminar la mitad ya sabe si le sirve dar el paso.
+const splitAtMiddleHeading = (md) => {
+  const starts = [...md.matchAll(/^## /gm)].map((m) => m.index);
+  if (starts.length < 3) return [md, ''];
+  const cut = starts.reduce((best, i) => (Math.abs(i - md.length / 2) < Math.abs(best - md.length / 2) ? i : best), starts[1]);
+  return [md.slice(0, cut), md.slice(cut)];
+};
+
+const isPricingPost = (post, mapped) =>
+  (mapped && mapped.cluster.id === 'precios') || /cuanto-cuesta|precio|presupuesto/.test(post.slug);
+
+const MidArticleCta = ({ pricing, slug }) => (
+  <aside className="my-10 rounded-2xl bg-[#182A2C] text-white p-6 md:p-8" aria-label={pricing ? 'Cotizador' : 'Auditoría gratis'}>
+    <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#d9fb06]">{pricing ? 'Cotizador' : 'Auditoría web gratis'}</p>
+    <p className="mt-2 text-xl md:text-2xl font-black leading-snug">
+      {pricing ? '¿Cuánto costaría tu proyecto? Calculalo en 1 minuto con nuestros precios publicados.' : '¿Tu web aplica esto? Te mandamos 3 mejoras concretas por WhatsApp, gratis.'}
+    </p>
+    <Link
+      to={pricing ? '/cotizador' : '/auditoria-gratis'}
+      data-cta-location={`blog_medio_${slug}`}
+      className="mt-5 inline-flex items-center gap-2 rounded-full bg-[#d9fb06] px-6 py-3 text-sm font-black text-[#182A2C] hover:bg-white transition-colors"
+    >
+      {pricing ? 'Usar el cotizador' : 'Pedir mi auditoría gratis'} <FiArrowRight size={16} />
+    </Link>
+  </aside>
+);
+
 export const BlogPostPage = () => {
   const { slug } = useParams();
   const post = blogPosts.find(p => p.slug === slug);
@@ -275,6 +305,9 @@ export const BlogPostPage = () => {
   const author = authorByName(post.author);
   const faq = extractFaq(content);
 
+  // Tarjeta para compartir y miniatura del artículo (scripts/generate-og-images.py)
+  const ogImage = ogImages.includes(post.slug) ? `/og/blog/${post.slug}.png` : undefined;
+
   // BlogPosting schema: author links to the author page (E-E-A-T)
   const articleSchema = {
     "@context": "https://schema.org",
@@ -297,6 +330,7 @@ export const BlogPostPage = () => {
         "url": "https://www.websysrl.com/websy-logo.png"
       }
     },
+    ...(ogImage && { "image": `${SITE_URL}${ogImage}` }),
     "datePublished": post.date,
     "dateModified": post.updated || post.date,
     "mainEntityOfPage": {
@@ -335,6 +369,7 @@ export const BlogPostPage = () => {
         description={post.seoDescription}
         url={`https://www.websysrl.com/blog/${post.slug}`}
         type="article"
+        image={ogImage}
         breadcrumbs={false}
       />
 
@@ -392,13 +427,14 @@ export const BlogPostPage = () => {
                 </p>
                 <p className="text-gray-400 text-xs">Websy</p>
                 <a 
-                  href={`https://wa.me/573186218792?text=Hola%20${encodeURIComponent(post.author)},%20le%C3%AD%20el%20art%C3%ADculo%20"${encodeURIComponent(post.title)}"%20en%20el%20blog%20de%20Websy%20y%20quiero%20m%C3%A1s%20informaci%C3%B3n.`}
+                  href={whatsappUrl(`Hola, leí el artículo "${post.title}" en el blog de Websy y quiero cotizar.`)}
+                  data-wa-location="blog_autor"
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 mt-1.5 px-3 py-1 bg-[#25D366]/20 hover:bg-[#25D366] text-[#25D366] hover:text-white rounded-full text-xs font-bold transition-all border border-[#25D366]/40"
                 >
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
-                  <span>Escribir por WhatsApp: +57 318 621 8792</span>
+                  <span>Consultar por WhatsApp</span>
                 </a>
               </div>
             </div>
@@ -418,7 +454,16 @@ export const BlogPostPage = () => {
         <div className="container mx-auto px-4 max-w-3xl">
           {content ? (
             <>
-              <MarkdownContent content={content} />
+              {(() => {
+                const [before, after] = splitAtMiddleHeading(content);
+                return (
+                  <>
+                    <MarkdownContent content={before} />
+                    {after && <MidArticleCta pricing={isPricingPost(post, mapped)} slug={post.slug} />}
+                    {after && <MarkdownContent content={after} />}
+                  </>
+                );
+              })()}
               {/* Markdown embedded in the prerendered HTML so hydration has it synchronously */}
               <script type="application/json" id={EMBED_ID} data-slug={post.slug} dangerouslySetInnerHTML={{ __html: embedJson(content) }} />
             </>
@@ -518,7 +563,7 @@ export const BlogPostPage = () => {
             ¿Necesitás ayuda con tu proyecto?
           </h2>
           <p className="text-gray-400 text-lg mb-8">
-            Cotización gratuita en menos de 24 horas.
+            Cotización gratuita en el día hábil.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link

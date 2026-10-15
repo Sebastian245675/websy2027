@@ -4,7 +4,8 @@ import { useLanguage } from '../LanguageContext';
 
 const SITE_URL = 'https://www.websysrl.com';
 const SITE_NAME = 'Websy';
-const DEFAULT_IMAGE = '/websy-logo.png';
+// Tarjeta 1200x630 generada por scripts/generate-og-images.py
+const DEFAULT_IMAGE = '/og/websy.png';
 
 // Readable breadcrumb names for known first-level paths
 const SECTION_NAMES = {
@@ -13,6 +14,12 @@ const SECTION_NAMES = {
   blog: 'Blog',
   contacto: 'Contacto',
   'casos-de-exito': 'Casos de Éxito',
+  colombia: 'Colombia',
+  cotizador: 'Cotizador',
+  'auditoria-gratis': 'Auditoría web gratis',
+  'quienes-somos': 'Quiénes somos',
+  mexico: 'México',
+  'estados-unidos': 'Estados Unidos',
 };
 
 // Canonical URL: always www, no query string, no hash, no trailing slash (except root)
@@ -77,6 +84,10 @@ export const SEOHead = ({
   noindex = false,
   breadcrumbs = true,
   jsonLd,
+  // [{ hreflang, href }] para páginas con versiones por país (home y /colombia, /mexico...). Sin esto,
+  // la página se declara a sí misma como versión en español.
+  alternates,
+  locale,
 }) => {
   const { currentLanguage } = useLanguage();
   const { pathname } = useLocation();
@@ -90,6 +101,9 @@ export const SEOHead = ({
   const canonicalUrl = buildCanonical(url, pathname);
   const finalImage = image.startsWith('http') ? image : `${SITE_URL}${image}`;
   const jsonLdString = jsonLd ? JSON.stringify(jsonLd) : '';
+  const alternatesString = JSON.stringify(alternates
+    || ['es', 'es-AR', 'es-419', 'x-default'].map((hreflang) => ({ hreflang, href: canonicalUrl })));
+  const ogLocale = locale || (currentLanguage === 'es' ? 'es_AR' : 'en_US');
 
   useEffect(() => {
     document.title = finalTitle;
@@ -106,27 +120,28 @@ export const SEOHead = ({
     upsertMeta('og:url', canonicalUrl, true);
     upsertMeta('og:type', type, true);
     upsertMeta('og:site_name', SITE_NAME, true);
-    upsertMeta('og:locale', currentLanguage === 'es' ? 'es_AR' : 'en_US', true);
+    upsertMeta('og:locale', ogLocale, true);
 
     // Twitter
-    upsertMeta('twitter:card', image === DEFAULT_IMAGE ? 'summary' : 'summary_large_image');
+    upsertMeta('twitter:card', 'summary_large_image');
     upsertMeta('twitter:title', finalTitle);
     upsertMeta('twitter:description', finalDescription);
     upsertMeta('twitter:image', finalImage);
     upsertMeta('twitter:url', canonicalUrl);
     upsertMeta('twitter:site', '@websyar');
 
-    document.documentElement.setAttribute('lang', currentLanguage === 'es' ? 'es' : 'en');
+    document.documentElement.setAttribute('lang', locale ? locale.replace('_', '-') : currentLanguage === 'es' ? 'es' : 'en');
 
     // Canonical + hreflang must point to THIS page, otherwise Google treats subpages as duplicates of the home.
     // A noindex page (404, not found) declares no canonical: "don't index" + "this is the canonical" contradict each other.
-    const hreflangs = ['es', 'es-AR', 'es-419', 'x-default'];
+    // Se borran todos antes de escribir: al navegar de la home (con es-CO, es-MX...) a otra página no deben quedar.
+    document.head.querySelectorAll('link[rel="alternate"][hreflang]').forEach((el) => el.remove());
     if (noindex) {
-      document.head.querySelectorAll('link[rel="canonical"], link[rel="alternate"][hreflang]').forEach((el) => el.remove());
+      document.head.querySelectorAll('link[rel="canonical"]').forEach((el) => el.remove());
     } else {
       upsertLink('link[rel="canonical"]', { rel: 'canonical', href: canonicalUrl });
-      hreflangs.forEach((lang) => {
-        upsertLink(`link[rel="alternate"][hreflang="${lang}"]`, { rel: 'alternate', hreflang: lang, href: canonicalUrl });
+      JSON.parse(alternatesString).forEach(({ hreflang, href }) => {
+        upsertLink(`link[rel="alternate"][hreflang="${hreflang}"]`, { rel: 'alternate', hreflang, href });
       });
     }
 
@@ -145,7 +160,7 @@ export const SEOHead = ({
     } else if (script) {
       script.remove();
     }
-  }, [finalTitle, finalDescription, finalImage, canonicalUrl, type, noindex, jsonLdString, breadcrumbs, pathname, currentLanguage]);
+  }, [finalTitle, finalDescription, finalImage, canonicalUrl, type, noindex, jsonLdString, alternatesString, ogLocale, breadcrumbs, pathname, currentLanguage]);
 
   return null;
 };

@@ -2,6 +2,22 @@ import React from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { SEOHead } from '../components/SEOHead';
 import { servicesData } from '../servicesSeoData';
+import { CaseCard } from '../components/CaseStudyParts';
+import { caseStudies } from '../caseStudies';
+import { clusters } from '../blogs/clusters';
+import { getPostBySlug } from '../blogData';
+
+// Guías del blog que apoyan a este servicio: la pilar y los posts del cluster que enlaza a esta página,
+// más los posts de otros clusters que declaran este servicio. Les pasa autoridad a los posts y le da
+// contexto a Google sobre de qué trata el servicio.
+const guidesFor = (path, featured = []) => {
+  const slugs = [...featured];
+  clusters.forEach((c) => {
+    if (c.service === path) slugs.push(c.pillar, ...c.posts.filter((p) => !p.service || p.service === path).map((p) => p.slug));
+    else slugs.push(...c.posts.filter((p) => p.service === path).map((p) => p.slug));
+  });
+  return [...new Set(slugs)].map(getPostBySlug).filter(Boolean).slice(0, 8);
+};
 
 // Inline SVG icons
 const FiCheck = ({ size = 16 }) => (
@@ -26,11 +42,10 @@ const FAQItem = ({ question, answer, isOpen, toggle }) => (
       <span className="text-base md:text-lg font-bold text-[#182A2C] pr-4">{question}</span>
       {isOpen ? <FiChevronUp className="text-[#d9fb06] shrink-0" size={20} /> : <FiChevronDown className="text-gray-400 shrink-0" size={20} />}
     </button>
-    {isOpen && (
-      <div className="pb-5 px-1 text-gray-600 leading-relaxed text-base animate-fadeIn">
-        {answer}
-      </div>
-    )}
+    {/* Siempre en el HTML (oculta con CSS): si se renderiza solo al abrirla, Google no lee la respuesta */}
+    <div className={isOpen ? 'pb-5 px-1 text-gray-600 leading-relaxed text-base animate-fadeIn' : 'hidden'}>
+      {answer}
+    </div>
   </div>
 );
 
@@ -55,6 +70,8 @@ export const ServiceDetailPage = () => {
   }
 
   const IconComp = service.icon;
+  const cases = caseStudies.filter((c) => c.service === service.slug).slice(0, 6);
+  const guides = guidesFor(`/servicios/${service.slug}`, service.guides);
 
   // Build FAQ schema for this page
   const faqSchema = {
@@ -196,6 +213,9 @@ export const ServiceDetailPage = () => {
       {/* Content Section */}
       <section className="py-16 md:py-24 bg-white">
         <div className="container mx-auto px-4 max-w-4xl">
+          {service.answer && (
+            <p className="text-lg md:text-xl text-[#182A2C] font-semibold leading-relaxed mb-12 border-l-4 border-[#d9fb06] pl-5">{service.answer}</p>
+          )}
           <h2 className="text-3xl md:text-4xl font-black text-[#182A2C] mb-8 leading-tight">
             ¿Por qué elegir <span className="bg-[#d9fb06] px-2">Websy</span> para {service.title.toLowerCase()}?
           </h2>
@@ -207,6 +227,42 @@ export const ServiceDetailPage = () => {
           </div>
         </div>
       </section>
+
+      {service.pricing && (
+        <section className="py-16 md:py-20 bg-white">
+          <div className="container mx-auto px-4 max-w-5xl">
+            <h2 className="text-2xl md:text-3xl font-black text-[#182A2C] mb-8">
+              Cuánto cuesta y cuánto tarda
+            </h2>
+            <div className="overflow-x-auto rounded-2xl border border-gray-200">
+              <table className="w-full text-left text-[15px]">
+                <thead className="bg-[#182A2C] text-white">
+                  <tr>
+                    <th className="px-5 py-4 font-bold">Tipo</th>
+                    <th className="px-5 py-4 font-bold hidden md:table-cell">Qué incluye</th>
+                    <th className="px-5 py-4 font-bold whitespace-nowrap">Precio</th>
+                    <th className="px-5 py-4 font-bold whitespace-nowrap">Plazo</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  {service.pricing.map((row) => (
+                    <tr key={row.name} className="align-top">
+                      <td className="px-5 py-4">
+                        <span className="font-bold text-[#182A2C]">{row.name}</span>
+                        <p className="md:hidden mt-1 text-sm text-gray-500">{row.desc}</p>
+                      </td>
+                      <td className="px-5 py-4 text-gray-600 hidden md:table-cell">{row.desc}</td>
+                      <td className="px-5 py-4 font-semibold text-[#182A2C] whitespace-nowrap">{row.price}</td>
+                      <td className="px-5 py-4 text-gray-600 whitespace-nowrap">{row.time}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            {service.pricingNote && <p className="mt-5 text-[15px] text-gray-600 leading-relaxed">{service.pricingNote} <Link to="/planes" className="font-semibold text-[#182A2C] underline decoration-[#d9fb06] decoration-2 underline-offset-4">Ver planes</Link></p>}
+          </div>
+        </section>
+      )}
 
       {/* All Features Grid */}
       <section className="py-16 md:py-20 bg-[#f9fafb]">
@@ -246,6 +302,23 @@ export const ServiceDetailPage = () => {
           </div>
         </div>
       </section>
+
+      {cases.length > 0 && (
+        <section className="py-16 md:py-20 bg-[#f9fafb]">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <h2 className="text-2xl md:text-3xl font-black text-[#182A2C] mb-3 text-center">
+              Proyectos reales de {service.title.toLowerCase()}
+            </h2>
+            <p className="text-gray-500 text-center mb-10">Qué resolvimos en cada uno, con qué tecnología y el sitio publicado.</p>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {cases.map((c) => <CaseCard key={c.slug} study={c} />)}
+            </div>
+            <p className="mt-8 text-center">
+              <Link to="/casos-de-exito" className="font-bold text-[#182A2C] underline decoration-[#d9fb06] decoration-2 underline-offset-4">Ver todos los casos de éxito</Link>
+            </p>
+          </div>
+        </section>
+      )}
 
       {/* FAQ Section */}
       <section className="py-16 md:py-24 bg-white">
@@ -291,6 +364,21 @@ export const ServiceDetailPage = () => {
         </div>
       </section>
 
+      {guides.length > 0 && (
+        <section className="py-14 md:py-16 bg-white">
+          <div className="container mx-auto px-4 max-w-4xl">
+            <h2 className="text-2xl md:text-3xl font-black text-[#182A2C] mb-6">Guías para decidir antes de contratar</h2>
+            <ul className="grid md:grid-cols-2 gap-x-8 gap-y-3">
+              {guides.map((p) => (
+                <li key={p.slug}>
+                  <Link to={`/blog/${p.slug}`} className="text-base font-semibold text-[#182A2C] underline decoration-[#d9fb06] decoration-2 underline-offset-4 hover:decoration-[#182A2C]">{p.title}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+
       {/* Related Services */}
       {relatedServices.length > 0 && (
         <section className="py-16 md:py-20 bg-[#f9fafb]">
@@ -330,7 +418,7 @@ export const ServiceDetailPage = () => {
             ¿Listo para empezar?
           </h2>
           <p className="text-gray-400 text-lg mb-8">
-            Contactanos y recibí una cotización gratuita en menos de 24 horas.
+            Contactanos y recibí una cotización gratuita en el día hábil.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <button

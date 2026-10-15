@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { openWhatsApp } from '../lib/tracking';
+import { COUNTRIES } from '../siteConfig';
+import useVisitorCountry from '../hooks/useVisitorCountry';
 
 // Ícono oficial de WhatsApp
 const WhatsAppIcon = ({ size = 24, className = "" }) => (
@@ -16,9 +18,14 @@ const WhatsAppIcon = ({ size = 24, className = "" }) => (
 
 export const WhatsAppButton = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const country = useVisitorCountry();
+  // Fuera de Argentina: tuteo, y el mensaje ya dice desde dónde escribe (sirve para responder en su horario)
+  const countryName = country && country !== 'AR' && COUNTRIES.find((c) => c.code === country && c.dial)?.name;
 
   const handleWhatsAppClick = () => {
-    openWhatsApp('¡Hola! Me interesa conocer más sobre sus servicios. ¿Me pasan más información?', 'boton_flotante');
+    openWhatsApp(countryName
+      ? `¡Hola! Les escribo desde ${countryName}. Me interesa conocer más sobre sus servicios.`
+      : '¡Hola! Me interesa conocer más sobre sus servicios. ¿Me pasan más información?', 'boton_flotante');
   };
 
   return (
@@ -42,7 +49,7 @@ export const WhatsAppButton = () => {
         <div className="flex items-center justify-center transform group-hover:rotate-12 transition-transform shrink-0">
           <WhatsAppIcon size={28} />
         </div>
-        <span className="tracking-wide hidden md:inline whitespace-nowrap">Escribinos por WhatsApp</span>
+        <span className="tracking-wide hidden md:inline whitespace-nowrap">{countryName ? 'Escríbenos por WhatsApp' : 'Escribinos por WhatsApp'}</span>
         
         {/* Particle effect on hover */}
         {isHovered && (

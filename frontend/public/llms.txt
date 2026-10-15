@@ -12,15 +12,16 @@
 - Contacto: WhatsApp +54 9 388 484-6695 · https://www.websysrl.com/contacto
 - Precios y planes: https://www.websysrl.com/planes
 
+## Por país
+
+- [Websy en Colombia](https://www.websysrl.com/colombia): proyectos en Bogotá, Cali y Manizales; precios en USD y pago desde Colombia.
+- [Websy en México](https://www.websysrl.com/mexico): webs, tiendas en línea y sistemas multisucursal; pago desde México.
+- [Websy en Estados Unidos](https://www.websysrl.com/estados-unidos): webs bilingües y automatización de consultas para negocios hispanos.
+- [Diseño web en Salta](https://www.websysrl.com/diseno-web-salta): oficina en San Luis 2105, Salta Capital.
+
 ## Servicios
 
-- [Desarrollo Web Profesional](https://www.websysrl.com/servicios/desarrollo-web)
-- [Diseño UI/UX](https://www.websysrl.com/servicios/ui-ux)
-- [Tiendas E-commerce](https://www.websysrl.com/servicios/ecommerce)
-- [Aplicaciones Móviles](https://www.websysrl.com/servicios/aplicaciones-moviles)
-- [Automatizaciones con IA](https://www.websysrl.com/servicios/automatizaciones-ia)
-- [SEO & Marketing Digital](https://www.websysrl.com/servicios/seo-marketing)
-- [Sistemas CRM, ERP & Gestión](https://www.websysrl.com/servicios/sistemas-gestion)
+
 
 ## Ejemplos por rubro
 
@@ -60,5 +61,8 @@
 
 ## Más
 
+- [Cotizador](https://www.websysrl.com/cotizador): rango de precio y plazo de una web, tienda, sistema o app con los precios publicados.
+- [Auditoría web gratis](https://www.websysrl.com/auditoria-gratis): 3 mejoras concretas para una web, enviadas por WhatsApp.
+- [Quiénes somos](https://www.websysrl.com/quienes-somos): fundada por un contador (Agustín Dávila, CPN); líder técnico Sebastian Aguirre.
 - [Todos los casos de éxito](https://www.websysrl.com/casos-de-exito)
 - [Blog](https://www.websysrl.com/blog): guías sobre desarrollo web, e-commerce, SEO y automatización para pymes de Latinoamérica.

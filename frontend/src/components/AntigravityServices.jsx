@@ -333,7 +333,7 @@ export const AntigravityServices = () => {
               ¿Tenés una idea o requerimiento especial en mente?
             </h2>
             <p className="text-gray-300 text-base md:text-lg mb-8 font-medium leading-relaxed">
-              Analizamos las necesidades específicas de tu empresa sin cargo para diseñarte una propuesta técnica y económica personalizada en menos de 24 horas.
+              Analizamos las necesidades específicas de tu empresa sin cargo para diseñarte una propuesta técnica y económica personalizada en el día hábil.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <button

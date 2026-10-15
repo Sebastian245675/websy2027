@@ -85,4 +85,4 @@ Entre 3 y 6 semanas, según la cantidad de productos, los medios de pago y las i
 
 ## Cotiza tu proyecto desde México
 
-Revisa el [caso de la cadena de bicicletas](/casos-de-exito/sistema-gestion-sucursales-tienda-online-bicicleteria-mexico), los [precios y planes](/planes) o [escríbenos](/contacto) y te enviamos una cotización en 24 horas.
+Mira cómo trabajamos con negocios mexicanos en [Websy México](/mexico), el [caso de la cadena de bicicletas](/casos-de-exito/sistema-gestion-sucursales-tienda-online-bicicleteria-mexico), los [precios y planes](/planes) o [escríbenos](/contacto) y te enviamos una cotización en el día hábil.

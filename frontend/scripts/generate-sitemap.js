@@ -21,13 +21,19 @@ const staticPages = [
   { loc: '/servicios', page: 'pages/ServicesPage.jsx', changefreq: 'monthly', priority: '0.9' },
   { loc: '/planes', page: 'pages/PlansPage.jsx', changefreq: 'monthly', priority: '0.9' },
   { loc: '/diseno-web-salta', page: 'pages/SaltaPage.jsx', changefreq: 'monthly', priority: '0.9' },
+  { loc: '/cotizador', page: 'pages/QuotePage.jsx', changefreq: 'monthly', priority: '0.9' },
+  { loc: '/quienes-somos', page: 'pages/AboutPage.jsx', changefreq: 'yearly', priority: '0.6' },
+  { loc: '/auditoria-gratis', page: 'pages/AuditPage.jsx', changefreq: 'monthly', priority: '0.9' },
+  { loc: '/colombia', page: 'pages/CountryPage.jsx', changefreq: 'monthly', priority: '0.9' },
+  { loc: '/mexico', page: 'pages/CountryPage.jsx', changefreq: 'monthly', priority: '0.9' },
+  { loc: '/estados-unidos', page: 'pages/CountryPage.jsx', changefreq: 'monthly', priority: '0.9' },
   { loc: '/casos-de-exito', page: 'pages/SuccessStoriesPage.jsx', changefreq: 'monthly', priority: '0.8' },
   { loc: '/contacto', page: 'pages/ContactPage.jsx', changefreq: 'monthly', priority: '0.9' },
   { loc: '/blog', page: 'pages/BlogPage.jsx', changefreq: 'weekly', priority: '0.9' },
   { loc: '/politica-de-privacidad', page: 'pages/PrivacyPolicyPage.jsx', changefreq: 'yearly', priority: '0.2' },
 ];
 // Routes in App.js that are deliberately not in the sitemap
-const NOT_IN_SITEMAP = ['/panel-cotizaciones', '/lp/:slug', '*'];
+const NOT_IN_SITEMAP = ['/panel-cotizaciones', '/lp/:slug', '*', '/desarrollo-web-salta', '/diseno-web-en-salta'];
 // Dynamic routes; their URLs come from services, case studies and blog posts below
 const DYNAMIC_ROUTES = ['/servicios/:slug', '/casos-de-exito/:slug', '/blog/:slug', '/autores/:slug'];
 
@@ -141,6 +147,15 @@ for (const { slug } of blogPosts) {
 fs.writeFileSync(path.join(blogDir, 'postStats.json'), `${JSON.stringify(postStats, null, 1)}
 `);
 
+// Imagen para compartir de cada post (public/og/blog/<slug>.png). Sin ella el post se publica igual, con la
+// tarjeta general del sitio, pero Google no muestra miniatura del artículo.
+const ogManifest = path.join(blogDir, 'ogImages.json');
+const withOg = new Set(fs.existsSync(ogManifest) ? JSON.parse(fs.readFileSync(ogManifest, 'utf8')) : []);
+const noOg = [...new Set(blogPosts.map((p) => p.slug))].filter((slug) => !withOg.has(slug));
+if (noOg.length) {
+  console.warn(`generate-sitemap: ${noOg.length} posts sin imagen para compartir; correr "python scripts/generate-og-images.py":\n  ${noOg.join('\n  ')}`);
+}
+
 const seen = new Set();
 const uniquePosts = blogPosts
   .filter((p) => !seen.has(p.slug) && seen.add(p.slug))
@@ -206,6 +221,13 @@ const llms = `# Websy
 - Contacto: WhatsApp +54 9 388 484-6695 · ${SITE_URL}/contacto
 - Precios y planes: ${SITE_URL}/planes
 
+## Por país
+
+- [Websy en Colombia](${SITE_URL}/colombia): proyectos en Bogotá, Cali y Manizales; precios en USD y pago desde Colombia.
+- [Websy en México](${SITE_URL}/mexico): webs, tiendas en línea y sistemas multisucursal; pago desde México.
+- [Websy en Estados Unidos](${SITE_URL}/estados-unidos): webs bilingües y automatización de consultas para negocios hispanos.
+- [Diseño web en Salta](${SITE_URL}/diseno-web-salta): oficina en San Luis 2105, Salta Capital.
+
 ## Servicios
 
 ${serviceTitles.map(([, slug, title]) => `- [${title}](${SITE_URL}/servicios/${slug})`).join('\n')}
@@ -220,6 +242,9 @@ ${caseTitles.map(([, slug, h1, summary]) => `- [${h1}](${SITE_URL}/casos-de-exit
 
 ## Más
 
+- [Cotizador](${SITE_URL}/cotizador): rango de precio y plazo de una web, tienda, sistema o app con los precios publicados.
+- [Auditoría web gratis](${SITE_URL}/auditoria-gratis): 3 mejoras concretas para una web, enviadas por WhatsApp.
+- [Quiénes somos](${SITE_URL}/quienes-somos): fundada por un contador (Agustín Dávila, CPN); líder técnico Sebastian Aguirre.
 - [Todos los casos de éxito](${SITE_URL}/casos-de-exito)
 - [Blog](${SITE_URL}/blog): guías sobre desarrollo web, e-commerce, SEO y automatización para pymes de Latinoamérica.
 `;

@@ -22,6 +22,18 @@ const ROOT = path.join(__dirname, '..');
 const args = process.argv.slice(2);
 const LOCAL = args.includes('--local');
 const LIVE_SITEMAP = args.includes('--sitemap=live');
+const VERBOSE = args.includes('--verbose');
+const reportArg = args.find((arg) => arg.startsWith('--report='));
+const REPORT = reportArg ? reportArg.slice('--report='.length) : (VERBOSE ? path.join(ROOT, 'reports', 'production-seo-latest.txt') : null);
+const reportLines = [];
+const log = (message = '') => {
+  console.log(message);
+  reportLines.push(message);
+};
+if (REPORT) process.on('exit', () => {
+  fs.mkdirSync(path.dirname(path.resolve(REPORT)), { recursive: true });
+  fs.writeFileSync(path.resolve(REPORT), `${reportLines.join('\n')}\n`);
+});
 
 const CURL_BASE = ['-s', '--max-time', '30', '-o', '-', '-D', '-', '-A', 'Mozilla/5.0 (compatible; websy-seo-check)'];
 const CURL_LOCAL = [
@@ -61,6 +73,10 @@ const robotsOf = (html) => {
   const tag = (html.match(/<meta\b[^>]*\bname="robots"[^>]*>/) || [])[0];
   return tag ? attr(tag, 'content') : '';
 };
+const textOf = (html, tag) => {
+  const match = html.match(new RegExp(`<${tag}\\b[^>]*>([\\s\\S]*?)<\\/${tag}>`, 'i'));
+  return match ? match[1].replace(/<[^>]+>/g, ' ').replace(/&[^;]+;/g, ' ').replace(/\s+/g, ' ').trim() : '';
+};
 const internalLinks = (html) => [...html.matchAll(/<a\b[^>]*\bhref="([^"]+)"/g)]
   .map((m) => m[1].replace(/&amp;/g, '&'))
   .filter((h) => h.startsWith('/') || h.startsWith(SITE));
@@ -68,21 +84,31 @@ const internalLinks = (html) => [...html.matchAll(/<a\b[^>]*\bhref="([^"]+)"/g)]
 const failures = [];
 const fail = (url, msg) => failures.push(`${url}  ->  ${msg}`);
 let checks = 0;
+let homeTitle = '';
+let homeH1 = '';
 
 const expectPage = async (url, { canonical = url, label = url } = {}) => {
   checks++;
   const r = await fetchRaw(url);
   if (r.status !== 200) return fail(label, `status ${r.status}${r.headers.location ? ` (Location: ${r.headers.location})` : ''}`);
   const c = canonicalOf(r.body);
+  const title = textOf(r.body, 'title');
+  const h1 = textOf(r.body, 'h1');
   if (c !== canonical) fail(label, `canonical ${c === null ? 'missing' : `"${c}"`}, expected "${canonical}"`);
+  if (!title) fail(label, 'missing <title>');
+  if (!h1) fail(label, 'missing <h1>');
+  if (canonical !== `${SITE}/` && title === homeTitle) fail(label, 'title is identical to the home title');
+  if (canonical !== `${SITE}/` && h1 === homeH1) fail(label, 'H1 is identical to the home H1');
   const robots = `${robotsOf(r.body)} ${r.headers['x-robots-tag'] || ''}`;
   if (/noindex/i.test(robots)) fail(label, `noindex (${robots.trim()})`);
+  if (VERBOSE) log(`PAGE ${r.status} canonical:${c === canonical ? 'OK' : 'FAIL'} title:${title && (canonical === `${SITE}/` || title !== homeTitle) ? 'OK' : 'FAIL'} h1:${h1 && (canonical === `${SITE}/` || h1 !== homeH1) ? 'OK' : 'FAIL'} ${label}`);
   return r;
 };
 
 const expectRedirect = async (from, to) => {
   checks++;
   const r = await fetchRaw(from);
+  if (VERBOSE) log(`REDIRECT ${r.status} ${r.headers.location === to ? 'OK' : 'FAIL'} ${from} -> ${r.headers.location || '(none)'}`);
   if (r.status !== 301) return fail(from, `status ${r.status}, expected 301 to ${to}`);
   if (r.headers.location !== to) fail(from, `301 to "${r.headers.location}", expected "${to}" in a single hop`);
 };
@@ -90,6 +116,7 @@ const expectRedirect = async (from, to) => {
 const expectNotFound = async (url) => {
   checks++;
   const r = await fetchRaw(url);
+  if (VERBOSE) log(`NOT_FOUND ${r.status} noindex:${/noindex/i.test(robotsOf(r.body)) ? 'OK' : 'FAIL'} ${url}`);
   if (r.status !== 404) return fail(url, `status ${r.status}, expected 404`);
   if (!/noindex/i.test(robotsOf(r.body))) fail(url, '404 page without noindex');
 };
@@ -107,7 +134,12 @@ const pool = async (items, size, fn) => {
     ? (await fetchRaw(`${SITE}/sitemap.xml`)).body
     : fs.readFileSync(path.join(ROOT, 'public', 'sitemap.xml'), 'utf8');
   const urls = [...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
-  console.log(`Target: ${LOCAL ? 'local nginx (deploy/ configs)' : 'production'} · ${urls.length} URLs in the sitemap\n`);
+  log(`Target: ${LOCAL ? 'local nginx (deploy/ configs)' : 'production'} · ${urls.length} URLs in the sitemap\n`);
+
+  const home = await fetchRaw(`${SITE}/`);
+  homeTitle = textOf(home.body, 'title');
+  homeH1 = textOf(home.body, 'h1');
+  if (home.status !== 200 || !homeTitle || !homeH1) fail(`${SITE}/`, 'could not establish home title/H1 baseline');
 
   // Sitemap URLs must already be canonical-shaped
   urls.forEach((u) => {
@@ -157,6 +189,7 @@ const pool = async (items, size, fn) => {
 
   // Real 404s
   await expectNotFound(`${SITE}/esta-pagina-no-existe`);
+  await expectNotFound(`${SITE}/pagina-que-no-existe-xyz`);
   await expectNotFound(`${SITE}/blog/post-que-no-existe`);
   await expectNotFound(`${SITE}/servicios/servicio-que-no-existe`);
   await expectNotFound(`${SITE}/404.html`);
@@ -168,10 +201,10 @@ const pool = async (items, size, fn) => {
   if (robots.status !== 200 || !robots.body.includes(`Sitemap: ${SITE}/sitemap.xml`)) fail(`${SITE}/robots.txt`, 'missing or without Sitemap line');
   if (/^Disallow:\s*\/(blog|static|.*\.(css|js))/mi.test(robots.body)) fail(`${SITE}/robots.txt`, 'blocks /blog, CSS or JS');
 
-  console.log(`${checks} checks, ${failures.length} failures`);
+  log(`${checks} checks, ${failures.length} failures`);
   if (failures.length) {
-    console.log(`\n${failures.slice(0, 200).join('\n')}${failures.length > 200 ? `\n... and ${failures.length - 200} more` : ''}`);
+    log(`\n${failures.slice(0, 200).join('\n')}${failures.length > 200 ? `\n... and ${failures.length - 200} more` : ''}`);
     process.exit(1);
   }
-  console.log('OK: every sitemap URL is 200, self-canonical and indexable; every variant is a single 301 to it.');
+  log('OK: every sitemap URL is 200, self-canonical and indexable; every variant is a single 301 to it.');
 })();

@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, memo, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import "./App.css";
 import { LanguageProvider } from "./LanguageContext";
 import { ScrollToTopOnRouteChange } from "./components/ScrollToTopOnRouteChange";
@@ -116,6 +116,22 @@ const NotFoundPage = lazy(() =>
 
 const SaltaPage = lazy(() =>
   import("./pages/SaltaPage").then(module => ({ default: module.SaltaPage }))
+);
+
+const QuotePage = lazy(() =>
+  import("./pages/QuotePage").then(module => ({ default: module.QuotePage }))
+);
+
+const AuditPage = lazy(() =>
+  import("./pages/AuditPage").then(module => ({ default: module.AuditPage }))
+);
+
+const AboutPage = lazy(() =>
+  import("./pages/AboutPage").then(module => ({ default: module.AboutPage }))
+);
+
+const CountryPage = lazy(() =>
+  import("./pages/CountryPage").then(module => ({ default: module.CountryPage }))
 );
 
 const NicheLandingPage = lazy(() =>
@@ -244,6 +260,41 @@ function App() {
                         <SaltaPage />
                       </Suspense>
                     } />
+                    <Route path="/cotizador" element={
+                      <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
+                        <QuotePage />
+                      </Suspense>
+                    } />
+                    <Route path="/auditoria-gratis" element={
+                      <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
+                        <AuditPage />
+                      </Suspense>
+                    } />
+                    <Route path="/quienes-somos" element={
+                      <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
+                        <AboutPage />
+                      </Suspense>
+                    } />
+                    {/* Versiones por país (src/countryPages.js), enlazadas con la home por hreflang */}
+                    <Route path="/colombia" element={
+                      <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
+                        <CountryPage code="CO" />
+                      </Suspense>
+                    } />
+                    <Route path="/mexico" element={
+                      <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
+                        <CountryPage code="MX" />
+                      </Suspense>
+                    } />
+                    <Route path="/estados-unidos" element={
+                      <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
+                        <CountryPage code="US" />
+                      </Suspense>
+                    } />
+                    {/* Old Salta URLs. In production nginx answers them with a 301 (deploy/websysrl-redirects.conf);
+                        these routes cover the dev server and any host without those rules. */}
+                    <Route path="/desarrollo-web-salta" element={<Navigate to="/diseno-web-salta" replace />} />
+                    <Route path="/diseno-web-en-salta" element={<Navigate to="/diseno-web-salta" replace />} />
                     <Route path="/politica-de-privacidad" element={
                       <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
                         <PrivacyPolicyPage />

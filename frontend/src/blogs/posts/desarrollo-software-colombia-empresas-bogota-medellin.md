@@ -101,4 +101,4 @@ Sí. Si recolectas nombres, correos o teléfonos, necesitas una política de tra
 
 ## Cotiza tu proyecto desde Colombia
 
-Mira los [proyectos que hicimos en Colombia](/casos-de-exito), revisa los [precios y planes](/planes) o [escríbenos](/contacto) y te enviamos una cotización en pesos colombianos en 24 horas.
+Mira cómo trabajamos con empresas colombianas en [Websy Colombia](/colombia), con los proyectos que hicimos en Bogotá, Cali y Manizales, revisa los [precios y planes](/planes) o [escríbenos](/contacto) y te enviamos una cotización en pesos colombianos en el día hábil.

@@ -7,7 +7,7 @@ import { SEOHead } from '../components/SEOHead';
 import { saveCotizacion, sendCotizacionEmail } from '../firebaseLazy';
 import { AuditForm } from '../components/AuditForm';
 import { trackFormSubmit } from '../lib/tracking';
-import { whatsappUrl } from '../siteConfig';
+import { BUDGET_RANGES, COUNTRIES, PROJECT_NEEDS, whatsappUrl } from '../siteConfig';
 
 // SVG icons inline
 const SendIcon = ({ size = 20 }) => (
@@ -49,18 +49,25 @@ export const ContactPage = () => {
     if (wantsAudit) setActiveTab('auditoria');
   }, [wantsAudit]);
 
+  // Los links de /planes y de versiones viejas usan type=web|app|custom y rangos de presupuesto viejos
+  const TYPE_FROM_QUERY = {
+    web: 'Página web', app: 'App móvil', custom: 'Sistema de gestión',
+    'desarrollo-web': 'Página web', 'ui-ux': 'Página web', ecommerce: 'Tienda online', 'sistemas-gestion': 'Sistema de gestión',
+    'automatizaciones-ia': 'Automatización con IA', 'aplicaciones-moviles': 'App móvil', 'seo-marketing': 'Otro',
+  };
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
-    company: '',
-    projectType: initialType || (initialPlan ? 'web' : ''),
-    budget: initialBudget || '',
+    phone: '',
+    country: 'AR',
+    projectType: PROJECT_NEEDS.includes(initialType) ? initialType : TYPE_FROM_QUERY[initialType] || (initialPlan ? 'Página web' : ''),
+    budget: BUDGET_RANGES.includes(initialBudget) ? initialBudget : '',
     message: initialPlan && !wantsAudit
       ? `¡Hola! Me interesa pedir presupuesto por el servicio/plan: ${initialPlan}.`
       : ''
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [sent, setSent] = useState(null);
 
   const handleChange = (e) => {
     setFormData({
@@ -69,35 +76,38 @@ export const ContactPage = () => {
     });
   };
 
+  // Cotización en 4 campos (nombre, WhatsApp, qué necesita, presupuesto) + detalle opcional
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    if (!formData.name || !formData.email || !formData.message || !formData.projectType) {
-      alert('Completá todos los campos obligatorios.');
-      setIsSubmitting(false);
-      return;
-    }
+    const dial = (COUNTRIES.find((c) => c.code === formData.country) || COUNTRIES[0]).dial;
+    const phone = `${dial} ${formData.phone}`.trim();
+    const message = [
+      `Necesita: ${formData.projectType}`,
+      `Presupuesto aproximado: ${formData.budget}`,
+      formData.message && `Detalle: ${formData.message}`,
+      `Página: ${window.location.pathname}`,
+    ].filter(Boolean).join('\n');
 
     try {
       const docId = await saveCotizacion({
         name: formData.name,
-        email: formData.email,
-        company: formData.company || null,
+        phone,
+        email: '',
         projectType: formData.projectType,
-        budget: formData.budget || null,
-        message: formData.message
+        budget: formData.budget,
+        message
       });
 
       try {
+        // La función de aviso (functions/index.js) exige email: el formulario ya no lo pide, va el WhatsApp
         await sendCotizacionEmail({
           cotizacionId: docId,
           name: formData.name,
-          email: formData.email,
-          company: formData.company || null,
+          email: `Sin email · WhatsApp ${phone}`,
           projectType: formData.projectType,
-          budget: formData.budget || null,
-          message: formData.message
+          budget: formData.budget,
+          message
         });
       } catch (fnErr) {
         console.error('Failed to call sendCotizacionEmail function:', fnErr);
@@ -111,11 +121,10 @@ export const ContactPage = () => {
           body: JSON.stringify({
             formData: {
               name: formData.name,
-              email: formData.email,
-              company: formData.company,
+              phone,
               projectType: formData.projectType,
               budget: formData.budget,
-              message: formData.message
+              message
             }
           })
         });
@@ -124,15 +133,8 @@ export const ContactPage = () => {
       }
 
       trackFormSubmit('contacto');
-      alert('¡Gracias por tu consulta! Te contactamos en menos de 24 horas.');
-      setFormData({
-        name: '',
-        email: '',
-        company: '',
-        projectType: '',
-        budget: '',
-        message: ''
-      });
+      setSent({ name: formData.name.split(' ')[0], need: formData.projectType, budget: formData.budget });
+      setFormData((prev) => ({ ...prev, name: '', phone: '', projectType: '', budget: '', message: '' }));
     } catch (err) {
       console.error('Error saving cotizacion:', err);
       alert('No pudimos enviar el mensaje. Probá de nuevo o escribinos por WhatsApp.');
@@ -141,18 +143,22 @@ export const ContactPage = () => {
     }
   };
 
+  const fieldCls = 'w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded text-sm sm:text-base';
+  const fieldStyle = { backgroundColor: 'var(--bg-page)', borderColor: 'var(--border-medium)', color: 'var(--text-primary)' };
+  const labelCls = 'block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2';
+
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-page)', paddingTop: '68px' }}>
       <SEOHead
         title="Contacto y Cotización Gratuita | Websy"
-        description="Solicitá una cotización personalizada sin compromiso en 24hs para tu proyecto de desarrollo web, app móvil o automatización con IA."
+        description="Solicitá una cotización personalizada sin compromiso para tu proyecto de desarrollo web, app móvil o automatización con IA."
       />
       {/* Contact Form Section - Clean CGI Style */}
       <section id="contact-form" className="py-8 sm:py-12 md:py-24 lg:py-32" style={{ backgroundColor: 'var(--bg-page)' }}>
         <div className="container px-4 md:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#182A2C] tracking-tight mb-3">Hablemos de tu proyecto</h1>
-            <p className="text-base sm:text-lg text-gray-600 mb-8 max-w-2xl">Pedí una auditoría gratuita de tu web o una cotización a medida. Respondemos en menos de 24 horas.</p>
+            <p className="text-base sm:text-lg text-gray-600 mb-8 max-w-2xl">Pedí una auditoría gratuita de tu web o una cotización a medida. Respondemos en el día hábil.</p>
 
             <div role="tablist" aria-label="Tipo de consulta" className="inline-flex flex-wrap gap-2 mb-8 sm:mb-10">
               {[
@@ -192,135 +198,68 @@ export const ContactPage = () => {
                   {t('contact.requestQuote')}
                 </h2>
 
+                {sent ? (
+                  <div className="border-2 border-[#182A2C] p-6 sm:p-8" role="status">
+                    <p className="text-xs font-black uppercase tracking-[0.15em] text-[#556902] mb-3">Consulta recibida</p>
+                    <h3 className="text-xl sm:text-2xl font-black text-[#182A2C] mb-4">Gracias{sent.name ? `, ${sent.name}` : ''}. Esto es lo que sigue:</h3>
+                    <ol className="space-y-2 text-gray-700 mb-6 list-decimal list-inside">
+                      <li>Te escribimos por WhatsApp en el día hábil para entender tu proyecto.</li>
+                      <li>Si hace falta, coordinamos una videollamada de 20 minutos.</li>
+                      <li>Te enviamos la propuesta con precio cerrado y plazo por escrito.</li>
+                    </ol>
+                    <a
+                      href={whatsappUrl(`Hola! Acabo de pedir una cotización en la web. Necesito: ${sent.need}. Presupuesto aproximado: ${sent.budget}.`)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-wa-location="contacto_gracias"
+                      className="inline-block bg-[#d9fb06] text-[#182A2C] font-black px-6 py-3 text-sm uppercase tracking-[0.1em]"
+                    >
+                      ¿Apurado? Escribinos ahora por WhatsApp
+                    </a>
+                  </div>
+                ) : (
                 <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                     <div>
-                      <label className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2" style={{ color: 'var(--text-primary)' }}>
-                        {t('contact.formLabels.nameRequired')}
-                      </label>
-                      <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded text-sm sm:text-base"
-                        style={{
-                          backgroundColor: 'var(--bg-page)',
-                          borderColor: 'var(--border-medium)',
-                          color: 'var(--text-primary)'
-                        }}
-                        placeholder={t('contact.placeholders.fullName')}
-                        required
-                      />
+                      <label htmlFor="cq-name" className={labelCls} style={{ color: 'var(--text-primary)' }}>Nombre *</label>
+                      <input id="cq-name" type="text" name="name" value={formData.name} onChange={handleChange} autoComplete="name"
+                        className={fieldCls} style={fieldStyle} placeholder="Tu nombre" required />
                     </div>
-
                     <div>
-                      <label className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2" style={{ color: 'var(--text-primary)' }}>
-                        {t('contact.formLabels.email')}
-                      </label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded text-sm sm:text-base"
-                        style={{
-                          backgroundColor: 'var(--bg-page)',
-                          borderColor: 'var(--border-medium)',
-                          color: 'var(--text-primary)'
-                        }}
-                        placeholder={t('contact.placeholders.email')}
-                        required
-                      />
+                      <label htmlFor="cq-phone" className={labelCls} style={{ color: 'var(--text-primary)' }}>WhatsApp *</label>
+                      <div className="flex gap-2">
+                        <select name="country" value={formData.country} onChange={handleChange} aria-label="Código de país"
+                          className="px-2 border rounded text-sm" style={fieldStyle}>
+                          {COUNTRIES.filter((c) => c.dial).map((c) => <option key={c.code} value={c.code}>{c.code} {c.dial}</option>)}
+                        </select>
+                        <input id="cq-phone" type="tel" name="phone" value={formData.phone} onChange={handleChange} autoComplete="tel-national"
+                          className={fieldCls} style={fieldStyle} placeholder="Número" required />
+                      </div>
                     </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2" style={{ color: 'var(--text-primary)' }}>
-                      {t('contact.formLabels.company')}
-                    </label>
-                    <input
-                      type="text"
-                      name="company"
-                      value={formData.company}
-                      onChange={handleChange}
-                      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded text-sm sm:text-base"
-                      style={{
-                        backgroundColor: 'var(--bg-page)',
-                        borderColor: 'var(--border-medium)',
-                        color: 'var(--text-primary)'
-                      }}
-                      placeholder={t('contact.placeholders.companyName')}
-                    />
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                     <div>
-                      <label className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2" style={{ color: 'var(--text-primary)' }}>
-                        {t('contact.formLabels.projectType')}
-                      </label>
-                      <select
-                        name="projectType"
-                        value={formData.projectType}
-                        onChange={handleChange}
-                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded text-sm sm:text-base"
-                        style={{
-                          backgroundColor: 'var(--bg-page)',
-                          borderColor: 'var(--border-medium)',
-                          color: 'var(--text-primary)'
-                        }}
-                        required
-                      >
-                        <option value="">{t('contact.selectOptions.select')}</option>
-                        <option value="app">App</option>
-                        <option value="web">Desarrollo Web</option>
-                        <option value="custom">Sistema Personalizado</option>
+                      <label htmlFor="cq-need" className={labelCls} style={{ color: 'var(--text-primary)' }}>¿Qué necesitás? *</label>
+                      <select id="cq-need" name="projectType" value={formData.projectType} onChange={handleChange} className={fieldCls} style={fieldStyle} required>
+                        <option value="">Elegí una opción</option>
+                        {PROJECT_NEEDS.map((n) => <option key={n} value={n}>{n}</option>)}
                       </select>
                     </div>
-
                     <div>
-                      <label className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2" style={{ color: 'var(--text-primary)' }}>
-                        {t('contact.formLabels.budget')}
-                      </label>
-                      <select
-                        name="budget"
-                        value={formData.budget}
-                        onChange={handleChange}
-                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded text-sm sm:text-base"
-                        style={{
-                          backgroundColor: 'var(--bg-page)',
-                          borderColor: 'var(--border-medium)',
-                          color: 'var(--text-primary)'
-                        }}
-                      >
-                        <option value="">{t('contact.selectOptions.select')}</option>
-                        <option value="0-50">{t('contact.budgetRanges.range1')}</option>
-                        <option value="50-100">{t('contact.budgetRanges.range2')}</option>
-                        <option value="100-200">{t('contact.budgetRanges.range3')}</option>
-                        <option value="1500+">{t('contact.budgetRanges.range4')}</option>
-                        <option value="a-cotizar">{t('contact.budgetRanges.aCotizar')}</option>
+                      <label htmlFor="cq-budget" className={labelCls} style={{ color: 'var(--text-primary)' }}>Presupuesto aproximado *</label>
+                      <select id="cq-budget" name="budget" value={formData.budget} onChange={handleChange} className={fieldCls} style={fieldStyle} required>
+                        <option value="">Elegí un rango</option>
+                        {BUDGET_RANGES.map((r) => <option key={r} value={r}>{r}</option>)}
                       </select>
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2" style={{ color: 'var(--text-primary)' }}>
-                      {t('contact.formLabels.projectDescription')}
-                    </label>
-                    <textarea
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded resize-none text-sm sm:text-base"
-                      style={{
-                        backgroundColor: 'var(--bg-page)',
-                        borderColor: 'var(--border-medium)',
-                        color: 'var(--text-primary)'
-                      }}
-                      rows="5"
-                      placeholder={t('contact.placeholders.projectDetails')}
-                      required
-                    ></textarea>
+                    <label htmlFor="cq-message" className={labelCls} style={{ color: 'var(--text-primary)' }}>Contanos tu proyecto (opcional)</label>
+                    <textarea id="cq-message" name="message" value={formData.message} onChange={handleChange}
+                      className={`${fieldCls} resize-none`} style={fieldStyle} rows="4"
+                      placeholder="Qué vendés, a quién y qué tiene que lograr la web o el sistema" />
                   </div>
 
                   <button
@@ -336,11 +275,13 @@ export const ContactPage = () => {
                     {isSubmitting ? 'Enviando...' : (
                       <>
                         <span className="sm:w-5 sm:h-5 inline-block mr-2"><SendIcon size={18} /></span>
-                        Enviar Solicitud
+                        Pedir propuesta
                       </>
                     )}
                   </button>
+                  <p className="text-xs text-gray-500">Te respondemos por WhatsApp en el día hábil. Precios desde USD 800: mirá los <a href="/planes" className="underline">planes</a>.</p>
                 </form>
+                )}
               </div>
               )}
 

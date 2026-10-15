@@ -101,6 +101,8 @@ export const SuccessStoriesPage = () => {
                             <img 
                                 src={story.image} 
                                 alt={`${story.title}: ${story.category}`} 
+                                width="640"
+                                height="400"
                                 className="w-full h-auto aspect-[16/10] object-cover transition-transform duration-[1.5s] group-hover:scale-105"
                                 loading="lazy"
                             />

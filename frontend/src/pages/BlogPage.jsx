@@ -216,7 +216,7 @@ export const BlogPage = () => {
     <div className="min-h-screen bg-white pt-[110px] md:pt-[115px]" style={{ overflowX: 'hidden' }}>
       <SEOHead
         title="Blog de Desarrollo Web, Apps, IA y Software | Websy"
-        description="Guías y artículos sobre desarrollo web, apps móviles, e-commerce, automatización con IA, CRM/ERP, SEO y ciberseguridad para empresas de Argentina y Latinoamérica."
+        description="Guías sobre desarrollo web, apps, e-commerce, automatización con IA, CRM/ERP, SEO y ciberseguridad para empresas de Argentina y Latinoamérica."
         url="https://www.websysrl.com/blog"
       />
 
@@ -437,7 +437,7 @@ export const BlogPage = () => {
                 <div className="rounded-2xl bg-[#182A2C] p-7 text-white">
                   <h2 className="text-xl font-bold">¿Tenés un proyecto en mente?</h2>
                   <p className="mt-2 text-sm text-slate-300 leading-relaxed">
-                    Contanos tu idea y te enviamos un presupuesto sin costo en menos de 24 horas.
+                    Contanos tu idea y te enviamos un presupuesto sin costo en el día hábil.
                   </p>
                   <Link
                     to="/contacto"

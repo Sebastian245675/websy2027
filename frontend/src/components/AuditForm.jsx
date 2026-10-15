@@ -29,8 +29,9 @@ const emptyForm = (defaultCountry, defaultRubro) => ({
 /**
  * Formulario de auditoría web gratuita (punto 2): web (opcional), rubro, WhatsApp con código de país.
  * tone: 'vos' (Argentina) | 'tu' (México / neutro). source: identifica el origen en el CRM y en los eventos.
+ * compact: solo web y WhatsApp (página /auditoria-gratis: cuantos menos campos, más pedidos).
  */
-export const AuditForm = ({ tone = 'vos', defaultCountry = 'AR', defaultRubro = '', source = 'auditoria', dark = false }) => {
+export const AuditForm = ({ tone = 'vos', defaultCountry = 'AR', defaultRubro = '', source = 'auditoria', dark = false, compact = false }) => {
   const copy = COPY[tone];
   const [form, setForm] = useState(() => emptyForm(defaultCountry, defaultRubro));
   const [status, setStatus] = useState('idle'); // idle | sending | done | error
@@ -46,7 +47,7 @@ export const AuditForm = ({ tone = 'vos', defaultCountry = 'AR', defaultRubro = 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.name.trim() || !form.rubro.trim() || !form.whatsapp.trim()) {
+    if (compact ? !form.whatsapp.trim() : !form.name.trim() || !form.rubro.trim() || !form.whatsapp.trim()) {
       setError(copy.required);
       return;
     }
@@ -55,15 +56,15 @@ export const AuditForm = ({ tone = 'vos', defaultCountry = 'AR', defaultRubro = 
 
     const phone = `${country.dial} ${form.whatsapp.trim()}`.trim();
     const website = form.noWebsite ? 'No tiene web' : (form.website.trim() || 'No indicó');
-    const message = `Pedido de auditoría web gratuita.\nWeb: ${website}\nRubro: ${form.rubro}\nPaís: ${country.name}\nWhatsApp: ${phone}\nOrigen: ${source}`;
+    const message = `Pedido de auditoría web gratuita.\nWeb: ${website}\nRubro: ${form.rubro || 'No indicó'}\nPaís: ${country.name}\nWhatsApp: ${phone}\nOrigen: ${source}\nPágina: ${window.location.pathname}`;
     const record = {
-      name: form.name.trim(),
+      name: form.name.trim() || 'Sin nombre (auditoría rápida)',
       email: 'No pedido (responder por WhatsApp)',
       phone,
       whatsapp: phone,
       country: country.name,
       website,
-      rubro: form.rubro,
+      rubro: form.rubro || 'No indicó',
       projectType: 'Auditoría web gratuita',
       source,
       message,
@@ -104,7 +105,7 @@ export const AuditForm = ({ tone = 'vos', defaultCountry = 'AR', defaultRubro = 
       <div className={`rounded-xl p-8 text-center ${dark ? 'bg-white/5 border border-white/15' : 'bg-[#f8fafc] border border-gray-200'}`} role="status">
         <CheckCircle2 size={44} className="mx-auto mb-4 text-[#7a9400]" />
         <p className={`text-xl sm:text-2xl font-black mb-2 ${dark ? 'text-white' : 'text-[#182A2C]'}`}>
-          ¡Listo, {form.name.trim().split(' ')[0]}!
+          ¡Listo{form.name.trim() ? `, ${form.name.trim().split(' ')[0]}` : ''}!
         </p>
         <p className={`text-base ${dark ? 'text-gray-300' : 'text-gray-600'}`}>
           Te mandamos por WhatsApp 3 mejoras concretas{form.noWebsite ? ' para empezar a vender online' : ' para tu web'}.
@@ -115,10 +116,12 @@ export const AuditForm = ({ tone = 'vos', defaultCountry = 'AR', defaultRubro = 
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-      <div>
-        <label htmlFor={`${source}-name`} className={labelCls}>Nombre *</label>
-        <input id={`${source}-name`} name="name" value={form.name} onChange={update} className={inputCls} autoComplete="name" required />
-      </div>
+      {!compact && (
+        <div>
+          <label htmlFor={`${source}-name`} className={labelCls}>Nombre *</label>
+          <input id={`${source}-name`} name="name" value={form.name} onChange={update} className={inputCls} autoComplete="name" required />
+        </div>
+      )}
 
       <div>
         <label htmlFor={`${source}-website`} className={labelCls}>Dirección de tu web</label>
@@ -139,7 +142,7 @@ export const AuditForm = ({ tone = 'vos', defaultCountry = 'AR', defaultRubro = 
         </label>
       </div>
 
-      <div>
+      {!compact && <div>
         <label htmlFor={`${source}-rubro`} className={labelCls}>{rubroLabel} *</label>
         <input
           id={`${source}-rubro`}
@@ -154,7 +157,7 @@ export const AuditForm = ({ tone = 'vos', defaultCountry = 'AR', defaultRubro = 
         <datalist id={`${source}-rubros`}>
           {RUBROS.map((r) => <option key={r} value={r} />)}
         </datalist>
-      </div>
+      </div>}
 
       <div className="grid grid-cols-1 sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-4">
         <div>

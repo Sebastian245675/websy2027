@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Check, ArrowRight, ArrowUpRight } from 'lucide-react';
 import { caseResults } from '../mockData';
 
@@ -102,9 +102,12 @@ export const AboutSection = () => {
             <p className="mt-2 text-slate-300 text-sm md:text-base">
               Pedí tu auditoría gratuita: revisamos tu web y te mandamos por WhatsApp 3 mejoras concretas.
             </p>
+            <Link to="/quienes-somos" className="mt-3 inline-block text-sm font-semibold text-[#d9fb06] underline underline-offset-4">
+              Quiénes somos: el equipo detrás de Websy
+            </Link>
           </div>
           <button
-            onClick={() => navigate('/contacto?tipo=auditoria')}
+            onClick={() => navigate('/auditoria-gratis')}
             className="group shrink-0 inline-flex items-center justify-center gap-3 rounded-full bg-[#d9fb06] px-7 py-4 text-[15px] font-bold text-[#182A2C] transition-colors hover:bg-white"
           >
             Pedir auditoría gratuita

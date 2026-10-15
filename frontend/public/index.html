@@ -39,20 +39,18 @@
   <meta property="og:title" content="Websy — Desarrollo Web, E-commerce & Automatizaciones IA | Argentina" />
   <meta property="og:description"
     content="Agencia de desarrollo web en Salta, Argentina. Páginas web profesionales, tiendas online, apps móviles, automatizaciones con IA y chatbots WhatsApp para toda Latinoamérica." />
-  <meta property="og:image" content="https://www.websysrl.com/websy-logo.png" />
-  <meta property="og:image:width" content="279" />
-  <meta property="og:image:height" content="274" />
-  <meta property="og:image:alt" content="Logo de Websy, agencia de desarrollo web" />
+  <meta property="og:image" content="https://www.websysrl.com/og/websy.png" />
+  <meta property="og:image:alt" content="Websy, agencia de desarrollo web" />
   <meta property="og:site_name" content="Websy" />
   <meta property="og:locale" content="es_AR" />
   <meta property="og:locale:alternate" content="es_ES" />
 
   <!-- Twitter -->
-  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Websy — Desarrollo Web, E-commerce & Automatizaciones IA" />
   <meta name="twitter:description"
     content="Agencia de desarrollo web en Salta, Argentina. Páginas web profesionales, tiendas online, apps y automatizaciones con IA para toda Latinoamérica." />
-  <meta name="twitter:image" content="https://www.websysrl.com/websy-logo.png" />
+  <meta name="twitter:image" content="https://www.websysrl.com/og/websy.png" />
   <meta name="twitter:site" content="@websyar" />
 
   <!-- Structured Data #1: Organization -->
@@ -60,8 +58,10 @@
         {
           "@context": "https://schema.org",
           "@type": "Organization",
+          "@id": "https://www.websysrl.com/#organization",
           "name": "Websy",
-          "alternateName": "Websy SRL",
+          "alternateName": ["Websy SRL", "websysrl"],
+          "founder": {"@type": "Person", "name": "Agustín Dávila"},
           "url": "https://www.websysrl.com",
           "logo": "https://www.websysrl.com/websy-logo.png",
           "description": "Agencia de desarrollo web y automatizaciones con IA en Salta, Argentina. Especialistas en e-commerce, CRM/ERP, chatbots WhatsApp y SEO para toda Latinoamérica.",
@@ -76,7 +76,7 @@
             "@type": "ContactPoint",
             "telephone": "+54-9-388-484-6695",
             "contactType": "customer service",
-            "areaServed": ["AR", "MX", "CO", "CL", "PE", "EC", "UY", "PY", "BO", "VE", "CR", "PA", "DO", "GT", "HN", "SV", "NI"],
+            "areaServed": ["AR", "MX", "CO", "US", "CL", "PE", "EC", "UY", "PY", "BO", "VE", "CR", "PA", "DO", "GT", "HN", "SV", "NI"],
             "availableLanguage": ["Spanish", "English"]
           },
           "sameAs": [
@@ -113,7 +113,7 @@
           "image": "https://www.websysrl.com/websy-logo.png",
           "url": "https://www.websysrl.com",
           "telephone": "+54-9-388-484-6695",
-          "email": "websy@gmail.com",
+          "email": "administracion@websysrl.com",
           "address": {
             "@type": "PostalAddress",
             "streetAddress": "San Luis 2105",
@@ -143,7 +143,8 @@
             {"@type": "Country", "name": "Ecuador"},
             {"@type": "Country", "name": "Uruguay"},
             {"@type": "Country", "name": "Paraguay"},
-            {"@type": "Country", "name": "Bolivia"}
+            {"@type": "Country", "name": "Bolivia"},
+            {"@type": "Country", "name": "Estados Unidos"}
           ],
           "hasOfferCatalog": {
             "@type": "OfferCatalog",

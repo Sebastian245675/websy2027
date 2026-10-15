@@ -129,4 +129,4 @@ Una app móvil. Además del desarrollo, requiere publicarla y mantenerla en dos 
 
 ## Pide tu presupuesto
 
-Si ya sabes qué necesitas, en [Inversión](/planes) tienes los planes con el detalle de qué incluye cada uno. Si todavía no lo tienes claro, [cuéntanos tu proyecto](/contacto) y te enviamos una cotización por escrito en 24 horas. Somos de Salta, Argentina, y trabajamos a distancia con empresas de toda Latinoamérica.
+Si ya sabes qué necesitas, en [Inversión](/planes) tienes los planes con el detalle de qué incluye cada uno. Si todavía no lo tienes claro, [cuéntanos tu proyecto](/contacto) y te enviamos una cotización por escrito en el día hábil. Somos de Salta, Argentina, y trabajamos a distancia con empresas de toda Latinoamérica.
