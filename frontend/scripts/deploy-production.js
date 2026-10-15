@@ -9,7 +9,8 @@ const ROOT = path.join(__dirname, '..');
 const SERVER = process.env.WEBSY_DEPLOY_SERVER || 'root@2.24.100.82';
 const stamp = new Date().toISOString().replace(/[-:TZ.]/g, '').slice(0, 14);
 const release = `websy-${stamp}`;
-const archive = path.join(ROOT, `${release}.tar`);
+// Rutas relativas a ROOT (cwd de cada comando): en Windows, tar y scp leen "C:\..." como host remoto "C"
+const archive = `${release}.tar`;
 
 const run = (command, args) => {
   const result = spawnSync(command, args, { cwd: ROOT, stdio: 'inherit', shell: false });
@@ -21,9 +22,9 @@ run('tar', ['-cf', archive, '-C', 'build', '.']);
 try {
   run('scp', [
     archive,
-    path.join('deploy', 'nginx-site.conf'),
-    path.join('deploy', 'websysrl-redirects.conf'),
-    path.join('deploy', 'websysrl-proxy.conf'),
+    'deploy/nginx-site.conf',
+    'deploy/websysrl-redirects.conf',
+    'deploy/websysrl-proxy.conf',
     `${SERVER}:/root/apps/websysrl/releases/`,
   ]);
 
@@ -73,5 +74,5 @@ echo "DEPLOY_OK release=$release sitemap_urls=$expected"`;
   const payload = Buffer.from(remote, 'utf8').toString('base64');
   run('ssh', [SERVER, `printf '%s' '${payload}' | base64 -d | bash`]);
 } finally {
-  fs.rmSync(archive, { force: true });
+  fs.rmSync(path.join(ROOT, archive), { force: true });
 }
