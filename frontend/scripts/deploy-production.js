@@ -50,6 +50,9 @@ while IFS= read -r url; do
   actual=$((actual + 1))
 done < <(sed -n 's:.*<loc>\\(.*\\)</loc>.*:\\1:p' "$target/sitemap.xml")
 test "$actual" -eq "$expected"
+# Conserva los JS/CSS del release en vivo: quien tenga abierta (o en caché) la versión anterior sigue
+# pidiendo sus chunks con hash viejo, y sin ellos la página se rompe a mitad de carga
+cp -r --update=none site/static/. "$target/static/"
 cp site.conf "backups/site.conf-pre-${release}"
 cp /root/apps/inmobiliaria/deploy/nginx/websysrl.conf "backups/websysrl.conf-pre-${release}"
 cp releases/nginx-site.conf site.conf

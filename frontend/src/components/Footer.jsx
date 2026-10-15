@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '../LanguageContext';
 import { CONTACT, SOCIAL, whatsappUrl } from '../siteConfig';
 import { countryPages } from '../countryPages';
+import { saveCountry } from '../lib/geo';
+
+const COUNTRY_LINKS = [{ code: 'AR', name: 'Argentina', path: '/' }, ...countryPages.map(({ code, name, path }) => ({ code, name, path }))];
 
 // SVG icons inline
 const icons = {
@@ -41,7 +44,6 @@ export const Footer = () => {
     { name: 'Auditoría web gratis', to: '/auditoria-gratis' },
     { name: t('footer.links.blog'), to: '/blog' },
     { name: 'Diseño web en Salta', to: '/diseno-web-salta' },
-    ...countryPages.map((c) => ({ name: `Websy ${c.code === 'US' ? 'EE. UU.' : c.name}`, to: c.path })),
     { name: t('footer.links.contact'), to: '/contacto' },
   ];
 
@@ -101,6 +103,13 @@ export const Footer = () => {
           <h4 className={headingCls}>{t('footer.legalTitle')}</h4>
           <ul className="space-y-2">
             <li><Link to="/politica-de-privacidad" className={linkCls}>{t('footer.links.privacy')}</Link></li>
+          </ul>
+          {/* Selector de país: guarda la elección, así el inicio deja de llevar a la versión detectada */}
+          <h4 className={`${headingCls} mt-8`}>Elegí tu país</h4>
+          <ul className="space-y-2">
+            {COUNTRY_LINKS.map((c) => (
+              <li key={c.code}><Link to={c.path} onClick={() => saveCountry(c.code)} className={linkCls}>{c.name}</Link></li>
+            ))}
           </ul>
           <p className="mt-8 text-[10px] uppercase font-black tracking-widest text-[#182A2C]/50">
             © {currentYear} {t('footer.copyright')}

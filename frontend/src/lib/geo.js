@@ -27,7 +27,7 @@ const TIMEZONES = {
   ES: ['Europe/Madrid', 'Atlantic/Canary'],
 };
 
-const BOT_UA = /bot|crawl|spider|slurp|lighthouse|headless|prerender|reactsnap|inspectiontool|preview/i;
+const BOT_UA = /bot|crawl|spider|slurp|google|bing|yandex|baidu|duckduck|facebookexternalhit|lighthouse|headless|prerender|reactsnap|inspectiontool|preview/i;
 
 export const isBot = () => typeof navigator === 'undefined' || BOT_UA.test(navigator.userAgent || '');
 

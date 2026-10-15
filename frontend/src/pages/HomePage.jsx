@@ -1,4 +1,5 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { HeroSection } from "../components/HeroSection";
 import { LazyRenderSection } from "../components/LazyRenderSection";
 import { ArchitectureDemoSection } from "../components/ArchitectureDemoSection";
@@ -80,6 +81,13 @@ const SectionLoader = () => (
 
 export const HomePage = () => {
   const country = useVisitorCountry();
+  const navigate = useNavigate();
+  // Visitantes de un país con versión propia van a ella (en una carga directa ya lo hizo el script de
+  // public/index.html; esto cubre la navegación dentro del sitio, como tocar el logo). Buscadores: nunca.
+  const countryPath = countryPageByCode(country)?.path;
+  useEffect(() => {
+    if (countryPath) navigate(countryPath, { replace: true });
+  }, [countryPath, navigate]);
   const homeStart = performance.now();
   console.log('🏠 [HOME] HomePage rendering...');
 

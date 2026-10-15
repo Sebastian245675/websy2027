@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Check, ChevronRight, Clock, CreditCard, Globe, MessageCircle, ShoppingBag } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
@@ -84,8 +84,6 @@ export const CountryPage = ({ code }) => {
   const posts = page.posts.map(getPostBySlug).filter(Boolean);
   const others = countryPages.filter((c) => c.code !== code);
 
-  // Entrar a una versión por país es una elección explícita: la home la recuerda la próxima vez
-  useEffect(() => saveCountry(code), [code]);
 
   const WhatsAppCta = ({ dark = false }) => (
     <a
@@ -298,7 +296,7 @@ export const CountryPage = ({ code }) => {
             {others.map((c, i) => (
               <React.Fragment key={c.code}>
                 {i > 0 && ' · '}
-                <Link to={c.path} className={linkCls}>{c.name}</Link>
+                <Link to={c.path} onClick={() => saveCountry(c.code)} className={linkCls}>{c.name}</Link>
               </React.Fragment>
             ))}
             {' · '}<Link to="/" onClick={() => saveCountry('AR')} className={linkCls}>Argentina</Link>

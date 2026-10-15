@@ -6,6 +6,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#d9fb06" />
 
+  <!-- Versión por país: quien entra al inicio desde Colombia, México o EE. UU. va directo a su versión
+       (/colombia, /mexico, /estados-unidos), antes de que se pinte la página. Los buscadores nunca se
+       redirigen: cada versión tiene su URL y hreflang. ?pais=ar|co|mx|us fija la elección (también la guardan
+       los enlaces "Websy en otros países"). Mismas zonas horarias que src/lib/geo.js. -->
+  <script>
+    (function () {
+      try {
+        var PAGES = { CO: '/colombia', MX: '/mexico', US: '/estados-unidos' };
+        var KEY = 'websy_country';
+        var store = function (v) { try { if (v) localStorage.setItem(KEY, v); return localStorage.getItem(KEY); } catch (e) { return null; } };
+        var param = (location.search.match(/[?&]pais=([a-z]{2})/i) || [])[1];
+        var saved = store(param && param.toUpperCase());
+        if (location.pathname !== '/') return;
+        if (/bot|crawl|spider|slurp|google|bing|yandex|baidu|duckduck|facebookexternalhit|lighthouse|headless|prerender|reactsnap|inspectiontool|preview/i.test(navigator.userAgent || '')) return;
+        var country = saved;
+        if (!country) {
+          var tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || '');
+          if (tz === 'America/Bogota') country = 'CO';
+          else if (/^America\/(Mexico_City|Cancun|Merida|Monterrey|Matamoros|Chihuahua|Ciudad_Juarez|Ojinaga|Mazatlan|Bahia_Banderas|Hermosillo|Tijuana)$/.test(tz)) country = 'MX';
+          else if (/^(America\/(New_York|Chicago|Denver|Los_Angeles|Phoenix|Anchorage|Detroit|Boise|Juneau|Puerto_Rico|Indiana\/.+|Kentucky\/.+|North_Dakota\/.+)|Pacific\/Honolulu)$/.test(tz)) country = 'US';
+        }
+        if (PAGES[country]) location.replace(PAGES[country] + location.search.replace(/([?&])pais=[a-z]{2}&?/i, '$1').replace(/[?&]$/, '') + location.hash);
+      } catch (e) { /* sin redirección: se queda en el inicio */ }
+    })();
+  </script>
+
   <!-- Preconnect and DNS prefetch for faster loading -->
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
