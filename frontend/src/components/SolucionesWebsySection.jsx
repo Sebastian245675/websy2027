@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import { HIGHLIGHTED_PLAN_ID } from '../siteConfig';
+import { DEFAULT_MARKET, formatPrice, PLAN_PRICES, pricingNote } from '../pricing';
 import { openWhatsApp } from '../lib/tracking';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
 import { Button } from './ui/button';
@@ -22,7 +23,7 @@ const planes = [
   {
     id: 'estandar',
     name: 'Plan Estándar',
-    price: 'USD 800 - 1.500',
+    price: PLAN_PRICES.estandar,
     icon: Sparkles,
     ideal: 'Emprendedores, profesionales independientes, marcas personales',
     description: 'Tener presencia digital profesional sin complejidad operativa',
@@ -40,7 +41,7 @@ const planes = [
   {
     id: 'comercio',
     name: 'Plan Comercio',
-    price: 'USD 1.800 - 3.500',
+    price: PLAN_PRICES.comercio,
     icon: Store,
     ideal: 'Comercios físicos, tiendas online, emprendimientos que ya venden',
     description: 'Vender online y ordenar la operatoria básica del negocio',
@@ -59,7 +60,7 @@ const planes = [
   {
     id: 'pymes',
     name: 'Plan PYMES',
-    price: 'USD 4.000 - 8.000',
+    price: PLAN_PRICES.pymes,
     icon: TrendingUp,
     ideal: 'Pymes, empresas chicas, negocios en crecimiento',
     description: 'Ordenar el negocio, los números y la información en un solo sistema',
@@ -78,7 +79,7 @@ const planes = [
   {
     id: 'corpo',
     name: 'Plan Corpo',
-    price: 'Desde USD 10.000',
+    price: PLAN_PRICES.corpo,
     icon: Building2,
     ideal: 'Empresas medianas, negocios consolidados',
     description: 'Centralizar operaciones, información y control del negocio digital',
@@ -98,7 +99,7 @@ const planes = [
   plan.id === HIGHLIGHTED_PLAN_ID ? { ...plan, highlighted: true, badge: 'El más elegido' } : { ...plan, highlighted: false }
 ));
 
-export const SolucionesWebsySection = () => {
+export const SolucionesWebsySection = ({ countryCode = DEFAULT_MARKET }) => {
   const { t } = useLanguage();
   const navigate = useNavigate();
   const [selectedPlan, setSelectedPlan] = useState(null);
@@ -117,7 +118,8 @@ export const SolucionesWebsySection = () => {
   const handleContactClick = () => {
     setIsModalOpen(false);
     if (selectedPlan) {
-      navigate(`/contacto?plan=${encodeURIComponent(selectedPlan.name + ' (' + selectedPlan.price + ')')}&budget=${encodeURIComponent(selectedPlan.id)}&type=web`);
+      const displayedPrice = formatPrice(selectedPlan.price, countryCode, { includeUsd: true });
+      navigate(`/contacto?plan=${encodeURIComponent(selectedPlan.name + ' (' + displayedPrice + ')')}&budget=${encodeURIComponent(selectedPlan.id)}&type=web&country=${encodeURIComponent(countryCode)}`);
     } else {
       navigate('/contacto');
     }
@@ -138,17 +140,17 @@ export const SolucionesWebsySection = () => {
       {/* Grid de Planes */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 container mx-auto px-4 pb-12">
         {planes.map((plan) => {
+          const displayedPrice = formatPrice(plan.price, countryCode);
           return (
-            <div
+            <article
               key={plan.id}
-              className={`relative overflow-hidden rounded-xl transition-all duration-500 cursor-pointer group ${plan.highlighted ? 'lg:scale-105' : ''
+              className={`relative overflow-hidden rounded-xl transition-all duration-500 group ${plan.highlighted ? 'lg:scale-105' : ''
                 }`}
               style={{
                 backgroundColor: '#ffffff',
                 border: plan.highlighted ? '2px solid #182A2C' : '1px solid #e2e8f0',
                 boxShadow: plan.highlighted ? '0 20px 60px rgba(24, 42, 44, 0.15)' : '0 4px 20px rgba(0, 0, 0, 0.06)'
               }}
-              onClick={() => handlePlanClick(plan)}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = plan.highlighted ? 'scale(1.08) translateY(-4px)' : 'translateY(-8px)';
                 e.currentTarget.style.boxShadow = plan.highlighted ? '0 30px 80px rgba(24, 42, 44, 0.2)' : '0 20px 40px rgba(0, 0, 0, 0.1)';
@@ -177,12 +179,9 @@ export const SolucionesWebsySection = () => {
                   <div className="text-sm font-semibold uppercase tracking-wider mb-2" style={{ color: '#718096' }}>
                     {plan.name.replace('Plan ', '')}
                   </div>
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-4xl font-bold" style={{ color: '#182A2C', letterSpacing: '-0.02em' }}>
-                      {plan.price.split(' ')[0]}
-                    </span>
-                    <span className="text-lg font-medium" style={{ color: '#718096' }}>
-                      {plan.price.split(' ').slice(1).join(' ')}
+                  <div className="min-h-[68px]">
+                    <span className="text-[1.65rem] md:text-3xl font-bold leading-tight" style={{ color: '#182A2C', letterSpacing: '-0.02em' }}>
+                      {displayedPrice}
                     </span>
                   </div>
                 </div>
@@ -237,6 +236,9 @@ export const SolucionesWebsySection = () => {
 
                 {/* Botón */}
                 <button
+                  type="button"
+                  onClick={() => handlePlanClick(plan)}
+                  aria-label={`${t('plans.moreInfo')} ${plan.name}`}
                   className="w-full py-3.5 rounded-lg font-semibold text-sm transition-all duration-300 uppercase tracking-wider"
                   style={{
                     backgroundColor: plan.highlighted ? '#182A2C' : 'transparent',
@@ -244,13 +246,17 @@ export const SolucionesWebsySection = () => {
                     border: plan.highlighted ? 'none' : '2px solid #182A2C'
                   }}
                 >
-                  Conocer más
+                  {t('plans.moreInfo')}
                 </button>
               </div>
-            </div>
+            </article>
           );
         })}
       </div>
+
+      <p className="container mx-auto px-4 -mt-7 mb-10 text-center text-sm text-slate-500">
+        {pricingNote(countryCode)}
+      </p>
 
       {/* Modal para Planes */}
       <Dialog open={isModalOpen} onOpenChange={handleCloseModal}>
@@ -270,7 +276,7 @@ export const SolucionesWebsySection = () => {
                       {selectedPlan.name}
                     </DialogTitle>
                     <div className="text-3xl font-black mb-4" style={{ color: 'var(--brand-primary)' }}>
-                      {selectedPlan.price}
+                      {formatPrice(selectedPlan.price, countryCode)}
                     </div>
                   </div>
                   {selectedPlan.badge && (
@@ -337,7 +343,7 @@ export const SolucionesWebsySection = () => {
                   <Button
                     variant="outline"
                     onClick={() => {
-                      openWhatsApp(`¡Hola Websy! Me interesa pedir información sobre el ${selectedPlan ? selectedPlan.name : 'desarrollo de mi sitio web'} (${selectedPlan ? selectedPlan.price : ''}).`, `inversion_${selectedPlan ? selectedPlan.id : 'modal'}`);
+                      openWhatsApp(`¡Hola Websy! Me interesa pedir información sobre el ${selectedPlan ? selectedPlan.name : 'desarrollo de mi sitio web'} (${selectedPlan ? formatPrice(selectedPlan.price, countryCode, { includeUsd: true }) : ''}).`, `inversion_${selectedPlan ? selectedPlan.id : 'modal'}`);
                     }}
                     className="flex items-center text-base px-8 py-4 border-2 font-bold"
                     style={{

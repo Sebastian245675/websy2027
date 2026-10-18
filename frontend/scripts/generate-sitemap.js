@@ -25,7 +25,12 @@ const staticPages = [
   { loc: '/quienes-somos', page: 'pages/AboutPage.jsx', changefreq: 'yearly', priority: '0.6' },
   { loc: '/auditoria-gratis', page: 'pages/AuditPage.jsx', changefreq: 'monthly', priority: '0.9' },
   { loc: '/colombia', page: 'pages/CountryPage.jsx', changefreq: 'monthly', priority: '0.9' },
+  { loc: '/colombia/desarrollo-web-bogota', page: 'pages/CityWebPage.jsx', changefreq: 'monthly', priority: '0.9' },
+  { loc: '/colombia/desarrollo-web-cali', page: 'pages/CityWebPage.jsx', changefreq: 'monthly', priority: '0.9' },
   { loc: '/mexico', page: 'pages/CountryPage.jsx', changefreq: 'monthly', priority: '0.9' },
+  { loc: '/mexico/diseno-web-cdmx', page: 'pages/CityWebPage.jsx', changefreq: 'monthly', priority: '0.9' },
+  { loc: '/colombia/automatizacion-procesos', page: 'pages/AutomationCountryPage.jsx', changefreq: 'monthly', priority: '0.9' },
+  { loc: '/mexico/automatizacion-procesos', page: 'pages/AutomationCountryPage.jsx', changefreq: 'monthly', priority: '0.9' },
   { loc: '/estados-unidos', page: 'pages/CountryPage.jsx', changefreq: 'monthly', priority: '0.9' },
   { loc: '/casos-de-exito', page: 'pages/SuccessStoriesPage.jsx', changefreq: 'monthly', priority: '0.8' },
   { loc: '/contacto', page: 'pages/ContactPage.jsx', changefreq: 'monthly', priority: '0.9' },
@@ -33,7 +38,7 @@ const staticPages = [
   { loc: '/politica-de-privacidad', page: 'pages/PrivacyPolicyPage.jsx', changefreq: 'yearly', priority: '0.2' },
 ];
 // Routes in App.js that are deliberately not in the sitemap
-const NOT_IN_SITEMAP = ['/panel-cotizaciones', '/lp/:slug', '*', '/desarrollo-web-salta', '/diseno-web-en-salta'];
+const NOT_IN_SITEMAP = ['/panel', '/panel-cotizaciones', '/lp/:slug', '*', '/desarrollo-web-salta', '/diseno-web-en-salta'];
 // Dynamic routes; their URLs come from services, case studies and blog posts below
 const DYNAMIC_ROUTES = ['/servicios/:slug', '/casos-de-exito/:slug', '/blog/:slug', '/autores/:slug'];
 
@@ -202,8 +207,16 @@ fs.writeFileSync(path.join(__dirname, '..', 'public', 'sitemap.xml'), xml);
 // El encabezado está acá; la lista de casos y rubros sale de src/caseStudies.js.
 const caseTitles = [...casesSrc.matchAll(/^\s{4}slug:\s*'([^']+)'[\s\S]*?^\s{4}h1:\s*'([^']+)'[\s\S]*?^\s{4}summary:\s*'([^']+)'/gm)];
 const hubTitles = [...hubsSrc.matchAll(/^\s{4}path:\s*'([^']+)'[\s\S]*?^\s{4}h1:\s*'([^']+)'/gm)];
-const serviceTitles = [...fs.readFileSync(path.join(SRC, 'servicesSeoData.js'), 'utf8')
-  .matchAll(/slug:\s*'([^']+)',\s*title:\s*'([^']+)'/g)];
+// Un bloque por servicio, desde su `slug:` hasta el siguiente: el título y la respuesta directa (`answer`)
+// pueden venir en cualquier orden dentro del bloque.
+const serviceTitles = fs.readFileSync(path.join(SRC, 'servicesSeoData.js'), 'utf8')
+  .split(/^\s{4}slug:\s*/m).slice(1)
+  .map((block) => [
+    block.match(/^'([^']+)'/)?.[1],
+    block.match(/^\s{4}title:\s*'([^']+)'/m)?.[1],
+    block.match(/^\s{4}answer:\s*'((?:[^'\\]|\\.)+)'/m)?.[1],
+  ])
+  .filter(([slug, title]) => slug && title);
 // Corta en el primer punto que cierra una palabra de 3+ letras, para no cortar en abreviaturas como "St."
 const firstSentence = (text) => text.split(/(?<=[a-záéíóúñ)]{3}\.)\s/)[0];
 
@@ -223,14 +236,19 @@ const llms = `# Websy
 
 ## Por país
 
-- [Websy en Colombia](${SITE_URL}/colombia): proyectos en Bogotá, Cali y Manizales; precios en USD y pago desde Colombia.
-- [Websy en México](${SITE_URL}/mexico): webs, tiendas en línea y sistemas multisucursal; pago desde México.
+- [Desarrollo web en Colombia](${SITE_URL}/colombia): proyectos en Bogotá, Cali y Manizales; precios orientativos en pesos colombianos y pago desde Colombia.
+- [Diseño y desarrollo web en Bogotá](${SITE_URL}/colombia/desarrollo-web-bogota): servicio remoto, precios en COP y tres casos reales publicados en Bogotá.
+- [Desarrollo web en Cali](${SITE_URL}/colombia/desarrollo-web-cali): páginas web, tiendas virtuales y automatización de marketing y WhatsApp para empresas de Cali; caso real de un despacho de abogados penalistas de Cali.
+- [Automatización de procesos en Colombia](${SITE_URL}/colombia/automatizacion-procesos): WhatsApp, CRM, n8n, agentes de IA e integraciones para empresas colombianas.
+- [Desarrollo web en México](${SITE_URL}/mexico): webs, tiendas en línea y sistemas multisucursal; precios orientativos en pesos mexicanos y pago desde México.
+- [Diseño web en Ciudad de México](${SITE_URL}/mexico/diseno-web-cdmx): páginas web desde MXN 15.000, tiendas en línea con SPEI u OXXO y sistemas multisucursal para negocios de la CDMX; pago en 3 partes.
+- [Automatización de procesos en México](${SITE_URL}/mexico/automatizacion-procesos): automatización empresarial con IA, WhatsApp, CRM y sistemas conectados.
 - [Websy en Estados Unidos](${SITE_URL}/estados-unidos): webs bilingües y automatización de consultas para negocios hispanos.
 - [Diseño web en Salta](${SITE_URL}/diseno-web-salta): oficina en San Luis 2105, Salta Capital.
 
 ## Servicios
 
-${serviceTitles.map(([, slug, title]) => `- [${title}](${SITE_URL}/servicios/${slug})`).join('\n')}
+${serviceTitles.map(([slug, title, answer]) => `- [${title}](${SITE_URL}/servicios/${slug})${answer ? `: ${firstSentence(answer)}` : ''}`).join('\n')}
 
 ## Ejemplos por rubro
 

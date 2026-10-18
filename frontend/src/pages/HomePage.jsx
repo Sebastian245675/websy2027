@@ -8,6 +8,7 @@ import { RubrosStrip } from "../components/RubrosStrip";
 import { FAQSection, HOME_FAQ, faqSchema } from "../components/FAQSection";
 import { COUNTRY_ALTERNATES, countryPageByCode } from "../countryPages";
 import useVisitorCountry from "../hooks/useVisitorCountry";
+import { useLanguage } from "../LanguageContext";
 
 const HomeGuides = React.lazy(() =>
   import('../components/HomeGuides').then(module => ({ default: module.HomeGuides }))
@@ -80,6 +81,8 @@ const SectionLoader = () => (
 );
 
 export const HomePage = () => {
+  const { currentLanguage } = useLanguage();
+  const isEnglish = currentLanguage === 'en';
   const country = useVisitorCountry();
   const navigate = useNavigate();
   // Visitantes de un país con versión propia van a ella (en una carga directa ya lo hizo el script de
@@ -99,8 +102,10 @@ export const HomePage = () => {
   return (
     <>
       <SEOHead
-        title="Desarrollo Web, E-commerce y Apps en Salta, Argentina | Websy"
-        description="Agencia de desarrollo web en Salta: páginas web desde USD 800, tiendas online, apps, sistemas y automatización con IA. Respuesta en el día hábil."
+        title={isEnglish ? 'Web Development, E-commerce and Apps | Websy' : 'Desarrollo Web, E-commerce y Apps en Salta, Argentina | Websy'}
+        description={isEnglish
+          ? 'Web development agency creating websites, online stores, apps, business systems and AI automations. Reply within one business day.'
+          : 'Agencia de desarrollo web en Salta: páginas web desde USD 800, tiendas online, apps, sistemas y automatización con IA. Respuesta en el día hábil.'}
         url="https://www.websysrl.com/"
         jsonLd={homeFaqSchema}
         alternates={COUNTRY_ALTERNATES}

@@ -68,7 +68,7 @@ const TikTokIcon = ({ size = 16 }) => (
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
-  const { currentLanguage, changeLanguage, t } = useLanguage();
+  const { currentLanguage, changeLanguage, t, isLoading } = useLanguage();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -189,19 +189,25 @@ export const Navigation = () => {
             <div className="relative">
               <button
                 onClick={toggleLanguageDropdown}
+                disabled={isLoading}
                 className="flex items-center gap-1.5 font-extrabold text-[10px] md:text-[11px] text-[#182A2C] hover:opacity-80 transition-opacity cursor-pointer uppercase tracking-tight py-1"
                 aria-label="Seleccionar idioma"
+                aria-haspopup="listbox"
+                aria-expanded={isLanguageOpen}
               >
-                <span>{currentLanguage === 'es' ? 'Español' : 'English'}</span>
+                <span>{languages.find((language) => language.code === currentLanguage)?.name || 'Español'}</span>
                 <ChevronDownIcon size={12} className={`transition-transform duration-200 ${isLanguageOpen ? 'rotate-180' : ''}`} />
               </button>
 
               {isLanguageOpen && (
-                <div className="absolute right-0 top-full mt-1.5 w-48 bg-white rounded-none shadow-2xl border border-gray-200 overflow-hidden z-[100] py-1 animate-fadeIn">
+                <div role="listbox" aria-label="Idioma" className="absolute right-0 top-full mt-1.5 w-48 bg-white rounded-none shadow-2xl border border-gray-200 overflow-hidden z-[100] py-1 animate-fadeIn">
                   {languages.map((lang) => (
                     <button
                       key={lang.code}
                       onClick={() => handleLanguageChange(lang)}
+                      disabled={isLoading}
+                      role="option"
+                      aria-selected={currentLanguage === lang.code}
                       className={`w-full flex items-center gap-2.5 px-3 py-2 text-[11px] font-bold text-left hover:bg-gray-100 transition-colors ${
                         currentLanguage === lang.code ? 'text-[#182A2C] bg-gray-100 font-black' : 'text-gray-600'
                       }`}
@@ -238,7 +244,7 @@ export const Navigation = () => {
                   Websy
                 </span>
                 <span className="text-[8px] md:text-[10px] font-bold text-gray-400 tracking-widest">
-                  DESARROLLO & TECNOLOGÍA
+                  {t('nav.tagline')}
                 </span>
               </div>
             </div>
@@ -254,7 +260,7 @@ export const Navigation = () => {
                     <a
                       key={item.name}
                       href={item.href}
-                      title={`Ir a ${item.name}`}
+                      title={`${t('nav.goTo')} ${item.name}`}
                       onClick={(e) => {
                         e.preventDefault();
                         scrollToSection(item.href, item.isRoute);
@@ -273,7 +279,7 @@ export const Navigation = () => {
               {/* Contact Button - Square Lime like CIMA */}
               <a
                 href={contactItem.href}
-                title="Contacto y presupuesto"
+                title={t('nav.contactTitle')}
                 onClick={(e) => {
                   e.preventDefault();
                   scrollToSection(contactItem.href, contactItem.isRoute);
@@ -291,7 +297,7 @@ export const Navigation = () => {
                 e.stopPropagation();
                 setIsOpen(!isOpen);
               }}
-              aria-label="Toggle menu"
+              aria-label={t('nav.toggleMenu')}
             >
               {isOpen ? <XIcon size={28} /> : <MenuIcon size={28} />}
             </button>
@@ -378,8 +384,29 @@ export const Navigation = () => {
               </div>
 
               {/* Mobile Language Selector */}
-              <div className="border-t pt-8" style={{ borderColor: '#e0e0e0' }}>
-
+              <div className="border-t pt-8" style={{ borderColor: 'rgba(255,255,255,0.18)' }}>
+                <p className="mb-4 text-right text-xs font-black uppercase tracking-[0.2em] text-white/60">
+                  {currentLanguage === 'es' ? 'Idioma' : 'Language'}
+                </p>
+                <div className="grid grid-cols-2 gap-3" role="listbox" aria-label="Idioma">
+                  {languages.map((lang) => (
+                    <button
+                      key={lang.code}
+                      type="button"
+                      role="option"
+                      aria-selected={currentLanguage === lang.code}
+                      disabled={isLoading}
+                      onClick={() => handleLanguageChange(lang)}
+                      className={`border px-4 py-3 text-sm font-black uppercase tracking-wider transition-colors ${
+                        currentLanguage === lang.code
+                          ? 'border-[#d9fb06] bg-[#d9fb06] text-[#182A2C]'
+                          : 'border-white/30 text-white hover:border-[#d9fb06] hover:text-[#d9fb06]'
+                      } disabled:cursor-wait disabled:opacity-60`}
+                    >
+                      {lang.name}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

@@ -6,6 +6,8 @@ import { BookCallButton, Breadcrumbs, CaseCard, ProjectCta, portfolioItem, resul
 import { caseBySlug, casesForHub, hubByPath, hubBySlug, VERIFIED_AT } from '../caseStudies';
 import { servicesData } from '../servicesSeoData';
 import { getPostBySlug } from '../blogData';
+import { cityPages } from '../cityPages';
+import { countryPages } from '../countryPages';
 
 const SITE_URL = 'https://www.websysrl.com';
 const ORG = { '@type': 'Organization', name: 'Websy', url: SITE_URL, logo: `${SITE_URL}/websy-logo.png` };
@@ -13,6 +15,10 @@ const ORG = { '@type': 'Organization', name: 'Websy', url: SITE_URL, logo: `${SI
 const SectionTitle = ({ children }) => (
   <h2 className="text-2xl md:text-3xl font-black text-[#182A2C] tracking-tight mb-5">{children}</h2>
 );
+
+// La ubicación enlaza a la página de su ciudad o, si no hay, a la de su país ("Cali, Colombia" -> /colombia/desarrollo-web-cali)
+const locationPage = (location = '') =>
+  cityPages.find((c) => location.startsWith(c.name))?.path || countryPages.find((c) => location.includes(c.caseMatch))?.path;
 
 const formatDate = (iso) => new Date(`${iso}T12:00:00`).toLocaleDateString('es-AR', { day: 'numeric', month: 'long', year: 'numeric' });
 
@@ -29,7 +35,9 @@ const CaseView = ({ study }) => {
   const facts = [
     ['Cliente', item.client],
     ['Rubro', item.category],
-    ['Ubicación', study.location],
+    ['Ubicación', locationPage(study.location)
+      ? <Link to={locationPage(study.location)} className="underline decoration-[#d9fb06] decoration-2 underline-offset-4">{study.location}</Link>
+      : study.location],
     ['Año', item.year],
     ['Tipo de proyecto', study.type],
     ['Tecnología', item.technologies?.join(', ')],

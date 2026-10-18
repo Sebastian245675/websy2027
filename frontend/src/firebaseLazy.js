@@ -31,9 +31,31 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+export const app = initializeApp(firebaseConfig);
+export const db = getFirestore(app);
 const functions = getFunctions(app);
+
+/**
+ * Clics a WhatsApp registrados por src/lib/tracking.js, los más recientes primero.
+ * @returns {Function} unsubscribe
+ */
+export function subscribeWhatsappClicks(onChange, onError) {
+  const q = query(collection(db, 'whatsapp_clicks'), orderBy('createdAt', 'desc'));
+  return onSnapshot(
+    q,
+    (snapshot) => onChange(snapshot.docs.map((d) => ({ id: d.id, ...d.data() }))),
+    (error) => (onError ? onError(error) : onChange([]))
+  );
+}
+
+export function subscribeLeads(onChange, onError) {
+  const q = query(collection(db, 'cotizaciones'), orderBy('createdAt', 'desc'));
+  return onSnapshot(
+    q,
+    (snapshot) => onChange(snapshot.docs.map((d) => ({ id: d.id, ...d.data() }))),
+    onError
+  );
+}
 
 /**
  * Call a callable Cloud Function named 'sendCotizacionEmail'.
@@ -56,8 +78,13 @@ export async function saveCotizacion(data) {
     throw new Error('Invalid data for saveCotizacion');
   }
 
+  // Todos los formularios guardan lo mismo para el panel (/panel): página de origen, fuente y estado inicial
+  const page = typeof window !== 'undefined' ? window.location.pathname : '';
   const payload = {
+    source: page === '/contacto' ? 'contacto' : 'formulario',
     ...data,
+    page,
+    status: 'nuevo',
     createdAt: serverTimestamp()
   };
 

@@ -98,10 +98,10 @@ export const ServiceDetailPage = () => {
       "name": "Websy",
       "url": "https://www.websysrl.com"
     },
-    "areaServed": {
+    "areaServed": ['Argentina', 'Colombia', 'México', 'Estados Unidos'].map(name => ({
       "@type": "Country",
-      "name": "Argentina"
-    },
+      "name": name
+    })),
     "serviceType": service.title
   };
 
@@ -227,6 +227,61 @@ export const ServiceDetailPage = () => {
           </div>
         </div>
       </section>
+
+      {service.useCases && (
+        <section className="py-16 md:py-20 bg-[#f9fafb]">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-[#8a5a00] mb-3">Casos de uso</p>
+            <h2 className="text-3xl md:text-4xl font-black text-[#182A2C] mb-4 leading-tight">
+              Qué procesos empresariales podemos automatizar
+            </h2>
+            <p className="max-w-3xl text-base md:text-lg text-gray-600 leading-relaxed mb-10">
+              Empezamos por una tarea que consuma tiempo o haga perder oportunidades. Estas son las áreas donde una automatización suele producir un resultado medible más rápido.
+            </p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {service.useCases.map((item) => (
+                <article key={item.title} className="rounded-2xl border border-gray-200 bg-white p-6">
+                  <h3 className="text-lg font-black text-[#182A2C]">{item.title}</h3>
+                  <p className="mt-2 text-[15px] text-gray-600 leading-relaxed">{item.text}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {service.process && (
+        <section className="py-16 md:py-20 bg-white">
+          <div className="container mx-auto px-4 max-w-5xl">
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-[#8a5a00] mb-3">Implementación</p>
+            <h2 className="text-3xl md:text-4xl font-black text-[#182A2C] mb-10 leading-tight">
+              De la tarea manual a un proceso automatizado y medible
+            </h2>
+            <ol className="grid md:grid-cols-5 gap-4">
+              {service.process.map((step, index) => (
+                <li key={step.title} className="rounded-2xl bg-[#182A2C] p-5 text-white">
+                  <span className="text-3xl font-black text-[#f59e0b]">{String(index + 1).padStart(2, '0')}</span>
+                  <h3 className="mt-4 font-black">{step.title}</h3>
+                  <p className="mt-2 text-sm text-white/70 leading-relaxed">{step.text}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+      )}
+
+      {service.slug === 'automatizaciones-ia' && (
+        <section className="py-12 bg-[#182A2C] text-white">
+          <div className="container mx-auto px-4 max-w-5xl">
+            <h2 className="text-2xl md:text-3xl font-black">Automatización para empresas por país</h2>
+            <p className="mt-3 text-white/70">Precios orientativos en moneda local, horario de atención y detalles para cada mercado.</p>
+            <div className="mt-6 grid sm:grid-cols-2 gap-4">
+              <Link to="/colombia/automatizacion-procesos" className="rounded-xl border border-white/15 bg-white/5 p-5 font-bold hover:bg-white/10 transition-colors">Automatización de procesos en Colombia →</Link>
+              <Link to="/mexico/automatizacion-procesos" className="rounded-xl border border-white/15 bg-white/5 p-5 font-bold hover:bg-white/10 transition-colors">Automatización de procesos en México →</Link>
+            </div>
+          </div>
+        </section>
+      )}
 
       {service.pricing && (
         <section className="py-16 md:py-20 bg-white">

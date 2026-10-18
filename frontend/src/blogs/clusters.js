@@ -125,7 +125,7 @@ export const clusters = [
     name: 'Automatización e IA',
     pillar: 'guia-automatizacion-e-inteligencia-artificial-para-empresas',
     service: '/servicios/automatizaciones-ia',
-    serviceLabel: 'Automatizaciones con IA',
+    serviceLabel: 'Automatización de procesos empresariales con IA',
     posts: [
       { slug: 'automatizacion-whatsapp-negocios-guia-completa', kw: 'cómo automatizar WhatsApp Business', intent: 'info', country: 'LATAM' },
       { slug: 'chatbot-whatsapp-business-automatizar-respuestas-clientes', kw: 'chatbot para WhatsApp', intent: 'comercial', country: 'LATAM' },

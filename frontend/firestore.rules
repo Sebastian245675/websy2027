@@ -1,0 +1,56 @@
+rules_version = '2';
+
+// Reglas de Firestore del proyecto multinivel-c0bcd (websysrl.com).
+// Publicar en Firebase Console > Firestore Database > Reglas (pegar este archivo y "Publicar"),
+// o con la CLI: firebase deploy --only firestore:rules
+//
+// Leads (cotizaciones) y clics a WhatsApp: cualquiera puede CREAR (los formularios y botones del sitio),
+// pero solo los administradores de la lista pueden LEER, editar o borrar. Antes cualquiera con la URL del
+// panel viejo podía ver los nombres y teléfonos de todos los leads.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Correos con acceso a /panel. Cada uno tiene que existir en Firebase Console > Authentication > Usuarios.
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email in [
+          'administracion@websysrl.com',
+          'juansalazat100@gmail.com'
+        ];
+    }
+
+    function shortString(field, max) {
+      return !(field in request.resource.data)
+        || (request.resource.data[field] is string && request.resource.data[field].size() <= max);
+    }
+
+    match /cotizaciones/{id} {
+      allow create: if request.resource.data.keys().size() <= 25
+        && shortString('name', 200)
+        && shortString('phone', 60)
+        && shortString('whatsapp', 60)
+        && shortString('email', 200)
+        && shortString('message', 5000)
+        // Sin status: visitantes con la versión anterior del sitio en caché
+        && (!('status' in request.resource.data) || request.resource.data.status == 'nuevo');
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /whatsapp_clicks/{id} {
+      allow create: if request.resource.data.keys().hasOnly(['location', 'page', 'referrer', 'createdAt'])
+        && shortString('location', 300)
+        && shortString('page', 300)
+        && shortString('referrer', 300)
+        && request.resource.data.createdAt is timestamp;
+      allow read, delete: if isAdmin();
+    }
+
+    // Colecciones que ya usaba el sitio (testimonios, novedades, analítica). Se dejan abiertas como
+    // estaban para no romper el AdminPanel actual, que no usa Firebase Auth. Pendiente: pasar sus
+    // escrituras a isAdmin() cuando ese panel use login real.
+    match /comentarios/{id} { allow read, write: if true; }
+    match /news/{id} { allow read, write: if true; }
+    match /analytics/{id} { allow read, write: if true; }
+  }
+}

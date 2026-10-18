@@ -49,7 +49,7 @@ El desarrollo web se puede contratar a distancia sin problemas: Colombia compart
 
 ### Bogotá
 
-Concentra la mayor cantidad de empresas y de competencia en Google. Para aparecer en búsquedas como "abogado penalista Bogotá" o "psicóloga en Bogotá" no alcanza con tener una web: hace falta SEO local, datos estructurados y una página por servicio. Hicimos en Bogotá la web de [LM & Asociados](/casos-de-exito/pagina-web-abogados-penalistas-bogota-lm-asociados), una firma de derecho penal; la de [Entre Relatos](/casos-de-exito/pagina-web-psicologos-bogota-entre-relatos), un consultorio de psicoterapia con dos sedes; y la de [SemillaMind](/casos-de-exito/pagina-web-psicologa-bogota-semillamind), con 29 URLs indexables para cubrir búsquedas específicas.
+Concentra la mayor cantidad de empresas y de competencia en Google. Para aparecer en búsquedas como "abogado penalista Bogotá" o "psicóloga en Bogotá" no alcanza con tener una web: hace falta SEO local, datos estructurados y una página por servicio. En nuestra guía de [diseño y desarrollo web en Bogotá](/colombia/desarrollo-web-bogota) explicamos el proceso y los precios en COP. Hicimos en Bogotá la web de [LM & Asociados](/casos-de-exito/pagina-web-abogados-penalistas-bogota-lm-asociados), una firma de derecho penal; la de [Entre Relatos](/casos-de-exito/pagina-web-psicologos-bogota-entre-relatos), un consultorio de psicoterapia con dos sedes; y la de [SemillaMind](/casos-de-exito/pagina-web-psicologa-bogota-semillamind), con 29 URLs indexables para cubrir búsquedas específicas.
 
 ### Cali
 

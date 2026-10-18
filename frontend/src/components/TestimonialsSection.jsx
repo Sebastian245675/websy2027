@@ -147,6 +147,8 @@ export const TestimonialsSection = () => {
                     <img
                       src={rev.profilePhoto}
                       alt={rev.name}
+                      width="56"
+                      height="56"
                       className="w-14 h-14 rounded-full object-cover shadow-sm border border-white"
                     />
                   ) : (

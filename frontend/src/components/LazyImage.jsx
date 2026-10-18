@@ -44,7 +44,6 @@ export const LazyImage = ({
 
   const handleLoad = () => {
     setIsLoaded(true);
-    console.log('🖼️ [IMAGE] Loaded:', src?.substring(0, 50));
     if (onLoad) onLoad();
   };
 

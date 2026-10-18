@@ -109,7 +109,7 @@ export const ArchitectureDemoSection = () => {
           </div>
 
           <a href={demo.url} target="_blank" rel="noopener noreferrer" aria-label={`Abrir demo de ${demo.name}`} className="group relative block min-h-[440px] overflow-hidden rounded-2xl bg-[#263b36] p-3 shadow-[0_32px_80px_-38px_rgba(24,42,44,.45)] sm:min-h-[550px] sm:p-4">
-            <img src={demo.image} alt={demo.imageAlt} className="absolute inset-3 h-[calc(100%-1.5rem)] w-[calc(100%-1.5rem)] rounded-xl object-cover object-top transition duration-700 group-hover:scale-[1.025] sm:inset-4 sm:h-[calc(100%-2rem)] sm:w-[calc(100%-2rem)]" loading="lazy" />
+            <img src={demo.image} alt={demo.imageAlt} width="900" height="1200" className="absolute inset-3 h-[calc(100%-1.5rem)] w-[calc(100%-1.5rem)] rounded-xl object-cover object-top transition duration-700 group-hover:scale-[1.025] sm:inset-4 sm:h-[calc(100%-2rem)] sm:w-[calc(100%-2rem)]" loading="lazy" decoding="async" />
             <div className="absolute inset-3 rounded-xl bg-gradient-to-t from-[#17231f]/85 via-[#17231f]/10 to-[#17231f]/5 sm:inset-4" />
 
             <div className="absolute left-7 right-7 top-7 flex items-center justify-between sm:left-9 sm:right-9 sm:top-9">
@@ -123,7 +123,7 @@ export const ArchitectureDemoSection = () => {
                 <p className="mt-2 text-3xl font-semibold tracking-[-.04em] text-white sm:text-4xl">{demo.name}</p>
               </div>
               <div className="hidden gap-2 sm:flex">
-                {demo.thumbs.map((photo) => <img key={photo.src} src={photo.src} alt={photo.alt} className="h-16 w-16 rounded-lg border border-white/50 object-cover shadow-lg" loading="lazy" />)}
+                {demo.thumbs.map((photo) => <img key={photo.src} src={photo.src} alt={photo.alt} width="64" height="64" className="h-16 w-16 rounded-lg border border-white/50 object-cover shadow-lg" loading="lazy" decoding="async" />)}
               </div>
             </div>
           </a>

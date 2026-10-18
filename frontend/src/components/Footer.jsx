@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../LanguageContext';
 import { CONTACT, SOCIAL, whatsappUrl } from '../siteConfig';
 import { countryPages } from '../countryPages';
@@ -32,18 +32,38 @@ const icons = {
 };
 
 export const Footer = () => {
-  const { t } = useLanguage();
+  const { t, currentLanguage } = useLanguage();
+  const { pathname } = useLocation();
   const currentYear = new Date().getFullYear();
+
+  const regionalContent = pathname.startsWith('/colombia')
+    ? {
+        description: 'Diseño y desarrollo web, software y automatización para empresas de Colombia. Trabajo remoto, precios en COP y casos reales.',
+        address: 'Sede administrativa: Salta, Argentina',
+      }
+    : pathname.startsWith('/mexico')
+      ? {
+          description: 'Diseño y desarrollo web, sistemas y automatización para empresas de México. Trabajo remoto, precios en MXN y un caso multisucursal real.',
+          address: 'Sede administrativa: Salta, Argentina',
+        }
+      : pathname.startsWith('/estados-unidos')
+        ? {
+            description: currentLanguage === 'en'
+              ? 'Bilingual websites and lead automation for businesses in the United States. Remote service in English and Spanish.'
+              : 'Páginas web bilingües y automatización de consultas para negocios de Estados Unidos. Atención remota en español e inglés.',
+            address: currentLanguage === 'en' ? 'Administrative office: Salta, Argentina' : 'Sede administrativa: Salta, Argentina',
+          }
+        : null;
 
   const siteLinks = [
     { name: t('footer.links.services'), to: '/servicios' },
     { name: t('footer.links.cases'), to: '/casos-de-exito' },
     { name: t('footer.links.investment'), to: '/planes' },
-    { name: 'Quiénes somos', to: '/quienes-somos' },
-    { name: 'Cotizador', to: '/cotizador' },
-    { name: 'Auditoría web gratis', to: '/auditoria-gratis' },
+    { name: t('footer.links.about'), to: '/quienes-somos' },
+    { name: t('footer.links.quote'), to: '/cotizador' },
+    { name: t('footer.links.audit'), to: '/auditoria-gratis' },
     { name: t('footer.links.blog'), to: '/blog' },
-    { name: 'Diseño web en Salta', to: '/diseno-web-salta' },
+    { name: t('footer.links.salta'), to: '/diseno-web-salta' },
     { name: t('footer.links.contact'), to: '/contacto' },
   ];
 
@@ -56,7 +76,7 @@ export const Footer = () => {
         {/* Brand + WhatsApp */}
         <div className="bg-[#182A2C] px-6 py-10 md:px-10 lg:px-14">
           <div className="text-xl font-black uppercase tracking-tighter text-white">Websy</div>
-          <p className="mt-2 text-sm text-white/70 max-w-xs">{t('footer.description')}</p>
+          <p className="mt-2 text-sm text-white/70 max-w-xs">{regionalContent?.description || t('footer.description')}</p>
 
           <a
             href={whatsappUrl()}
@@ -94,7 +114,7 @@ export const Footer = () => {
           <ul className="space-y-2">
             <li><a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" data-wa-location="pie_telefono" className={linkCls}>{CONTACT.phoneDisplay}</a></li>
             <li><a href={`mailto:${CONTACT.email}`} className={linkCls}>{CONTACT.email}</a></li>
-            <li><Link to="/diseno-web-salta" className={linkCls}>{CONTACT.address}</Link></li>
+            <li><Link to="/diseno-web-salta" className={linkCls}>{regionalContent?.address || CONTACT.address}</Link></li>
           </ul>
         </div>
 
@@ -105,7 +125,7 @@ export const Footer = () => {
             <li><Link to="/politica-de-privacidad" className={linkCls}>{t('footer.links.privacy')}</Link></li>
           </ul>
           {/* Selector de país: guarda la elección, así el inicio deja de llevar a la versión detectada */}
-          <h4 className={`${headingCls} mt-8`}>Elegí tu país</h4>
+          <h4 className={`${headingCls} mt-8`}>{t('footer.chooseCountry')}</h4>
           <ul className="space-y-2">
             {COUNTRY_LINKS.map((c) => (
               <li key={c.code}><Link to={c.path} onClick={() => saveCountry(c.code)} className={linkCls}>{c.name}</Link></li>

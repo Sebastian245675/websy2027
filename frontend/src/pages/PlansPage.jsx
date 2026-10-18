@@ -1,7 +1,11 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SolucionesWebsySection } from '../components/SolucionesWebsySection';
 import { SEOHead } from '../components/SEOHead';
 import { FAQSection, PLANS_FAQ, faqSchema } from '../components/FAQSection';
+import useVisitorCountry from '../hooks/useVisitorCountry';
+import { saveCountry } from '../lib/geo';
+import { DEFAULT_MARKET, formatPrice, getMarket, MARKET_PRICING, PLAN_PRICES } from '../pricing';
 
 const installments = [
   { pct: '30%', when: 'Al inicio' },
@@ -10,12 +14,36 @@ const installments = [
 ];
 
 export const PlansPage = () => {
+  const visitorCountry = useVisitorCountry();
+  const [countryCode, setCountryCode] = useState(DEFAULT_MARKET);
+
+  useEffect(() => {
+    if (visitorCountry && MARKET_PRICING[visitorCountry]) setCountryCode(visitorCountry);
+  }, [visitorCountry]);
+
+  const market = getMarket(countryCode);
+  const localizedFaq = [
+    {
+      q: `¿Cuánto cuesta una página web en ${market.country}?`,
+      a: `Una landing page o un sitio institucional cuesta ${formatPrice(PLAN_PRICES.estandar, countryCode)}; una tienda online, ${formatPrice(PLAN_PRICES.comercio, countryCode)}; y un sistema de gestión, ${formatPrice(PLAN_PRICES.pymes, countryCode)}. Son valores orientativos: el precio final queda cerrado por escrito.`,
+    },
+    ...PLANS_FAQ.map((item) => item.q.includes('Cómo se paga') ? {
+      ...item,
+      a: `En 3 cuotas: 30% al inicio, 30% a mitad del proyecto y 40% en la entrega. En ${market.country} puedes pagar con ${market.payment}.`,
+    } : item),
+  ];
+  const selectCountry = (event) => {
+    const nextCountry = event.target.value;
+    setCountryCode(nextCountry);
+    saveCountry(nextCountry);
+  };
+
   return (
     <div className="min-h-screen pt-[68px]" style={{ backgroundColor: '#ffffff', overflowX: 'hidden' }}>
       <SEOHead
         title="Inversión: planes y precios de desarrollo web | Websy"
-        description="Cuánto cuesta tu web, tienda online o sistema de gestión con Websy. Planes desde USD 800, pago en 3 cuotas y ejemplos reales de cada nivel."
-        jsonLd={faqSchema(PLANS_FAQ)}
+        description="Precios de desarrollo web, tiendas online y sistemas de gestión con Websy. Valores en tu moneda, pago en 3 cuotas y ejemplos reales."
+        jsonLd={faqSchema(localizedFaq)}
       />
       {/* Page Header */}
       <div className="bg-[#f8f9fa] border-b border-gray-100 py-4 md:py-8">
@@ -37,12 +65,26 @@ export const PlansPage = () => {
             ¿Cuánto <span className="bg-[#d9fb06] px-3 py-1">cuesta</span> tu proyecto? <br className="hidden md:block" />
             <span className="text-[#182A2C] opacity-70">Elegí el nivel que necesita tu negocio hoy</span>
           </h1>
+          <div className="mt-6 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
+            <label htmlFor="pricing-country" className="text-sm font-bold text-[#182A2C]">Ver precios para</label>
+            <select
+              id="pricing-country"
+              value={countryCode}
+              onChange={selectCountry}
+              className="w-full sm:w-auto rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-[#182A2C] focus:outline-none focus:ring-2 focus:ring-[#9db600]"
+            >
+              {Object.entries(MARKET_PRICING).map(([code, item]) => (
+                <option key={code} value={code}>{item.country} ({item.currency})</option>
+              ))}
+            </select>
+            <span className="text-xs text-slate-500">Detectamos tu país; puedes cambiarlo aquí.</span>
+          </div>
         </div>
       </div>
 
       {/* Plans Grid */}
       <div>
-        <SolucionesWebsySection />
+        <SolucionesWebsySection countryCode={countryCode} />
       </div>
 
       {/* Formas de pago */}
@@ -54,7 +96,7 @@ export const PlansPage = () => {
               Pagás en 3 cuotas, a medida que avanza el proyecto
             </h2>
             <p className="mt-5 text-base md:text-lg text-gray-300 leading-relaxed">
-              En Argentina, con Naranja X o Mercado Pago. Desde el exterior, con Dólar App o Binance.
+              En {market.country}, puedes pagar con {market.payment}. El importe y las fechas quedan por escrito antes de empezar.
             </p>
           </div>
           <ol className="grid grid-cols-3 gap-3 md:gap-4">
@@ -69,7 +111,7 @@ export const PlansPage = () => {
         </div>
       </section>
 
-      <FAQSection items={PLANS_FAQ} />
+      <FAQSection items={localizedFaq} />
     </div>
   );
 };

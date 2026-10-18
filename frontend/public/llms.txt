@@ -14,14 +14,25 @@
 
 ## Por país
 
-- [Websy en Colombia](https://www.websysrl.com/colombia): proyectos en Bogotá, Cali y Manizales; precios en USD y pago desde Colombia.
-- [Websy en México](https://www.websysrl.com/mexico): webs, tiendas en línea y sistemas multisucursal; pago desde México.
+- [Desarrollo web en Colombia](https://www.websysrl.com/colombia): proyectos en Bogotá, Cali y Manizales; precios orientativos en pesos colombianos y pago desde Colombia.
+- [Diseño y desarrollo web en Bogotá](https://www.websysrl.com/colombia/desarrollo-web-bogota): servicio remoto, precios en COP y tres casos reales publicados en Bogotá.
+- [Desarrollo web en Cali](https://www.websysrl.com/colombia/desarrollo-web-cali): páginas web, tiendas virtuales y automatización de marketing y WhatsApp para empresas de Cali; caso real de un despacho de abogados penalistas de Cali.
+- [Automatización de procesos en Colombia](https://www.websysrl.com/colombia/automatizacion-procesos): WhatsApp, CRM, n8n, agentes de IA e integraciones para empresas colombianas.
+- [Desarrollo web en México](https://www.websysrl.com/mexico): webs, tiendas en línea y sistemas multisucursal; precios orientativos en pesos mexicanos y pago desde México.
+- [Diseño web en Ciudad de México](https://www.websysrl.com/mexico/diseno-web-cdmx): páginas web desde MXN 15.000, tiendas en línea con SPEI u OXXO y sistemas multisucursal para negocios de la CDMX; pago en 3 partes.
+- [Automatización de procesos en México](https://www.websysrl.com/mexico/automatizacion-procesos): automatización empresarial con IA, WhatsApp, CRM y sistemas conectados.
 - [Websy en Estados Unidos](https://www.websysrl.com/estados-unidos): webs bilingües y automatización de consultas para negocios hispanos.
 - [Diseño web en Salta](https://www.websysrl.com/diseno-web-salta): oficina en San Luis 2105, Salta Capital.
 
 ## Servicios
 
-
+- [Desarrollo Web Profesional](https://www.websysrl.com/servicios/desarrollo-web): Una página web profesional para una pyme cuesta desde USD 800 en Websy: una landing page está lista en 5 a 7 días hábiles y un sitio institucional en 2 a 3 semanas.
+- [Diseño UI/UX](https://www.websysrl.com/servicios/ui-ux): El diseño UI/UX está incluido en cada web, tienda, app o sistema que hacemos: diseñamos las pantallas en Figma y las aprobás en un prototipo navegable antes de que se programe una línea de código.
+- [Tiendas E-commerce](https://www.websysrl.com/servicios/ecommerce): Una tienda online a medida cuesta entre USD 1.800 y 3.500 en Websy y está lista en 3 a 6 semanas, según la cantidad de productos y las integraciones.
+- [Aplicaciones Móviles](https://www.websysrl.com/servicios/aplicaciones-moviles): Una app para Android e iPhone cuesta desde USD 2.000 en Websy si es informativa o de catálogo, entre USD 3.000 y 5.000 si maneja turnos, pedidos o reservas, y desde USD 5.000 si tiene pagos, mapa en tiempo real o chat.
+- [Automatización de Procesos con IA](https://www.websysrl.com/servicios/automatizaciones-ia): Automatizamos procesos empresariales que hoy dependen de copiar datos, responder siempre lo mismo o perseguir tareas a mano.
+- [SEO & Marketing Digital](https://www.websysrl.com/servicios/seo-marketing): El servicio de SEO de Websy arranca en USD 300 por mes: SEO técnico, una página por servicio, contenido, perfil de empresa en Google y un informe mensual de qué búsquedas trajeron visitas y consultas.
+- [Sistemas CRM, ERP & Gestión](https://www.websysrl.com/servicios/sistemas-gestion): Un sistema de gestión a medida para una pyme cuesta entre USD 4.000 y 8.000 en Websy y se desarrolla por etapas: la primera ya se usa en el día a día.
 
 ## Ejemplos por rubro
 

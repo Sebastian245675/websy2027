@@ -7,14 +7,25 @@ export const en = {
         plans: 'Pricing',
         about: 'About',
         testimonials: 'Testimonials',
-        contact: 'Contact'
+        contact: 'Contact',
+        tagline: 'DEVELOPMENT & TECHNOLOGY',
+        goTo: 'Go to',
+        contactTitle: 'Contact and quote',
+        toggleMenu: 'Open or close menu'
     },
 
     // Hero Section
     hero: {
-        title: 'Software Development Agency',
-        subtitle: 'Your brand to the next level, with a site that works (and smiles) for you.',
-        description: 'We create web, mobile applications and custom systems that drive your business growth with cutting-edge technology for companies in Argentina seeking to innovate and grow in the digital world.',
+        title: 'Websites and systems that bring customers to your business',
+        subtitle: 'Grow your business with custom development',
+        eyebrow: 'Web development and AI automation agency serving Argentina and Mexico',
+        description: 'Your website is designed by a technical team with a business mindset: we measure sales, not deliverables. Websites, online stores and automations that turn visits into customers.',
+        brandTagline: 'development & technology',
+        quoteCta: 'How much will my website cost?',
+        auditCta: 'Free Website Audit',
+        auditDetail: '3 actionable improvements sent via WhatsApp',
+        automationLabels: ['WhatsApp Automation', 'Instagram Bots', 'Make/n8n Workflows', 'GPT Models', 'AI Agents'],
+        productLabels: ['Websites & Landings', 'Online Stores', 'Android/iOS Apps', 'Google SEO', 'ERP / CRM'],
         cta: 'Request Quote',
         viewPortfolio: 'View Portfolio',
         solutions: 'Complete Solutions for your Digital Business',
@@ -32,6 +43,10 @@ export const en = {
             customSoft: 'Custom Software',
             customSoftDesc: 'Personalized systems for your company'
         }
+    },
+
+    plans: {
+        moreInfo: 'Learn more'
     },
 
     // Services
@@ -321,10 +336,15 @@ export const en = {
         sitemap: 'Site',
         contactTitle: 'Contact',
         legalTitle: 'Legal',
+        chooseCountry: 'Choose your country',
         links: {
             services: 'Services',
             cases: 'Success stories',
             investment: 'Pricing',
+            about: 'About us',
+            quote: 'Project estimator',
+            audit: 'Free website audit',
+            salta: 'Web design in Salta',
             blog: 'Blog',
             contact: 'Contact',
             privacy: 'Privacy policy'

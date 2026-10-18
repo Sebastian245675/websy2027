@@ -1,7 +1,8 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useCallback, useContext, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { translations, getTranslation, loadLanguage } from './translations';
 
 const LanguageContext = createContext();
+const SUPPORTED_LANGUAGES = ['es', 'en'];
 
 export const useLanguage = () => {
   const context = useContext(LanguageContext);
@@ -12,46 +13,70 @@ export const useLanguage = () => {
 };
 
 export const LanguageProvider = ({ children }) => {
+  // Keep the first render aligned with the Spanish prerendered HTML, then restore a saved
+  // language before the browser paints. English is imported eagerly, so this is synchronous.
   const [currentLanguage, setCurrentLanguage] = useState('es');
   const [isLoading, setIsLoading] = useState(false);
+  const requestId = useRef(0);
 
-  useEffect(() => {
-    // Check if there's a stored language preference
-    const storedLang = localStorage.getItem('websy_language');
-    if (storedLang && storedLang !== 'es' && ['en', 'zh', 'ja'].includes(storedLang)) {
-      changeLanguage(storedLang);
+  const changeLanguage = useCallback(async (langCode) => {
+    if (!SUPPORTED_LANGUAGES.includes(langCode)) return false;
+    if (langCode === currentLanguage && translations[langCode]) {
+      requestId.current += 1;
+      setIsLoading(false);
+      try {
+        localStorage.setItem('websy_language', langCode);
+      } catch (_) {
+        // Private browsing or disabled storage must not break the selector.
+      }
+      return true;
     }
-  }, []);
 
-  const changeLanguage = async (langCode) => {
-    if (langCode === currentLanguage && translations[langCode]) return;
-
+    const activeRequest = ++requestId.current;
     setIsLoading(true);
     try {
       if (!translations[langCode]) {
-        await loadLanguage(langCode);
+        const loaded = await loadLanguage(langCode);
+        if (!loaded || !translations[langCode]) throw new Error(`Language ${langCode} could not be loaded`);
       }
+      if (activeRequest !== requestId.current) return false;
       setCurrentLanguage(langCode);
-      localStorage.setItem('websy_language', langCode);
+      try {
+        localStorage.setItem('websy_language', langCode);
+      } catch (_) {
+        // Private browsing or disabled storage must not break the selector.
+      }
+      return true;
     } catch (error) {
       console.error('Error changing language:', error);
+      return false;
     } finally {
-      setIsLoading(false);
+      if (activeRequest === requestId.current) setIsLoading(false);
     }
-  };
+  }, [currentLanguage]);
 
-  const t = (key) => {
+  useLayoutEffect(() => {
+    try {
+      const storedLang = localStorage.getItem('websy_language');
+      if (storedLang && storedLang !== 'es') changeLanguage(storedLang);
+    } catch (_) {
+      // Keep Spanish when storage is unavailable.
+    }
+  }, [changeLanguage]);
+
+  const t = useCallback((key) => {
     // Check if translation exists for current language, fallback to es is handled in getTranslation
     return getTranslation(currentLanguage, key);
-  };
+  }, [currentLanguage]);
 
-  const value = {
+  const value = useMemo(() => ({
     currentLanguage,
     changeLanguage,
     t,
     translations: translations[currentLanguage] || translations['es'],
-    isLoading
-  };
+    isLoading,
+    supportedLanguages: SUPPORTED_LANGUAGES
+  }), [changeLanguage, currentLanguage, isLoading, t]);
 
   return (
     <LanguageContext.Provider value={value}>

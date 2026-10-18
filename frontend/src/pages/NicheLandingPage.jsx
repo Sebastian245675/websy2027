@@ -91,7 +91,7 @@ export const NicheLandingPage = () => {
             <div className="grid gap-6 md:grid-cols-3">
               {cases.map((c) => (
                 <a key={c.id} href={c.url} target="_blank" rel="noopener noreferrer" className="group block rounded-2xl bg-white border border-slate-200 overflow-hidden hover:shadow-xl transition-shadow">
-                  <img src={c.image} alt={c.title} className="aspect-video w-full object-cover object-top" loading="lazy" />
+                  <img src={c.image} alt={c.title} width="640" height="360" className="aspect-video w-full object-cover object-top" loading="lazy" decoding="async" />
                   <div className="p-5 flex items-start justify-between gap-3">
                     <div>
                       <p className="text-xs font-semibold uppercase tracking-[.14em] text-slate-400">{c.category}</p>

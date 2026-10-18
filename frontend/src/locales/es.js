@@ -7,14 +7,25 @@ export const es = {
         plans: 'Inversión',
         about: 'Nosotros',
         testimonials: 'Testimonios',
-        contact: 'CONTACTO'
+        contact: 'CONTACTO',
+        tagline: 'DESARROLLO & TECNOLOGÍA',
+        goTo: 'Ir a',
+        contactTitle: 'Contacto y presupuesto',
+        toggleMenu: 'Abrir o cerrar menú'
     },
 
     // Hero Section
     hero: {
-        title: 'Agencia de Desarrollo de Software',
+        title: 'Webs y sistemas que le traen clientes a tu empresa',
         subtitle: 'Impulsá el crecimiento de tu negocio con desarrollo a medida',
-        description: '',
+        eyebrow: 'Agencia de desarrollo web y automatización con IA en Argentina y México',
+        description: 'Tu web la diseña un equipo técnico y la piensa un contador: medimos ventas, no entregables. Páginas web, tiendas online y automatizaciones para que tus visitas se conviertan en clientes.',
+        brandTagline: 'desarrollo & tecnología',
+        quoteCta: '¿Cuánto cuesta mi web?',
+        auditCta: 'Auditoría Web Gratuita',
+        auditDetail: '3 mejoras concretas por WhatsApp',
+        automationLabels: ['Auto. WhatsApp', 'Bots Instagram', 'Flujos Make/n8n', 'Modelos GPT', 'Agentes IA'],
+        productLabels: ['Webs & Landings', 'Tiendas online', 'Apps Android/iOS', 'SEO en Google', 'ERP / CRM'],
         cta: 'Solicitar Cotización',
         viewPortfolio: 'Ver Portfolio',
         solutions: 'Soluciones Completas para tu Negocio Digital',
@@ -32,6 +43,10 @@ export const es = {
             customSoft: 'Software a Medida',
             customSoftDesc: 'Sistemas personalizados para tu empresa'
         }
+    },
+
+    plans: {
+        moreInfo: 'Conocer más'
     },
 
     // Servicios
@@ -321,10 +336,15 @@ export const es = {
         sitemap: 'Sitio',
         contactTitle: 'Contacto',
         legalTitle: 'Legal',
+        chooseCountry: 'Elegí tu país',
         links: {
             services: 'Servicios',
             cases: 'Casos de éxito',
             investment: 'Inversión',
+            about: 'Quiénes somos',
+            quote: 'Cotizador',
+            audit: 'Auditoría web gratis',
+            salta: 'Diseño web en Salta',
             blog: 'Blog',
             contact: 'Contacto',
             privacy: 'Política de privacidad'

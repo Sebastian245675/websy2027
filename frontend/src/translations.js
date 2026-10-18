@@ -1,8 +1,11 @@
 import { es } from './locales/es';
+import { en } from './locales/en';
 
-// Initial state, other languages will be loaded on demand
+// Spanish and English power the visible selector, so both are available on first paint.
+// This avoids briefly rendering Spanish for visitors who already selected English.
 export const translations = {
-  es
+  es,
+  en
 };
 
 export const loadLanguage = async (lang) => {
@@ -11,9 +14,6 @@ export const loadLanguage = async (lang) => {
   try {
     let module;
     switch (lang) {
-      case 'en':
-        module = await import('./locales/en');
-        break;
       case 'zh':
         module = await import('./locales/zh');
         break;
@@ -60,6 +60,6 @@ export const getTranslation = (lang, key) => {
     result = traverse(translations.es, keys);
   }
 
-  // Return key if absolutely nothing found
-  return result || key;
+  // Preserve valid empty strings, zeroes and booleans; only expose the key when it is truly missing.
+  return result === undefined ? key : result;
 };

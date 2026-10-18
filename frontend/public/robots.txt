@@ -4,7 +4,7 @@ Allow: /
 # Private areas
 Disallow: /admin
 Disallow: /api
-Disallow: /panel-cotizaciones
+Disallow: /panel
 
 # Asistentes de IA: permitido explícitamente para que puedan citar y recomendar el sitio
 User-agent: GPTBot
@@ -21,7 +21,7 @@ User-agent: Bingbot
 Allow: /
 Disallow: /admin
 Disallow: /api
-Disallow: /panel-cotizaciones
+Disallow: /panel
 
 # Resumen del sitio para asistentes de IA: https://www.websysrl.com/llms.txt
 Sitemap: https://www.websysrl.com/sitemap.xml

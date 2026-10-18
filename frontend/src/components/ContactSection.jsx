@@ -37,6 +37,8 @@ export const ContactSection = () => {
         message,
         projectType: formData.need,
         budget: formData.budget,
+        source: 'contacto_rapido',
+        country: (COUNTRIES.find((c) => c.code === formData.country) || COUNTRIES[0]).name,
       });
 
       try {
@@ -204,7 +206,7 @@ export const ContactSection = () => {
         <div className="w-full lg:w-[30%] relative min-h-[420px] bg-[#35affb]/80">
           {CONTACT_PHOTO && (
             <>
-              <img src={CONTACT_PHOTO} alt="Equipo de Websy" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+              <img src={CONTACT_PHOTO} alt="Equipo de Websy" width="640" height="840" className="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a]/85 via-[#1a1a1a]/20 to-transparent" />
             </>
           )}

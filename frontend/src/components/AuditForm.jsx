@@ -3,6 +3,7 @@ import { CheckCircle2, Send } from 'lucide-react';
 import { saveCotizacion, sendCotizacionEmail } from '../firebaseLazy';
 import { COUNTRIES, RUBROS } from '../siteConfig';
 import { trackFormSubmit } from '../lib/tracking';
+import { useLanguage } from '../LanguageContext';
 
 const COPY = {
   vos: {
@@ -14,6 +15,11 @@ const COPY = {
     noWeb: 'Todavía no tengo web',
     error: 'No pudimos enviar la solicitud. Intenta de nuevo o escríbenos por WhatsApp.',
     required: 'Completa tu nombre, giro y WhatsApp.',
+  },
+  en: {
+    noWeb: "I don't have a website yet",
+    error: 'We could not send your request. Please try again or message us on WhatsApp.',
+    required: 'Enter your name, industry and WhatsApp number.',
   },
 };
 
@@ -32,13 +38,15 @@ const emptyForm = (defaultCountry, defaultRubro) => ({
  * compact: solo web y WhatsApp (página /auditoria-gratis: cuantos menos campos, más pedidos).
  */
 export const AuditForm = ({ tone = 'vos', defaultCountry = 'AR', defaultRubro = '', source = 'auditoria', dark = false, compact = false }) => {
-  const copy = COPY[tone];
+  const { currentLanguage } = useLanguage();
+  const isEnglish = currentLanguage === 'en';
+  const copy = isEnglish ? COPY.en : COPY[tone];
   const [form, setForm] = useState(() => emptyForm(defaultCountry, defaultRubro));
   const [status, setStatus] = useState('idle'); // idle | sending | done | error
   const [error, setError] = useState('');
 
   const country = COUNTRIES.find((c) => c.code === form.country) || COUNTRIES[0];
-  const rubroLabel = tone === 'tu' ? 'Giro de tu negocio' : 'Rubro de tu negocio';
+  const rubroLabel = isEnglish ? 'Your industry' : tone === 'tu' ? 'Giro de tu negocio' : 'Rubro de tu negocio';
 
   const update = (e) => {
     const { name, value, type, checked } = e.target;
@@ -105,10 +113,12 @@ export const AuditForm = ({ tone = 'vos', defaultCountry = 'AR', defaultRubro = 
       <div className={`rounded-xl p-8 text-center ${dark ? 'bg-white/5 border border-white/15' : 'bg-[#f8fafc] border border-gray-200'}`} role="status">
         <CheckCircle2 size={44} className="mx-auto mb-4 text-[#7a9400]" />
         <p className={`text-xl sm:text-2xl font-black mb-2 ${dark ? 'text-white' : 'text-[#182A2C]'}`}>
-          ¡Listo{form.name.trim() ? `, ${form.name.trim().split(' ')[0]}` : ''}!
+          {isEnglish ? 'Done' : '¡Listo'}{form.name.trim() ? `, ${form.name.trim().split(' ')[0]}` : ''}!
         </p>
         <p className={`text-base ${dark ? 'text-gray-300' : 'text-gray-600'}`}>
-          Te mandamos por WhatsApp 3 mejoras concretas{form.noWebsite ? ' para empezar a vender online' : ' para tu web'}.
+          {isEnglish
+            ? `We will send you 3 actionable improvements on WhatsApp${form.noWebsite ? ' to help you start selling online' : ' for your website'}.`
+            : `Te mandamos por WhatsApp 3 mejoras concretas${form.noWebsite ? ' para empezar a vender online' : ' para tu web'}.`}
         </p>
       </div>
     );
@@ -118,13 +128,13 @@ export const AuditForm = ({ tone = 'vos', defaultCountry = 'AR', defaultRubro = 
     <form onSubmit={handleSubmit} className="space-y-5" noValidate>
       {!compact && (
         <div>
-          <label htmlFor={`${source}-name`} className={labelCls}>Nombre *</label>
+          <label htmlFor={`${source}-name`} className={labelCls}>{isEnglish ? 'Name' : 'Nombre'} *</label>
           <input id={`${source}-name`} name="name" value={form.name} onChange={update} className={inputCls} autoComplete="name" required />
         </div>
       )}
 
       <div>
-        <label htmlFor={`${source}-website`} className={labelCls}>Dirección de tu web</label>
+        <label htmlFor={`${source}-website`} className={labelCls}>{isEnglish ? 'Website address' : 'Dirección de tu web'}</label>
         <input
           id={`${source}-website`}
           name="website"
@@ -150,7 +160,7 @@ export const AuditForm = ({ tone = 'vos', defaultCountry = 'AR', defaultRubro = 
           value={form.rubro}
           onChange={update}
           list={`${source}-rubros`}
-          placeholder="Ej.: inmobiliaria, estudio jurídico, gastronomía"
+          placeholder={isEnglish ? 'E.g. real estate, law firm, hospitality' : 'Ej.: inmobiliaria, estudio jurídico, gastronomía'}
           className={inputCls}
           required
         />
@@ -161,7 +171,7 @@ export const AuditForm = ({ tone = 'vos', defaultCountry = 'AR', defaultRubro = 
 
       <div className="grid grid-cols-1 sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-4">
         <div>
-          <label htmlFor={`${source}-country`} className={labelCls}>País *</label>
+          <label htmlFor={`${source}-country`} className={labelCls}>{isEnglish ? 'Country' : 'País'} *</label>
           <select id={`${source}-country`} name="country" value={form.country} onChange={update} className={inputCls}>
             {COUNTRIES.map((c) => (
               <option key={c.code} value={c.code} className="text-[#182A2C]">
@@ -182,7 +192,7 @@ export const AuditForm = ({ tone = 'vos', defaultCountry = 'AR', defaultRubro = 
               type="tel"
               value={form.whatsapp}
               onChange={update}
-              placeholder={form.country === 'AR' ? '9 388 123-4567' : 'Número con código de área'}
+              placeholder={form.country === 'AR' ? '9 388 123-4567' : isEnglish ? 'Number with area code' : 'Número con código de área'}
               className={`${inputCls} rounded-l-none`}
               autoComplete="tel-national"
               required
@@ -199,10 +209,12 @@ export const AuditForm = ({ tone = 'vos', defaultCountry = 'AR', defaultRubro = 
         className="w-full flex items-center justify-center gap-2 bg-[#d9fb06] hover:bg-[#c5e405] text-[#182A2C] font-black px-6 py-4 rounded text-sm uppercase tracking-[0.12em] transition-colors disabled:opacity-60"
       >
         <Send size={18} />
-        {status === 'sending' ? 'Enviando...' : 'Quiero mi auditoría gratis'}
+        {status === 'sending' ? (isEnglish ? 'Sending...' : 'Enviando...') : (isEnglish ? 'Get my free audit' : 'Quiero mi auditoría gratis')}
       </button>
       <p className={`text-xs text-center ${dark ? 'text-gray-400' : 'text-gray-500'}`}>
-        Te respondemos por WhatsApp con 3 mejoras concretas. Sin costo y sin compromiso.
+        {isEnglish
+          ? 'We reply on WhatsApp with 3 actionable improvements. Free and with no obligation.'
+          : 'Te respondemos por WhatsApp con 3 mejoras concretas. Sin costo y sin compromiso.'}
       </p>
     </form>
   );

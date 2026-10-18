@@ -9,6 +9,37 @@ import { AuditForm } from '../components/AuditForm';
 import { trackFormSubmit } from '../lib/tracking';
 import { BUDGET_RANGES, COUNTRIES, PROJECT_NEEDS, whatsappUrl } from '../siteConfig';
 
+const CONTACT_COPY = {
+  es: {
+    heading: 'Hablemos de tu proyecto', intro: 'Pedí una auditoría gratuita de tu web o una cotización a medida. Respondemos en el día hábil.',
+    tabsLabel: 'Tipo de consulta', auditTab: 'Auditoría web gratuita', quoteTab: 'Pedir cotización',
+    auditTitle: 'Auditoría web gratuita', auditDescription: 'Revisamos tu web (o tu negocio, si todavía no tenés) y te mandamos por WhatsApp 3 mejoras concretas para conseguir más clientes.',
+    received: 'Consulta recibida', thanks: 'Esto es lo que sigue:',
+    steps: ['Te escribimos por WhatsApp en el día hábil para entender tu proyecto.', 'Si hace falta, coordinamos una videollamada de 20 minutos.', 'Te enviamos la propuesta con precio cerrado y plazo por escrito.'],
+    urgent: '¿Apurado? Escribinos ahora por WhatsApp', name: 'Nombre', namePlaceholder: 'Tu nombre', countryCode: 'Código de país', number: 'Número',
+    need: '¿Qué necesitás?', chooseOption: 'Elegí una opción', budget: 'Presupuesto aproximado', chooseRange: 'Elegí un rango',
+    details: 'Contanos tu proyecto (opcional)', detailsPlaceholder: 'Qué vendés, a quién y qué tiene que lograr la web o el sistema',
+    sending: 'Enviando...', proposal: 'Pedir propuesta', response: 'Te respondemos por WhatsApp en el día hábil. Precios desde USD 800: mirá los', plans: 'planes',
+    location: 'Ubicación', phone: 'Teléfono', error: 'No pudimos enviar el mensaje. Probá de nuevo o escribinos por WhatsApp.',
+    needLabels: PROJECT_NEEDS,
+    budgetLabels: BUDGET_RANGES,
+  },
+  en: {
+    heading: "Let's talk about your project", intro: 'Request a free website audit or a custom quote. We reply within one business day.',
+    tabsLabel: 'Type of enquiry', auditTab: 'Free website audit', quoteTab: 'Request a quote',
+    auditTitle: 'Free website audit', auditDescription: "We review your website—or your business if you don't have one yet—and send you 3 actionable improvements on WhatsApp.",
+    received: 'Request received', thanks: 'Here is what happens next:',
+    steps: ['We message you on WhatsApp within one business day to understand your project.', 'If needed, we schedule a 20-minute video call.', 'We send you a written proposal with a fixed price and timeline.'],
+    urgent: 'In a hurry? Message us on WhatsApp', name: 'Name', namePlaceholder: 'Your name', countryCode: 'Country code', number: 'Number',
+    need: 'What do you need?', chooseOption: 'Choose an option', budget: 'Approximate budget', chooseRange: 'Choose a range',
+    details: 'Tell us about your project (optional)', detailsPlaceholder: 'What you sell, who your customers are and what the website or system should achieve',
+    sending: 'Sending...', proposal: 'Request proposal', response: 'We reply on WhatsApp within one business day. Projects start at USD 800: see our', plans: 'plans',
+    location: 'Location', phone: 'Phone', error: 'We could not send your message. Please try again or contact us on WhatsApp.',
+    needLabels: ['Website', 'Online store', 'Management system', 'AI automation', 'Mobile app', 'Other'],
+    budgetLabels: ['Under USD 800', 'USD 800 to 1,500', 'USD 1,500 to 3,500', 'Over USD 3,500', 'Not sure yet'],
+  },
+};
+
 // SVG icons inline
 const SendIcon = ({ size = 20 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -35,7 +66,8 @@ const MailIcon = ({ size = 24 }) => (
 );
 
 export const ContactPage = () => {
-  const { t } = useLanguage();
+  const { currentLanguage, t } = useLanguage();
+  const copy = CONTACT_COPY[currentLanguage] || CONTACT_COPY.es;
   const [searchParams] = useSearchParams();
 
   const initialPlan = searchParams.get('plan') || '';
@@ -96,6 +128,8 @@ export const ContactPage = () => {
         email: '',
         projectType: formData.projectType,
         budget: formData.budget,
+        source: 'contacto',
+        country: (COUNTRIES.find((c) => c.code === formData.country) || COUNTRIES[0]).name,
         message
       });
 
@@ -137,7 +171,7 @@ export const ContactPage = () => {
       setFormData((prev) => ({ ...prev, name: '', phone: '', projectType: '', budget: '', message: '' }));
     } catch (err) {
       console.error('Error saving cotizacion:', err);
-      alert('No pudimos enviar el mensaje. Probá de nuevo o escribinos por WhatsApp.');
+      alert(copy.error);
     } finally {
       setIsSubmitting(false);
     }
@@ -150,20 +184,22 @@ export const ContactPage = () => {
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-page)', paddingTop: '68px' }}>
       <SEOHead
-        title="Contacto y Cotización Gratuita | Websy"
-        description="Solicitá una cotización personalizada sin compromiso para tu proyecto de desarrollo web, app móvil o automatización con IA."
+        title={currentLanguage === 'en' ? 'Contact and Free Project Quote | Websy' : 'Contacto y Cotización Gratuita | Websy'}
+        description={currentLanguage === 'en'
+          ? 'Request a free custom quote for your website, mobile app, business system or AI automation project.'
+          : 'Solicitá una cotización personalizada sin compromiso para tu proyecto de desarrollo web, app móvil o automatización con IA.'}
       />
       {/* Contact Form Section - Clean CGI Style */}
       <section id="contact-form" className="py-8 sm:py-12 md:py-24 lg:py-32" style={{ backgroundColor: 'var(--bg-page)' }}>
         <div className="container px-4 md:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#182A2C] tracking-tight mb-3">Hablemos de tu proyecto</h1>
-            <p className="text-base sm:text-lg text-gray-600 mb-8 max-w-2xl">Pedí una auditoría gratuita de tu web o una cotización a medida. Respondemos en el día hábil.</p>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#182A2C] tracking-tight mb-3">{copy.heading}</h1>
+            <p className="text-base sm:text-lg text-gray-600 mb-8 max-w-2xl">{copy.intro}</p>
 
-            <div role="tablist" aria-label="Tipo de consulta" className="inline-flex flex-wrap gap-2 mb-8 sm:mb-10">
+            <div role="tablist" aria-label={copy.tabsLabel} className="inline-flex flex-wrap gap-2 mb-8 sm:mb-10">
               {[
-                { id: 'auditoria', label: 'Auditoría web gratuita' },
-                { id: 'cotizacion', label: 'Pedir cotización' },
+                { id: 'auditoria', label: copy.auditTab },
+                { id: 'cotizacion', label: copy.quoteTab },
               ].map((tab) => (
                 <button
                   key={tab.id}
@@ -185,10 +221,10 @@ export const ContactPage = () => {
               {activeTab === 'auditoria' ? (
                 <div id="auditoria">
                   <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
-                    Auditoría web gratuita
+                    {copy.auditTitle}
                   </h2>
                   <p className="text-sm sm:text-base text-gray-600 mb-6">
-                    Revisamos tu web (o tu negocio, si todavía no tenés) y te mandamos por WhatsApp 3 mejoras concretas para conseguir más clientes.
+                    {copy.auditDescription}
                   </p>
                   <AuditForm source="auditoria" />
                 </div>
@@ -200,12 +236,10 @@ export const ContactPage = () => {
 
                 {sent ? (
                   <div className="border-2 border-[#182A2C] p-6 sm:p-8" role="status">
-                    <p className="text-xs font-black uppercase tracking-[0.15em] text-[#556902] mb-3">Consulta recibida</p>
-                    <h3 className="text-xl sm:text-2xl font-black text-[#182A2C] mb-4">Gracias{sent.name ? `, ${sent.name}` : ''}. Esto es lo que sigue:</h3>
+                    <p className="text-xs font-black uppercase tracking-[0.15em] text-[#556902] mb-3">{copy.received}</p>
+                    <h3 className="text-xl sm:text-2xl font-black text-[#182A2C] mb-4">{currentLanguage === 'en' ? 'Thank you' : 'Gracias'}{sent.name ? `, ${sent.name}` : ''}. {copy.thanks}</h3>
                     <ol className="space-y-2 text-gray-700 mb-6 list-decimal list-inside">
-                      <li>Te escribimos por WhatsApp en el día hábil para entender tu proyecto.</li>
-                      <li>Si hace falta, coordinamos una videollamada de 20 minutos.</li>
-                      <li>Te enviamos la propuesta con precio cerrado y plazo por escrito.</li>
+                      {copy.steps.map((step) => <li key={step}>{step}</li>)}
                     </ol>
                     <a
                       href={whatsappUrl(`Hola! Acabo de pedir una cotización en la web. Necesito: ${sent.need}. Presupuesto aproximado: ${sent.budget}.`)}
@@ -214,52 +248,52 @@ export const ContactPage = () => {
                       data-wa-location="contacto_gracias"
                       className="inline-block bg-[#d9fb06] text-[#182A2C] font-black px-6 py-3 text-sm uppercase tracking-[0.1em]"
                     >
-                      ¿Apurado? Escribinos ahora por WhatsApp
+                      {copy.urgent}
                     </a>
                   </div>
                 ) : (
                 <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                     <div>
-                      <label htmlFor="cq-name" className={labelCls} style={{ color: 'var(--text-primary)' }}>Nombre *</label>
+                      <label htmlFor="cq-name" className={labelCls} style={{ color: 'var(--text-primary)' }}>{copy.name} *</label>
                       <input id="cq-name" type="text" name="name" value={formData.name} onChange={handleChange} autoComplete="name"
-                        className={fieldCls} style={fieldStyle} placeholder="Tu nombre" required />
+                        className={fieldCls} style={fieldStyle} placeholder={copy.namePlaceholder} required />
                     </div>
                     <div>
                       <label htmlFor="cq-phone" className={labelCls} style={{ color: 'var(--text-primary)' }}>WhatsApp *</label>
                       <div className="flex gap-2">
-                        <select name="country" value={formData.country} onChange={handleChange} aria-label="Código de país"
+                        <select name="country" value={formData.country} onChange={handleChange} aria-label={copy.countryCode}
                           className="px-2 border rounded text-sm" style={fieldStyle}>
                           {COUNTRIES.filter((c) => c.dial).map((c) => <option key={c.code} value={c.code}>{c.code} {c.dial}</option>)}
                         </select>
                         <input id="cq-phone" type="tel" name="phone" value={formData.phone} onChange={handleChange} autoComplete="tel-national"
-                          className={fieldCls} style={fieldStyle} placeholder="Número" required />
+                          className={fieldCls} style={fieldStyle} placeholder={copy.number} required />
                       </div>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                     <div>
-                      <label htmlFor="cq-need" className={labelCls} style={{ color: 'var(--text-primary)' }}>¿Qué necesitás? *</label>
+                      <label htmlFor="cq-need" className={labelCls} style={{ color: 'var(--text-primary)' }}>{copy.need} *</label>
                       <select id="cq-need" name="projectType" value={formData.projectType} onChange={handleChange} className={fieldCls} style={fieldStyle} required>
-                        <option value="">Elegí una opción</option>
-                        {PROJECT_NEEDS.map((n) => <option key={n} value={n}>{n}</option>)}
+                        <option value="">{copy.chooseOption}</option>
+                        {PROJECT_NEEDS.map((need, index) => <option key={need} value={need}>{copy.needLabels[index]}</option>)}
                       </select>
                     </div>
                     <div>
-                      <label htmlFor="cq-budget" className={labelCls} style={{ color: 'var(--text-primary)' }}>Presupuesto aproximado *</label>
+                      <label htmlFor="cq-budget" className={labelCls} style={{ color: 'var(--text-primary)' }}>{copy.budget} *</label>
                       <select id="cq-budget" name="budget" value={formData.budget} onChange={handleChange} className={fieldCls} style={fieldStyle} required>
-                        <option value="">Elegí un rango</option>
-                        {BUDGET_RANGES.map((r) => <option key={r} value={r}>{r}</option>)}
+                        <option value="">{copy.chooseRange}</option>
+                        {BUDGET_RANGES.map((range, index) => <option key={range} value={range}>{copy.budgetLabels[index]}</option>)}
                       </select>
                     </div>
                   </div>
 
                   <div>
-                    <label htmlFor="cq-message" className={labelCls} style={{ color: 'var(--text-primary)' }}>Contanos tu proyecto (opcional)</label>
+                    <label htmlFor="cq-message" className={labelCls} style={{ color: 'var(--text-primary)' }}>{copy.details}</label>
                     <textarea id="cq-message" name="message" value={formData.message} onChange={handleChange}
                       className={`${fieldCls} resize-none`} style={fieldStyle} rows="4"
-                      placeholder="Qué vendés, a quién y qué tiene que lograr la web o el sistema" />
+                      placeholder={copy.detailsPlaceholder} />
                   </div>
 
                   <button
@@ -272,14 +306,14 @@ export const ContactPage = () => {
                       borderRadius: '4px'
                     }}
                   >
-                    {isSubmitting ? 'Enviando...' : (
+                    {isSubmitting ? copy.sending : (
                       <>
                         <span className="sm:w-5 sm:h-5 inline-block mr-2"><SendIcon size={18} /></span>
-                        Pedir propuesta
+                        {copy.proposal}
                       </>
                     )}
                   </button>
-                  <p className="text-xs text-gray-500">Te respondemos por WhatsApp en el día hábil. Precios desde USD 800: mirá los <a href="/planes" className="underline">planes</a>.</p>
+                  <p className="text-xs text-gray-500">{copy.response} <a href="/planes" className="underline">{copy.plans}</a>.</p>
                 </form>
                 )}
               </div>
@@ -298,7 +332,7 @@ export const ContactPage = () => {
                     </span>
                     <div>
                       <h3 className="text-base sm:text-lg font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>
-                        Ubicación
+                        {copy.location}
                       </h3>
                       <p className="text-sm sm:text-base" style={{ color: 'var(--text-secondary)' }}>
                         {companyInfo.location}
@@ -312,7 +346,7 @@ export const ContactPage = () => {
                     </span>
                     <div>
                       <h3 className="text-base sm:text-lg font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>
-                        Teléfono
+                        {copy.phone}
                       </h3>
                       <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" data-wa-location="contacto_datos" className="text-sm sm:text-base hover:underline" style={{ color: 'var(--text-secondary)' }}>
                         {companyInfo.phone} (WhatsApp)

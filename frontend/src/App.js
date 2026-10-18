@@ -65,11 +65,9 @@ const PlansPage = lazy(() => {
   });
 });
 
-const CotizacionesView = lazy(() => {
-  return import("./pages/CotizacionesView").then(module => {
-    return { default: module.CotizacionesView };
-  });
-});
+const LeadsPanel = lazy(() =>
+  import("./pages/LeadsPanel").then(module => ({ default: module.LeadsPanel }))
+);
 
 const SuccessStoriesPage = lazy(() => {
   const start = performance.now();
@@ -134,6 +132,14 @@ const CountryPage = lazy(() =>
   import("./pages/CountryPage").then(module => ({ default: module.CountryPage }))
 );
 
+const AutomationCountryPage = lazy(() =>
+  import("./pages/AutomationCountryPage").then(module => ({ default: module.AutomationCountryPage }))
+);
+
+const CityWebPage = lazy(() =>
+  import("./pages/CityWebPage").then(module => ({ default: module.CityWebPage }))
+);
+
 const NicheLandingPage = lazy(() =>
   import("./pages/NicheLandingPage").then(module => ({ default: module.NicheLandingPage }))
 );
@@ -141,7 +147,14 @@ const NicheLandingPage = lazy(() =>
 // Paid-ads landing pages (/lp/...) render without the site menu and footer
 const SiteChrome = ({ children }) => {
   const { pathname } = useLocation();
-  return pathname.startsWith('/lp/') ? null : children;
+  // Landings de anuncios (/lp/...) y el panel de consultas (/panel) van sin menú ni pie
+  return pathname.startsWith('/lp/') || pathname === '/panel' ? null : children;
+};
+
+// El botón flotante de WhatsApp sí va en las landings, pero no en el panel
+const NotOnPanel = ({ children }) => {
+  const { pathname } = useLocation();
+  return pathname === '/panel' ? null : children;
 };
 
 // Lazy load non-critical components
@@ -229,12 +242,13 @@ function App() {
                         <PlansPage />
                       </Suspense>
                     } />
-                    <Route path="/panel-cotizaciones" element={
-                      <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
-                        <SEOHead title="Panel de cotizaciones | Websy" noindex />
-                        <CotizacionesView />
+                    <Route path="/panel" element={
+                      <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
+                        <SEOHead title="Panel de consultas | Websy" noindex />
+                        <LeadsPanel />
                       </Suspense>
                     } />
+                    <Route path="/panel-cotizaciones" element={<Navigate to="/panel" replace />} />
                     <Route path="/casos-de-exito" element={
                       <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
                         <SuccessStoriesPage />
@@ -286,6 +300,31 @@ function App() {
                         <CountryPage code="MX" />
                       </Suspense>
                     } />
+                    <Route path="/colombia/automatizacion-procesos" element={
+                      <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
+                        <AutomationCountryPage code="CO" />
+                      </Suspense>
+                    } />
+                    <Route path="/colombia/desarrollo-web-bogota" element={
+                      <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
+                        <CityWebPage slug="bogota" />
+                      </Suspense>
+                    } />
+                    <Route path="/colombia/desarrollo-web-cali" element={
+                      <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
+                        <CityWebPage slug="cali" />
+                      </Suspense>
+                    } />
+                    <Route path="/mexico/diseno-web-cdmx" element={
+                      <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
+                        <CityWebPage slug="cdmx" />
+                      </Suspense>
+                    } />
+                    <Route path="/mexico/automatizacion-procesos" element={
+                      <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
+                        <AutomationCountryPage code="MX" />
+                      </Suspense>
+                    } />
                     <Route path="/estados-unidos" element={
                       <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
                         <CountryPage code="US" />
@@ -329,9 +368,11 @@ function App() {
                   </Suspense>
                 </SiteChrome>
 
-                <Suspense fallback={null}>
-                  <WhatsAppButton />
-                </Suspense>
+                <NotOnPanel>
+                  <Suspense fallback={null}>
+                    <WhatsAppButton />
+                  </Suspense>
+                </NotOnPanel>
 
                 <Suspense fallback={null}>
                   <ScrollToTop />

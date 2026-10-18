@@ -226,21 +226,21 @@ Si lo que necesitás es que te encuentren en Google y te escriban, quizás no te
   'automatizaciones-ia': {
     slug: 'automatizaciones-ia',
     // Respuesta directa con número al abrir la página (modelo de la página de Salta)
-    answer: 'Un chatbot de WhatsApp con IA para una pyme cuesta desde USD 200 por mes en Websy: responde las preguntas frecuentes, califica cada consulta y te pasa solo los clientes listos para comprar. Para una empresa de paisajismo de St. Louis, la web con una respuesta automática hoy trae unas 40 consultas calificadas y 5 clientes nuevos por mes.',
-    title: 'Automatizaciones con IA',
-    seoTitle: 'Automatización con IA y Chatbots de WhatsApp | Websy',
-    seoDescription: 'Chatbots de WhatsApp e Instagram, flujos con Make o n8n e integraciones con OpenAI para responder y calificar consultas solas. Desde USD 200 por mes.',
-    seoKeywords: 'automatizaciones ia argentina, chatbot whatsapp, bot instagram, make integromat, n8n automatizaciones, inteligencia artificial pymes, openai api, chatgpt negocios',
+    answer: 'Automatizamos procesos empresariales que hoy dependen de copiar datos, responder siempre lo mismo o perseguir tareas a mano. Conectamos WhatsApp, CRM, email, formularios, planillas y sistemas internos; los chatbots con IA parten desde USD 200 por mes y cada automatización se cotiza con alcance y resultado medible.',
+    title: 'Automatización de Procesos con IA',
+    seoTitle: 'Automatización de Procesos Empresariales con IA | Websy',
+    seoDescription: 'Automatización de procesos empresariales, agentes de IA y WhatsApp: conectamos CRM, email, formularios y sistemas con n8n o Make. Diagnóstico y precio cerrado.',
+    seoKeywords: 'automatización de procesos empresariales, empresa de automatización, automatización con ia, agentes de ia para empresas, chatbot whatsapp, n8n automatizaciones, make integromat, inteligencia artificial pymes',
     icon: IconCpu,
     color: '#f59e0b',
-    heroTitle: 'Automatizaciones',
-    heroHighlight: 'con IA',
-    heroSubtitle: 'Tu negocio trabajando 24/7 con inteligencia artificial. Automatizá, vendé más, trabajá menos.',
-    description: `La inteligencia artificial ya no es ciencia ficción: es la herramienta más poderosa para escalar tu negocio. En Websy implementamos automatizaciones inteligentes que trabajan por vos las 24 horas del día.
+    heroTitle: 'Automatización de procesos',
+    heroHighlight: 'empresariales con IA',
+    heroSubtitle: 'Conectamos tus herramientas y eliminamos tareas repetitivas en ventas, atención, administración y operaciones.',
+    description: `Una automatización útil empieza por un proceso concreto, no por elegir una herramienta. Primero documentamos quién hace la tarea, cuánto tarda, qué información usa y qué excepciones requieren una decisión humana. Después conectamos los sistemas y medimos el resultado.
 
-Creamos chatbots para WhatsApp e Instagram que responden consultas, toman pedidos y agendan citas automáticamente. Configuramos workflows con Make (Integromat) y n8n que conectan tus herramientas favoritas y eliminan tareas repetitivas.
+Implementamos flujos con n8n o Make que unen WhatsApp, CRM, email, formularios, Google Sheets, bases de datos y sistemas internos. Cuando el proceso necesita interpretar mensajes o documentos, sumamos modelos de IA; cuando solo necesita reglas claras, usamos automatización tradicional, que suele ser más predecible y económica.
 
-Integramos modelos de IA de OpenAI y Google para que tu negocio pueda ofrecer atención personalizada, generar contenido, analizar datos y tomar decisiones basadas en inteligencia artificial.`,
+La automatización no reemplaza el criterio de tu equipo. Diseñamos alertas, aprobaciones y derivación a una persona para los casos sensibles. Entregamos documentación, capacitación y seguimiento para que el flujo siga funcionando cuando cambie una herramienta o aparezca una excepción nueva.`,
     features: [
       'Chatbots inteligentes para WhatsApp Business',
       'Bots de atención para Instagram DM',
@@ -253,14 +253,39 @@ Integramos modelos de IA de OpenAI y Google para que tu negocio pueda ofrecer at
       'Conexión de CRM + email + WhatsApp',
       'Reportes y analytics automatizados'
     ],
+    useCases: [
+      { title: 'Ventas y seguimiento', text: 'Captura leads de formularios o WhatsApp, los califica, los guarda en el CRM y avisa al vendedor indicado para que ninguna consulta quede olvidada.' },
+      { title: 'Atención por WhatsApp', text: 'Responde preguntas frecuentes, consulta información real, agenda turnos y deriva a una persona cuando hay una excepción o una oportunidad lista para cerrar.' },
+      { title: 'Administración', text: 'Pasa datos entre planillas y sistemas, procesa documentos, genera comprobantes y envía recordatorios sin copiar y pegar información.' },
+      { title: 'Operaciones', text: 'Conecta pedidos, inventario, agenda, estados de trabajo y notificaciones para que cada cambio active automáticamente el siguiente paso.' },
+      { title: 'Reportes y control', text: 'Consolida datos de distintas fuentes y entrega reportes periódicos con alertas cuando un indicador sale del rango esperado.' },
+      { title: 'Agentes de IA internos', text: 'Permite consultar procedimientos, documentos o bases de conocimiento y ejecutar acciones permitidas con trazabilidad y límites claros.' },
+    ],
+    process: [
+      { title: 'Diagnóstico', text: 'Elegimos una tarea frecuente, medimos volumen, tiempo, errores y costo actual.' },
+      { title: 'Diseño del flujo', text: 'Definimos reglas, datos, integraciones, excepciones y puntos de aprobación humana.' },
+      { title: 'Implementación', text: 'Construimos el flujo y conectamos las herramientas que tu empresa ya utiliza.' },
+      { title: 'Prueba en paralelo', text: 'Comparamos la automatización con el proceso manual antes de delegarle tareas reales.' },
+      { title: 'Medición y mejora', text: 'Revisamos horas liberadas, errores, tiempos de respuesta y oportunidades generadas.' },
+    ],
     technologies: ['OpenAI API', 'Make (Integromat)', 'n8n', 'WhatsApp API', 'Python', 'Node.js'],
     faqs: [
-      { question: '¿Qué es un chatbot para WhatsApp y cómo me ayuda?', answer: 'Un chatbot para WhatsApp es un sistema automatizado que responde mensajes de tus clientes 24/7. Puede responder preguntas frecuentes, mostrar catálogos, tomar pedidos, agendar citas y derivar consultas complejas a un humano. Esto te ahorra horas de trabajo diario.' },
-      { question: '¿Necesito conocimientos técnicos para usar las automatizaciones?', answer: 'No, nosotros configuramos todo por vos. Las automatizaciones funcionan en segundo plano sin que tengas que hacer nada. Además, te capacitamos para que puedas hacer ajustes básicos si lo necesitás.' },
-      { question: '¿Cuánto puedo ahorrar con automatizaciones?', answer: 'Nuestros clientes reportan ahorros del 60-80% en tiempo dedicado a tareas repetitivas como responder consultas, enviar cotizaciones y hacer seguimiento de leads. Eso se traduce en más tiempo para hacer crecer tu negocio.' }
+      { question: '¿Qué procesos de una empresa conviene automatizar primero?', answer: 'Los mejores candidatos son tareas frecuentes, repetitivas y con reglas claras: registrar consultas, actualizar el CRM, enviar recordatorios, generar reportes, mover datos entre sistemas o confirmar turnos. En el diagnóstico medimos cuál libera más tiempo con menos riesgo.' },
+      { question: '¿Tengo que cambiar el CRM o los sistemas que ya uso?', answer: 'No necesariamente. Podemos conectar WhatsApp, email, formularios, planillas, CRM, ERP y bases de datos mediante sus APIs. Si una herramienta no permite integración, analizamos una alternativa segura antes de proponer reemplazarla.' },
+      { question: '¿Cuál es la diferencia entre un chatbot, una automatización y un agente de IA?', answer: 'Un chatbot conversa, una automatización ejecuta un flujo definido y un agente de IA interpreta contexto para decidir entre acciones permitidas. Muchos proyectos combinan los tres: la conversación recibe el pedido, el agente lo entiende y la automatización actualiza los sistemas.' },
+      { question: '¿La automatización puede derivar el caso a una persona?', answer: 'Sí. Definimos desde el inicio qué puede resolver sola y cuándo debe pedir aprobación o transferir el caso. Las excepciones, negociaciones y decisiones sensibles permanecen en manos de tu equipo.' },
+      { question: '¿Cuánto tarda implementar una automatización?', answer: 'Un flujo acotado puede estar funcionando en 1 a 3 semanas. Una integración con varios sistemas se divide en etapas. Antes de reemplazar el proceso manual hacemos pruebas en paralelo con casos normales y excepciones.' },
+      { question: '¿Cuánto cuesta automatizar un proceso empresarial?', answer: 'Un chatbot de WhatsApp con IA parte desde USD 200 por mes. Las integraciones y automatizaciones a medida se cotizan según cantidad de sistemas, volumen, reglas y nivel de soporte. El alcance, el precio y los costos de herramientas quedan por escrito antes de empezar.' },
+      { question: '¿Tienen un caso real de automatización?', answer: 'Sí. Para STL Gold Landscaping conectamos una web de servicios con una respuesta automática que recibe y califica consultas. Hoy el sistema genera unas 40 consultas calificadas y 5 clientes nuevos por mes, según los resultados reportados por el cliente.' }
     ],
     priceRange: 'Desde USD 200/mes',
-    ctaText: 'Automatizá tu negocio',
+    pricing: [
+      { name: 'Chatbot de WhatsApp con IA', desc: 'Preguntas frecuentes, calificación de consultas y derivación al equipo', price: 'Desde USD 200/mes', time: '1 a 3 semanas' },
+      { name: 'Automatización de un proceso', desc: 'Conexión entre formularios, email, planillas, CRM o sistema interno', price: 'Según alcance', time: 'Por etapas' },
+      { name: 'Agente de IA a medida', desc: 'Consulta información y ejecuta acciones permitidas con supervisión', price: 'Según alcance', time: 'Por etapas' },
+    ],
+    pricingNote: 'Primero medimos el proceso actual. La propuesta separa implementación, herramientas de terceros y soporte mensual para que sepas cuánto cuesta cada parte.',
+    ctaText: 'Analizar mi proceso',
     relatedServices: ['desarrollo-web', 'ecommerce', 'seo-marketing']
   },
 

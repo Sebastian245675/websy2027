@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { countryPageByCode, countryPages } from '../countryPages';
 import { COUNTRIES } from '../siteConfig';
+import { useLanguage } from '../LanguageContext';
 
 // Países de la franja inferior; los que tienen versión propia enlazan a ella
 const STRIP = [{ code: 'AR', name: 'Argentina' }, ...countryPages.map(({ code, name, path }) => ({ code, name, path }))];
@@ -13,11 +14,16 @@ const STRIP = [{ code: 'AR', name: 'Argentina' }, ...countryPages.map(({ code, n
 // Aviso sobre el título según el país del visitante (null = buscadores, prerender o Argentina).
 // Ocupa siempre el mismo alto para que el cambio de texto al detectar el país no mueva la página.
 const CountryPill = ({ country }) => {
+  const { currentLanguage } = useLanguage();
   const page = countryPageByCode(country);
   const other = !page && country && country !== 'AR' && COUNTRIES.find((c) => c.code === country);
-  const text = page ? page.pill
-    : other ? `Trabajamos a distancia con empresas de ${other.name}`
-    : 'Proyectos publicados en Argentina, Colombia, México y EE. UU.';
+  const text = currentLanguage === 'en'
+    ? page ? `Web development for businesses in ${page.name}`
+      : other ? `We work remotely with businesses in ${other.name}`
+      : 'Projects delivered in Argentina, Colombia, Mexico and the United States'
+    : page ? page.pill
+      : other ? `Trabajamos a distancia con empresas de ${other.name}`
+      : 'Proyectos publicados en Argentina, Colombia, México y EE. UU.';
   return (
     <Link
       to={page ? page.path : '/casos-de-exito'}
@@ -31,24 +37,27 @@ const CountryPill = ({ country }) => {
 };
 
 export const HeroSection = ({ country = null }) => {
+  const { currentLanguage, t } = useLanguage();
   const navigate = useNavigate();
   // El país del visitante va primero en la franja
   const strip = [...STRIP].sort((a, b) => (b.code === country) - (a.code === country));
 
+  const automationLabels = t('hero.automationLabels');
+  const productLabels = t('hero.productLabels');
   const colUpItems = [
-    { label: 'Auto. WhatsApp', icon: MessageSquare, badge: 'IA 24/7' },
-    { label: 'Bots Instagram', icon: Instagram, badge: 'Auto' },
-    { label: 'Flujos Make/n8n', icon: Zap, badge: 'Flows' },
-    { label: 'Modelos GPT', icon: Bot, badge: 'AI Engine' },
-    { label: 'Agentes IA', icon: Cpu, badge: 'Agentes' },
+    { label: automationLabels[0], icon: MessageSquare, badge: 'AI 24/7' },
+    { label: automationLabels[1], icon: Instagram, badge: 'Auto' },
+    { label: automationLabels[2], icon: Zap, badge: 'Flows' },
+    { label: automationLabels[3], icon: Bot, badge: 'AI Engine' },
+    { label: automationLabels[4], icon: Cpu, badge: 'AI' },
   ];
 
   const colDownItems = [
-    { label: 'Webs & Landings', icon: Globe, badge: 'Top Design' },
-    { label: 'Tiendas online', icon: ShoppingBag, badge: 'Ventas' },
-    { label: 'Apps Android/iOS', icon: Smartphone, badge: 'Mobile' },
-    { label: 'SEO en Google', icon: TrendingUp, badge: 'Tráfico' },
-    { label: 'ERP / CRM', icon: Database, badge: 'A Medida' },
+    { label: productLabels[0], icon: Globe, badge: 'Top Design' },
+    { label: productLabels[1], icon: ShoppingBag, badge: currentLanguage === 'en' ? 'Sales' : 'Ventas' },
+    { label: productLabels[2], icon: Smartphone, badge: 'Mobile' },
+    { label: productLabels[3], icon: TrendingUp, badge: currentLanguage === 'en' ? 'Traffic' : 'Tráfico' },
+    { label: productLabels[4], icon: Database, badge: currentLanguage === 'en' ? 'Custom' : 'A Medida' },
   ];
 
   return (
@@ -88,20 +97,20 @@ export const HeroSection = ({ country = null }) => {
       <div className="container mx-auto px-4 relative z-20 text-center flex flex-col items-center justify-center max-w-5xl">
         <CountryPill country={country} />
         <div aria-hidden="true" className="font-brand-bold text-7xl sm:text-9xl lg:text-[160px] font-black text-white leading-none tracking-tight uppercase drop-shadow-2xl">WEBSY</div>
-        <p aria-hidden="true" className="font-cursive text-4xl sm:text-6xl lg:text-7xl text-[#d9fb06] -mt-2 sm:-mt-6 lg:-mt-10 mb-6 sm:mb-8 font-normal tracking-wide drop-shadow-lg rotate-[-2deg]">desarrollo & tecnología</p>
-        <h1 className="max-w-[44rem] text-3xl sm:text-5xl lg:text-[3.4rem] font-black text-white leading-[1.08] tracking-tight mb-4">Webs y sistemas que le traen clientes a tu empresa</h1>
-        <p className="mb-6 text-xs sm:text-sm font-bold uppercase tracking-[0.14em] text-[#d9fb06]">Agencia de desarrollo web y automatización con IA en Argentina y México</p>
-        <p className="max-w-3xl text-base sm:text-xl text-gray-100 font-medium leading-relaxed mb-10 opacity-95">Tu web la diseña un equipo técnico y la piensa un contador: medimos ventas, no entregables. Páginas web, tiendas online y automatizaciones para que tus visitas se conviertan en clientes.</p>
+        <p aria-hidden="true" className="font-cursive text-4xl sm:text-6xl lg:text-7xl text-[#d9fb06] -mt-2 sm:-mt-6 lg:-mt-10 mb-6 sm:mb-8 font-normal tracking-wide drop-shadow-lg rotate-[-2deg]">{t('hero.brandTagline')}</p>
+        <h1 className="max-w-[44rem] text-3xl sm:text-5xl lg:text-[3.4rem] font-black text-white leading-[1.08] tracking-tight mb-4">{t('hero.title')}</h1>
+        <p className="mb-6 text-xs sm:text-sm font-bold uppercase tracking-[0.14em] text-[#d9fb06]">{t('hero.eyebrow')}</p>
+        <p className="max-w-3xl text-base sm:text-xl text-gray-100 font-medium leading-relaxed mb-10 opacity-95">{t('hero.description')}</p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
-          <button onClick={() => navigate('/cotizador')} className="w-full sm:w-auto bg-[#d9fb06] hover:bg-white text-[#182A2C] font-black px-8 py-4 text-xs sm:text-sm uppercase tracking-[0.15em] transition-all duration-300 shadow-2xl hover:scale-105 flex items-center justify-center gap-3 group"><span>¿Cuánto cuesta mi web?</span><ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" /></button>
-          <button onClick={() => navigate('/auditoria-gratis')} className="w-full sm:w-auto bg-black/50 hover:bg-black/80 text-white font-black px-8 py-3.5 text-xs sm:text-sm border border-[#d9fb06]/60 hover:border-[#d9fb06] backdrop-blur-md transition-all duration-300 hover:scale-105 flex flex-col items-center justify-center group"><div className="flex items-center gap-2 uppercase tracking-[0.15em] text-white group-hover:text-[#d9fb06] transition-colors"><Sparkles size={16} className="text-[#d9fb06]" /><span>Auditoría Web Gratuita</span></div><span className="text-[11px] font-medium text-gray-300 normal-case tracking-normal opacity-90 mt-0.5">3 mejoras concretas por WhatsApp</span></button>
+          <button onClick={() => navigate('/cotizador')} className="w-full sm:w-auto bg-[#d9fb06] hover:bg-white text-[#182A2C] font-black px-8 py-4 text-xs sm:text-sm uppercase tracking-[0.15em] transition-all duration-300 shadow-2xl hover:scale-105 flex items-center justify-center gap-3 group"><span>{t('hero.quoteCta')}</span><ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" /></button>
+          <button onClick={() => navigate('/auditoria-gratis')} className="w-full sm:w-auto bg-black/50 hover:bg-black/80 text-white font-black px-8 py-3.5 text-xs sm:text-sm border border-[#d9fb06]/60 hover:border-[#d9fb06] backdrop-blur-md transition-all duration-300 hover:scale-105 flex flex-col items-center justify-center group"><div className="flex items-center gap-2 uppercase tracking-[0.15em] text-white group-hover:text-[#d9fb06] transition-colors"><Sparkles size={16} className="text-[#d9fb06]" /><span>{t('hero.auditCta')}</span></div><span className="text-[11px] font-medium text-gray-300 normal-case tracking-normal opacity-90 mt-0.5">{t('hero.auditDetail')}</span></button>
         </div>
         <div className="mt-16 pt-8 border-t border-white/10 flex flex-wrap items-center justify-center gap-6 text-[10px] sm:text-xs font-black uppercase tracking-[0.2em] text-white/70">
           {strip.map((c, i) => (
             <React.Fragment key={c.code}>
               {i > 0 && <span aria-hidden="true">•</span>}
               {c.path
-                ? <Link to={c.path} className={`hover:text-[#d9fb06] transition-colors ${c.code === country ? 'text-[#d9fb06]' : ''}`}>{c.name}</Link>
+                ? <Link to={c.path} className={`hover:text-[#d9fb06] transition-colors ${c.code === country ? 'text-[#d9fb06]' : ''}`}>{currentLanguage === 'en' && c.code === 'MX' ? 'Mexico' : currentLanguage === 'en' && c.code === 'US' ? 'United States' : c.name}</Link>
                 : <span className={c.code === country ? 'text-[#d9fb06]' : ''}>{c.name}</span>}
             </React.Fragment>
           ))}

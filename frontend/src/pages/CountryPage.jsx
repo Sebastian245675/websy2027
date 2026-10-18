@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Check, ChevronRight, Clock, CreditCard, Globe, MessageCircle, ShoppingBag } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
@@ -8,18 +8,20 @@ import { CaseCard } from '../components/CaseStudyParts';
 import { caseStudies } from '../caseStudies';
 import { getPostBySlug } from '../blogData';
 import { COUNTRY_ALTERNATES, countryPageByCode, countryPages } from '../countryPages';
+import { cityPages } from '../cityPages';
 import { whatsappUrl } from '../siteConfig';
 import { saveCountry } from '../lib/geo';
+import { formatPrice, getMarket, localAmount, PLAN_PRICES, pricingNote } from '../pricing';
 
 // Versión del sitio para un país (/colombia, /mexico, /estados-unidos). El contenido está en src/countryPages.js.
 
 const SITE_URL = 'https://www.websysrl.com';
 
 const SERVICES = [
-  { name: 'Landing page', desc: 'Una página para un servicio o una campaña, con WhatsApp y formulario.', price: 'Desde USD 800', time: '5 a 7 días hábiles', to: '/servicios/desarrollo-web' },
-  { name: 'Sitio institucional', desc: 'Varias páginas: servicios, empresa, casos, contacto y blog.', price: 'Desde USD 800', time: '2 a 3 semanas', to: '/servicios/desarrollo-web' },
-  { name: 'Tienda en línea', desc: 'Catálogo, carrito, pagos, envíos y panel para cargar productos.', price: 'USD 1.800 a 3.500', time: '3 a 6 semanas', to: '/servicios/ecommerce' },
-  { name: 'Sistema de gestión', desc: 'Inventario, ventas, sucursales, turnos o clientes en un solo sistema.', price: 'USD 4.000 a 8.000', time: 'Por etapas', to: '/servicios/sistemas-gestion' },
+  { name: 'Landing page', desc: 'Una página para un servicio o una campaña, con WhatsApp y formulario.', price: PLAN_PRICES.estandar, time: '5 a 7 días hábiles', to: '/servicios/desarrollo-web' },
+  { name: 'Sitio institucional', desc: 'Varias páginas: servicios, empresa, casos, contacto y blog.', price: PLAN_PRICES.estandar, time: '2 a 3 semanas', to: '/servicios/desarrollo-web' },
+  { name: 'Tienda en línea', desc: 'Catálogo, carrito, pagos, envíos y panel para cargar productos.', price: PLAN_PRICES.comercio, time: '3 a 6 semanas', to: '/servicios/ecommerce' },
+  { name: 'Sistema de gestión', desc: 'Inventario, ventas, sucursales, turnos o clientes en un solo sistema.', price: PLAN_PRICES.pymes, time: 'Por etapas', to: '/servicios/sistemas-gestion' },
   { name: 'Automatización con IA', desc: 'Respuestas automáticas por WhatsApp, calificación de prospectos, reportes.', price: 'Según alcance', time: 'Según alcance', to: '/servicios/automatizaciones-ia' },
 ];
 
@@ -66,7 +68,15 @@ const pageJsonLd = (page, url) => ({
         itemListElement: SERVICES.map((s) => ({
           '@type': 'Offer',
           itemOffered: { '@type': 'Service', name: s.name, description: s.desc },
-          description: `${s.price} · ${s.time}`,
+          ...(typeof s.price === 'object' ? {
+            priceSpecification: {
+              '@type': 'PriceSpecification',
+              priceCurrency: getMarket(page.code).currency,
+              minPrice: String(localAmount(s.price.min, page.code)),
+              ...(s.price.max ? { maxPrice: String(localAmount(s.price.max, page.code)) } : {}),
+            },
+          } : {}),
+          description: `${typeof s.price === 'object' ? formatPrice(s.price, page.code) : s.price} · ${s.time}`,
         })),
       },
     },
@@ -83,6 +93,11 @@ export const CountryPage = ({ code }) => {
   const cases = caseStudies.filter((c) => c.location.includes(page.caseMatch));
   const posts = page.posts.map(getPostBySlug).filter(Boolean);
   const others = countryPages.filter((c) => c.code !== code);
+  const cities = cityPages.filter((c) => c.country.code === code);
+
+  // Entrar directamente a /colombia, /mexico o /estados-unidos también fija el mercado
+  // para que /planes conserve la moneda correcta durante el resto de la visita.
+  useEffect(() => saveCountry(code), [code]);
 
 
   const WhatsAppCta = ({ dark = false }) => (
@@ -158,6 +173,10 @@ export const CountryPage = ({ code }) => {
           <div className="max-w-3xl text-[17px] text-slate-700 leading-relaxed space-y-5">
             <p><strong className="text-[#182A2C]">{page.answer[0]}</strong></p>
             {page.answer.slice(1).map((p) => <p key={p.slice(0, 40)}>{p}</p>)}
+            <p>
+              Conoce en detalle nuestro <Link to="/servicios/desarrollo-web" className={linkCls}>servicio de desarrollo web profesional</Link>,
+              {' '}los entregables y los plazos de cada tipo de proyecto.
+            </p>
           </div>
         </div>
       </section>
@@ -175,6 +194,19 @@ export const CountryPage = ({ code }) => {
             <p className="mt-8 text-[15px] text-slate-600">
               También trabajamos con empresas de Argentina y del resto de Latinoamérica. Mira todos los <Link to="/casos-de-exito" className={linkCls}>casos de éxito</Link>.
             </p>
+            {cities.length > 0 && (
+              <div className="mt-8 grid md:grid-cols-2 gap-6">
+                {cities.map((c) => (
+                  <div key={c.slug} className="rounded-2xl border border-[#182A2C]/15 bg-white p-6 flex flex-col">
+                    <h3 className="text-xl font-extrabold text-[#182A2C]">¿Tu empresa está en {c.name}?</h3>
+                    <p className="mt-2 text-[15px] leading-relaxed text-slate-600 flex-1">{c.teaser}</p>
+                    <Link to={c.path} className="mt-4 inline-flex items-center gap-2 font-bold text-[#182A2C] underline decoration-[#d9fb06] decoration-2 underline-offset-4">
+                      {c.breadcrumb} <ArrowRight size={16} />
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </section>
       )}
@@ -182,7 +214,7 @@ export const CountryPage = ({ code }) => {
       {/* Precios */}
       <section id="precios" className="py-14 md:py-20" style={{ scrollMarginTop: '120px' }}>
         <div className="container mx-auto px-5 lg:px-8 max-w-7xl">
-          <SectionTitle kicker="Precios en dólares">Cuánto cuesta una página web desde {page.name}</SectionTitle>
+          <SectionTitle kicker={`Precios en ${getMarket(code).currency}`}>Cuánto cuesta una página web en {page.name}</SectionTitle>
           <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white">
             <table className="w-full text-left text-[15px]">
               <thead className="bg-[#182A2C] text-white">
@@ -201,17 +233,18 @@ export const CountryPage = ({ code }) => {
                       <p className="md:hidden mt-1 text-sm text-slate-500">{s.desc}</p>
                     </td>
                     <td className="px-5 py-4 text-slate-600 hidden md:table-cell">{s.desc}</td>
-                    <td className="px-5 py-4 font-semibold text-[#182A2C] whitespace-nowrap">{s.price}</td>
+                    <td className="px-5 py-4 font-semibold text-[#182A2C] whitespace-nowrap">{typeof s.price === 'object' ? formatPrice(s.price, code) : s.price}</td>
                     <td className="px-5 py-4 text-slate-600 whitespace-nowrap">{s.time}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
+          <p className="mt-4 text-sm text-slate-500">{pricingNote(code)}</p>
           <div className="mt-8 grid md:grid-cols-2 gap-6 text-[15px] text-slate-700 leading-relaxed">
             <div className="rounded-2xl bg-[#f4f7f9] p-6">
               <h3 className="flex items-center gap-2 text-lg font-bold text-[#182A2C] mb-2"><CreditCard size={18} /> Cómo se paga</h3>
-              <p>{page.payment} El detalle de cada plan está en <Link to="/planes" className={linkCls}>planes</Link>.</p>
+              <p>{page.payment} El detalle de cada plan está en <Link to="/planes" onClick={() => saveCountry(code)} className={linkCls}>planes y precios de desarrollo web</Link>.</p>
             </div>
             <div className="rounded-2xl bg-[#f4f7f9] p-6">
               <h3 className="flex items-center gap-2 text-lg font-bold text-[#182A2C] mb-2"><ShoppingBag size={18} /> Cobrar en tu tienda</h3>
@@ -238,6 +271,21 @@ export const CountryPage = ({ code }) => {
           </div>
         </div>
       </section>
+
+      {(code === 'CO' || code === 'MX') && (
+        <section className="bg-[#182A2C] py-12 md:py-16 text-white">
+          <div className="container mx-auto px-5 lg:px-8 max-w-7xl flex flex-col lg:flex-row lg:items-center lg:justify-between gap-7">
+            <div className="max-w-3xl">
+              <p className="text-xs font-black uppercase tracking-[.18em] text-[#d9fb06]">Automatización para empresas</p>
+              <h2 className="mt-3 text-2xl md:text-3xl font-black">Conecta WhatsApp, CRM, email y tus sistemas</h2>
+              <p className="mt-3 text-white/70 leading-relaxed">Eliminamos tareas repetitivas en ventas, atención, administración y operaciones con flujos medibles y supervisión humana.</p>
+            </div>
+            <Link to={`${page.path}/automatizacion-procesos`} className="shrink-0 inline-flex items-center gap-2 rounded-full bg-[#d9fb06] px-6 py-3.5 font-bold text-[#182A2C] hover:bg-white transition-colors">
+              Automatización de procesos en {page.name} <ArrowRight size={16} />
+            </Link>
+          </div>
+        </section>
+      )}
 
       {/* Proceso + formulario */}
       <section className="py-14 md:py-20">
