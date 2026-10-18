@@ -27,7 +27,9 @@ services:
         condition: service_healthy
     env_file: .env
     environment:
-      DATABASE_URL: postgres://websy:${POSTGRES_PASSWORD}@db:5432/websy
+      # Por el nombre del contenedor, no "db": la API también está en la red del proxy, donde otra app
+      # (inmobiliaria) tiene su propio servicio "db" y el nombre corto resolvía a esa base
+      DATABASE_URL: postgres://websy:${POSTGRES_PASSWORD}@websysrl_leads_db:5432/websy
       PORT: "4100"
     networks: [internal, proxy]
 
