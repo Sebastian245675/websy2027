@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { saveCotizacion, sendCotizacionEmail } from '../firebase';
+import { saveLead } from '../lib/api';
 import { trackFormSubmit } from '../lib/tracking';
 import { BUDGET_RANGES, CONTACT, CONTACT_PHOTO, COUNTRIES, PROJECT_NEEDS, whatsappUrl } from '../siteConfig';
 import useVisitorCountry from '../hooks/useVisitorCountry';
@@ -30,7 +30,7 @@ export const ContactSection = () => {
     const phone = formData.phone ? `${dial} ${formData.phone}`.trim() : '';
     const message = `Necesita: ${formData.need} · Presupuesto aproximado: ${formData.budget} · Página: ${window.location.pathname}`;
     try {
-      const docId = await saveCotizacion({
+      await saveLead({
         name: formData.name,
         phone,
         email: '',
@@ -40,39 +40,6 @@ export const ContactSection = () => {
         source: 'contacto_rapido',
         country: (COUNTRIES.find((c) => c.code === formData.country) || COUNTRIES[0]).name,
       });
-
-      try {
-        // La función de aviso (functions/index.js) exige email: el formulario ya no lo pide, va el WhatsApp
-        await sendCotizacionEmail({
-          cotizacionId: docId,
-          name: formData.name,
-          phone,
-          email: `Sin email · WhatsApp ${phone}`,
-          projectType: formData.need,
-          budget: formData.budget,
-          message
-        });
-      } catch (fnErr) {
-        console.error('Failed to send email notification:', fnErr);
-      }
-
-      // ENVIAR A CRM WEBSY
-      try {
-        await fetch('https://backend.websysrl.com/api/public/forms/websy-contacto-landing/submissions', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            formData: {
-              name: formData.name,
-              email: '',
-              phone,
-              message
-            }
-          })
-        });
-      } catch (crmErr) {
-        console.error('Failed to send to CRM:', crmErr);
-      }
 
       trackFormSubmit('contacto_rapido');
       setSent({ name: formData.name.split(' ')[0], need: formData.need, budget: formData.budget });

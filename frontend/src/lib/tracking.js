@@ -8,6 +8,7 @@
 //   envio_formulario_auditoria   · envío del formulario de auditoría
 
 import { whatsappUrl } from '../siteConfig';
+import { logWhatsAppClick } from './api';
 
 const gaEvent = (name, params) => {
   if (window.gtag) window.gtag('event', name, params);
@@ -21,33 +22,7 @@ const tiktokTrack = (event, params) => {
   if (window.ttq) window.ttq.track(event, params);
 };
 
-// Cada clic a WhatsApp queda en Firestore (colección whatsapp_clicks) para verlo en el panel (/panel) junto
-// a los formularios. Va por la API REST con keepalive para no cargar el SDK de Firebase ni frenar la apertura
-// de WhatsApp. Las reglas de Firestore permiten crear estos documentos pero solo leerlos con sesión de admin.
-const FIRESTORE_REST = 'https://firestore.googleapis.com/v1/projects/multinivel-c0bcd/databases/(default)/documents';
-const FIREBASE_WEB_KEY = 'AIzaSyAX0_2aSXzeFGDX732mNBKYTnsIzqvHDI4';
-const logWhatsAppClick = (location) => {
-  if (typeof window === 'undefined' || navigator.userAgent.includes('ReactSnap') || window.location.hostname === 'localhost') return;
-  const str = (v) => ({ stringValue: String(v || '').slice(0, 300) });
-  try {
-    fetch(`${FIRESTORE_REST}/whatsapp_clicks?key=${FIREBASE_WEB_KEY}`, {
-      method: 'POST',
-      keepalive: true,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        fields: {
-          location: str(location),
-          page: str(window.location.pathname),
-          referrer: str(document.referrer),
-          createdAt: { timestampValue: new Date().toISOString() },
-        },
-      }),
-    }).catch(() => {});
-  } catch {
-    // El registro nunca debe impedir que se abra WhatsApp
-  }
-};
-
+// Cada clic a WhatsApp queda en PostgreSQL (leads-api) para verlo en el panel (/panel) junto a los formularios
 export const trackWhatsAppClick = (location) => {
   logWhatsAppClick(location);
   gaEvent('click_whatsapp', { link_location: location });

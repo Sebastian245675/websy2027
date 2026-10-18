@@ -4,7 +4,7 @@ import { companyInfo } from '../mockData';
 import { useLanguage } from '../LanguageContext';
 import { SEOHead } from '../components/SEOHead';
 // Use lazy Firebase loader - only loads Firebase when form is submitted
-import { saveCotizacion, sendCotizacionEmail } from '../firebaseLazy';
+import { saveLead } from '../lib/api';
 import { AuditForm } from '../components/AuditForm';
 import { trackFormSubmit } from '../lib/tracking';
 import { BUDGET_RANGES, COUNTRIES, PROJECT_NEEDS, whatsappUrl } from '../siteConfig';
@@ -122,7 +122,7 @@ export const ContactPage = () => {
     ].filter(Boolean).join('\n');
 
     try {
-      const docId = await saveCotizacion({
+      await saveLead({
         name: formData.name,
         phone,
         email: '',
@@ -132,39 +132,6 @@ export const ContactPage = () => {
         country: (COUNTRIES.find((c) => c.code === formData.country) || COUNTRIES[0]).name,
         message
       });
-
-      try {
-        // La función de aviso (functions/index.js) exige email: el formulario ya no lo pide, va el WhatsApp
-        await sendCotizacionEmail({
-          cotizacionId: docId,
-          name: formData.name,
-          email: `Sin email · WhatsApp ${phone}`,
-          projectType: formData.projectType,
-          budget: formData.budget,
-          message
-        });
-      } catch (fnErr) {
-        console.error('Failed to call sendCotizacionEmail function:', fnErr);
-      }
-
-      // ENVIAR A CRM WEBSY
-      try {
-        await fetch('https://backend.websysrl.com/api/public/forms/websy-contacto-landing/submissions', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            formData: {
-              name: formData.name,
-              phone,
-              projectType: formData.projectType,
-              budget: formData.budget,
-              message
-            }
-          })
-        });
-      } catch (crmErr) {
-        console.error('Failed to send to CRM:', crmErr);
-      }
 
       trackFormSubmit('contacto');
       setSent({ name: formData.name.split(' ')[0], need: formData.projectType, budget: formData.budget });

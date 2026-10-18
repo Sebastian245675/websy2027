@@ -11,6 +11,7 @@ const stamp = new Date().toISOString().replace(/[-:TZ.]/g, '').slice(0, 14);
 const release = `websy-${stamp}`;
 // Rutas relativas a ROOT (cwd de cada comando): en Windows, tar y scp leen "C:\..." como host remoto "C"
 const archive = `${release}.tar`;
+const leadsArchive = `${release}-leads-api.tar`;
 
 const run = (command, args) => {
   const result = spawnSync(command, args, { cwd: ROOT, stdio: 'inherit', shell: false });
@@ -19,9 +20,12 @@ const run = (command, args) => {
 
 run('node', [path.join('scripts', 'verify-build.js')]);
 run('tar', ['-cf', archive, '-C', 'build', '.']);
+// API de consultas (../leads-api): código sin node_modules ni .env (el .env vive solo en el servidor)
+run('tar', ['-cf', leadsArchive, '--exclude=node_modules', '--exclude=.env', '--exclude=test', '-C', path.join('..', 'leads-api'), '.']);
 try {
   run('scp', [
     archive,
+    leadsArchive,
     'deploy/nginx-site.conf',
     'deploy/websysrl-redirects.conf',
     'deploy/websysrl-proxy.conf',
@@ -50,6 +54,12 @@ while IFS= read -r url; do
   actual=$((actual + 1))
 done < <(sed -n 's:.*<loc>\\(.*\\)</loc>.*:\\1:p' "$target/sitemap.xml")
 test "$actual" -eq "$expected"
+# API de consultas antes que el sitio: los formularios nuevos le escriben, así que si no queda sana el
+# deploy se corta acá sin haber tocado nada de lo que está en vivo
+if tar -tf "releases/${release}-leads-api.tar" | grep -Eq '(^/|(^|/)\\.\\.(/|$))'; then echo unsafe_archive; exit 1; fi
+mkdir -p leads-api
+tar -xf "releases/${release}-leads-api.tar" -C leads-api
+bash leads-api/deploy/install.sh
 # Conserva los JS/CSS del release en vivo: quien tenga abierta (o en caché) la versión anterior sigue
 # pidiendo sus chunks con hash viejo, y sin ellos la página se rompe a mitad de carga
 cp -r --update=none site/static/. "$target/static/"
@@ -78,4 +88,5 @@ echo "DEPLOY_OK release=$release sitemap_urls=$expected"`;
   run('ssh', [SERVER, `printf '%s' '${payload}' | base64 -d | bash`]);
 } finally {
   fs.rmSync(path.join(ROOT, archive), { force: true });
+  fs.rmSync(path.join(ROOT, leadsArchive), { force: true });
 }

@@ -1,0 +1,41 @@
+# Consultas de websysrl.com: PostgreSQL + API. Los dos contenedores se unen a la red del proxy nginx
+# (la misma de websysrl_site) para que el proxy llegue a la API como websysrl_leads_api:4100.
+# PostgreSQL no publica puertos: solo lo ve la API.
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: websysrl_leads_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: websy
+      POSTGRES_USER: websy
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Falta POSTGRES_PASSWORD en .env}
+    volumes:
+      - websy_leads_pg:/var/lib/postgresql/data
+    networks: [internal]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U websy -d websy"]
+      interval: 5s
+      retries: 20
+
+  api:
+    build: .
+    container_name: websysrl_leads_api
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://websy:${POSTGRES_PASSWORD}@db:5432/websy
+      PORT: "4100"
+    networks: [internal, proxy]
+
+volumes:
+  websy_leads_pg:
+
+networks:
+  internal:
+  proxy:
+    external: true
+    name: ${PROXY_NETWORK:?Falta PROXY_NETWORK en .env (red del contenedor websysrl_site)}

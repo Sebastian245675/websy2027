@@ -1,11 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Download, LogOut, MessageCircle, Search, Trash2 } from 'lucide-react';
-import { deleteCotizacion, subscribeLeads, subscribeWhatsappClicks, updateCotizacion } from '../firebaseLazy';
-import { adminSignIn, adminSignOut, onAdminAuth } from '../panelAuth';
+import { Download, LogOut, MessageCircle, RefreshCw, Search, Trash2 } from 'lucide-react';
+import { panel } from '../lib/api';
 
-// Panel de consultas (/panel): todos los formularios del sitio (colección cotizaciones) y los clics a
-// WhatsApp (colección whatsapp_clicks), con estado, notas y la meta de 10 reuniones por semana.
-// Solo funciona con sesión de Firebase Auth de un correo autorizado en firestore.rules.
+// Panel de consultas (/panel): todos los formularios del sitio y los clics a WhatsApp, guardados en
+// PostgreSQL por leads-api, con estado, notas y la meta de 10 reuniones por semana. Entra con la
+// contraseña PANEL_PASSWORD del .env de leads-api; la sesión es una cookie HttpOnly de 7 días.
+
+const REFRESH_MS = 30000;
 
 const STATUSES = [
   { id: 'nuevo', label: 'Nuevo', cls: 'bg-[#d9fb06] text-[#182A2C]' },
@@ -22,13 +23,14 @@ const SOURCE_LABELS = {
   contacto: 'Página de contacto',
   contacto_rapido: 'Contacto rápido (inicio)',
   cotizador: 'Cotizador',
-  auditoria: 'Auditoría gratis',
+  auditoria: 'Auditoría gratis (página de contacto)',
+  auditoria_pagina: 'Auditoría gratis',
   formulario: 'Formulario',
 };
-const sourceLabel = (s) => SOURCE_LABELS[s] || (s && s.startsWith('pais_') ? `Auditoría · página ${s.slice(5).toUpperCase()}` : s && s.startsWith('landing_') ? `Landing ${s.slice(8)}` : s || 'Formulario');
+const sourceLabel = (s) => SOURCE_LABELS[s] || (s && s.startsWith('pais_') ? `Auditoría gratis · página ${s.slice(5).toUpperCase()}` : s && s.startsWith('landing_') ? `Landing ${s.slice(8)}` : s || 'Formulario');
 
 const META_REUNIONES = 10;
-const toDate = (ts) => (!ts ? null : ts.toDate ? ts.toDate() : new Date(ts));
+const toDate = (ts) => (ts ? new Date(ts) : null);
 const fmt = (d) => (d ? d.toLocaleString('es-AR', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' }) : '—');
 // Lunes 00:00 de la semana actual
 const weekStart = () => {
@@ -57,8 +59,7 @@ const downloadCsv = (leads) => {
   URL.revokeObjectURL(a.href);
 };
 
-const Login = () => {
-  const [email, setEmail] = useState('');
+const Login = ({ onLogin }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
@@ -68,9 +69,11 @@ const Login = () => {
     setBusy(true);
     setError('');
     try {
-      await adminSignIn(email, password);
+      await panel.login(password);
+      onLogin();
     } catch (err) {
-      setError(err.code === 'auth/too-many-requests' ? 'Demasiados intentos. Espera unos minutos.' : 'Correo o contraseña incorrectos.');
+      setError(err.status === 401 ? 'Contraseña incorrecta.' : err.message);
+      setPassword('');
     }
     setBusy(false);
   };
@@ -79,9 +82,7 @@ const Login = () => {
     <div className="min-h-screen bg-[#182A2C] flex items-center justify-center p-5">
       <form onSubmit={submit} className="w-full max-w-sm rounded-2xl bg-white p-8 space-y-4">
         <h1 className="text-2xl font-black text-[#182A2C]">Panel de consultas</h1>
-        <p className="text-sm text-slate-500">Ingresa con tu cuenta de administrador de Websy.</p>
-        <input type="email" required autoComplete="username" placeholder="Correo" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full rounded-lg border border-slate-300 px-4 py-3" />
-        <input type="password" required autoComplete="current-password" placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full rounded-lg border border-slate-300 px-4 py-3" />
+        <input type="password" required autoFocus autoComplete="current-password" placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full rounded-lg border border-slate-300 px-4 py-3" />
         {error && <p className="text-sm font-semibold text-red-600">{error}</p>}
         <button disabled={busy} className="w-full rounded-full bg-[#d9fb06] py-3 font-bold text-[#182A2C] disabled:opacity-60">{busy ? 'Ingresando…' : 'Ingresar'}</button>
       </form>
@@ -97,15 +98,19 @@ const Stat = ({ label, value, sub, highlight }) => (
   </div>
 );
 
-const LeadRow = ({ lead }) => {
+const LeadRow = ({ lead, onChange, onDelete }) => {
   const [open, setOpen] = useState(false);
   const [note, setNote] = useState(lead.note || '');
   const status = statusOf(lead.status);
   const wa = waLink(lead);
 
-  const setStatus = (id) => updateCotizacion(lead.id, { status: id, ...(id === 'reunion' && !lead.reunionAt ? { reunionAt: new Date() } : {}) });
-  const saveNote = () => note !== (lead.note || '') && updateCotizacion(lead.id, { note });
-  const remove = () => window.confirm(`¿Eliminar la consulta de ${lead.name || 'sin nombre'}? No se puede deshacer.`) && deleteCotizacion(lead.id);
+  const setStatus = async (status) => onChange(await panel.updateLead(lead.id, { status }));
+  const saveNote = async () => note !== (lead.note || '') && onChange(await panel.updateLead(lead.id, { note }));
+  const remove = async () => {
+    if (!window.confirm(`¿Eliminar la consulta de ${lead.name || 'sin nombre'}? No se puede deshacer.`)) return;
+    await panel.deleteLead(lead.id);
+    onDelete(lead.id);
+  };
 
   return (
     <li className="rounded-2xl border border-slate-200 bg-white p-5">
@@ -134,9 +139,9 @@ const LeadRow = ({ lead }) => {
         </div>
       </div>
       <div className="mt-3 flex flex-wrap items-center gap-4 text-sm">
-        <span className="text-slate-500">{phoneOf(lead) || 'Sin teléfono'}{lead.email && !lead.email.startsWith('Sin email') && !lead.email.startsWith('No pedido') ? ` · ${lead.email}` : ''}</span>
-        <button type="button" onClick={() => setOpen(!open)} className="font-semibold text-[#182A2C] underline">{open ? 'Ocultar detalle' : 'Ver detalle'}</button>
-        <button type="button" onClick={remove} className="ml-auto inline-flex items-center gap-1 text-red-500 hover:text-red-700"><Trash2 size={14} /> Eliminar</button>
+        <span className="text-slate-500">{phoneOf(lead) || 'Sin teléfono'}{lead.email && lead.email.includes('@') ? ` · ${lead.email}` : ''}</span>
+        <button type="button" onClick={() => setOpen(!open)} className="bg-transparent font-semibold text-[#182A2C] underline">{open ? 'Ocultar detalle' : 'Ver detalle'}</button>
+        <button type="button" onClick={remove} className="bg-transparent ml-auto inline-flex items-center gap-1 text-red-500 hover:text-red-700"><Trash2 size={14} /> Eliminar</button>
       </div>
       {open && (
         <div className="mt-4 grid md:grid-cols-2 gap-4">
@@ -154,20 +159,41 @@ const countBy = (items, key) => Object.entries(items.reduce((acc, it) => {
   return acc;
 }, {})).sort((a, b) => b[1] - a[1]);
 
-const Dashboard = ({ user }) => {
+const Dashboard = ({ onLogout }) => {
   const [leads, setLeads] = useState(null);
   const [clicks, setClicks] = useState(null);
+  const [archive, setArchive] = useState(null);
   const [error, setError] = useState('');
+  const [loadedAt, setLoadedAt] = useState(null);
   const [tab, setTab] = useState('formularios');
   const [filters, setFilters] = useState({ status: 'activos', source: '', country: '', range: '30', q: '' });
 
+  const load = async () => {
+    try {
+      const [l, c] = await Promise.all([panel.leads(), panel.whatsappClicks()]);
+      setLeads(l);
+      setClicks(c);
+      setError('');
+      setLoadedAt(new Date());
+    } catch (err) {
+      if (err.status === 401) onLogout();
+      else setError(`No se pudieron cargar los datos: ${err.message}`);
+    }
+  };
+
   useEffect(() => {
-    const onError = (err) => setError(err.code === 'permission-denied'
-      ? `Tu cuenta (${user.email}) no tiene permiso para leer las consultas. Agrégala a la lista de administradores en firestore.rules y publica las reglas.`
-      : `No se pudieron cargar los datos: ${err.message}`);
-    const unsubs = [subscribeLeads(setLeads, onError), subscribeWhatsappClicks(setClicks, () => setClicks([]))];
-    return () => unsubs.forEach((u) => u());
-  }, [user.email]);
+    load();
+    const t = setInterval(load, REFRESH_MS);
+    return () => clearInterval(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (tab === 'archivo' && !archive) panel.archive().then(setArchive).catch((err) => setError(err.message));
+  }, [tab, archive]);
+
+  const replaceLead = (updated) => setLeads((prev) => prev.map((l) => (l.id === updated.id ? updated : l)));
+  const removeLead = (id) => setLeads((prev) => prev.filter((l) => l.id !== id));
 
   const set = (k) => (e) => setFilters({ ...filters, [k]: e.target.value });
   const since = filters.range === 'todo' ? null : new Date(Date.now() - Number(filters.range) * 864e5);
@@ -183,7 +209,7 @@ const Dashboard = ({ user }) => {
     return true;
   }), [leads, filters, since]);
 
-  if (error) return <p className="m-8 rounded-xl bg-red-50 p-6 font-semibold text-red-700">{error}</p>;
+  if (error && !leads) return <p className="m-8 rounded-xl bg-red-50 p-6 font-semibold text-red-700">{error}</p>;
   if (!leads) return <p className="p-8 text-slate-500">Cargando consultas…</p>;
 
   const all = leads;
@@ -199,8 +225,8 @@ const Dashboard = ({ user }) => {
     <div className="mx-auto max-w-7xl p-5 md:p-8">
       <div className="flex flex-wrap items-center gap-4">
         <h1 className="text-3xl font-black text-[#182A2C]">Consultas</h1>
-        <span className="text-sm text-slate-500">{user.email}</span>
-        <button type="button" onClick={adminSignOut} className="ml-auto inline-flex items-center gap-1.5 text-sm font-semibold text-slate-600"><LogOut size={15} /> Salir</button>
+        <button type="button" onClick={load} className="bg-transparent inline-flex items-center gap-1.5 text-sm text-slate-500" title="Actualizar"><RefreshCw size={14} /> {loadedAt ? `Actualizado ${loadedAt.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' })}` : ''}</button>
+        <button type="button" onClick={async () => { await panel.logout().catch(() => {}); onLogout(); }} className="bg-transparent ml-auto inline-flex items-center gap-1.5 text-sm font-semibold text-slate-600"><LogOut size={15} /> Salir</button>
       </div>
 
       <div className="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -211,8 +237,8 @@ const Dashboard = ({ user }) => {
       </div>
 
       <div className="mt-8 flex gap-2 border-b border-slate-200">
-        {[['formularios', `Formularios (${all.length})`], ['whatsapp', `WhatsApp (${clicks ? clicks.length : '…'})`]].map(([id, label]) => (
-          <button key={id} type="button" onClick={() => setTab(id)} className={`-mb-px border-b-2 px-4 py-2.5 font-bold ${tab === id ? 'border-[#182A2C] text-[#182A2C]' : 'border-transparent text-slate-500'}`}>{label}</button>
+        {[['formularios', `Formularios (${all.length})`], ['whatsapp', `WhatsApp (${clicks ? clicks.length : '…'})`], ['archivo', 'Archivo']].map(([id, label]) => (
+          <button key={id} type="button" onClick={() => setTab(id)} className={`-mb-px border-b-2 bg-transparent px-4 py-2.5 font-bold ${tab === id ? 'border-[#182A2C] text-[#182A2C]' : 'border-transparent text-slate-500'}`}>{label}</button>
         ))}
       </div>
 
@@ -223,7 +249,7 @@ const Dashboard = ({ user }) => {
               <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
               <input value={filters.q} onChange={set('q')} placeholder="Buscar nombre, teléfono, texto…" className={`${selectCls} pl-9 w-64`} />
             </label>
-            <select value={filters.status} onChange={set('status')} className={selectCls} aria-label="Estado">
+            <select value={filters.status} onChange={set('status')} className={selectCls} aria-label="Filtrar por estado">
               <option value="activos">Activos (sin perdidos ni spam)</option>
               <option value="">Todos los estados</option>
               {STATUSES.map((s) => <option key={s.id} value={s.id}>{s.label}</option>)}
@@ -246,9 +272,24 @@ const Dashboard = ({ user }) => {
           </div>
           <p className="mt-3 text-sm text-slate-500">{visible.length} consulta{visible.length === 1 ? '' : 's'}</p>
           <ul className="mt-3 space-y-3">
-            {visible.map((lead) => <LeadRow key={lead.id} lead={lead} />)}
+            {visible.map((lead) => <LeadRow key={`${lead.id}-${lead.updatedAt || ''}`} lead={lead} onChange={replaceLead} onDelete={removeLead} />)}
           </ul>
         </>
+      ) : tab === 'archivo' ? (
+        <div className="mt-6 space-y-6">
+          <p className="text-sm text-slate-600">Datos que había en Firestore y que el sitio ya no usa (testimonios, novedades y analítica del panel viejo), importados tal cual.</p>
+          {!archive ? <p className="text-slate-500">Cargando…</p> : archive.collections.length === 0 ? <p className="text-slate-500">No hay datos archivados.</p> : archive.collections.map((c) => (
+            <details key={c.collection} className="rounded-2xl border border-slate-200 bg-white p-5">
+              <summary className="cursor-pointer font-black text-[#182A2C]">{c.collection} · {c.n} registros <span className="font-normal text-slate-500">({fmt(toDate(c.desde))} a {fmt(toDate(c.hasta))})</span></summary>
+              <ul className="mt-4 divide-y divide-slate-100 text-xs">
+                {archive.latest.filter((r) => r.collection === c.collection).map((r) => (
+                  <li key={r.firestore_id} className="py-2"><span className="text-slate-500">{fmt(toDate(r.created_at))}</span> <code className="break-all text-slate-700">{JSON.stringify(r.data).slice(0, 400)}</code></li>
+                ))}
+              </ul>
+              {c.n > 50 && <p className="mt-2 text-xs text-slate-500">Se muestran los 50 más recientes; el resto está completo en PostgreSQL (tabla firestore_archive).</p>}
+            </details>
+          ))}
+        </div>
       ) : (
         <div className="mt-6 grid lg:grid-cols-3 gap-6">
           <div className="rounded-2xl border border-slate-200 bg-white p-5">
@@ -282,10 +323,12 @@ const Dashboard = ({ user }) => {
 };
 
 export const LeadsPanel = () => {
-  const [user, setUser] = useState(undefined);
-  useEffect(() => onAdminAuth(setUser), []);
+  const [authed, setAuthed] = useState(null);
+  useEffect(() => {
+    panel.session().then((r) => setAuthed(r.ok)).catch(() => setAuthed(false));
+  }, []);
 
-  if (user === undefined) return <div className="min-h-screen bg-[#f4f7f9]" />;
-  if (!user) return <Login />;
-  return <div className="min-h-screen bg-[#f4f7f9]"><Dashboard user={user} /></div>;
+  if (authed === null) return <div className="min-h-screen bg-[#f4f7f9]" />;
+  if (!authed) return <Login onLogin={() => setAuthed(true)} />;
+  return <div className="min-h-screen bg-[#f4f7f9]"><Dashboard onLogout={() => setAuthed(false)} /></div>;
 };

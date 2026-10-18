@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Check, ChevronRight, MessageCircle } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
 import { FAQSection, faqSchema } from '../components/FAQSection';
-import { saveCotizacion, sendCotizacionEmail } from '../firebaseLazy';
+import { saveLead } from '../lib/api';
 import { trackFormSubmit } from '../lib/tracking';
 import { COUNTRIES, whatsappUrl } from '../siteConfig';
 
@@ -144,13 +144,7 @@ export const QuotePage = () => {
     const message = [`Cotizador: ${def.label}`, `Rango mostrado: ${result.range} (${result.time})`, ...result.summary, 'Página: /cotizador'].join('\n');
     const record = { name: contact.name.trim(), phone, whatsapp: phone, email: `Sin email · WhatsApp ${phone}`, projectType: def.label, budget: result.range, source: 'cotizador', message };
     try {
-      const docId = await saveCotizacion(record);
-      try { await sendCotizacionEmail({ cotizacionId: docId, ...record }); } catch (err) { console.error(err); }
-      try {
-        await fetch('https://backend.websysrl.com/api/public/forms/websy-contacto-landing/submissions', {
-          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ formData: record }),
-        });
-      } catch (err) { console.error(err); }
+      await saveLead(record);
       trackFormSubmit('cotizador');
       setStatus('done');
     } catch (err) {

@@ -6,7 +6,6 @@ import { ScrollToTopOnRouteChange } from "./components/ScrollToTopOnRouteChange"
 import { SEOHead } from "./components/SEOHead";
 import { SkipLinks } from "./components/Accessibility";
 import { LoadingProvider, ErrorBoundary, ToastProvider } from "./components/UXEnhancements";
-import useAdminPanel from "./hooks/useAdminPanel";
 import { installWhatsAppLinkTracking } from "./lib/tracking";
 
 // Critical path - HomePage loads eagerly for fast FCP/LCP
@@ -166,37 +165,10 @@ const WhatsAppButton = lazy(() => {
   });
 });
 
-
-const AdminLogin = lazy(() => {
-  const start = performance.now();
-  return import("./components/AdminLogin").then(module => {
-    console.log('✅ [LAZY] AdminLogin loaded in', Math.round(performance.now() - start), 'ms');
-    return module;
-  });
-});
-
-const AdminPanel = lazy(() => {
-  const start = performance.now();
-  return import("./components/AdminPanel").then(module => {
-    console.log('✅ [LAZY] AdminPanel loaded in', Math.round(performance.now() - start), 'ms');
-    return module;
-  });
-});
-
-
-
 function App() {
   const appStart = performance.now();
   console.log('⚙️ [APP] App component rendering');
 
-  const {
-    showLogin,
-    showPanel,
-    handleLogin,
-    handleLogout,
-    closeLogin,
-    closePanel
-  } = useAdminPanel();
 
   useEffect(() => installWhatsAppLinkTracking(), []);
 
@@ -378,24 +350,6 @@ function App() {
                   <ScrollToTop />
                 </Suspense>
 
-                {/* Admin System */}
-                {showLogin && (
-                  <Suspense fallback={<div>Cargando...</div>}>
-                    <AdminLogin
-                      onLogin={handleLogin}
-                      onClose={closeLogin}
-                    />
-                  </Suspense>
-                )}
-
-                {showPanel && (
-                  <Suspense fallback={<div>Cargando...</div>}>
-                    <AdminPanel
-                      onClose={closePanel}
-                      onLogout={handleLogout}
-                    />
-                  </Suspense>
-                )}
               </div>
             </Router>
           </ToastProvider>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CheckCircle2, Send } from 'lucide-react';
-import { saveCotizacion, sendCotizacionEmail } from '../firebaseLazy';
+import { saveLead } from '../lib/api';
 import { COUNTRIES, RUBROS } from '../siteConfig';
 import { trackFormSubmit } from '../lib/tracking';
 import { useLanguage } from '../LanguageContext';
@@ -79,21 +79,7 @@ export const AuditForm = ({ tone = 'vos', defaultCountry = 'AR', defaultRubro = 
     };
 
     try {
-      const docId = await saveCotizacion(record);
-      try {
-        await sendCotizacionEmail({ cotizacionId: docId, ...record });
-      } catch (fnErr) {
-        console.error('Failed to send audit email notification:', fnErr);
-      }
-      try {
-        await fetch('https://backend.websysrl.com/api/public/forms/websy-contacto-landing/submissions', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ formData: record }),
-        });
-      } catch (crmErr) {
-        console.error('Failed to send audit to CRM:', crmErr);
-      }
+      await saveLead(record);
       trackFormSubmit(source);
       setStatus('done');
     } catch (err) {

@@ -1,0 +1,2 @@
+# Se ejecuta en Linux: install.sh con CRLF falla en bash. Todo el directorio con LF.
+* text=auto eol=lf
