@@ -32,6 +32,12 @@ EOF
   echo "leads-api: .env creado (red del proxy: $net)"
 fi
 
+# Token con el que los servidores de campaña (WhatsApp, correo) mandan datos al centro de prospección
+if ! grep -q '^OUTREACH_TOKEN=' .env; then
+  ( umask 077; echo "OUTREACH_TOKEN=$(random_hex 32)" >> .env )
+  echo "leads-api: OUTREACH_TOKEN agregado a .env"
+fi
+
 docker compose up -d --build --remove-orphans
 
 for i in $(seq 1 45); do

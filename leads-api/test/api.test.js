@@ -8,6 +8,7 @@ process.env.PANEL_PASSWORD = '123456789';
 process.env.SESSION_SECRET = 'secreto-de-prueba';
 process.env.COOKIE_SECURE = 'false';
 process.env.PORT = '4199';
+process.env.OUTREACH_TOKEN = 'token-de-prueba';
 const { server, pool, start } = require('../src/server');
 
 const BASE = 'http://127.0.0.1:4199/api';
@@ -22,7 +23,7 @@ const call = async (path, { method = 'GET', body, ip = '10.0.0.1', auth = true }
 };
 
 test.before(async () => {
-  await pool.query('DROP TABLE IF EXISTS leads, whatsapp_clicks, firestore_archive');
+  await pool.query('DROP TABLE IF EXISTS leads, whatsapp_clicks, firestore_archive, outreach_prospects, outreach_messages');
   await start();
 });
 test.after(async () => {
@@ -96,4 +97,29 @@ test('una cookie alterada no sirve', async () => {
   const forged = `websy_panel=${Number(exp) + 1000}.${cookie.split('.')[1]}`;
   const res = await fetch(`${BASE}/panel/leads`, { headers: { Cookie: forged } });
   assert.strictEqual(res.status, 401);
+});
+
+test('prospección: sin token no entra nada', async () => {
+  const r = await call('/outreach/ingest', { method: 'POST', body: { prospects: [{ key: 'wa:1', estado: 'enviado' }] } });
+  assert.strictEqual(r.status, 401);
+});
+
+test('prospección: el lote se guarda, se actualiza y no duplica mensajes', async () => {
+  const ingest = (body) => fetch(`${BASE}/outreach/ingest`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Outreach-Token': 'token-de-prueba' }, body: JSON.stringify(body),
+  }).then((res) => res.json());
+  const lote = {
+    prospects: [{ key: 'wa:573000000000', canal: 'whatsapp', campana: 'contadores-co', pais: 'CO', nombre: 'Estudio Uno', contacto: '573000000000', estado: 'enviado', enviado_at: '2026-11-17T15:00:00Z' }],
+    messages: [{ id: 'm1', key: 'wa:573000000000', at: '2026-11-17T15:00:00Z', de: 'websy', tipo: 'campana', texto: 'Hola' }],
+  };
+  assert.deepStrictEqual(await ingest(lote), { ok: true, prospects: 1, messages: 1 });
+  lote.prospects[0].estado = 'reunion';
+  lote.prospects[0].reunion = 'martes 18/11, 10:00 h de Colombia';
+  assert.deepStrictEqual(await ingest(lote), { ok: true, prospects: 1, messages: 0 });
+  const panel = await call('/panel/outreach');
+  assert.strictEqual(panel.status, 200);
+  assert.strictEqual(panel.body.prospects[0].estado, 'reunion');
+  assert.strictEqual(panel.body.prospects[0].reunion, 'martes 18/11, 10:00 h de Colombia');
+  const msgs = await call(`/panel/outreach/messages?key=${encodeURIComponent('wa:573000000000')}`);
+  assert.strictEqual(msgs.body.length, 1);
 });

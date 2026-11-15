@@ -8,6 +8,9 @@
 //   POST /api/panel/login {password}   ·  POST /api/panel/logout  ·  GET /api/panel/session
 //   GET /api/panel/leads  ·  PATCH /api/panel/leads/:id {status, note}  ·  DELETE /api/panel/leads/:id
 //   GET /api/panel/whatsapp-clicks  ·  GET /api/panel/archive
+//   GET /api/panel/outreach  ·  GET /api/panel/outreach/messages?key=…   (centro de prospección)
+// Servidores de campaña (token X-Outreach-Token = OUTREACH_TOKEN):
+//   POST /api/outreach/ingest {prospects: [...], messages: [...]}
 const http = require('http');
 const crypto = require('crypto');
 const fs = require('fs');
@@ -136,6 +139,18 @@ const notify = async (lead) => {
   }
 };
 
+// ---------- prospección ----------
+// Los servidores de campaña (WhatsApp, correo) mandan su estado completo y los mensajes nuevos.
+const OUTREACH_TOKEN = process.env.OUTREACH_TOKEN || '';
+const OUTREACH_STATES = ['programado', 'enviado', 'respondio', 'interesado', 'reunion', 'no_interesado', 'requiere_humano', 'sin_whatsapp', 'rebote', 'baja', 'cliente'];
+const tokenOk = (given) => {
+  if (!OUTREACH_TOKEN) return false;
+  const a = crypto.createHash('sha256').update(String(given || '')).digest();
+  const b = crypto.createHash('sha256').update(OUTREACH_TOKEN).digest();
+  return crypto.timingSafeEqual(a, b);
+};
+const ts = (v) => (v ? new Date(v) : null);
+
 // ---------- rutas ----------
 
 const leadRow = (r) => ({
@@ -225,6 +240,75 @@ const routes = {
   'GET /api/panel/whatsapp-clicks': async (req, res) => {
     const { rows } = await pool.query("SELECT id, created_at, location, page, referrer FROM whatsapp_clicks WHERE created_at > now() - interval '180 days' ORDER BY created_at DESC LIMIT 20000");
     send(res, 200, rows.map((r) => ({ id: String(r.id), createdAt: r.created_at, location: r.location, page: r.page, referrer: r.referrer })));
+  },
+
+  'POST /api/outreach/ingest': async (req, res) => {
+    if (!tokenOk(req.headers['x-outreach-token'])) return send(res, 401, { error: 'Token inválido' });
+    const body = await readJson(req, 4_000_000);
+    const prospects = Array.isArray(body.prospects) ? body.prospects.slice(0, 5000) : [];
+    const messages = Array.isArray(body.messages) ? body.messages.slice(0, 5000) : [];
+    const client = await pool.connect();
+    try {
+      await client.query('BEGIN');
+      for (const p of prospects) {
+        const key = str(p.key, 300);
+        if (!key) continue;
+        const estado = OUTREACH_STATES.includes(p.estado) ? p.estado : 'programado';
+        await client.query(
+          `INSERT INTO outreach_prospects (key, canal, campana, pais, nombre, contacto, web, estado, programado_para, enviado_at, respondio_at, reunion, ultimo_at, extra, updated_at)
+           VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14, now())
+           ON CONFLICT (key) DO UPDATE SET canal=$2, campana=$3, pais=$4, nombre=$5, contacto=$6, web=$7, estado=$8,
+             programado_para=$9, enviado_at=$10, respondio_at=$11, reunion=$12, ultimo_at=$13, extra=$14, updated_at=now()`,
+          [key, str(p.canal, 20) || 'whatsapp', str(p.campana, 80), str(p.pais, 10), str(p.nombre, 300), str(p.contacto, 300), str(p.web, 500), estado,
+            p.programado_para || null, ts(p.enviado_at), ts(p.respondio_at), str(p.reunion, 300), ts(p.ultimo_at), p.extra && typeof p.extra === 'object' ? p.extra : {}],
+        );
+      }
+      let inserted = 0;
+      for (const m of messages) {
+        const key = str(m.key, 300);
+        if (!key || !m.at) continue;
+        const r = await client.query(
+          `INSERT INTO outreach_messages (prospect_key, ext_id, at, de, tipo, texto) VALUES ($1,$2,$3,$4,$5,$6) ON CONFLICT (ext_id) DO NOTHING`,
+          [key, str(m.id, 300), ts(m.at), str(m.de, 20) || 'sistema', str(m.tipo, 20) || 'mensaje', str(m.texto, 20000)],
+        );
+        inserted += r.rowCount;
+      }
+      await client.query('COMMIT');
+      send(res, 200, { ok: true, prospects: prospects.length, messages: inserted });
+    } catch (err) {
+      await client.query('ROLLBACK');
+      throw err;
+    } finally {
+      client.release();
+    }
+  },
+
+  'GET /api/panel/outreach': async (req, res) => {
+    const [prospects, porDia, respuestasDia] = await Promise.all([
+      pool.query(`SELECT p.*, (SELECT texto FROM outreach_messages m WHERE m.prospect_key = p.key AND m.de = 'prospecto' ORDER BY at DESC LIMIT 1) AS ultima_respuesta,
+                         (SELECT count(*)::int FROM outreach_messages m WHERE m.prospect_key = p.key) AS mensajes
+                  FROM outreach_prospects p ORDER BY COALESCE(p.ultimo_at, p.enviado_at, p.updated_at) DESC LIMIT 5000`),
+      pool.query(`SELECT canal, to_char(date_trunc('day', enviado_at AT TIME ZONE 'America/Bogota'), 'YYYY-MM-DD') AS dia, count(*)::int AS n
+                  FROM outreach_prospects WHERE enviado_at > now() - interval '45 days' GROUP BY 1, 2`),
+      pool.query(`SELECT canal, to_char(date_trunc('day', respondio_at AT TIME ZONE 'America/Bogota'), 'YYYY-MM-DD') AS dia, count(*)::int AS n
+                  FROM outreach_prospects WHERE respondio_at > now() - interval '45 days' GROUP BY 1, 2`),
+    ]);
+    send(res, 200, {
+      prospects: prospects.rows.map((r) => ({
+        key: r.key, canal: r.canal, campana: r.campana, pais: r.pais, nombre: r.nombre, contacto: r.contacto, web: r.web, estado: r.estado,
+        programadoPara: r.programado_para, enviadoAt: r.enviado_at, respondioAt: r.respondio_at, reunion: r.reunion, ultimoAt: r.ultimo_at,
+        ultimaRespuesta: r.ultima_respuesta, mensajes: r.mensajes, extra: r.extra,
+      })),
+      enviosPorDia: porDia.rows,
+      respuestasPorDia: respuestasDia.rows,
+    });
+  },
+
+  'GET /api/panel/outreach/messages': async (req, res) => {
+    const key = new URL(req.url, 'http://x').searchParams.get('key');
+    if (!key) return send(res, 400, { error: 'Falta key' });
+    const { rows } = await pool.query('SELECT id, at, de, tipo, texto FROM outreach_messages WHERE prospect_key = $1 ORDER BY at, id LIMIT 2000', [key]);
+    send(res, 200, rows.map((r) => ({ id: String(r.id), at: r.at, de: r.de, tipo: r.tipo, texto: r.texto })));
   },
 
   'GET /api/panel/archive': async (req, res) => {

@@ -45,4 +45,6 @@ export const panel = {
   deleteLead: (id) => request(`/panel/leads/${id}`, { method: 'DELETE' }),
   whatsappClicks: () => request('/panel/whatsapp-clicks'),
   archive: () => request('/panel/archive'),
+  outreach: () => request('/panel/outreach'),
+  outreachMessages: (key) => request(`/panel/outreach/messages?key=${encodeURIComponent(key)}`),
 };

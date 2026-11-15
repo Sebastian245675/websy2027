@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Download, LogOut, MessageCircle, RefreshCw, Search, Trash2 } from 'lucide-react';
 import { panel } from '../lib/api';
+import { ProspectingCenter } from '../components/ProspectingCenter';
 
 // Panel de consultas (/panel): todos los formularios del sitio y los clics a WhatsApp, guardados en
 // PostgreSQL por leads-api, con estado, notas y la meta de 10 reuniones por semana. Entra con la
@@ -237,7 +238,7 @@ const Dashboard = ({ onLogout }) => {
       </div>
 
       <div className="mt-8 flex gap-2 border-b border-slate-200">
-        {[['formularios', `Formularios (${all.length})`], ['whatsapp', `WhatsApp (${clicks ? clicks.length : '…'})`], ['archivo', 'Archivo']].map(([id, label]) => (
+        {[['formularios', `Formularios (${all.length})`], ['whatsapp', `WhatsApp (${clicks ? clicks.length : '…'})`], ['prospeccion', 'Prospección'], ['archivo', 'Archivo']].map(([id, label]) => (
           <button key={id} type="button" onClick={() => setTab(id)} className={`-mb-px border-b-2 bg-transparent px-4 py-2.5 font-bold ${tab === id ? 'border-[#182A2C] text-[#182A2C]' : 'border-transparent text-slate-500'}`}>{label}</button>
         ))}
       </div>
@@ -275,6 +276,8 @@ const Dashboard = ({ onLogout }) => {
             {visible.map((lead) => <LeadRow key={`${lead.id}-${lead.updatedAt || ''}`} lead={lead} onChange={replaceLead} onDelete={removeLead} />)}
           </ul>
         </>
+      ) : tab === 'prospeccion' ? (
+        <ProspectingCenter />
       ) : tab === 'archivo' ? (
         <div className="mt-6 space-y-6">
           <p className="text-sm text-slate-600">Datos que había en Firestore y que el sitio ya no usa (testimonios, novedades y analítica del panel viejo), importados tal cual.</p>
