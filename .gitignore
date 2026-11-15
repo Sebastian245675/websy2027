@@ -80,3 +80,5 @@ agenthub/agents/youtube/db
 android-sdk/ 
 # Respaldos comprimidos que no van al repositorio
 **/*.rar
+# Otros proyectos con su propio repositorio
+frontend/sites/
