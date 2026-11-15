@@ -305,7 +305,8 @@ const Dashboard = ({ onLogout }) => {
   const outreachItems = outreach.data?.prospects || [];
   const outreachMeetings = outreachItems.filter((p) => p.estado === 'reunion' && toDate(p.ultimoAt) >= ws).length;
   const weekMeetings = meetings + outreachMeetings;
-  const toAttend = outreachItems.filter((p) => ['respondio', 'interesado', 'requiere_humano'].includes(p.estado));
+  const sentWeek = outreachItems.filter((p) => toDate(p.enviadoAt) >= ws);
+  const positiveWeek = outreachItems.filter((p) => ['interesado', 'reunion', 'cliente'].includes(p.estado) && toDate(p.respondioAt || p.ultimoAt) >= ws);
   const badges = {
     formularios: newOnes ? { n: newOnes, alert: true } : null,
     whatsapp: clicksWeek.length ? { n: clicksWeek.length } : null,
@@ -349,8 +350,8 @@ const Dashboard = ({ onLogout }) => {
               <div className="grid grid-cols-2 gap-4 xl:grid-cols-4">
                 <Stat highlight label="Reuniones esta semana" value={`${weekMeetings} / ${META_REUNIONES}`} sub={`${meetings} de formularios · ${outreachMeetings} de prospección`} />
                 <Stat label="Formularios esta semana" value={thisWeek.length} sub={`${all.length} en total · ${newOnes} sin responder`} />
-                <Stat label="Prospectos por atender" value={toAttend.length} sub="Respondieron a una campaña" />
-                <Stat label="Clics a WhatsApp" value={clicks ? clicksWeek.length : '…'} sub="Esta semana, desde la web" />
+                <Stat label="Mensajes enviados esta semana" value={sentWeek.length} sub={`${sentWeek.filter((p) => p.canal === 'whatsapp').length} WhatsApp · ${sentWeek.filter((p) => p.canal === 'email').length} correos`} />
+                <Stat label="Respuestas positivas esta semana" value={positiveWeek.length} sub="Interesados o con reunión agendada" />
               </div>
               <div className="grid gap-6 xl:grid-cols-2">
                 <section className="rounded-2xl border border-slate-200 bg-white">
