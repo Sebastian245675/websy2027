@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Download, LogOut, MessageCircle, RefreshCw, Search, Trash2 } from 'lucide-react';
+import { Archive, ChartColumn, Download, FileText, Inbox, LayoutDashboard, LogOut, Menu, MessageCircle, MousePointerClick, RefreshCw, Search, Send, Target, Trash2, Users, X } from 'lucide-react';
 import { panel } from '../lib/api';
-import { ProspectingCenter } from '../components/ProspectingCenter';
+import { LeadPool } from '../components/LeadPool';
+import { OUTREACH_STATES, ProspectingCenter, attentionCount, queuedCount, useOutreach } from '../components/ProspectingCenter';
 
 // Panel de consultas (/panel): todos los formularios del sitio y los clics a WhatsApp, guardados en
 // PostgreSQL por leads-api, con estado, notas y la meta de 10 reuniones por semana. Entra con la
@@ -93,10 +94,84 @@ const Login = ({ onLogin }) => {
 
 const Stat = ({ label, value, sub, highlight }) => (
   <div className={`rounded-2xl p-5 ${highlight ? 'bg-[#182A2C] text-white' : 'bg-white border border-slate-200'}`}>
-    <p className={`text-xs font-bold uppercase tracking-wider ${highlight ? 'text-[#d9fb06]' : 'text-slate-500'}`}>{label}</p>
-    <p className="mt-2 text-3xl font-black">{value}</p>
-    {sub && <p className={`mt-1 text-sm ${highlight ? 'text-white/70' : 'text-slate-500'}`}>{sub}</p>}
+    <p className={`text-[11px] font-bold uppercase tracking-wider ${highlight ? 'text-[#d9fb06]' : 'text-slate-500'}`}>{label}</p>
+    <p className="mt-2 text-3xl font-black tabular-nums">{value}</p>
+    {sub && <p className={`mt-1 text-xs ${highlight ? 'text-white/60' : 'text-slate-500'}`}>{sub}</p>}
   </div>
+);
+
+// Navegación de la barra lateral: [id, etiqueta, icono]
+const NAV = [
+  { items: [['inicio', 'Inicio', LayoutDashboard]] },
+  { group: 'Entrantes', items: [['formularios', 'Formularios', FileText], ['whatsapp', 'Clics a WhatsApp', MousePointerClick]] },
+  { group: 'Prospección', items: [['p-clientes', 'Posibles clientes', Target], ['p-resumen', 'Resumen', ChartColumn], ['p-bandeja', 'Bandeja', Inbox], ['p-prospectos', 'Prospectos', Users], ['p-cola', 'Cola de envíos', Send]] },
+  { group: 'Otros', items: [['archivo', 'Archivo', Archive]] },
+];
+const SECTIONS = {
+  inicio: ['Inicio', 'Lo importante de la semana en un vistazo'],
+  formularios: ['Formularios', 'Consultas que llegan desde los formularios del sitio'],
+  whatsapp: ['Clics a WhatsApp', 'Conversaciones iniciadas desde los botones del sitio'],
+  'p-clientes': ['Posibles clientes', 'Negocios a los que todavía no les escribimos y por qué les serviría Websy'],
+  'p-resumen': ['Prospección', 'Campañas de WhatsApp y correo: envíos, respuestas y reuniones'],
+  'p-bandeja': ['Bandeja', 'Conversaciones con prospectos y lo que respondió el agente de IA'],
+  'p-prospectos': ['Prospectos', 'Todos los negocios en campaña y en qué etapa está cada uno'],
+  'p-cola': ['Cola de envíos', 'Lo que sale en los próximos días'],
+  archivo: ['Archivo', 'Datos importados del panel anterior'],
+};
+
+const Sidebar = ({ section, onSelect, badges, meetings, open, onClose, onLogout }) => (
+  <>
+    <div className={`fixed inset-0 z-40 bg-black/40 transition-opacity lg:hidden ${open ? 'opacity-100' : 'pointer-events-none opacity-0'}`} onClick={onClose} />
+    <aside className={`fixed inset-y-0 left-0 z-50 flex w-64 flex-col bg-[#132224] text-white transition-transform duration-200 lg:translate-x-0 ${open ? 'translate-x-0' : '-translate-x-full'}`}>
+      <div className="flex items-center gap-3 px-5 pb-5 pt-6">
+        <img src="/websy-logo.png" alt="" className="h-9 w-9 rounded-full" />
+        <div className="min-w-0 flex-1">
+          <p className="font-black leading-tight">Websy</p>
+          <p className="text-xs text-white/50">Panel comercial</p>
+        </div>
+        <button type="button" onClick={onClose} className="rounded-lg bg-transparent p-1 text-white/60 lg:hidden" aria-label="Cerrar menú"><X size={18} /></button>
+      </div>
+
+      <nav className="min-h-0 flex-1 space-y-6 overflow-y-auto px-3 pb-4">
+        {NAV.map(({ group, items }) => (
+          <div key={group || 'main'}>
+            {group && <p className="mb-1.5 px-3 text-[10px] font-bold uppercase tracking-[0.14em] text-white/35">{group}</p>}
+            <ul className="space-y-0.5">
+              {items.map(([id, label, Icon]) => {
+                const active = section === id;
+                const badge = badges[id];
+                return (
+                  <li key={id}>
+                    <button
+                      type="button"
+                      onClick={() => onSelect(id)}
+                      className={`group relative flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${active ? 'bg-white/10 text-white' : 'bg-transparent text-white/60 hover:bg-white/5 hover:text-white'}`}
+                    >
+                      {active && <span className="absolute -left-3 top-1.5 bottom-1.5 w-1 rounded-r bg-[#d9fb06]" />}
+                      <Icon size={17} className={active ? 'text-[#d9fb06]' : 'text-white/45 group-hover:text-white/80'} />
+                      <span className="flex-1 text-left">{label}</span>
+                      {badge ? <span className={`min-w-[22px] rounded-full px-1.5 py-0.5 text-center text-[11px] font-bold tabular-nums ${badge.alert ? 'bg-[#d9fb06] text-[#182A2C]' : 'bg-white/10 text-white/70'}`}>{badge.n}</span> : null}
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))}
+      </nav>
+
+      <div className="border-t border-white/10 p-4">
+        <div className="rounded-xl bg-white/5 p-3">
+          <div className="flex items-baseline justify-between text-xs">
+            <span className="font-bold text-white/60">Meta semanal</span>
+            <span className="font-black tabular-nums text-white">{meetings} / {META_REUNIONES} <span className="font-semibold text-white/50">reuniones</span></span>
+          </div>
+          <div className="mt-2 h-1.5 rounded-full bg-white/10"><div className="h-1.5 rounded-full bg-[#d9fb06]" style={{ width: `${Math.min(100, (meetings / META_REUNIONES) * 100)}%` }} /></div>
+        </div>
+        <button type="button" onClick={onLogout} className="mt-3 flex w-full items-center gap-3 rounded-lg bg-transparent px-3 py-2 text-sm font-semibold text-white/60 hover:bg-white/5 hover:text-white"><LogOut size={17} /> Salir</button>
+      </div>
+    </aside>
+  </>
 );
 
 const LeadRow = ({ lead, onChange, onDelete }) => {
@@ -166,7 +241,12 @@ const Dashboard = ({ onLogout }) => {
   const [archive, setArchive] = useState(null);
   const [error, setError] = useState('');
   const [loadedAt, setLoadedAt] = useState(null);
-  const [tab, setTab] = useState('formularios');
+  const [section, setSection] = useState(() => {
+    const h = typeof window !== 'undefined' ? window.location.hash.slice(1) : '';
+    return SECTIONS[h] ? h : 'inicio';
+  });
+  const [menuOpen, setMenuOpen] = useState(false);
+  const outreach = useOutreach();
   const [filters, setFilters] = useState({ status: 'activos', source: '', country: '', range: '30', q: '' });
 
   const load = async () => {
@@ -190,8 +270,8 @@ const Dashboard = ({ onLogout }) => {
   }, []);
 
   useEffect(() => {
-    if (tab === 'archivo' && !archive) panel.archive().then(setArchive).catch((err) => setError(err.message));
-  }, [tab, archive]);
+    if (section === 'archivo' && !archive) panel.archive().then(setArchive).catch((err) => setError(err.message));
+  }, [section, archive]);
 
   const replaceLead = (updated) => setLeads((prev) => prev.map((l) => (l.id === updated.id ? updated : l)));
   const removeLead = (id) => setLeads((prev) => prev.filter((l) => l.id !== id));
@@ -220,107 +300,191 @@ const Dashboard = ({ onLogout }) => {
   const clicksWeek = (clicks || []).filter((c) => toDate(c.createdAt) >= ws);
   const sources = [...new Set(all.map((l) => l.source).filter(Boolean))];
   const countries = [...new Set(all.map((l) => l.country).filter(Boolean))];
-  const selectCls = 'rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm';
+  const selectCls = 'rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm';
+
+  const outreachItems = outreach.data?.prospects || [];
+  const outreachMeetings = outreachItems.filter((p) => p.estado === 'reunion' && toDate(p.ultimoAt) >= ws).length;
+  const weekMeetings = meetings + outreachMeetings;
+  const toAttend = outreachItems.filter((p) => ['respondio', 'interesado', 'requiere_humano'].includes(p.estado));
+  const badges = {
+    formularios: newOnes ? { n: newOnes, alert: true } : null,
+    whatsapp: clicksWeek.length ? { n: clicksWeek.length } : null,
+    'p-bandeja': attentionCount(outreach.data) ? { n: attentionCount(outreach.data), alert: true } : null,
+    'p-cola': queuedCount(outreach.data) ? { n: queuedCount(outreach.data) } : null,
+  };
+  const go = (id) => {
+    setSection(id);
+    setMenuOpen(false);
+    window.history.replaceState(null, '', `#${id}`);
+    window.scrollTo(0, 0);
+  };
+  const logout = async () => { await panel.logout().catch(() => {}); onLogout(); };
+  const [title, subtitle] = SECTIONS[section] || SECTIONS.inicio;
+  const updated = outreach.loadedAt || loadedAt;
+  const reload = () => { load(); outreach.load(); };
 
   return (
-    <div className="mx-auto max-w-7xl p-5 md:p-8">
-      <div className="flex flex-wrap items-center gap-4">
-        <h1 className="text-3xl font-black text-[#182A2C]">Consultas</h1>
-        <button type="button" onClick={load} className="bg-transparent inline-flex items-center gap-1.5 text-sm text-slate-500" title="Actualizar"><RefreshCw size={14} /> {loadedAt ? `Actualizado ${loadedAt.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' })}` : ''}</button>
-        <button type="button" onClick={async () => { await panel.logout().catch(() => {}); onLogout(); }} className="bg-transparent ml-auto inline-flex items-center gap-1.5 text-sm font-semibold text-slate-600"><LogOut size={15} /> Salir</button>
-      </div>
+    <div className="min-h-screen bg-[#f4f7f9]">
+      <Sidebar section={section} onSelect={go} badges={badges} meetings={weekMeetings} open={menuOpen} onClose={() => setMenuOpen(false)} onLogout={logout} />
 
-      <div className="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <Stat highlight label="Reuniones esta semana" value={`${meetings} / ${META_REUNIONES}`} sub="Marca la consulta como “Reunión agendada”" />
-        <Stat label="Formularios esta semana" value={thisWeek.length} sub={`${all.length} en total`} />
-        <Stat label="Sin responder" value={newOnes} sub="Estado “Nuevo”" />
-        <Stat label="Clics a WhatsApp esta semana" value={clicks ? clicksWeek.length : '…'} sub="Conversaciones iniciadas desde la web" />
-      </div>
-
-      <div className="mt-8 flex gap-2 border-b border-slate-200">
-        {[['formularios', `Formularios (${all.length})`], ['whatsapp', `WhatsApp (${clicks ? clicks.length : '…'})`], ['prospeccion', 'Prospección'], ['archivo', 'Archivo']].map(([id, label]) => (
-          <button key={id} type="button" onClick={() => setTab(id)} className={`-mb-px border-b-2 bg-transparent px-4 py-2.5 font-bold ${tab === id ? 'border-[#182A2C] text-[#182A2C]' : 'border-transparent text-slate-500'}`}>{label}</button>
-        ))}
-      </div>
-
-      {tab === 'formularios' ? (
-        <>
-          <div className="mt-5 flex flex-wrap items-center gap-3">
-            <label className="relative">
-              <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-              <input value={filters.q} onChange={set('q')} placeholder="Buscar nombre, teléfono, texto…" className={`${selectCls} pl-9 w-64`} />
-            </label>
-            <select value={filters.status} onChange={set('status')} className={selectCls} aria-label="Filtrar por estado">
-              <option value="activos">Activos (sin perdidos ni spam)</option>
-              <option value="">Todos los estados</option>
-              {STATUSES.map((s) => <option key={s.id} value={s.id}>{s.label}</option>)}
-            </select>
-            <select value={filters.source} onChange={set('source')} className={selectCls} aria-label="Fuente">
-              <option value="">Todas las fuentes</option>
-              {sources.map((s) => <option key={s} value={s}>{sourceLabel(s)}</option>)}
-            </select>
-            <select value={filters.country} onChange={set('country')} className={selectCls} aria-label="País">
-              <option value="">Todos los países</option>
-              {countries.map((c) => <option key={c} value={c}>{c}</option>)}
-            </select>
-            <select value={filters.range} onChange={set('range')} className={selectCls} aria-label="Período">
-              <option value="7">Últimos 7 días</option>
-              <option value="30">Últimos 30 días</option>
-              <option value="90">Últimos 90 días</option>
-              <option value="todo">Todo</option>
-            </select>
-            <button type="button" onClick={() => downloadCsv(visible)} className="ml-auto inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-bold text-[#182A2C]"><Download size={15} /> Exportar CSV</button>
+      <div className="lg:pl-64">
+        <header className="sticky top-0 z-30 border-b border-slate-200 bg-[#f4f7f9]/90 backdrop-blur">
+          <div className="flex items-center gap-3 px-5 py-4 md:px-8">
+            <button type="button" onClick={() => setMenuOpen(true)} className="-ml-1 rounded-lg bg-transparent p-1.5 text-[#182A2C] hover:bg-slate-200/60 lg:hidden" aria-label="Abrir menú"><Menu size={22} /></button>
+            <div className="min-w-0 flex-1">
+              <h1 className="truncate text-xl font-black text-[#182A2C] md:text-2xl">{title}</h1>
+              <p className="hidden truncate text-sm text-slate-500 sm:block">{subtitle}</p>
+            </div>
+            <button type="button" onClick={reload} className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-600 hover:text-[#182A2C]" title="Actualizar">
+              <RefreshCw size={14} /> <span className="hidden sm:inline">{updated ? `Actualizado ${updated.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' })}` : 'Actualizar'}</span>
+            </button>
           </div>
-          <p className="mt-3 text-sm text-slate-500">{visible.length} consulta{visible.length === 1 ? '' : 's'}</p>
-          <ul className="mt-3 space-y-3">
-            {visible.map((lead) => <LeadRow key={`${lead.id}-${lead.updatedAt || ''}`} lead={lead} onChange={replaceLead} onDelete={removeLead} />)}
-          </ul>
-        </>
-      ) : tab === 'prospeccion' ? (
-        <ProspectingCenter />
-      ) : tab === 'archivo' ? (
-        <div className="mt-6 space-y-6">
-          <p className="text-sm text-slate-600">Datos que había en Firestore y que el sitio ya no usa (testimonios, novedades y analítica del panel viejo), importados tal cual.</p>
-          {!archive ? <p className="text-slate-500">Cargando…</p> : archive.collections.length === 0 ? <p className="text-slate-500">No hay datos archivados.</p> : archive.collections.map((c) => (
-            <details key={c.collection} className="rounded-2xl border border-slate-200 bg-white p-5">
-              <summary className="cursor-pointer font-black text-[#182A2C]">{c.collection} · {c.n} registros <span className="font-normal text-slate-500">({fmt(toDate(c.desde))} a {fmt(toDate(c.hasta))})</span></summary>
-              <ul className="mt-4 divide-y divide-slate-100 text-xs">
-                {archive.latest.filter((r) => r.collection === c.collection).map((r) => (
-                  <li key={r.firestore_id} className="py-2"><span className="text-slate-500">{fmt(toDate(r.created_at))}</span> <code className="break-all text-slate-700">{JSON.stringify(r.data).slice(0, 400)}</code></li>
-                ))}
+        </header>
+
+        <div className="px-5 py-6 md:px-8 md:py-8">
+          {error && <p className="mb-6 rounded-xl bg-red-50 p-4 text-sm font-semibold text-red-700">{error}</p>}
+
+          {section === 'inicio' && (
+            <div className="space-y-6">
+              <div className="grid grid-cols-2 gap-4 xl:grid-cols-4">
+                <Stat highlight label="Reuniones esta semana" value={`${weekMeetings} / ${META_REUNIONES}`} sub={`${meetings} de formularios · ${outreachMeetings} de prospección`} />
+                <Stat label="Formularios esta semana" value={thisWeek.length} sub={`${all.length} en total · ${newOnes} sin responder`} />
+                <Stat label="Prospectos por atender" value={toAttend.length} sub="Respondieron a una campaña" />
+                <Stat label="Clics a WhatsApp" value={clicks ? clicksWeek.length : '…'} sub="Esta semana, desde la web" />
+              </div>
+              <div className="grid gap-6 xl:grid-cols-2">
+                <section className="rounded-2xl border border-slate-200 bg-white">
+                  <header className="flex items-center border-b border-slate-100 px-5 py-4">
+                    <h2 className="flex-1 font-black text-[#182A2C]">Últimas consultas</h2>
+                    <button type="button" onClick={() => go('formularios')} className="bg-transparent text-xs font-bold text-[#182A2C] underline">Ver todas</button>
+                  </header>
+                  <ul className="divide-y divide-slate-100">
+                    {all.slice(0, 6).map((l) => (
+                      <li key={l.id}>
+                        <button type="button" onClick={() => go('formularios')} className="flex w-full items-center gap-3 bg-transparent px-5 py-3 text-left hover:bg-slate-50">
+                          <FileText size={15} className="shrink-0 text-slate-400" />
+                          <span className="min-w-0 flex-1">
+                            <span className="block truncate text-sm font-semibold text-[#182A2C]">{l.name || 'Sin nombre'}</span>
+                            <span className="block truncate text-xs text-slate-500">{l.projectType || sourceLabel(l.source)} · {fmt(toDate(l.createdAt))}</span>
+                          </span>
+                          <span className={`shrink-0 rounded-full px-2 py-0.5 text-[11px] font-bold ${statusOf(l.status).cls}`}>{statusOf(l.status).label}</span>
+                        </button>
+                      </li>
+                    ))}
+                    {!all.length && <li className="px-5 py-6 text-sm text-slate-500">Todavía no llegaron consultas.</li>}
+                  </ul>
+                </section>
+                <section className="rounded-2xl border border-slate-200 bg-white">
+                  <header className="flex items-center border-b border-slate-100 px-5 py-4">
+                    <h2 className="flex-1 font-black text-[#182A2C]">Respuestas de prospección</h2>
+                    <button type="button" onClick={() => go('p-bandeja')} className="bg-transparent text-xs font-bold text-[#182A2C] underline">Abrir bandeja</button>
+                  </header>
+                  <ul className="divide-y divide-slate-100">
+                    {outreachItems.filter((p) => p.ultimaRespuesta).sort((a, b) => toDate(b.ultimoAt) - toDate(a.ultimoAt)).slice(0, 6).map((p) => (
+                      <li key={p.key}>
+                        <button type="button" onClick={() => go('p-bandeja')} className="flex w-full items-center gap-3 bg-transparent px-5 py-3 text-left hover:bg-slate-50">
+                          <MessageCircle size={15} className="shrink-0 text-slate-400" />
+                          <span className="min-w-0 flex-1">
+                            <span className="block truncate text-sm font-semibold text-[#182A2C]">{p.nombre}</span>
+                            <span className="block truncate text-xs text-slate-500">{p.ultimaRespuesta}</span>
+                          </span>
+                          <span className={`shrink-0 rounded-full px-2 py-0.5 text-[11px] font-bold ${(OUTREACH_STATES[p.estado] || {}).cls}`}>{(OUTREACH_STATES[p.estado] || {}).label || p.estado}</span>
+                        </button>
+                      </li>
+                    ))}
+                    {!outreachItems.some((p) => p.ultimaRespuesta) && <li className="px-5 py-6 text-sm text-slate-500">Nadie respondió todavía.</li>}
+                  </ul>
+                </section>
+              </div>
+            </div>
+          )}
+
+          {section === 'formularios' && (
+            <>
+              <div className="flex flex-wrap items-center gap-3">
+                <label className="relative">
+                  <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <input value={filters.q} onChange={set('q')} placeholder="Buscar nombre, teléfono, texto…" className={`${selectCls} pl-9 w-64`} />
+                </label>
+                <select value={filters.status} onChange={set('status')} className={selectCls} aria-label="Filtrar por estado">
+                  <option value="activos">Activos (sin perdidos ni spam)</option>
+                  <option value="">Todos los estados</option>
+                  {STATUSES.map((s) => <option key={s.id} value={s.id}>{s.label}</option>)}
+                </select>
+                <select value={filters.source} onChange={set('source')} className={selectCls} aria-label="Fuente">
+                  <option value="">Todas las fuentes</option>
+                  {sources.map((s) => <option key={s} value={s}>{sourceLabel(s)}</option>)}
+                </select>
+                <select value={filters.country} onChange={set('country')} className={selectCls} aria-label="País">
+                  <option value="">Todos los países</option>
+                  {countries.map((c) => <option key={c} value={c}>{c}</option>)}
+                </select>
+                <select value={filters.range} onChange={set('range')} className={selectCls} aria-label="Período">
+                  <option value="7">Últimos 7 días</option>
+                  <option value="30">Últimos 30 días</option>
+                  <option value="90">Últimos 90 días</option>
+                  <option value="todo">Todo</option>
+                </select>
+                <button type="button" onClick={() => downloadCsv(visible)} className="ml-auto inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-bold text-[#182A2C]"><Download size={15} /> Exportar CSV</button>
+              </div>
+              <p className="mt-4 text-sm text-slate-500">{visible.length} consulta{visible.length === 1 ? '' : 's'}</p>
+              <ul className="mt-3 space-y-3">
+                {visible.map((lead) => <LeadRow key={`${lead.id}-${lead.updatedAt || ''}`} lead={lead} onChange={replaceLead} onDelete={removeLead} />)}
+                {!visible.length && <li className="rounded-2xl border border-dashed border-slate-300 p-8 text-center text-sm text-slate-500">No hay consultas con estos filtros.</li>}
               </ul>
-              {c.n > 50 && <p className="mt-2 text-xs text-slate-500">Se muestran los 50 más recientes; el resto está completo en PostgreSQL (tabla firestore_archive).</p>}
-            </details>
-          ))}
-        </div>
-      ) : (
-        <div className="mt-6 grid lg:grid-cols-3 gap-6">
-          <div className="rounded-2xl border border-slate-200 bg-white p-5">
-            <h2 className="font-black text-[#182A2C]">Páginas que más llevan a WhatsApp</h2>
-            <p className="mt-1 text-xs text-slate-500">Últimos 30 días</p>
-            <ol className="mt-4 space-y-2 text-sm">
-              {countBy((clicks || []).filter((c) => toDate(c.createdAt) >= new Date(Date.now() - 30 * 864e5)), (c) => c.page).slice(0, 15).map(([page, n]) => (
-                <li key={page} className="flex justify-between gap-3"><span className="truncate text-slate-700">{page}</span><strong>{n}</strong></li>
+            </>
+          )}
+
+          {section === 'p-clientes' && <LeadPool />}
+          {section.startsWith('p-') && section !== 'p-clientes' && <ProspectingCenter view={section.slice(2)} onView={(v) => go(`p-${v}`)} outreach={outreach} />}
+
+          {section === 'archivo' && (
+            <div className="space-y-4">
+              <p className="text-sm text-slate-600">Datos que había en Firestore y que el sitio ya no usa (testimonios, novedades y analítica del panel viejo), importados tal cual.</p>
+              {!archive ? <p className="text-slate-500">Cargando…</p> : archive.collections.length === 0 ? <p className="text-slate-500">No hay datos archivados.</p> : archive.collections.map((c) => (
+                <details key={c.collection} className="rounded-2xl border border-slate-200 bg-white p-5">
+                  <summary className="cursor-pointer font-black text-[#182A2C]">{c.collection} · {c.n} registros <span className="font-normal text-slate-500">({fmt(toDate(c.desde))} a {fmt(toDate(c.hasta))})</span></summary>
+                  <ul className="mt-4 divide-y divide-slate-100 text-xs">
+                    {archive.latest.filter((r) => r.collection === c.collection).map((r) => (
+                      <li key={r.firestore_id} className="py-2"><span className="text-slate-500">{fmt(toDate(r.created_at))}</span> <code className="break-all text-slate-700">{JSON.stringify(r.data).slice(0, 400)}</code></li>
+                    ))}
+                  </ul>
+                  {c.n > 50 && <p className="mt-2 text-xs text-slate-500">Se muestran los 50 más recientes; el resto está completo en PostgreSQL (tabla firestore_archive).</p>}
+                </details>
               ))}
-            </ol>
-          </div>
-          <div className="lg:col-span-2 rounded-2xl border border-slate-200 bg-white p-5">
-            <h2 className="font-black text-[#182A2C]">Últimos clics</h2>
-            <p className="mt-1 text-xs text-slate-500">El mensaje llega a WhatsApp con “(Página: …)” al final, así lo cruzas con esta lista.</p>
-            <ul className="mt-4 divide-y divide-slate-100 text-sm">
-              {(clicks || []).slice(0, 200).map((c) => (
-                <li key={c.id} className="flex flex-wrap gap-x-4 py-2">
-                  <span className="w-32 text-slate-500">{fmt(toDate(c.createdAt))}</span>
-                  <span className="font-semibold text-[#182A2C]">{c.page}</span>
-                  <span className="text-slate-500">botón: {c.location}</span>
-                  {c.referrer && <span className="truncate text-slate-400">desde {c.referrer}</span>}
-                </li>
-              ))}
-              {clicks && clicks.length === 0 && <li className="py-2 text-slate-500">Todavía no hay clics registrados.</li>}
-            </ul>
-          </div>
+            </div>
+          )}
+
+          {section === 'whatsapp' && (
+            <div className="grid gap-6 xl:grid-cols-3">
+              <section className="rounded-2xl border border-slate-200 bg-white p-5">
+                <h2 className="font-black text-[#182A2C]">Páginas que más llevan a WhatsApp</h2>
+                <p className="mt-1 text-xs text-slate-500">Últimos 30 días</p>
+                <ol className="mt-4 space-y-2 text-sm">
+                  {countBy((clicks || []).filter((c) => toDate(c.createdAt) >= new Date(Date.now() - 30 * 864e5)), (c) => c.page).slice(0, 15).map(([page, n]) => (
+                    <li key={page} className="flex justify-between gap-3"><span className="truncate text-slate-700">{page}</span><strong>{n}</strong></li>
+                  ))}
+                </ol>
+              </section>
+              <section className="rounded-2xl border border-slate-200 bg-white p-5 xl:col-span-2">
+                <h2 className="font-black text-[#182A2C]">Últimos clics</h2>
+                <p className="mt-1 text-xs text-slate-500">El mensaje llega a WhatsApp con “(Página: …)” al final, así lo cruzas con esta lista.</p>
+                <ul className="mt-4 divide-y divide-slate-100 text-sm">
+                  {(clicks || []).slice(0, 200).map((c) => (
+                    <li key={c.id} className="flex flex-wrap gap-x-4 py-2">
+                      <span className="w-32 text-slate-500">{fmt(toDate(c.createdAt))}</span>
+                      <span className="font-semibold text-[#182A2C]">{c.page}</span>
+                      <span className="text-slate-500">botón: {c.location}</span>
+                      {c.referrer && <span className="truncate text-slate-400">desde {c.referrer}</span>}
+                    </li>
+                  ))}
+                  {clicks && clicks.length === 0 && <li className="py-2 text-slate-500">Todavía no hay clics registrados.</li>}
+                </ul>
+              </section>
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 };
@@ -333,5 +497,5 @@ export const LeadsPanel = () => {
 
   if (authed === null) return <div className="min-h-screen bg-[#f4f7f9]" />;
   if (!authed) return <Login onLogin={() => setAuthed(true)} />;
-  return <div className="min-h-screen bg-[#f4f7f9]"><Dashboard onLogout={() => setAuthed(false)} /></div>;
+  return <Dashboard onLogout={() => setAuthed(false)} />;
 };

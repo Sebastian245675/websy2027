@@ -79,3 +79,31 @@ CREATE TABLE IF NOT EXISTS outreach_messages (
   texto          TEXT
 );
 CREATE INDEX IF NOT EXISTS outreach_messages_key_idx ON outreach_messages (prospect_key, at);
+
+-- Posibles clientes (base tipo Apollo del panel): negocios encontrados en Google Maps a los que todavía no
+-- se les escribió, con lo que se averiguó de su web y por qué les serviría Websy. Los carga el script de
+-- búsqueda con POST /api/outreach/pool; desde el panel se guardan, descartan o anotan.
+CREATE TABLE IF NOT EXISTS prospect_pool (
+  id             TEXT PRIMARY KEY,                 -- id del lugar en Google Maps
+  pais           TEXT,
+  ciudad         TEXT,
+  rubro          TEXT,
+  nombre         TEXT,
+  telefono       TEXT,                             -- tal como figura en Maps
+  whatsapp       TEXT,                             -- solo dígitos, si es un celular o la web tiene wa.me
+  email          TEXT,
+  web            TEXT,
+  direccion      TEXT,
+  rating         NUMERIC(2,1),
+  resenas        INT,
+  maps_url       TEXT,
+  oportunidad    INT NOT NULL DEFAULT 0,           -- 0 a 100: qué tan claro es que nos necesita
+  servicio       TEXT,                             -- servicio sugerido
+  motivos        JSONB NOT NULL DEFAULT '[]'::jsonb,
+  info           JSONB NOT NULL DEFAULT '{}'::jsonb, -- redes, horarios, datos de la web, correos extra…
+  estado         TEXT NOT NULL DEFAULT 'nuevo',    -- nuevo | guardado | descartado
+  nota           TEXT,
+  created_at     TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at     TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS prospect_pool_oportunidad_idx ON prospect_pool (oportunidad DESC);

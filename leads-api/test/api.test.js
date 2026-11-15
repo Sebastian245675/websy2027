@@ -23,7 +23,7 @@ const call = async (path, { method = 'GET', body, ip = '10.0.0.1', auth = true }
 };
 
 test.before(async () => {
-  await pool.query('DROP TABLE IF EXISTS leads, whatsapp_clicks, firestore_archive, outreach_prospects, outreach_messages');
+  await pool.query('DROP TABLE IF EXISTS leads, whatsapp_clicks, firestore_archive, outreach_prospects, outreach_messages, prospect_pool');
   await start();
 });
 test.after(async () => {
@@ -122,4 +122,36 @@ test('prospección: el lote se guarda, se actualiza y no duplica mensajes', asyn
   assert.strictEqual(panel.body.prospects[0].reunion, 'martes 18/11, 10:00 h de Colombia');
   const msgs = await call(`/panel/outreach/messages?key=${encodeURIComponent('wa:573000000000')}`);
   assert.strictEqual(msgs.body.length, 1);
+});
+
+test('posibles clientes: carga con token, marca los que ya están en campaña y se descartan desde el panel', async () => {
+  const load = (items) => fetch(`${BASE}/outreach/pool`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-Outreach-Token': 'token-de-prueba' },
+    body: JSON.stringify({ items }),
+  });
+  assert.strictEqual((await call('/outreach/pool', { method: 'POST', body: { items: [] } })).status, 401);
+  const r = await load([
+    { id: 'ChIJ-uno', nombre: 'Dental Sonrisa', pais: 'CO', whatsapp: '573000000000', rating: 4.7, resenas: 120, oportunidad: 80, motivos: ['No tiene página web'], info: { instagram: 'https://instagram.com/x' } },
+    { id: 'ChIJ-dos', nombre: 'Taller Pérez', pais: 'MX', email: 'hola@taller.mx', oportunidad: 40 },
+  ]);
+  assert.strictEqual(r.status, 200);
+  let list = await call('/panel/pool');
+  assert.strictEqual(list.body.length, 2);
+  assert.strictEqual(list.body[0].nombre, 'Dental Sonrisa');
+  assert.strictEqual(list.body[0].rating, 4.7);
+  assert.ok(list.body[0].enCampana); // wa:573000000000 ya está en una campaña por la prueba anterior
+  assert.strictEqual(list.body[1].enCampana, null);
+  assert.deepStrictEqual(list.body[0].motivos, ['No tiene página web']);
+
+  const upd = await call('/panel/pool/ChIJ-dos', { method: 'PATCH', body: { estado: 'descartado', nota: 'franquicia' } });
+  assert.strictEqual(upd.body.estado, 'descartado');
+  assert.strictEqual((await call('/panel/pool/ChIJ-dos', { method: 'PATCH', body: { estado: 'otro' } })).status, 400);
+  // Recargar no pisa lo hecho en el panel
+  await load([{ id: 'ChIJ-dos', nombre: 'Taller Pérez', oportunidad: 45 }]);
+  list = await call('/panel/pool');
+  const dos = list.body.find((p) => p.id === 'ChIJ-dos');
+  assert.strictEqual(dos.estado, 'descartado');
+  assert.strictEqual(dos.nota, 'franquicia');
+  assert.strictEqual(dos.oportunidad, 45);
 });

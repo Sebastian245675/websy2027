@@ -9,8 +9,10 @@
 //   GET /api/panel/leads  ·  PATCH /api/panel/leads/:id {status, note}  ·  DELETE /api/panel/leads/:id
 //   GET /api/panel/whatsapp-clicks  ·  GET /api/panel/archive
 //   GET /api/panel/outreach  ·  GET /api/panel/outreach/messages?key=…   (centro de prospección)
+//   GET /api/panel/pool  ·  PATCH /api/panel/pool/:id {estado, nota}   (posibles clientes)
 // Servidores de campaña (token X-Outreach-Token = OUTREACH_TOKEN):
 //   POST /api/outreach/ingest {prospects: [...], messages: [...]}
+//   POST /api/outreach/pool {items: [...]}
 const http = require('http');
 const crypto = require('crypto');
 const fs = require('fs');
@@ -150,6 +152,14 @@ const tokenOk = (given) => {
   return crypto.timingSafeEqual(a, b);
 };
 const ts = (v) => (v ? new Date(v) : null);
+const POOL_STATES = ['nuevo', 'guardado', 'descartado'];
+const num = (v) => (v === undefined || v === null || v === '' || Number.isNaN(Number(v)) ? null : Number(v));
+const poolRow = (r) => ({
+  id: r.id, pais: r.pais, ciudad: r.ciudad, rubro: r.rubro, nombre: r.nombre, telefono: r.telefono, whatsapp: r.whatsapp, email: r.email,
+  web: r.web, direccion: r.direccion, rating: r.rating === null ? null : Number(r.rating), resenas: r.resenas, mapsUrl: r.maps_url,
+  oportunidad: r.oportunidad, servicio: r.servicio, motivos: r.motivos, info: r.info, estado: r.estado, nota: r.nota,
+  enCampana: r.en_campana || null, createdAt: r.created_at, updatedAt: r.updated_at,
+});
 
 // ---------- rutas ----------
 
@@ -311,6 +321,67 @@ const routes = {
     send(res, 200, rows.map((r) => ({ id: String(r.id), at: r.at, de: r.de, tipo: r.tipo, texto: r.texto })));
   },
 
+  // Carga o actualiza posibles clientes; no pisa el estado ni la nota que se pusieron desde el panel
+  'POST /api/outreach/pool': async (req, res) => {
+    if (!tokenOk(req.headers['x-outreach-token'])) return send(res, 401, { error: 'Token inválido' });
+    const body = await readJson(req, 30_000_000);
+    const items = Array.isArray(body.items) ? body.items.slice(0, 20000) : [];
+    const client = await pool.connect();
+    let n = 0;
+    try {
+      await client.query('BEGIN');
+      for (const p of items) {
+        const id = str(p.id, 300);
+        if (!id) continue;
+        await client.query(
+          `INSERT INTO prospect_pool (id, pais, ciudad, rubro, nombre, telefono, whatsapp, email, web, direccion, rating, resenas, maps_url, oportunidad, servicio, motivos, info)
+           VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17)
+           ON CONFLICT (id) DO UPDATE SET pais=$2, ciudad=$3, rubro=$4, nombre=$5, telefono=$6, whatsapp=$7, email=$8, web=$9, direccion=$10,
+             rating=$11, resenas=$12, maps_url=$13, oportunidad=$14, servicio=$15, motivos=$16, info=$17, updated_at=now()`,
+          [id, str(p.pais, 10), str(p.ciudad, 120), str(p.rubro, 120), str(p.nombre, 300), str(p.telefono, 60), str(p.whatsapp, 30), str(p.email, 200),
+            str(p.web, 500), str(p.direccion, 500), num(p.rating), num(p.resenas), str(p.mapsUrl, 500), Math.max(0, Math.min(100, Math.round(num(p.oportunidad) || 0))),
+            str(p.servicio, 120), JSON.stringify(Array.isArray(p.motivos) ? p.motivos.slice(0, 20) : []), p.info && typeof p.info === 'object' ? p.info : {}],
+        );
+        n += 1;
+      }
+      await client.query('COMMIT');
+      send(res, 200, { ok: true, items: n });
+    } catch (err) {
+      await client.query('ROLLBACK');
+      throw err;
+    } finally {
+      client.release();
+    }
+  },
+
+  // Posibles clientes, marcando los que ya están en una campaña (mismo WhatsApp o correo)
+  'GET /api/panel/pool': async (req, res) => {
+    const { rows } = await pool.query(`SELECT p.*, (SELECT o.estado FROM outreach_prospects o
+        WHERE (p.whatsapp IS NOT NULL AND o.key = 'wa:' || p.whatsapp) OR (p.email IS NOT NULL AND o.key = 'email:' || lower(p.email)) LIMIT 1) AS en_campana
+      FROM prospect_pool p ORDER BY p.oportunidad DESC, p.resenas DESC NULLS LAST LIMIT 20000`);
+    send(res, 200, rows.map(poolRow));
+  },
+
+  'PATCH /api/panel/pool/:id': async (req, res, id) => {
+    const body = await readJson(req);
+    const sets = [];
+    const vals = [];
+    if (body.estado !== undefined) {
+      if (!POOL_STATES.includes(body.estado)) return send(res, 400, { error: 'Estado inválido' });
+      vals.push(body.estado);
+      sets.push(`estado = $${vals.length}`);
+    }
+    if (body.nota !== undefined) {
+      vals.push(str(body.nota, 5000));
+      sets.push(`nota = $${vals.length}`);
+    }
+    if (!sets.length) return send(res, 400, { error: 'Nada para actualizar' });
+    vals.push(id);
+    const { rows } = await pool.query(`UPDATE prospect_pool SET ${sets.join(', ')}, updated_at = now() WHERE id = $${vals.length} RETURNING *`, vals);
+    if (!rows.length) return send(res, 404, { error: 'No existe' });
+    send(res, 200, poolRow(rows[0]));
+  },
+
   'GET /api/panel/archive': async (req, res) => {
     const counts = await pool.query('SELECT collection, count(*)::int AS n, min(created_at) AS desde, max(created_at) AS hasta FROM firestore_archive GROUP BY collection ORDER BY collection');
     const latest = await pool.query(`SELECT collection, firestore_id, created_at, data FROM (
@@ -325,6 +396,8 @@ const match = (method, url) => {
   if (routes[`${method} ${p}`]) return [routes[`${method} ${p}`]];
   const m = p.match(/^(\/api\/panel\/leads)\/(\d+)$/);
   if (m && routes[`${method} ${m[1]}/:id`]) return [routes[`${method} ${m[1]}/:id`], m[2]];
+  const pm = p.match(/^\/api\/panel\/pool\/([A-Za-z0-9_-]{1,300})$/);
+  if (pm && routes[`${method} /api/panel/pool/:id`]) return [routes[`${method} /api/panel/pool/:id`], pm[1]];
   return null;
 };
 
