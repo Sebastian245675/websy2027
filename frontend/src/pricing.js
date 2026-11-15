@@ -27,6 +27,20 @@ export const PLAN_PRICES = {
   corpo: { min: 10000 },
 };
 
+export const SEO_MONTHLY_PRICE_USD = 200;
+export const SEO_PRICING_UPDATED_AT = '19 de octubre de 2026';
+
+// Equivalencias comerciales del plan SEO mensual, redondeadas a partir de referencias
+// de bancos centrales del 19/10/2026. Se muestran como orientación y se confirman al contratar.
+const SEO_LOCAL_PRICES = {
+  AR: 310000,
+  CO: 635000,
+  MX: 3700,
+};
+
+export const seoLocalAmount = (countryCode) => SEO_LOCAL_PRICES[countryCode]
+  || localAmount(SEO_MONTHLY_PRICE_USD, countryCode);
+
 const roundCommercial = (value, step) => Math.round(value / step) * step;
 
 export const getMarket = (countryCode) => MARKET_PRICING[countryCode] || {
@@ -50,6 +64,18 @@ export const formatLocalAmount = (usd, countryCode) => {
 };
 
 export const formatUsdAmount = (usd) => `USD ${new Intl.NumberFormat('es-AR').format(usd)}`;
+
+export const formatSeoMonthlyPrice = (countryCode) => {
+  const market = getMarket(countryCode);
+  const amount = seoLocalAmount(countryCode);
+  return `${new Intl.NumberFormat(market.locale, {
+    style: 'currency',
+    currency: market.currency,
+    currencyDisplay: 'code',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(amount).replace(/\s+/g, ' ')}/mes`;
+};
 
 export const formatPrice = ({ min, max }, countryCode, { includeUsd = false } = {}) => {
   const market = getMarket(countryCode);

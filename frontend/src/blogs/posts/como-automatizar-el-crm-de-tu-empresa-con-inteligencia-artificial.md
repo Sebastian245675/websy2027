@@ -54,6 +54,19 @@ Supongamos una empresa que vende sistemas de gestión. Los criterios acordados c
 
 El vendedor recibe el contacto con el resumen, el puntaje y la sugerencia: "Preguntar presupuesto y proponer una reunión esta semana." Como los criterios son explícitos, el equipo entiende por qué una oportunidad tiene prioridad y puede ajustar las reglas.
 
+## Mejores CRM con IA
+
+Los CRM más usados ya traen funciones de inteligencia artificial incluidas. Las diferencias están en qué hace la IA y cuánto cuesta por usuario; las funciones y los planes cambian seguido, así que confírmalos en el sitio de cada uno.
+
+| CRM | Su IA | Para quién suele convenir |
+| --- | --- | --- |
+| HubSpot | Asistentes de IA para redactar correos, resumir contactos y priorizar oportunidades | Pymes que quieren marketing y ventas en el mismo lugar |
+| Salesforce | Einstein, su capa de IA para predicción y automatización | Empresas medianas y grandes con procesos complejos |
+| Zoho CRM | Zia, asistente para predicciones, alertas y búsquedas | Pymes que buscan muchas funciones a menor costo |
+| Pipedrive | Asistente de ventas con sugerencias sobre el embudo | Equipos comerciales chicos que venden por etapas |
+
+Si tu canal principal es WhatsApp, revisa cómo se conecta cada CRM: muchos lo hacen con una integración aparte o con automatizaciones.
+
 ## Opciones para implementarlo
 
 | Opción | Ventajas | Límites |
@@ -81,6 +94,10 @@ Más en [ley de protección de datos personales para empresas](/blog/como-proteg
 - **No capacitar al equipo**: si los vendedores no usan el CRM, ninguna IA lo va a salvar.
 
 ## Preguntas frecuentes
+
+### ¿Cuál es el mejor CRM con IA?
+
+Depende del tamaño del equipo y de dónde vienen los clientes. Para una pyme, HubSpot o Zoho CRM suelen ser el punto de partida; para procesos complejos, Salesforce. Si casi todo pasa por WhatsApp, puede convenir un CRM conectado con automatizaciones o uno a medida.
 
 ### ¿Qué es un CRM con inteligencia artificial?
 

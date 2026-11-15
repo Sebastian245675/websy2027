@@ -2,7 +2,7 @@ import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useLanguage } from '../LanguageContext';
 import { useScrollSpy } from '../hooks/useScrollSpy';
-import { CONTACT, whatsappUrl } from '../siteConfig';
+import { contactForPath, whatsappUrl } from '../siteConfig';
 
 // SVG icons inline
 const MenuIcon = ({ size = 24 }) => (
@@ -71,6 +71,7 @@ export const Navigation = () => {
   const { currentLanguage, changeLanguage, t, isLoading } = useLanguage();
   const navigate = useNavigate();
   const location = useLocation();
+  const regionalContact = contactForPath(location.pathname);
 
   // Section IDs for scroll spy - memoized to prevent infinite loops
   const sectionIds = useMemo(() => ['inicio', 'servicios', 'portfolio', 'planes', 'nosotros', 'testimonios', 'contacto'], []);
@@ -172,7 +173,7 @@ export const Navigation = () => {
               </div>
               <div className="flex flex-col leading-[1.1]">
                 <span className="opacity-70 text-[8px]">WHATSAPP</span>
-                <span className="font-bold">{CONTACT.phoneDisplay}</span>
+                <span className="font-bold">{regionalContact.phoneDisplay}</span>
               </div>
             </a>
           </div>
@@ -181,7 +182,7 @@ export const Navigation = () => {
             <div className="flex items-center space-x-2.5 border-r border-gray-300/80 pr-3">
               <a href="https://www.instagram.com/websyar" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Websy" className="hover:text-[#556902] transition-colors"><InstagramIcon size={14} /></a>
               <a href="https://www.facebook.com/share/18nU64kL9y/" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Websy" className="hover:text-[#556902] transition-colors"><FacebookIcon size={14} /></a>
-              <a href="https://www.tiktok.com/@websyar" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Websy" className="hover:text-[#556902] transition-colors"><TikTokIcon size={14} /></a>
+              <a href="https://www.tiktok.com/@websyarg1" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Websy" className="hover:text-[#556902] transition-colors"><TikTokIcon size={14} /></a>
               <a href="https://www.linkedin.com/company/websy-dev" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de Websy" className="hover:text-[#556902] transition-colors"><LinkedInIcon size={14} /></a>
             </div>
 

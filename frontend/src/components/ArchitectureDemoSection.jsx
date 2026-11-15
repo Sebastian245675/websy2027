@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  ArrowDownRight, ArrowLeft, ArrowRight, BedDouble, MessageCircle, PanelsTopLeft, Search, Smartphone, Workflow
+  ArrowDownRight, ArrowLeft, ArrowRight, BedDouble, CreditCard, Gauge, MessageCircle, PanelsTopLeft, Search, Smartphone, Sparkles, Workflow
 } from 'lucide-react';
 
 // Carrusel de demos por rubro (punto 17). Para sumar una demo, agregar un objeto a `demos`.
@@ -48,6 +48,25 @@ const demos = [
     tagline: 'Hotelería · Turismo · Reservas',
     image: '/mv-portfolio/hotel-palmalinda.png',
     imageAlt: 'Página de inicio de la demo de hotel boutique',
+    thumbs: [],
+  },
+  {
+    id: 'forja',
+    rubro: 'Infoproductores',
+    eyebrow: 'Cursos, mentorías y programas online',
+    title: 'Un lanzamiento que se recuerda y se paga.',
+    intro: <>La demo de <strong className="font-semibold text-[#263b36]">Forja</strong>, un programa de entrenamiento online, abre con video de entrenamientos reales y lleva directo a la reserva: método por fases, clases en video, coach, precios en cuotas y un checkout de muestra.</>,
+    details: [
+      { icon: Sparkles, title: 'Video en el hero', copy: 'Escenas reales de entrenamiento con el nombre de cada ejercicio.' },
+      { icon: Gauge, title: 'Carga inmediata', copy: 'Foto primero y video de 1 MB: lista para tráfico de anuncios.' },
+      { icon: CreditCard, title: 'Lista para cobrar', copy: 'Pago único o en cuotas, cuenta regresiva, garantía y checkout.' },
+    ],
+    url: 'https://www.websysrl.com/demos/infoproductores',
+    cta: 'Quiero una landing para mi curso',
+    name: 'Forja',
+    tagline: 'Fitness · Cursos online · Checkout',
+    image: '/demos/infoproductores/portada-vertical.jpg',
+    imageAlt: 'Portada de la demo Forja: atleta entrenando y el título Entrena como atleta',
     thumbs: [],
   },
 ];

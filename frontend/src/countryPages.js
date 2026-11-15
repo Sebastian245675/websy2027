@@ -12,6 +12,43 @@ const SITE_URL = 'https://www.websysrl.com';
 
 export const countryPages = [
   {
+    code: 'AR',
+    path: '/argentina',
+    hreflang: 'es-AR',
+    locale: 'es_AR',
+    name: 'Argentina',
+    caseMatch: 'Argentina',
+    seoTitle: 'Desarrollo Web en Argentina para Empresas | Websy',
+    seoDescription: 'Desarrollo web en Argentina para empresas: páginas rápidas, tiendas online, sistemas y SEO. Agencia de Salta con proyectos reales y precios claros.',
+    h1: ['Desarrollo web para empresas en', 'Argentina'],
+    lead: 'Diseñamos páginas web, tiendas online, sistemas de gestión y estrategias SEO para empresas argentinas. Trabajamos desde Salta con alcance nacional, precio cerrado, avances visibles y una estructura preparada para convertir búsquedas en consultas.',
+    highlights: ['Agencia argentina con atención nacional', 'Páginas web desde USD 800', 'SEO técnico desde el desarrollo', 'Pago en 3 partes'],
+    pill: 'Websy en Argentina: desarrollo web, sistemas y SEO',
+    answer: [
+      'Si buscas desarrollo web en Argentina, la web tiene que hacer tres trabajos: explicar con claridad qué vendes, convertir visitas en consultas y darle a Google una página sólida para cada servicio y ciudad que quieras posicionar. En Websy combinamos diseño, desarrollo y SEO técnico desde el inicio.',
+      'Somos una agencia de Salta y trabajamos con empresas de todo el país. Entregamos el alcance, el precio y el plazo por escrito; mostramos cada avance en un enlace de prueba y publicamos la web con el dominio registrado a nombre del cliente.',
+    ],
+    schedule: 'Trabajamos en horario de Argentina y coordinamos por videollamada y WhatsApp con empresas de todo el país.',
+    payment: 'El presupuesto se expresa en pesos argentinos con referencia en USD. Se paga en 3 partes: 30% al inicio, 30% a mitad del proyecto y 40% en la entrega, por Mercado Pago o Naranja X.',
+    domain: 'El dominio .com.ar o .com se registra a tu nombre y la web queda bajo tu control.',
+    storeNote: 'Para vender online integramos Mercado Pago, transferencia, envíos y facturación según el alcance del proyecto.',
+    rubros: [
+      { title: 'Empresas de servicios', text: 'Una página por servicio, casos reales y contacto inmediato para competir en búsquedas comerciales de alcance nacional o local.', to: '/casos-de-exito/paginas-web-para-empresas', link: 'Webs para empresas' },
+      { title: 'Estudios jurídicos y profesionales', text: 'Sitios que transmiten confianza, explican cada especialidad y facilitan una consulta urgente desde el celular.', to: '/casos-de-exito/paginas-web-para-abogados', link: 'Webs para profesionales' },
+      { title: 'Hoteles y turismo', text: 'Webs con reservas directas, galería, ubicación y SEO local para depender menos de plataformas con comisión.', to: '/casos-de-exito/paginas-web-para-hoteles', link: 'Webs para turismo' },
+      { title: 'Pymes con operación propia', text: 'Sistemas para stock, ventas, clientes y reportes conectados con la web o la tienda online.', to: '/servicios/sistemas-gestion', link: 'Sistemas de gestión' },
+    ],
+    faq: [
+      { q: '¿Trabajan con empresas de toda Argentina?', a: 'Sí. La agencia está en Salta y trabajamos a distancia con empresas de cualquier provincia mediante videollamadas, WhatsApp y avances visibles en línea.' },
+      { q: '¿Cuánto cuesta una página web en Argentina?', a: 'Una landing page o un sitio institucional parte de USD 800, convertido a pesos argentinos al acordar el proyecto. El alcance, el precio final, las cuotas y el plazo quedan por escrito antes de empezar.' },
+      { q: '¿La página incluye SEO?', a: 'Incluye la base técnica: contenido disponible en el HTML, URLs limpias, canonical, sitemap, datos estructurados, velocidad y medición. Para trabajar posiciones mes a mes ofrecemos un plan SEO mensual de USD 200.' },
+      { q: '¿Puedo posicionarme fuera de Salta?', a: 'Sí. La estrategia se organiza por servicio, provincia o ciudad según dónde puedas vender. Evitamos crear páginas repetidas: cada landing debe responder una intención real y aportar contenido propio.' },
+      { q: '¿Cómo se paga?', a: 'En 3 partes: 30% al inicio, 30% a mitad del proyecto y 40% en la entrega, mediante Mercado Pago o Naranja X.' },
+    ],
+    posts: ['desarrollo-web-argentina-mejores-empresas-como-contratar', 'cuanto-cuesta-pagina-web-argentina-2026', 'como-posicionar-mi-negocio-local-en-google-seo-local'],
+    waText: 'Hola Websy, les escribo desde Argentina. Quiero una cotización para mi proyecto.',
+  },
+  {
     code: 'CO',
     path: '/colombia',
     hreflang: 'es-CO',
@@ -22,12 +59,12 @@ export const countryPages = [
     seoTitle: 'Diseño y Desarrollo Web en Colombia | Agencia Websy',
     seoDescription: 'Diseño y desarrollo web en Colombia para empresas: páginas desde COP 3.000.000, tiendas y sistemas. Casos reales en Bogotá, Cali y Manizales.',
     h1: ['Agencia de diseño y desarrollo web para empresas en', 'Colombia'],
-    lead: 'Diseñamos y desarrollamos páginas web, tiendas virtuales, sistemas y automatizaciones para empresas y profesionales de Colombia. Ya trabajamos con abogados, psicólogos, una fábrica, un glamping y una productora de eventos de Bogotá, Cali y Manizales, todo a distancia y con precio cerrado antes de empezar.',
-    highlights: ['Páginas web desde COP 3.000.000', '7 proyectos publicados en Colombia', 'Videollamadas en horario de Colombia', 'Pago en 3 partes'],
+    lead: 'Diseñamos y desarrollamos páginas web, tiendas virtuales, sistemas y automatizaciones para empresas y profesionales de Colombia. Ya trabajamos con abogados, psicólogos, una fábrica, un glamping, una productora de eventos y un marketplace de repuestos de Bogotá, Cali y Manizales, todo a distancia y con precio cerrado antes de empezar.',
+    highlights: ['Páginas web desde COP 3.000.000', '8 proyectos publicados en Colombia', 'Videollamadas en horario de Colombia', 'Pago en 3 partes'],
     pill: 'Websy en Colombia: casos en Bogotá, Cali y Manizales',
     answer: [
       'Si buscas una empresa de desarrollo web en Colombia, necesitas algo más que un diseño atractivo: la página debe cargar rápido en el celular, explicar en segundos qué haces, permitir escribirte por WhatsApp y aparecer cuando buscan tu servicio en tu ciudad. En Websy hacemos eso desde COP 3.000.000, con el precio y el plazo por escrito antes de empezar.',
-      'Somos una agencia de Salta, Argentina, y trabajamos a distancia. Colombia es hoy el país desde donde más empresas nos encuentran, y ya publicamos siete proyectos para clientes colombianos: dos firmas de abogados penalistas, dos consultorios de psicología, una fábrica de protección industrial, un hotel glamping y una productora de eventos.',
+      'Somos una agencia de Salta, Argentina, y trabajamos a distancia. Colombia es hoy el país desde donde más empresas nos encuentran, y ya publicamos ocho proyectos para clientes colombianos: dos firmas de abogados penalistas, dos consultorios de psicología, una fábrica de protección industrial, un hotel glamping, una productora de eventos y un marketplace de repuestos para carros.',
     ],
     schedule: 'Argentina va 2 horas adelante de Colombia. Agendamos las videollamadas entre las 8 y las 16 h de Colombia, y por WhatsApp respondemos durante todo el día hábil.',
     payment: 'Mostramos los precios en pesos colombianos con su referencia en USD. Se paga en 3 partes (30% al empezar, 30% a mitad del proyecto y 40% en la entrega) con Dólar App o Binance.',
@@ -40,14 +77,14 @@ export const countryPages = [
       { title: 'Industria y servicios', text: 'ABO Colombia (forros y protección industrial) y Remix Producciones (eventos en Manizales): una web clara por servicio y el pedido de cotización a un toque.', to: '/casos-de-exito/paginas-web-para-empresas', link: 'Webs para empresas' },
     ],
     faq: [
-      { q: '¿Trabajan con empresas de Colombia sin tener oficina allá?', a: 'Sí. Trabajamos a distancia por videollamada y WhatsApp, y ya publicamos siete proyectos para clientes de Bogotá, Cali, Manizales y otras zonas de Colombia. Te mostramos el diseño antes de programar y cada avance en un enlace de prueba.' },
+      { q: '¿Trabajan con empresas de Colombia sin tener oficina allá?', a: 'Sí. Trabajamos a distancia por videollamada y WhatsApp, y ya publicamos ocho proyectos para clientes de Bogotá, Cali, Manizales y otras zonas de Colombia. Te mostramos el diseño antes de programar y cada avance en un enlace de prueba.' },
       { q: '¿Cuánto cuesta una página web para una empresa en Colombia?', a: 'Con Websy, una landing page o una página institucional arranca en COP 3.000.000; una tienda virtual cuesta entre COP 6.800.000 y 13.300.000, y un sistema de gestión entre COP 15.200.000 y 30.400.000. Son valores orientativos y el precio queda cerrado por escrito antes de empezar.' },
       { q: '¿Cómo pago desde Colombia?', a: 'En 3 partes: 30% al empezar, 30% a mitad del proyecto y 40% en la entrega, con Dólar App o Binance.' },
       { q: '¿En qué horario me atienden?', a: 'Argentina va 2 horas adelante de Colombia. Las videollamadas se agendan entre las 8 y las 16 h de Colombia.' },
       { q: '¿Pueden hacer una tienda virtual que cobre con PSE o Nequi?', a: 'Sí. La tienda se conecta con una pasarela que opere en Colombia, como Wompi, PayU, ePayco o Mercado Pago, según los medios de pago que quieras ofrecer.' },
       { q: '¿Me ayudan a aparecer en Google en mi ciudad?', a: 'Todas las webs salen preparadas para Google: rápidas, con una página por servicio, textos que nombran tu ciudad y datos estructurados de negocio. Para pelear los primeros puestos sumamos el servicio de SEO, con perfil de empresa en Google y contenido.' },
     ],
-    posts: ['desarrollo-software-colombia-empresas-bogota-medellin', 'mejor-hosting-para-paginas-web-en-argentina-colombia-mexico', 'automatizacion-whatsapp-negocios-guia-completa'],
+    posts: ['cuanto-cuesta-una-pagina-web-en-colombia-2026', 'como-crear-una-tienda-virtual-en-colombia-pagos-envios-costos', 'empresa-de-desarrollo-de-aplicaciones-moviles-en-colombia', 'desarrollo-software-colombia-empresas-bogota-medellin'],
     waText: 'Hola Websy, les escribo desde Colombia. Quiero una cotización para mi proyecto.',
   },
   {
@@ -84,7 +121,7 @@ export const countryPages = [
       { q: '¿En qué horario me atienden?', a: 'Argentina va 3 horas adelante de la Ciudad de México. Las videollamadas se agendan entre las 9 y las 15 h del centro de México.' },
       { q: '¿Cuánto tarda?', a: 'Una landing page, de 5 a 7 días hábiles; un sitio institucional, de 2 a 3 semanas; una tienda en línea, de 3 a 6 semanas. El plazo exacto queda por escrito en la cotización.' },
     ],
-    posts: ['desarrollo-web-mexico-empresas-cdmx-guadalajara-monterrey', 'stripe-vs-mercadopago-cual-pasarela-pagos-elegir-ecommerce', 'mejor-hosting-para-paginas-web-en-argentina-colombia-mexico'],
+    posts: ['cuanto-cuesta-una-pagina-web-en-mexico-2026', 'como-crear-una-tienda-en-linea-en-mexico-pagos-envios-facturacion', 'desarrollo-web-mexico-empresas-cdmx-guadalajara-monterrey'],
     waText: 'Hola Websy, les escribo desde México. Quiero una cotización para mi proyecto.',
   },
   {
@@ -119,7 +156,7 @@ export const countryPages = [
       { q: '¿Cuánto cuesta?', a: 'Una landing page o un sitio institucional arranca en USD 800; una tienda en línea, entre USD 1.800 y 3.500. La automatización de consultas se cotiza según el alcance. El precio queda cerrado por escrito antes de empezar.' },
       { q: '¿Cómo pago desde Estados Unidos?', a: 'En 3 partes: 30% al empezar, 30% a mitad del proyecto y 40% en la entrega, con Dólar App o Binance.' },
     ],
-    posts: ['automatizacion-whatsapp-negocios-guia-completa', 'chatbot-whatsapp-business-automatizar-respuestas-clientes'],
+    posts: ['pagina-web-bilingue-para-negocios-hispanos-en-estados-unidos', 'pagina-web-para-contratistas-y-remodelacion-en-estados-unidos', 'pagina-web-para-empresas-de-limpieza-en-estados-unidos', 'automatizacion-whatsapp-negocios-guia-completa'],
     waText: 'Hola Websy, les escribo desde Estados Unidos. Quiero una cotización para mi negocio.',
   },
 ];
@@ -130,7 +167,6 @@ export const countryPageByCode = (code) => countryPages.find((c) => c.code === c
 export const COUNTRY_ALTERNATES = [
   { hreflang: 'x-default', href: `${SITE_URL}/` },
   { hreflang: 'es', href: `${SITE_URL}/` },
-  { hreflang: 'es-AR', href: `${SITE_URL}/` },
   { hreflang: 'es-419', href: `${SITE_URL}/` },
   ...countryPages.map((c) => ({ hreflang: c.hreflang, href: `${SITE_URL}${c.path}` })),
 ];

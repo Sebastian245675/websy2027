@@ -14,7 +14,9 @@ En esta guía verás en qué se diferencia de un sitio web, la estructura de una
 
 Muchas empresas necesitan los dos: el sitio para posicionar y presentar la empresa, y landings para cada campaña.
 
-## Estructura de una landing que convierte
+## Estructura de una landing page que convierte
+
+La estructura de una landing page tiene 9 partes, en este orden. Cada una responde una duda del visitante antes de que la haga:
 
 1. **Título con el beneficio principal**: qué obtiene el visitante, en una frase.
 2. **Subtítulo** que aclara para quién es y cómo funciona.
@@ -25,6 +27,26 @@ Muchas empresas necesitan los dos: el sitio para posicionar y presentar la empre
 7. **Oferta y precio** o rango, si aplica.
 8. **Objeciones respondidas**: preguntas frecuentes.
 9. **Llamado a la acción repetido** al final.
+
+### Ejemplo de estructura para un servicio
+
+Así se vería la estructura de una landing page para un estudio contable que quiere conseguir clientes con anuncios:
+
+| Sección | Qué dice |
+| --- | --- |
+| Título | "Tu contabilidad al día sin perder tiempo cada mes" |
+| Subtítulo | Contabilidad para pymes y monotributistas, con un contador asignado |
+| Llamado a la acción | Botón "Consultar por WhatsApp" visible al abrir la página |
+| Beneficios | Vencimientos avisados, reportes mensuales, respuesta en el día |
+| Pruebas | Cantidad de clientes, reseñas de Google, años de experiencia |
+| Cómo funciona | 1. Nos escribes. 2. Revisamos tu situación. 3. Te pasamos el plan y el precio |
+| Oferta | Precio desde o "primera consulta sin costo" |
+| Preguntas frecuentes | ¿Qué pasa si estoy atrasado? ¿Cómo se paga? |
+| Llamado final | Mismo botón de WhatsApp |
+
+### Estructura de una landing page para vender un producto
+
+Para un producto, el orden cambia un poco: la foto o el video del producto va arriba junto al título, el precio aparece antes, y las pruebas se apoyan en reseñas de compradores y en la garantía o política de devolución.
 
 ## Cómo escribir cada parte
 
@@ -72,6 +94,10 @@ Una página web con un único objetivo, como generar una consulta o una venta, a
 ### ¿Cuál es la diferencia entre una landing page y una página web?
 
 La landing tiene un solo objetivo y se usa para campañas; el sitio web presenta toda la empresa, tiene varias secciones y busca posicionar en Google.
+
+### ¿Cuál es la estructura de una landing page?
+
+Título con el beneficio, subtítulo, llamado a la acción visible, beneficios, pruebas, cómo funciona, oferta, preguntas frecuentes y llamado a la acción repetido. Ese orden lleva al visitante desde "¿qué es esto?" hasta "quiero hacerlo".
 
 ### ¿Qué debe tener una landing page?
 

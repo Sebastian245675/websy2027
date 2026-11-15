@@ -16,6 +16,8 @@ export const clusters = [
     serviceLabel: 'Ver precios y planes de Websy',
     posts: [
       { slug: 'cuanto-cuesta-pagina-web-argentina-2026', kw: 'cuánto cuesta una página web en Argentina', intent: 'comercial', country: 'AR' },
+      { slug: 'cuanto-cuesta-una-pagina-web-en-colombia-2026', kw: 'cuánto cuesta una página web en Colombia', intent: 'comercial', country: 'CO' },
+      { slug: 'cuanto-cuesta-una-pagina-web-en-mexico-2026', kw: 'cuánto cuesta una página web en México', intent: 'comercial', country: 'MX' },
       { slug: 'cuanto-cuesta-desarrollar-una-app-movil-argentina-latam', kw: 'cuánto cuesta desarrollar una app', intent: 'comercial', country: 'LATAM' },
       { slug: 'cuanto-cuesta-mantener-una-aplicacion-movil-servidores-y-licencias', kw: 'cuánto cuesta mantener una app', intent: 'comercial', country: 'LATAM' },
       { slug: 'como-hacer-una-pagina-web-gratis-opciones-reales-ventajas-desventajas', kw: 'cómo hacer una página web gratis', intent: 'info', country: 'LATAM' },
@@ -24,6 +26,8 @@ export const clusters = [
       { slug: 'desarrollo-software-colombia-empresas-bogota-medellin', kw: 'desarrollo de software en Colombia', intent: 'comercial', country: 'CO' },
       { slug: 'desarrollo-web-mexico-empresas-cdmx-guadalajara-monterrey', kw: 'desarrollo web en México', intent: 'comercial', country: 'MX' },
       { slug: 'mejor-hosting-para-paginas-web-en-argentina-colombia-mexico', kw: 'mejor hosting para páginas web', intent: 'comercial', country: 'LATAM', service: '/servicios/desarrollo-web' },
+      { slug: 'cuanto-cuesta-una-landing-page-precio-2026', kw: 'cuánto cuesta una landing page', intent: 'comercial', country: 'LATAM' },
+      { slug: 'freelancer-o-agencia-para-hacer-una-pagina-web-cual-conviene', kw: 'freelancer o agencia para hacer una página web', intent: 'comercial', country: 'LATAM' },
     ],
   },
   {
@@ -55,6 +59,8 @@ export const clusters = [
       { slug: 'accesibilidad-web-wcag-que-es-como-implementarla', kw: 'accesibilidad web WCAG', intent: 'info', country: 'LATAM', service: '/servicios/ui-ux' },
       { slug: 'como-disenar-logo-profesional-para-empresa-guia-branding', kw: 'cómo diseñar un logo profesional', intent: 'info', country: 'LATAM', service: '/servicios/ui-ux' },
       { slug: 'como-disenar-un-formulario-de-contacto-de-alta-conversion', kw: 'formulario de contacto que convierte', intent: 'info', country: 'LATAM', service: '/servicios/ui-ux' },
+      { slug: 'pagina-web-bilingue-para-negocios-hispanos-en-estados-unidos', kw: 'página web bilingüe para negocios hispanos en Estados Unidos', intent: 'comercial', country: 'US' },
+      { slug: 'rediseno-de-pagina-web-cuando-conviene-cuanto-cuesta-sin-perder-seo', kw: 'rediseño de página web', intent: 'comercial', country: 'LATAM' },
     ],
   },
   {
@@ -97,6 +103,7 @@ export const clusters = [
       { slug: 'app-store-optimization-aso-como-posicionar-tu-app', kw: 'qué es ASO', intent: 'info', country: 'LATAM' },
       { slug: 'como-monetizar-una-app-movil-suscripciones-anuncios-in-app-purchases', kw: 'cómo monetizar una app', intent: 'info', country: 'LATAM' },
       { slug: 'seguridad-en-aplicaciones-moviles-cifrado-jwt-y-biometria', kw: 'seguridad en aplicaciones móviles', intent: 'info', country: 'LATAM' },
+      { slug: 'empresa-de-desarrollo-de-aplicaciones-moviles-en-colombia', kw: 'empresa de desarrollo de aplicaciones móviles en Colombia', intent: 'comercial', country: 'CO' },
     ],
   },
   {
@@ -118,6 +125,8 @@ export const clusters = [
       { slug: 'b2b-ecommerce-plataformas-de-venta-mayorista-online', kw: 'ecommerce B2B mayorista', intent: 'comercial', country: 'LATAM' },
       { slug: 'como-crear-un-marketplace-multivendedor-a-medida-argentina-latam', kw: 'cómo crear un marketplace', intent: 'info', country: 'LATAM' },
       { slug: 'headless-commerce-con-nextjs-shopify-storefront-api', kw: 'qué es headless commerce', intent: 'info', country: 'LATAM' },
+      { slug: 'como-crear-una-tienda-virtual-en-colombia-pagos-envios-costos', kw: 'cómo crear una tienda virtual en Colombia', intent: 'comercial', country: 'CO' },
+      { slug: 'como-crear-una-tienda-en-linea-en-mexico-pagos-envios-facturacion', kw: 'cómo crear una tienda en línea en México', intent: 'comercial', country: 'MX' },
     ],
   },
   {
@@ -216,6 +225,15 @@ export const clusters = [
       { slug: 'pagina-web-para-escuelas-colegios-institutos-educativos', kw: 'página web para colegios', intent: 'comercial', country: 'LATAM' },
       { slug: 'desarrollo-de-plataformas-edtech-e-learning-lms-a-medida', kw: 'plataforma e-learning a medida', intent: 'comercial', country: 'LATAM', service: '/servicios/sistemas-gestion' },
       { slug: 'desarrollo-de-software-fintech-pasarelas-prestamos-billeteras-virtuales', kw: 'desarrollo de software fintech', intent: 'comercial', country: 'LATAM', service: '/servicios/sistemas-gestion' },
+      { slug: 'pagina-web-para-tienda-de-repuestos-autopartes', kw: 'página web para tienda de repuestos', intent: 'comercial', country: 'LATAM' },
+      { slug: 'pagina-web-para-odontologos-consultorios-dentales', kw: 'página web para odontólogos', intent: 'comercial', country: 'LATAM' },
+      { slug: 'pagina-web-para-contratistas-y-remodelacion-en-estados-unidos', kw: 'página web para contratistas en Estados Unidos', intent: 'comercial', country: 'US' },
+      { slug: 'pagina-web-para-empresas-de-limpieza-en-estados-unidos', kw: 'página web para empresas de limpieza', intent: 'comercial', country: 'US' },
+      { slug: 'pagina-web-para-empresas-de-logistica-y-transporte', kw: 'página web para empresas de logística', intent: 'comercial', country: 'LATAM' },
+      { slug: 'pagina-web-para-fabricas-y-empresas-industriales', kw: 'página web para empresas industriales', intent: 'comercial', country: 'LATAM' },
+      { slug: 'pagina-web-para-productoras-de-eventos-sonido-iluminacion', kw: 'página web para productoras de eventos', intent: 'comercial', country: 'LATAM' },
+      { slug: 'pagina-web-para-clinicas-esteticas', kw: 'página web para clínicas estéticas', intent: 'comercial', country: 'LATAM' },
+      { slug: 'pagina-web-para-talleres-mecanicos', kw: 'página web para talleres mecánicos', intent: 'comercial', country: 'LATAM' },
     ],
   },
 ];

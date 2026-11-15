@@ -67,7 +67,7 @@ Pide que los archivos queden a tu nombre y con los derechos de uso cedidos.
 - **Muchos colores**: encarecen la impresión y se pierde coherencia.
 - **No probar en el celular**, donde la mayoría verá tu marca.
 
-## El logo es solo el comienzo de la identidad
+## Diseño de marca profesional: el logo es solo el comienzo
 
 La identidad visual incluye además colores, tipografías, estilo de fotos e íconos y tono de comunicación. Aplicada con coherencia en la web, las redes y los materiales, hace que la marca se reconozca. En la web, esa identidad se traduce en un sistema de diseño. Ver [qué es un design system](/blog/diseno-de-design-systems-figma-a-codigo-react).
 

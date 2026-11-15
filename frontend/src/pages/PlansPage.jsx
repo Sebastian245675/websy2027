@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { ArrowRight, Check } from 'lucide-react';
 import { SolucionesWebsySection } from '../components/SolucionesWebsySection';
 import { SEOHead } from '../components/SEOHead';
 import { FAQSection, PLANS_FAQ, faqSchema } from '../components/FAQSection';
 import useVisitorCountry from '../hooks/useVisitorCountry';
 import { saveCountry } from '../lib/geo';
-import { DEFAULT_MARKET, formatPrice, getMarket, MARKET_PRICING, PLAN_PRICES } from '../pricing';
+import { DEFAULT_MARKET, formatPrice, formatSeoMonthlyPrice, getMarket, MARKET_PRICING, PLAN_PRICES, SEO_MONTHLY_PRICE_USD, SEO_PRICING_UPDATED_AT } from '../pricing';
 
 const installments = [
   { pct: '30%', when: 'Al inicio' },
@@ -22,6 +23,7 @@ export const PlansPage = () => {
   }, [visitorCountry]);
 
   const market = getMarket(countryCode);
+  const seoCountryPath = { AR: '/argentina/seo', CO: '/colombia/seo', MX: '/mexico/seo' }[countryCode] || '/servicios/seo-marketing';
   const localizedFaq = [
     {
       q: `¿Cuánto cuesta una página web en ${market.country}?`,
@@ -86,6 +88,32 @@ export const PlansPage = () => {
       <div>
         <SolucionesWebsySection countryCode={countryCode} />
       </div>
+
+      <section className="bg-[#f4f7f9] py-14 md:py-20">
+        <div className="container mx-auto max-w-6xl px-5 lg:px-8">
+          <div className="overflow-hidden rounded-3xl bg-[#182A2C] text-white lg:grid lg:grid-cols-[1.1fr_.9fr]">
+            <div className="p-7 md:p-10 lg:p-12">
+              <p className="text-xs font-black uppercase tracking-[.2em] text-[#d9fb06]">Suscripción SEO</p>
+              <h2 className="mt-4 text-3xl font-black tracking-tight md:text-4xl">Seguimiento y mejora todos los meses</h2>
+              <p className="mt-5 max-w-2xl leading-relaxed text-white/75">Para ganar posiciones de forma sostenida: medimos búsquedas, corregimos SEO técnico, optimizamos contenido y trabajamos una prioridad comercial cada mes.</p>
+              <ul className="mt-7 grid gap-3 text-sm sm:grid-cols-2">
+                {['Auditoría y medición inicial', 'Seguimiento de posiciones', 'Mejoras técnicas y on-page', 'Una página prioritaria por mes', 'Enlazado interno y contenido', 'Informe y reunión mensual'].map((item) => (
+                  <li key={item} className="flex items-start gap-2.5"><Check size={17} className="mt-0.5 shrink-0 text-[#d9fb06]" />{item}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="flex flex-col justify-center bg-white/[.07] p-7 md:p-10 lg:p-12">
+              <p className="text-sm font-bold uppercase tracking-[.16em] text-white/60">En {market.country}</p>
+              <p className="mt-3 text-4xl font-black text-[#d9fb06]">{formatSeoMonthlyPrice(countryCode)}</p>
+              <p className="mt-2 font-semibold">Equivalente a USD {SEO_MONTHLY_PRICE_USD}/mes</p>
+              <p className="mt-5 text-sm leading-relaxed text-white/60">Conversión orientativa actualizada el {SEO_PRICING_UPDATED_AT}; se confirma al contratar.</p>
+              <Link to={seoCountryPath} className="mt-7 inline-flex w-fit items-center gap-2 rounded-full bg-[#d9fb06] px-6 py-3.5 font-bold text-[#182A2C] hover:bg-white">
+                Ver el plan completo <ArrowRight size={16} />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Formas de pago */}
       <section className="bg-[#182A2C] py-14 md:py-20">

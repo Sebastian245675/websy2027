@@ -6,6 +6,7 @@ import { CaseCard } from '../components/CaseStudyParts';
 import { caseStudies } from '../caseStudies';
 import { clusters } from '../blogs/clusters';
 import { getPostBySlug } from '../blogData';
+import { whatsappUrl } from '../siteConfig';
 
 // Guías del blog que apoyan a este servicio: la pilar y los posts del cluster que enlaza a esta página,
 // más los posts de otros clusters que declaran este servicio. Les pasa autoridad a los posts y le da
@@ -182,7 +183,8 @@ export const ServiceDetailPage = () => {
                   <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
                 </button>
                 <a
-                  href="https://wa.me/5493884846695"
+                  href={whatsappUrl(`Hola, vi el servicio de ${service.title} en la web de Websy y quiero cotizar.`)}
+                  data-wa-location="servicio_hero"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 border-2 border-white/20 text-white font-bold text-sm uppercase tracking-[0.15em] px-8 py-4 hover:bg-white/10 transition-all"
@@ -484,7 +486,8 @@ export const ServiceDetailPage = () => {
               {service.ctaText}
             </button>
             <a
-              href="https://wa.me/5493884846695"
+              href={whatsappUrl(`Hola, vi el servicio de ${service.title} en la web de Websy y quiero cotizar.`)}
+              data-wa-location="servicio_final"
               target="_blank"
               rel="noopener noreferrer"
               className="border-2 border-white/20 text-white font-black text-sm uppercase tracking-[0.15em] px-10 py-5 hover:bg-white/10 transition-all text-center"

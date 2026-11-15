@@ -8,13 +8,33 @@ export const CONTACT = {
   address: 'San Luis 2105, Salta',
 };
 
-export const whatsappUrl = (text) =>
-  `https://wa.me/${CONTACT.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ''}`;
+export const COLOMBIA_CONTACT = {
+  ...CONTACT,
+  phoneDisplay: '+57 305 357 7980',
+  whatsapp: '573053577980',
+};
+
+export const contactForCountry = (countryCode) => countryCode === 'CO' ? COLOMBIA_CONTACT : CONTACT;
+
+export const countryCodeForPath = (pathname = '') => {
+  if (pathname.startsWith('/colombia')) return 'CO';
+  if (pathname.startsWith('/mexico')) return 'MX';
+  if (pathname.startsWith('/argentina')) return 'AR';
+  return null;
+};
+
+export const contactForPath = (pathname = '') => contactForCountry(countryCodeForPath(pathname));
+
+export const whatsappUrl = (text, countryCode) => {
+  const pathCountry = typeof window !== 'undefined' ? countryCodeForPath(window.location.pathname) : null;
+  const contact = contactForCountry(countryCode || pathCountry);
+  return `https://wa.me/${contact.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ''}`;
+};
 
 export const SOCIAL = [
   { name: 'Instagram', url: 'https://www.instagram.com/websyar' },
   { name: 'Facebook', url: 'https://www.facebook.com/share/18nU64kL9y/' },
-  { name: 'TikTok', url: 'https://www.tiktok.com/@websyar' },
+  { name: 'TikTok', url: 'https://www.tiktok.com/@websyarg1' },
   { name: 'LinkedIn', url: 'https://www.linkedin.com/company/websy-dev' },
 ];
 

@@ -13,6 +13,10 @@ En esta guía verás la diferencia entre un CMS tradicional y uno headless, qué
 | Seguridad | Panel y sitio en el mismo lugar | Panel separado del sitio público |
 | Edición | Panel integrado | Panel del CMS, con vista previa si se configura |
 
+## Qué es la arquitectura headless
+
+"Headless" (sin cabeza) quiere decir que el sistema que guarda los datos no tiene una parte visible propia: la "cabeza", que es lo que ve el usuario, se construye aparte y se conecta por una API. La misma idea se aplica al contenido (headless CMS), a las tiendas ([headless commerce](/blog/headless-commerce-con-nextjs-shopify-storefront-api)) y a cualquier sistema que tenga que mostrar sus datos en una web, una app y otros canales a la vez.
+
 ## Qué es Jamstack
 
 Jamstack es un enfoque de arquitectura web: páginas generadas por adelantado y servidas desde una red global (CDN), contenido obtenido de APIs (como un headless CMS) y funciones dinámicas mediante servicios o funciones en el servidor. Hoy, con frameworks como Next.js que combinan generación estática y renderizado en el servidor, el término se usa menos, pero la idea sigue vigente: separar contenido y presentación, y servir lo máximo posible de forma estática.
@@ -72,6 +76,10 @@ Ver [migrar de WordPress a Next.js](/blog/como-migrar-de-wordpress-a-react-nextj
 ### ¿Qué es un headless CMS?
 
 Un gestor de contenidos que guarda el contenido y lo entrega por una API, sin definir cómo se ve; la web o la app lo muestran con su propio diseño.
+
+### ¿Qué significa headless?
+
+Que el sistema guarda y entrega los datos por una API, pero no decide cómo se muestran. El diseño de la web o de la app se hace aparte y toma el contenido de esa API.
 
 ### ¿Qué es Jamstack?
 

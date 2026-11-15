@@ -9,17 +9,25 @@
 - Plazos habituales: landing page en 5 a 7 días hábiles; sitio institucional en 2 a 3 semanas; tienda online en 3 a 6 semanas.
 - Forma de pago: 30% al inicio, 30% a mitad del proyecto y 40% en la entrega. Argentina: Naranja X o Mercado Pago. Exterior: Dólar App o Binance.
 - Rubros con proyectos publicados: estudios jurídicos, psicología, tiendas online, sistemas de gestión, industria y servicios, hotelería, inmobiliarias.
-- Contacto: WhatsApp +54 9 388 484-6695 · https://www.websysrl.com/contacto
+- Contacto por país: Colombia +57 305 357 7980; Argentina y México +54 9 388 484-6695 · https://www.websysrl.com/contacto
 - Precios y planes: https://www.websysrl.com/planes
 
 ## Por país
 
+- [Desarrollo web en Argentina](https://www.websysrl.com/argentina): páginas, tiendas, sistemas y automatizaciones para empresas argentinas, con precios en pesos y casos reales.
+- [SEO en Argentina](https://www.websysrl.com/argentina/seo): plan mensual de posicionamiento, mejoras técnicas y contenido por USD 200 al mes, con referencia en pesos argentinos.
 - [Desarrollo web en Colombia](https://www.websysrl.com/colombia): proyectos en Bogotá, Cali y Manizales; precios orientativos en pesos colombianos y pago desde Colombia.
-- [Diseño y desarrollo web en Bogotá](https://www.websysrl.com/colombia/desarrollo-web-bogota): servicio remoto, precios en COP y tres casos reales publicados en Bogotá.
+- [SEO en Colombia](https://www.websysrl.com/colombia/seo): plan mensual de posicionamiento nacional y local, con seguimiento e informe de resultados.
+- [Diseño y desarrollo web en Bogotá](https://www.websysrl.com/colombia/desarrollo-web-bogota): servicio remoto, precios en COP y cuatro casos reales publicados en Bogotá.
 - [Desarrollo web en Cali](https://www.websysrl.com/colombia/desarrollo-web-cali): páginas web, tiendas virtuales y automatización de marketing y WhatsApp para empresas de Cali; caso real de un despacho de abogados penalistas de Cali.
 - [Automatización de procesos en Colombia](https://www.websysrl.com/colombia/automatizacion-procesos): WhatsApp, CRM, n8n, agentes de IA e integraciones para empresas colombianas.
 - [Desarrollo web en México](https://www.websysrl.com/mexico): webs, tiendas en línea y sistemas multisucursal; precios orientativos en pesos mexicanos y pago desde México.
+- [SEO en México](https://www.websysrl.com/mexico/seo): plan mensual para mejorar búsquedas comerciales en México y sus ciudades.
 - [Diseño web en Ciudad de México](https://www.websysrl.com/mexico/diseno-web-cdmx): páginas web desde MXN 15.000, tiendas en línea con SPEI u OXXO y sistemas multisucursal para negocios de la CDMX; pago en 3 partes.
+- [Diseño web en Medellín](https://www.websysrl.com/colombia/desarrollo-web-medellin): páginas web desde COP 3.000.000, tiendas virtuales con PSE y Nequi y automatización de WhatsApp para empresas de Medellín y el Valle de Aburrá; servicio remoto.
+- [Diseño web en Barranquilla](https://www.websysrl.com/colombia/desarrollo-web-barranquilla): páginas web desde COP 3.000.000, tiendas virtuales y automatización de WhatsApp para empresas de Barranquilla y la Costa Caribe; servicio remoto.
+- [Diseño web en Monterrey](https://www.websysrl.com/mexico/diseno-web-monterrey): páginas web desde MXN 15.000, tiendas en línea y sistemas multisucursal para empresas industriales y de servicios de Monterrey; pago en 3 partes.
+- [Diseño web en Guadalajara](https://www.websysrl.com/mexico/diseno-web-guadalajara): páginas web desde MXN 15.000 y tiendas en línea con SPEI u OXXO para negocios de Guadalajara y Zapopan; pago en 3 partes.
 - [Automatización de procesos en México](https://www.websysrl.com/mexico/automatizacion-procesos): automatización empresarial con IA, WhatsApp, CRM y sistemas conectados.
 - [Websy en Estados Unidos](https://www.websysrl.com/estados-unidos): webs bilingües y automatización de consultas para negocios hispanos.
 - [Diseño web en Salta](https://www.websysrl.com/diseno-web-salta): oficina en San Luis 2105, Salta Capital.
@@ -31,7 +39,7 @@
 - [Tiendas E-commerce](https://www.websysrl.com/servicios/ecommerce): Una tienda online a medida cuesta entre USD 1.800 y 3.500 en Websy y está lista en 3 a 6 semanas, según la cantidad de productos y las integraciones.
 - [Aplicaciones Móviles](https://www.websysrl.com/servicios/aplicaciones-moviles): Una app para Android e iPhone cuesta desde USD 2.000 en Websy si es informativa o de catálogo, entre USD 3.000 y 5.000 si maneja turnos, pedidos o reservas, y desde USD 5.000 si tiene pagos, mapa en tiempo real o chat.
 - [Automatización de Procesos con IA](https://www.websysrl.com/servicios/automatizaciones-ia): Automatizamos procesos empresariales que hoy dependen de copiar datos, responder siempre lo mismo o perseguir tareas a mano.
-- [SEO & Marketing Digital](https://www.websysrl.com/servicios/seo-marketing): El servicio de SEO de Websy arranca en USD 300 por mes: SEO técnico, una página por servicio, contenido, perfil de empresa en Google y un informe mensual de qué búsquedas trajeron visitas y consultas.
+- [SEO & Marketing Digital](https://www.websysrl.com/servicios/seo-marketing): El plan mensual de SEO de Websy cuesta USD 200 por mes: seguimiento técnico, investigación de búsquedas, mejoras on-page, una página prioritaria por mes y un informe con posiciones, visitas y consultas.
 - [Sistemas CRM, ERP & Gestión](https://www.websysrl.com/servicios/sistemas-gestion): Un sistema de gestión a medida para una pyme cuesta entre USD 4.000 y 8.000 en Websy y se desarrolla por etapas: la primera ya se usa en el día a día.
 
 ## Ejemplos por rubro
@@ -55,6 +63,7 @@
 - [Tienda online para perfumería y regalería: VISFUM](https://www.websysrl.com/casos-de-exito/tienda-online-perfumeria-visfum): Tienda online de perfumería, regalería y productos para el hogar, hecha a medida.
 - [Tienda online con panel de administración: Regala Algo](https://www.websysrl.com/casos-de-exito/tienda-online-regalos-panel-admin-regala-algo): Tienda online de regalería y electrodomésticos con un panel administrativo propio para gestionar inventario, pedidos y análisis de ventas.
 - [E-commerce B2B de materiales eléctricos en Odoo: Covenant](https://www.websysrl.com/casos-de-exito/ecommerce-materiales-electricos-odoo-covenant): E-commerce de materiales eléctricos e iluminación profesional construido sobre Odoo.
+- [Marketplace de repuestos para carros en Colombia: R. Repuestos 24/7](https://www.websysrl.com/casos-de-exito/marketplace-repuestos-carros-colombia-r-repuestos-24-7): Marketplace de repuestos para carros con sede en Bogotá y envíos a toda Colombia.
 - [Tienda online para veterinaria y productos para mascotas: Animal Path](https://www.websysrl.com/casos-de-exito/tienda-online-veterinaria-animal-path): Sitio web de una clínica veterinaria con tienda online de productos para mascotas: collares, correas, pretales y ropa.
 - [Sistema de gestión para 4 sucursales con tienda online: bicicletería en México](https://www.websysrl.com/casos-de-exito/sistema-gestion-sucursales-tienda-online-bicicleteria-mexico): Sistema de gestión para una cadena de bicicletas con 4 sucursales en México, más una tienda online conectada al mismo sistema.
 - [Software de gestión ganadera a medida: Koziura](https://www.websysrl.com/casos-de-exito/software-gestion-ganadera-tambo-koziura): Sistema de gestión hecho a medida para una granja, con módulos de partos, registro de leche, control de movimientos, proveedores y otras funciones para administrar una operación ganadera completa.
@@ -64,10 +73,10 @@
 - [Página web para productora de eventos con SEO local: Remix Producciones](https://www.websysrl.com/casos-de-exito/pagina-web-productora-eventos-manizales-remix): Plataforma oficial de una productora con más de 20 años de experiencia en Manizales y el Eje Cafetero.
 - [Página web para fábrica de protección industrial: ABO Colombia](https://www.websysrl.com/casos-de-exito/pagina-web-fabrica-forros-industriales-abo-colombia): Sitio web para una empresa colombiana que fabrica forros y protección industrial y comercial.
 - [Web con automatización para empresa de paisajismo en Estados Unidos: STL Gold Landscaping](https://www.websysrl.com/casos-de-exito/web-y-automatizacion-paisajismo-estados-unidos-stl-gold): Sitio de servicios para una empresa de paisajismo y mantenimiento de jardines en St. Louis, con una automatización para responder consultas.
-- [Plataforma web para agencia de importación desde China: Konnect](https://www.websysrl.com/casos-de-exito/plataforma-web-importacion-china-konnect): Plataforma web y canal de venta digital para Konnect, empresa de agenciamiento y logística que importa productos de China a Latinoamérica.
 - [Página web para glamping y hotel boutique: Mágica Luna](https://www.websysrl.com/casos-de-exito/pagina-web-glamping-hotel-colombia-magica-luna): Sitio oficial de un hotel glamping de alta gama en Colombia, con una experiencia inmersiva que refleja la marca del lugar, reservas por WhatsApp y una optimización SEO pensada para que Google muestre el alojamiento con sus servicios y valoraciones.
 - [Plataforma web para inmobiliaria con buscador de propiedades: CASAMAX](https://www.websysrl.com/casos-de-exito/plataforma-inmobiliaria-propiedades-casamax): Plataforma inmobiliaria para descubrir propiedades con filtros por operación y tipo, fichas de detalle, favoritos, alertas e historial.
 - [Ejemplo de página web para estudio de arquitectura: Nórdica](https://www.websysrl.com/casos-de-exito/demo-pagina-web-estudio-arquitectura-nordica): Demo de sitio web para un estudio de arquitectura, diseño y construcción, con identidad visual editorial, servicios integrales, galería de proyectos y contacto directo por WhatsApp. Sirve como punto de partida para estudios que quieren ver cómo quedaría su web antes de encargarla.
+- [Ejemplo de landing page para infoproductores: Forja](https://www.websysrl.com/casos-de-exito/demo-landing-page-infoproductores-forja): Demo de landing de lanzamiento para un programa de entrenamiento online de 12 semanas: hero con video de entrenamientos reales que cambia de escena (fuerza, cardio, soga, cuerdas y kettlebell), el método en 8 fases, clases en video, presentación de la coach, testimonios con resultados, dos planes con pago único o en 3 cuotas, garantía, cuenta regresiva de preventa y un checkout de muestra.
 - [Landing page para servicios online: Cuervo Tarot](https://www.websysrl.com/casos-de-exito/landing-page-tarot-online-cuervo-tarot): Landing page para un servicio de lecturas de tarot y runas online.
 
 ## Más

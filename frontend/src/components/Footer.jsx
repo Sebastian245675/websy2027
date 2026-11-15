@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../LanguageContext';
-import { CONTACT, SOCIAL, whatsappUrl } from '../siteConfig';
+import { CONTACT, contactForPath, SOCIAL, whatsappUrl } from '../siteConfig';
 import { countryPages } from '../countryPages';
+import { cityPages } from '../cityPages';
 import { saveCountry } from '../lib/geo';
 
-const COUNTRY_LINKS = [{ code: 'AR', name: 'Argentina', path: '/' }, ...countryPages.map(({ code, name, path }) => ({ code, name, path }))];
+const COUNTRY_LINKS = countryPages.map(({ code, name, path }) => ({ code, name, path }));
 
 // SVG icons inline
 const icons = {
@@ -34,6 +35,7 @@ const icons = {
 export const Footer = () => {
   const { t, currentLanguage } = useLanguage();
   const { pathname } = useLocation();
+  const regionalContact = contactForPath(pathname);
   const currentYear = new Date().getFullYear();
 
   const regionalContent = pathname.startsWith('/colombia')
@@ -112,9 +114,16 @@ export const Footer = () => {
         <div className="bg-white md:bg-transparent px-6 pb-8 md:py-10">
           <h4 className={headingCls}>{t('footer.contactTitle')}</h4>
           <ul className="space-y-2">
-            <li><a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" data-wa-location="pie_telefono" className={linkCls}>{CONTACT.phoneDisplay}</a></li>
+            <li><a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" data-wa-location="pie_telefono" className={linkCls}>{regionalContact.phoneDisplay}</a></li>
             <li><a href={`mailto:${CONTACT.email}`} className={linkCls}>{CONTACT.email}</a></li>
             <li><Link to="/diseno-web-salta" className={linkCls}>{regionalContent?.address || CONTACT.address}</Link></li>
+          </ul>
+          {/* Enlace a cada página de ciudad desde todo el sitio: sin esto Google tardaba semanas en encontrarlas */}
+          <h4 className={`${headingCls} mt-8`}>Diseño web por ciudad</h4>
+          <ul className="space-y-2">
+            {cityPages.map((c) => (
+              <li key={c.slug}><Link to={c.path} className={linkCls}>{c.breadcrumb}</Link></li>
+            ))}
           </ul>
         </div>
 

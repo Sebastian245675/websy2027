@@ -7,8 +7,9 @@
 //   envio_formulario_contacto    · envío del formulario de contacto o de contacto rápido
 //   envio_formulario_auditoria   · envío del formulario de auditoría
 
-import { whatsappUrl } from '../siteConfig';
+import { whatsappUrl, contactForCountry, countryCodeForPath, CONTACT } from '../siteConfig';
 import { logWhatsAppClick } from './api';
+import { detectCountry } from './geo';
 
 const gaEvent = (name, params) => {
   if (window.gtag) window.gtag('event', name, params);
@@ -23,9 +24,11 @@ const tiktokTrack = (event, params) => {
 };
 
 // Cada clic a WhatsApp queda en PostgreSQL (leads-api) para verlo en el panel (/panel) junto a los formularios
+// El país va pegado a la ubicación ("blog_autor · CO") para ver en el panel de dónde escribe cada uno
 export const trackWhatsAppClick = (location) => {
-  logWhatsAppClick(location);
-  gaEvent('click_whatsapp', { link_location: location });
+  const country = detectCountry();
+  logWhatsAppClick(country ? `${location} · ${country}` : location);
+  gaEvent('click_whatsapp', { link_location: location, visitor_country: country || 'desconocido' });
   metaTrack('Contact', { content_name: location });
   tiktokTrack('Contact', { content_name: location });
 };
@@ -60,9 +63,24 @@ export const withOrigin = (url) => {
   }
 };
 
+// Fuera de las páginas por país (blog, servicios, inicio) el HTML prerenderizado trae el número por defecto.
+// Al hacer clic se cambia por el del país del visitante: un colombiano que lee el blog escribe al número
+// de Colombia y no a uno de Argentina (antes esas consultas llegaban al número equivocado o no llegaban).
+export const withVisitorNumber = (url) => {
+  try {
+    const u = new URL(url);
+    if (u.pathname.replace('/', '') !== CONTACT.whatsapp) return url;
+    const country = countryCodeForPath(window.location.pathname) || detectCountry();
+    u.pathname = `/${contactForCountry(country).whatsapp}`;
+    return u.toString();
+  } catch {
+    return url;
+  }
+};
+
 export const openWhatsApp = (text, location) => {
   trackWhatsAppClick(location);
-  window.open(withOrigin(whatsappUrl(text)), '_blank', 'noopener,noreferrer');
+  window.open(withOrigin(withVisitorNumber(whatsappUrl(text))), '_blank', 'noopener,noreferrer');
 };
 
 // Cualquier <a href="https://wa.me/..."> del sitio (incluidos los del blog) cuenta como clic a WhatsApp
@@ -73,7 +91,7 @@ export const installWhatsAppLinkTracking = () => {
     const link = e.target.closest && e.target.closest('a[href*="wa.me/"]');
     if (!link) return;
     trackWhatsAppClick(link.dataset.waLocation || window.location.pathname);
-    link.href = withOrigin(link.href);
+    link.href = withOrigin(withVisitorNumber(link.href));
   };
   document.addEventListener('click', handler, true);
   return () => document.removeEventListener('click', handler, true);

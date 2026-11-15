@@ -1,5 +1,7 @@
 **ASO (App Store Optimization) es el trabajo para que tu app aparezca más arriba cuando alguien busca en Google Play o App Store y para que, al ver la ficha, la descargue.** Se apoya en dos grupos de factores: los de búsqueda (nombre, subtítulo, palabras clave, descripción en Google Play) y los de conversión (ícono, capturas, video, calificación y reseñas), más el comportamiento de los usuarios después de instalar (uso, retención, desinstalaciones).
 
+Si aún no tienes la app, empieza por [cuánto cuesta crear una app](/blog/cuanto-cuesta-desarrollar-una-app-movil-argentina-latam) o por nuestro [servicio de desarrollo de apps](/servicios/aplicaciones-moviles).
+
 En esta guía verás qué campos indexa cada tienda, cómo elegir palabras clave, cómo diseñar capturas que conviertan, cómo conseguir mejores reseñas, cómo medir y un checklist para tu ficha.
 
 ## Qué campos usa cada tienda para la búsqueda

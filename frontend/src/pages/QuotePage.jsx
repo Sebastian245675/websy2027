@@ -4,7 +4,7 @@ import { ArrowRight, Check, ChevronRight, MessageCircle } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
 import { FAQSection, faqSchema } from '../components/FAQSection';
 import { saveLead } from '../lib/api';
-import { trackFormSubmit } from '../lib/tracking';
+import { openWhatsApp, trackFormSubmit } from '../lib/tracking';
 import { COUNTRIES, whatsappUrl } from '../siteConfig';
 
 // Cotizador: responde "cuánto cuesta una página web" con el rango oficial de cada tipo de proyecto y deja
@@ -143,6 +143,8 @@ export const QuotePage = () => {
     const phone = `${dial} ${contact.phone.trim()}`;
     const message = [`Cotizador: ${def.label}`, `Rango mostrado: ${result.range} (${result.time})`, ...result.summary, 'Página: /cotizador'].join('\n');
     const record = { name: contact.name.trim(), phone, whatsapp: phone, email: `Sin email · WhatsApp ${phone}`, projectType: def.label, budget: result.range, source: 'cotizador', message };
+    // WhatsApp se abre en el mismo clic: después del await el navegador lo bloquearía como ventana emergente
+    openWhatsApp(`Hola! Soy ${contact.name.trim()}. ${waText.replace(/^Hola! /, '')}`, 'cotizador_envio');
     try {
       await saveLead(record);
       trackFormSubmit('cotizador');
@@ -217,7 +219,7 @@ export const QuotePage = () => {
               <p className="mt-1 text-sm text-white/60">Pago en 3 partes: 30% al inicio, 30% a mitad del proyecto y 40% en la entrega.</p>
 
               {status === 'done' ? (
-                <p className="mt-8 flex items-start gap-2 text-lg font-semibold"><Check className="text-[#d9fb06] mt-1 shrink-0" /> Listo. Te escribimos por WhatsApp en el día hábil con la propuesta exacta.</p>
+                <p className="mt-8 flex items-start gap-2 text-lg font-semibold"><Check className="text-[#d9fb06] mt-1 shrink-0" /> Listo. Te abrimos WhatsApp con tu resultado: envía el mensaje y te respondemos en el día hábil con la propuesta exacta.</p>
               ) : (
                 <form onSubmit={submit} className="mt-8 grid md:grid-cols-[1fr_1.3fr_auto] gap-3 items-end">
                   <div>
@@ -237,7 +239,7 @@ export const QuotePage = () => {
                     </div>
                   </div>
                   <button type="submit" disabled={status === 'sending'} className="rounded-lg bg-[#d9fb06] text-[#182A2C] font-black px-6 py-3.5 hover:bg-white disabled:opacity-60">
-                    {status === 'sending' ? 'Enviando...' : 'Quiero la propuesta exacta'}
+                    {status === 'sending' ? 'Enviando...' : 'Enviar por WhatsApp'}
                   </button>
                   {status === 'error' && <p className="md:col-span-3 text-sm text-red-300">No pudimos enviarlo. Escribinos por WhatsApp.</p>}
                 </form>

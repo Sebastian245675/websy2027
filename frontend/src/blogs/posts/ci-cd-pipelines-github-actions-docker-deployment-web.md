@@ -2,6 +2,10 @@
 
 En esta guía verás qué es cada parte, cómo se arma un pipeline típico, un ejemplo con GitHub Actions, qué pruebas conviene automatizar y cómo empezar en un proyecto chico.
 
+## Qué es CI en GitHub
+
+En GitHub, la integración continua (CI) se hace con **GitHub Actions**: archivos de configuración dentro del repositorio (en la carpeta `.github/workflows`) que le dicen a GitHub qué hacer cada vez que alguien sube código o abre un pull request. Lo habitual es instalar las dependencias, ejecutar las pruebas y compilar el proyecto; si algo falla, GitHub lo marca en rojo en el pull request antes de que el cambio llegue a la rama principal. Sumando el despliegue automático (CD), el mismo flujo puede publicar la web cuando las pruebas pasan.
+
 ## CI y CD por separado
 
 | Parte | Qué hace | Beneficio |
@@ -94,6 +98,10 @@ La automatización del camino del código: cada cambio se compila y se prueba au
 ### ¿Para qué sirve en una empresa?
 
 Para publicar cambios con menos errores, con más frecuencia y con la posibilidad de volver atrás rápido si algo falla.
+
+### ¿Qué es CI en GitHub?
+
+Es la integración continua hecha con GitHub Actions: con cada cambio que se sube al repositorio, GitHub ejecuta automáticamente las pruebas y la compilación, y avisa en el pull request si algo falló.
 
 ### ¿GitHub Actions es gratis?
 

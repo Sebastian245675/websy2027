@@ -54,7 +54,7 @@
 
   <!-- Social Media Links for SEO -->
   <link rel="me" href="https://www.facebook.com/websyar" />
-  <link rel="me" href="https://www.tiktok.com/@websyar" />
+  <link rel="me" href="https://www.tiktok.com/@websyarg1" />
   <link rel="me" href="https://www.instagram.com/websyar" />
   <link rel="me" href="https://www.linkedin.com/company/websy-dev" />
 
@@ -98,16 +98,9 @@
             "addressRegion": "Salta",
             "addressCountry": "AR"
           },
-          "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+54-9-388-484-6695",
-            "contactType": "customer service",
-            "areaServed": ["AR", "MX", "CO", "US", "CL", "PE", "EC", "UY", "PY", "BO", "VE", "CR", "PA", "DO", "GT", "HN", "SV", "NI"],
-            "availableLanguage": ["Spanish", "English"]
-          },
           "sameAs": [
             "https://www.facebook.com/websyar",
-            "https://www.tiktok.com/@websyar",
+            "https://www.tiktok.com/@websyarg1",
             "https://www.instagram.com/websyar",
             "https://www.linkedin.com/company/websy-dev"
           ],
@@ -138,7 +131,6 @@
           "name": "Websy",
           "image": "https://www.websysrl.com/websy-logo.png",
           "url": "https://www.websysrl.com",
-          "telephone": "+54-9-388-484-6695",
           "email": "administracion@websysrl.com",
           "address": {
             "@type": "PostalAddress",
@@ -385,6 +377,8 @@
   <script>
     (function () {
       const trackingId = '%REACT_APP_GA_TRACKING_ID%';
+      // En el prerender no: react-snap guardaba el <script> de gtag en el HTML y cada visita lo cargaba dos veces
+      if (/ReactSnap/.test(navigator.userAgent)) return;
       if (trackingId && trackingId !== 'undefined' && trackingId !== 'G-XXXXXXXXXX') {
         const script = document.createElement('script');
         script.async = true;
@@ -432,10 +426,19 @@
       }(window, document, 'ttq');
     })();
   </script>
+
+  <!-- Metricool: no corre en el prerender, si no react-snap guarda su <script> en el HTML y se carga dos veces -->
+  <script>
+    (function () {
+      if (/ReactSnap/.test(navigator.userAgent)) return;
+      function loadScript(a) { var b = document.getElementsByTagName("head")[0], c = document.createElement("script"); c.type = "text/javascript", c.src = "https://tracker.metricool.com/resources/be.js", c.onreadystatechange = a, c.onload = a, b.appendChild(c) }
+      loadScript(function () { beTracker.t({ hash: "ec9aa0aa0d9642d502bd3060699f8881" }) });
+    })();
+  </script>
 </head>
 
 <body>
-  <noscript>Websy es una agencia de desarrollo web en Salta, Argentina: páginas web profesionales, tiendas e-commerce, aplicaciones móviles, sistemas CRM/ERP, automatizaciones con IA y SEO para toda Latinoamérica. Activá JavaScript para ver el sitio completo o escribinos por WhatsApp al +54 9 388 484-6695.</noscript>
+  <noscript>Websy desarrolla páginas web, tiendas e-commerce, aplicaciones, sistemas, automatizaciones y estrategias SEO para Latinoamérica. Activá JavaScript para ver el contacto correspondiente a tu país o escribinos a administracion@websysrl.com.</noscript>
   <div id="root"></div>
 
   <!-- PostHog - Deferred to not block main thread -->

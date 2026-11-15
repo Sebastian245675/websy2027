@@ -58,6 +58,17 @@ export const portfolio = [
     year: "2026"
   },
   {
+    id: 'demo-forja-infoproductores',
+    title: "Forja — Demo Websy para infoproductores",
+    description: "Demo de landing de lanzamiento para un programa de entrenamiento online: hero con video de entrenamientos reales y escenas sincronizadas, método por fases, clases en video, coach, testimonios con resultados, precios con pago único o en cuotas, garantía y checkout de muestra. HTML estático, sin librerías.",
+    image: "/demos/infoproductores/portada.jpg",
+    url: "https://www.websysrl.com/demos/infoproductores",
+    category: "Demo · Landing para infoproductores",
+    technologies: ["HTML", "CSS", "JavaScript", "Video"],
+    client: "Demo Websy",
+    year: "2026"
+  },
+  {
     id: 1,
     title: "M Logística y Distribución SRL",
     description: "Sitio web corporativo para empresa especializada en transporte premium de litio, hidróxido y carbonato para exportación. Diseño profesional y optimizado para SEO.",
@@ -212,17 +223,6 @@ export const portfolio = [
     year: "2026"
   },
   {
-    id: 15,
-    title: "Konnect",
-    description: "Plataforma oficial de servicios de conectividad e internet. Una solución robusta y moderna diseñada para ofrecer una experiencia de usuario fluida y profesional con alto rendimiento.",
-    image: "/Captura-de-pantalla-2026-04-18-152926.webp",
-    url: "https://konnectoficial.com/",
-    category: "Plataforma Web",
-    technologies: ["React", "Tailwind CSS", "Vite", "SEO"],
-    client: "Konnect",
-    year: "2026"
-  },
-  {
     id: 'hotel-palmalinda-demo',
     title: "Plantilla Web Hotel Boutique",
     description: "Demo de sitio web para hoteles campestres y hospedajes turísticos. Presenta habitaciones, tarifas y servicios, con un flujo de reservas directo por WhatsApp y estructura preparada para SEO local.",
@@ -298,12 +298,23 @@ export const portfolio = [
     technologies: ["React", "Next.js", "Tailwind CSS", "SEO Local", "WhatsApp"],
     client: "Dra. Nancy Melo",
     year: "2026"
+  },
+  {
+    id: 'r-repuestos-24-7',
+    title: "R. Repuestos 24/7 — Marketplace de repuestos",
+    description: "Marketplace de repuestos para carros en Colombia: búsqueda por marca, modelo y año, tiendas verificadas, pago protegido hasta la entrega y vendedores que cargan su inventario desde Excel.",
+    image: "/mv-portfolio/r-repuestos-24-7.png",
+    url: "https://24-7rrepuestos.com.co/",
+    category: "E-commerce · Marketplace de repuestos",
+    technologies: ["Expo", "React Native Web", "Marketplace", "PSE y Nequi", "SEO"],
+    client: "R. Repuestos 24/7",
+    year: "2026"
   }
 ];
 
 // Casos con resultados medibles: inicio (tarjetas) y /casos-de-exito (por portfolioId).
-// Pendiente de confirmar con Agustín: período del resultado de STL Gold, resultado del caso México
-// y rubro de Konnect (en el portfolio figura como conectividad e internet).
+// Pendiente de confirmar con Agustín: período del resultado de STL Gold y resultado del caso México.
+// Konnect se sacó del portafolio a pedido de Agustín (2026-11-07).
 export const caseResults = [
   {
     id: 'stl-gold',
@@ -327,17 +338,6 @@ export const caseResults = [
     metricLabel: 'en ventas (~USD 1.000 por mes)',
     details: ['+3.000 productos activos en la tienda', 'Inversión inicial de USD 600'],
     url: 'https://regalaalgosrl.com/'
-  },
-  {
-    id: 'konnect',
-    portfolioId: 15,
-    client: 'Konnect',
-    rubro: 'Importación y distribución Latam',
-    what: 'Plataforma web y canal de venta digital',
-    metric: 'ROI en 2 semanas',
-    metricLabel: 'recuperaron la inversión inicial',
-    details: ['+100 productos traídos a Latinoamérica'],
-    url: 'https://konnectoficial.com/'
   },
   {
     id: 'bicicletas-mx',

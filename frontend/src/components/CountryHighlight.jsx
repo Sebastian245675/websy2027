@@ -27,7 +27,7 @@ export const CountryHighlight = ({ country }) => {
               <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
             </Link>
             <a
-              href={whatsappUrl(page.waText)}
+              href={whatsappUrl(page.waText, page.code)}
               target="_blank"
               rel="noopener noreferrer"
               data-wa-location={`home_pais_${page.code.toLowerCase()}`}

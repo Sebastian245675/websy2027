@@ -108,7 +108,7 @@ export const CityWebPage = ({ slug }) => {
               </h1>
               <p className="mt-6 max-w-3xl text-lg md:text-xl leading-relaxed text-white/80">{city.lead}</p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <a href={whatsappUrl(city.waHero)} target="_blank" rel="noopener noreferrer" data-wa-location={`${city.slug}_hero`} className="inline-flex items-center gap-2 rounded-full bg-[#d9fb06] px-6 py-3.5 font-bold text-[#182A2C] hover:bg-white transition-colors">
+                <a href={whatsappUrl(city.waHero, city.country.code)} target="_blank" rel="noopener noreferrer" data-wa-location={`${city.slug}_hero`} className="inline-flex items-center gap-2 rounded-full bg-[#d9fb06] px-6 py-3.5 font-bold text-[#182A2C] hover:bg-white transition-colors">
                   <MessageCircle size={18} /> Cotizar mi web
                 </a>
                 <a href="#precios-ciudad" className="inline-flex items-center rounded-full border border-white/30 px-6 py-3.5 font-bold hover:bg-white/10">Ver precios en {getMarket(code).currency}</a>
@@ -265,7 +265,7 @@ export const CityWebPage = ({ slug }) => {
         <div className="container mx-auto px-5 max-w-3xl">
           <h2 className="text-3xl md:text-5xl font-black text-[#182A2C] tracking-tight">Cuéntanos qué necesita tu empresa</h2>
           <p className="mt-5 text-lg leading-relaxed text-slate-600">Te respondemos con una recomendación, el alcance y un valor estimado en {getMarket(code).currency}. Si buscas conectar la web con WhatsApp, CRM o tus sistemas, revisa también la <Link to={`${city.country.path}/automatizacion-procesos`} className={linkCls}>automatización de procesos en {city.country.name}</Link>.</p>
-          <a href={whatsappUrl(city.waClose)} target="_blank" rel="noopener noreferrer" data-wa-location={`${city.slug}_cierre`} className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#182A2C] px-7 py-4 font-bold text-white hover:bg-black"><MessageCircle size={18} /> Pedir propuesta <ArrowRight size={16} /></a>
+          <a href={whatsappUrl(city.waClose, city.country.code)} target="_blank" rel="noopener noreferrer" data-wa-location={`${city.slug}_cierre`} className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#182A2C] px-7 py-4 font-bold text-white hover:bg-black"><MessageCircle size={18} /> Pedir propuesta <ArrowRight size={16} /></a>
           {others.length > 0 && (
             <p className="mt-10 text-sm text-slate-500">
               También en {city.country.name}:{' '}

@@ -40,6 +40,18 @@ WhatsApp a un toque en todas las páginas, teléfono que se pueda tocar para lla
 
 La mayoría de las visitas llegan desde el teléfono. Una web que tarda en cargar pierde visitantes antes de que vean nada. Ver [cómo mejorar la velocidad de carga](/blog/velocidad-de-carga-web-como-optimizar-pagespeed-100).
 
+## 7 formas de conseguir clientes con tu página web
+
+1. **Aparecer en Google por cada servicio**: una página por servicio y por ciudad, con los textos que tu cliente escribe al buscar.
+2. **Tener el perfil de Google completo**, con fotos, horarios y reseñas, para salir en el mapa.
+3. **Llevar anuncios a una landing**: Google Ads o Meta, con una página pensada para esa campaña.
+4. **WhatsApp a un toque** en todas las páginas, con el mensaje ya escrito.
+5. **Mostrar pruebas**: casos reales, reseñas y fotos de tu trabajo.
+6. **Publicar precios o rangos**: filtra consultas y genera confianza.
+7. **Responder en minutos** y hacer seguimiento a quien no contestó.
+
+Abajo explicamos cada canal y cómo medir si está funcionando.
+
 ## De dónde vienen las visitas
 
 | Canal | Velocidad | Costo | Cuándo conviene |

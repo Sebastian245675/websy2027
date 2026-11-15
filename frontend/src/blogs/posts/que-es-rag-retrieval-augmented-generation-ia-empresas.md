@@ -35,6 +35,15 @@ Un modelo de lenguaje sabe mucho de temas generales, pero no conoce tu catálogo
 
 Para la mayoría de las empresas, RAG es la opción correcta: la información de un negocio cambia seguido y tiene que poder actualizarse sin tocar el modelo.
 
+## RAG empresarial: automatización con tus propios documentos
+
+Un RAG empresarial conecta un modelo de IA con la información de la empresa (manuales, políticas, catálogos, contratos, preguntas frecuentes) para que responda con esos datos y no con lo que "cree" saber. Lo que lo diferencia de un chatbot genérico es:
+
+- **Fuentes controladas**: responde solo con los documentos que la empresa cargó, y puede citar de dónde sacó cada respuesta.
+- **Permisos**: cada persona ve solo la información a la que tiene acceso.
+- **Actualización**: cuando cambia un documento, la respuesta cambia sin volver a entrenar nada.
+- **Integración**: se conecta con WhatsApp, el CRM o la intranet para automatizar respuestas y tareas.
+
 ## Casos de uso en empresas
 
 - **Atención al cliente**: un asistente en WhatsApp o en la web que responde con tu catálogo y tus políticas. Ver [cómo crear un chatbot con IA](/blog/como-crear-un-chatbot-con-ia-para-tu-empresa-openai-api).
@@ -73,6 +82,10 @@ Arma un set de preguntas reales con la respuesta correcta. Para cada una, revisa
 ### ¿Qué es RAG en inteligencia artificial?
 
 Es una técnica que busca información relevante en tus documentos y se la pasa al modelo de lenguaje para que responda con esos datos, en lugar de responder solo con lo que aprendió en su entrenamiento.
+
+### ¿Qué es un RAG empresarial?
+
+Es un sistema de IA que responde usando los documentos y datos internos de la empresa, con control de qué fuentes usa y quién puede ver cada información. Se usa para atención al cliente, soporte y bases de conocimiento internas.
 
 ### ¿Para qué sirve RAG en una empresa?
 

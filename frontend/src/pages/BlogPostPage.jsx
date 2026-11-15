@@ -8,6 +8,10 @@ import { clusterOf } from '../blogs/clusters';
 import { authorByName } from '../blogs/authors';
 import ogImages from '../blogs/ogImages.json';
 import { whatsappUrl } from '../siteConfig';
+import { AppCostCalculator } from '../components/AppCostCalculator';
+
+// Notas que llevan una calculadora en lugar del llamado de mitad de artículo
+const CALCULATOR_POSTS = ['cuanto-cuesta-desarrollar-una-app-movil-argentina-latam'];
 
 const SITE_URL = 'https://www.websysrl.com';
 
@@ -244,19 +248,32 @@ const splitAtMiddleHeading = (md) => {
 const isPricingPost = (post, mapped) =>
   (mapped && mapped.cluster.id === 'precios') || /cuanto-cuesta|precio|presupuesto/.test(post.slug);
 
-const MidArticleCta = ({ pricing, slug }) => (
+// Además del cotizador o la auditoría, WhatsApp directo: quien ya decidió no debería tener que pasar
+// por otra página y otro formulario para preguntar un precio.
+const MidArticleCta = ({ pricing, slug, title }) => (
   <aside className="my-10 rounded-2xl bg-[#182A2C] text-white p-6 md:p-8" aria-label={pricing ? 'Cotizador' : 'Auditoría gratis'}>
     <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#d9fb06]">{pricing ? 'Cotizador' : 'Auditoría web gratis'}</p>
     <p className="mt-2 text-xl md:text-2xl font-black leading-snug">
-      {pricing ? '¿Cuánto costaría tu proyecto? Calculalo en 1 minuto con nuestros precios publicados.' : '¿Tu web aplica esto? Te mandamos 3 mejoras concretas por WhatsApp, gratis.'}
+      {pricing ? '¿Cuánto costaría tu proyecto? Calcúlalo en 1 minuto con nuestros precios publicados o pregúntanos directo.' : '¿Tu web aplica esto? Te mandamos 3 mejoras concretas por WhatsApp, gratis.'}
     </p>
-    <Link
-      to={pricing ? '/cotizador' : '/auditoria-gratis'}
-      data-cta-location={`blog_medio_${slug}`}
-      className="mt-5 inline-flex items-center gap-2 rounded-full bg-[#d9fb06] px-6 py-3 text-sm font-black text-[#182A2C] hover:bg-white transition-colors"
-    >
-      {pricing ? 'Usar el cotizador' : 'Pedir mi auditoría gratis'} <FiArrowRight size={16} />
-    </Link>
+    <div className="mt-5 flex flex-wrap gap-3">
+      <Link
+        to={pricing ? '/cotizador' : '/auditoria-gratis'}
+        data-cta-location={`blog_medio_${slug}`}
+        className="inline-flex items-center gap-2 rounded-full bg-[#d9fb06] px-6 py-3 text-sm font-black text-[#182A2C] hover:bg-white transition-colors"
+      >
+        {pricing ? 'Usar el cotizador' : 'Pedir mi auditoría gratis'} <FiArrowRight size={16} />
+      </Link>
+      <a
+        href={whatsappUrl(`Hola, leí "${title}" en el blog de Websy y quiero saber cuánto costaría mi proyecto.`)}
+        data-wa-location="blog_medio"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 rounded-full border-2 border-[#25D366] px-6 py-3 text-sm font-black text-white hover:bg-[#25D366] transition-colors"
+      >
+        Preguntar por WhatsApp
+      </a>
+    </div>
   </aside>
 );
 
@@ -459,7 +476,9 @@ export const BlogPostPage = () => {
                 return (
                   <>
                     <MarkdownContent content={before} />
-                    {after && <MidArticleCta pricing={isPricingPost(post, mapped)} slug={post.slug} />}
+                    {after && (CALCULATOR_POSTS.includes(post.slug)
+                      ? <AppCostCalculator postTitle={post.title} />
+                      : <MidArticleCta pricing={isPricingPost(post, mapped)} slug={post.slug} title={post.title} />)}
                     {after && <MarkdownContent content={after} />}
                   </>
                 );
@@ -560,10 +579,10 @@ export const BlogPostPage = () => {
       <section className="py-16 bg-[#182A2C]">
         <div className="container mx-auto px-4 text-center max-w-3xl">
           <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
-            ¿Necesitás ayuda con tu proyecto?
+            ¿Necesitas ayuda con tu proyecto?
           </h2>
           <p className="text-gray-400 text-lg mb-8">
-            Cotización gratuita en el día hábil.
+            Cuéntanos qué necesitas y te respondemos por WhatsApp hoy mismo, con un precio por escrito en el día hábil.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link
@@ -573,7 +592,8 @@ export const BlogPostPage = () => {
               Solicitar cotización
             </Link>
             <a
-              href="https://wa.me/5493884846695"
+              href={whatsappUrl(`Hola, leí el artículo "${post.title}" en el blog de Websy y quiero cotizar un proyecto.`)}
+              data-wa-location="blog_final"
               target="_blank"
               rel="noopener noreferrer"
               className="border-2 border-white/20 text-white font-black text-sm uppercase tracking-[0.15em] px-10 py-5 hover:bg-white/10 transition-all text-center"

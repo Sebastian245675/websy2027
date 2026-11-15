@@ -1,5 +1,7 @@
 **Para publicar una app necesitas una cuenta de desarrollador en cada tienda (Google Play Console por USD 25 una sola vez y Apple Developer Program por USD 99 al año), la app compilada y firmada, una ficha con nombre, descripción, capturas e ícono, una política de privacidad y la declaración de qué datos usa la app; después la envías a revisión.** Google suele aprobar en pocos días; Apple revisa con más detalle y puede pedir cambios antes de publicar.
 
+Si todavía estás en la etapa de presupuesto, revisa antes [cuánto cuesta crear una app](/blog/cuanto-cuesta-desarrollar-una-app-movil-argentina-latam): las cuentas de las tiendas son solo una parte del costo total.
+
 En esta guía tienes el paso a paso para cada tienda, los requisitos que más rechazos generan, cómo preparar la ficha para que la app se descargue y qué hacer después del lanzamiento.
 
 ## Antes de empezar: cuentas a nombre de la empresa

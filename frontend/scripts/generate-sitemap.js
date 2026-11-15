@@ -20,15 +20,27 @@ const staticPages = [
   { loc: '/', page: 'pages/HomePage.jsx', changefreq: 'weekly', priority: '1.0' },
   { loc: '/servicios', page: 'pages/ServicesPage.jsx', changefreq: 'monthly', priority: '0.9' },
   { loc: '/planes', page: 'pages/PlansPage.jsx', changefreq: 'monthly', priority: '0.9' },
+  { loc: '/planes/estandar', page: 'pages/PlanDetailPage.jsx', changefreq: 'monthly', priority: '0.8' },
+  { loc: '/planes/comercio', page: 'pages/PlanDetailPage.jsx', changefreq: 'monthly', priority: '0.8' },
+  { loc: '/planes/pymes', page: 'pages/PlanDetailPage.jsx', changefreq: 'monthly', priority: '0.8' },
+  { loc: '/planes/corpo', page: 'pages/PlanDetailPage.jsx', changefreq: 'monthly', priority: '0.8' },
   { loc: '/diseno-web-salta', page: 'pages/SaltaPage.jsx', changefreq: 'monthly', priority: '0.9' },
   { loc: '/cotizador', page: 'pages/QuotePage.jsx', changefreq: 'monthly', priority: '0.9' },
   { loc: '/quienes-somos', page: 'pages/AboutPage.jsx', changefreq: 'yearly', priority: '0.6' },
   { loc: '/auditoria-gratis', page: 'pages/AuditPage.jsx', changefreq: 'monthly', priority: '0.9' },
+  { loc: '/argentina', page: 'pages/CountryPage.jsx', changefreq: 'monthly', priority: '0.9' },
+  { loc: '/argentina/seo', page: 'pages/SeoCountryPage.jsx', changefreq: 'monthly', priority: '0.9' },
   { loc: '/colombia', page: 'pages/CountryPage.jsx', changefreq: 'monthly', priority: '0.9' },
+  { loc: '/colombia/seo', page: 'pages/SeoCountryPage.jsx', changefreq: 'monthly', priority: '0.9' },
   { loc: '/colombia/desarrollo-web-bogota', page: 'pages/CityWebPage.jsx', changefreq: 'monthly', priority: '0.9' },
   { loc: '/colombia/desarrollo-web-cali', page: 'pages/CityWebPage.jsx', changefreq: 'monthly', priority: '0.9' },
   { loc: '/mexico', page: 'pages/CountryPage.jsx', changefreq: 'monthly', priority: '0.9' },
+  { loc: '/mexico/seo', page: 'pages/SeoCountryPage.jsx', changefreq: 'monthly', priority: '0.9' },
   { loc: '/mexico/diseno-web-cdmx', page: 'pages/CityWebPage.jsx', changefreq: 'monthly', priority: '0.9' },
+  { loc: '/colombia/desarrollo-web-medellin', page: 'pages/CityWebPage.jsx', changefreq: 'monthly', priority: '0.9' },
+  { loc: '/colombia/desarrollo-web-barranquilla', page: 'pages/CityWebPage.jsx', changefreq: 'monthly', priority: '0.9' },
+  { loc: '/mexico/diseno-web-monterrey', page: 'pages/CityWebPage.jsx', changefreq: 'monthly', priority: '0.9' },
+  { loc: '/mexico/diseno-web-guadalajara', page: 'pages/CityWebPage.jsx', changefreq: 'monthly', priority: '0.9' },
   { loc: '/colombia/automatizacion-procesos', page: 'pages/AutomationCountryPage.jsx', changefreq: 'monthly', priority: '0.9' },
   { loc: '/mexico/automatizacion-procesos', page: 'pages/AutomationCountryPage.jsx', changefreq: 'monthly', priority: '0.9' },
   { loc: '/estados-unidos', page: 'pages/CountryPage.jsx', changefreq: 'monthly', priority: '0.9' },
@@ -40,7 +52,7 @@ const staticPages = [
 // Routes in App.js that are deliberately not in the sitemap
 const NOT_IN_SITEMAP = ['/panel', '/panel-cotizaciones', '/lp/:slug', '*', '/desarrollo-web-salta', '/diseno-web-en-salta'];
 // Dynamic routes; their URLs come from services, case studies and blog posts below
-const DYNAMIC_ROUTES = ['/servicios/:slug', '/casos-de-exito/:slug', '/blog/:slug', '/autores/:slug'];
+const DYNAMIC_ROUTES = ['/planes/:planId', '/servicios/:slug', '/casos-de-exito/:slug', '/blog/:slug', '/autores/:slug'];
 
 // A new public route in App.js must be added to staticPages (or to one of the lists above)
 const appRoutes = [...fs.readFileSync(path.join(SRC, 'App.js'), 'utf8').matchAll(/<Route path="([^"]+)"/g)].map((m) => m[1]);
@@ -231,17 +243,25 @@ const llms = `# Websy
 - Plazos habituales: landing page en 5 a 7 días hábiles; sitio institucional en 2 a 3 semanas; tienda online en 3 a 6 semanas.
 - Forma de pago: 30% al inicio, 30% a mitad del proyecto y 40% en la entrega. Argentina: Naranja X o Mercado Pago. Exterior: Dólar App o Binance.
 - Rubros con proyectos publicados: estudios jurídicos, psicología, tiendas online, sistemas de gestión, industria y servicios, hotelería, inmobiliarias.
-- Contacto: WhatsApp +54 9 388 484-6695 · ${SITE_URL}/contacto
+- Contacto por país: Colombia +57 305 357 7980; Argentina y México +54 9 388 484-6695 · ${SITE_URL}/contacto
 - Precios y planes: ${SITE_URL}/planes
 
 ## Por país
 
+- [Desarrollo web en Argentina](${SITE_URL}/argentina): páginas, tiendas, sistemas y automatizaciones para empresas argentinas, con precios en pesos y casos reales.
+- [SEO en Argentina](${SITE_URL}/argentina/seo): plan mensual de posicionamiento, mejoras técnicas y contenido por USD 200 al mes, con referencia en pesos argentinos.
 - [Desarrollo web en Colombia](${SITE_URL}/colombia): proyectos en Bogotá, Cali y Manizales; precios orientativos en pesos colombianos y pago desde Colombia.
-- [Diseño y desarrollo web en Bogotá](${SITE_URL}/colombia/desarrollo-web-bogota): servicio remoto, precios en COP y tres casos reales publicados en Bogotá.
+- [SEO en Colombia](${SITE_URL}/colombia/seo): plan mensual de posicionamiento nacional y local, con seguimiento e informe de resultados.
+- [Diseño y desarrollo web en Bogotá](${SITE_URL}/colombia/desarrollo-web-bogota): servicio remoto, precios en COP y cuatro casos reales publicados en Bogotá.
 - [Desarrollo web en Cali](${SITE_URL}/colombia/desarrollo-web-cali): páginas web, tiendas virtuales y automatización de marketing y WhatsApp para empresas de Cali; caso real de un despacho de abogados penalistas de Cali.
 - [Automatización de procesos en Colombia](${SITE_URL}/colombia/automatizacion-procesos): WhatsApp, CRM, n8n, agentes de IA e integraciones para empresas colombianas.
 - [Desarrollo web en México](${SITE_URL}/mexico): webs, tiendas en línea y sistemas multisucursal; precios orientativos en pesos mexicanos y pago desde México.
+- [SEO en México](${SITE_URL}/mexico/seo): plan mensual para mejorar búsquedas comerciales en México y sus ciudades.
 - [Diseño web en Ciudad de México](${SITE_URL}/mexico/diseno-web-cdmx): páginas web desde MXN 15.000, tiendas en línea con SPEI u OXXO y sistemas multisucursal para negocios de la CDMX; pago en 3 partes.
+- [Diseño web en Medellín](${SITE_URL}/colombia/desarrollo-web-medellin): páginas web desde COP 3.000.000, tiendas virtuales con PSE y Nequi y automatización de WhatsApp para empresas de Medellín y el Valle de Aburrá; servicio remoto.
+- [Diseño web en Barranquilla](${SITE_URL}/colombia/desarrollo-web-barranquilla): páginas web desde COP 3.000.000, tiendas virtuales y automatización de WhatsApp para empresas de Barranquilla y la Costa Caribe; servicio remoto.
+- [Diseño web en Monterrey](${SITE_URL}/mexico/diseno-web-monterrey): páginas web desde MXN 15.000, tiendas en línea y sistemas multisucursal para empresas industriales y de servicios de Monterrey; pago en 3 partes.
+- [Diseño web en Guadalajara](${SITE_URL}/mexico/diseno-web-guadalajara): páginas web desde MXN 15.000 y tiendas en línea con SPEI u OXXO para negocios de Guadalajara y Zapopan; pago en 3 partes.
 - [Automatización de procesos en México](${SITE_URL}/mexico/automatizacion-procesos): automatización empresarial con IA, WhatsApp, CRM y sistemas conectados.
 - [Websy en Estados Unidos](${SITE_URL}/estados-unidos): webs bilingües y automatización de consultas para negocios hispanos.
 - [Diseño web en Salta](${SITE_URL}/diseno-web-salta): oficina en San Luis 2105, Salta Capital.

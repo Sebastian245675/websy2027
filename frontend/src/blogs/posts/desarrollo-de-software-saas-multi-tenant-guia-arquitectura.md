@@ -2,6 +2,20 @@
 
 Esta guía es para equipos técnicos y fundadores: compara los tres modelos, explica cómo garantizar el aislamiento de datos, cómo resolver la identificación del tenant, las migraciones, la personalización por cliente y los problemas que aparecen al escalar.
 
+## Qué es multi-tenant, con un ejemplo
+
+"Tenant" significa inquilino. En un software multi-tenant, cada cliente es un inquilino que usa el mismo edificio (la misma aplicación y los mismos servidores) pero tiene su propio departamento con llave (sus datos, sus usuarios y su configuración).
+
+Por ejemplo, un sistema de turnos que usan 200 clínicas: todas entran a la misma aplicación, pero cada clínica solo ve a sus pacientes y sus turnos. Lo contrario es single-tenant, donde cada cliente tiene su propia copia de la aplicación: más aislamiento, pero mucho más costo de mantenimiento.
+
+| | Multi-tenant | Single-tenant |
+| --- | --- | --- |
+| Aplicación | Una sola para todos los clientes | Una copia por cliente |
+| Costo por cliente | Bajo | Alto |
+| Actualizaciones | Una vez para todos | Una por cliente |
+| Aislamiento | Lógico (por diseño) | Físico (por instalación) |
+| Cuándo conviene | La mayoría de los SaaS | Clientes con exigencias de seguridad muy altas |
+
 ## Los tres modelos de multi-tenancy
 
 | Modelo | Cómo funciona | Ventajas | Desventajas | Conviene para |
@@ -67,6 +81,10 @@ Los clientes piden cambios. Para que el producto no se divida en versiones disti
 ### ¿Qué es una arquitectura multi-tenant?
 
 La forma en que una aplicación SaaS sirve a muchos clientes con el mismo sistema, manteniendo separados los datos de cada uno.
+
+### ¿Cuál es la diferencia entre multi-tenant y single-tenant?
+
+En multi-tenant todos los clientes comparten la misma aplicación con los datos separados; en single-tenant cada cliente tiene su propia instalación. Multi-tenant es más barato de operar y actualizar; single-tenant da aislamiento físico a cambio de más costo.
 
 ### ¿Qué modelo multi-tenant conviene?
 

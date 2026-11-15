@@ -56,6 +56,7 @@ export const PrivacyPolicyPage = () => (
         <p>Usamos estos servicios, que pueden instalar cookies o identificadores en tu navegador:</p>
         <ul className="list-disc pl-6 space-y-1">
           <li><strong>Google Analytics</strong>: estadísticas de visitas y conversiones.</li>
+          <li><strong>Metricool</strong>: estadísticas de visitas.</li>
           <li><strong>Píxel de Meta</strong> (Facebook e Instagram) y <strong>píxel de TikTok</strong>: medición de anuncios y audiencias.</li>
           <li><strong>PostHog</strong>: análisis de uso del sitio.</li>
           <li><strong>Google Maps / Places</strong>: para mostrar nuestras reseñas de Google.</li>

@@ -292,10 +292,10 @@ La automatización no reemplaza el criterio de tu equipo. Diseñamos alertas, ap
   'seo-marketing': {
     slug: 'seo-marketing',
     // Respuesta directa con número al abrir la página (modelo de la página de Salta)
-    answer: 'El servicio de SEO de Websy arranca en USD 300 por mes: SEO técnico, una página por servicio, contenido, perfil de empresa en Google y un informe mensual de qué búsquedas trajeron visitas y consultas. Es un trabajo de meses: los primeros resultados suelen verse entre el segundo y el cuarto mes.',
+    answer: 'El plan mensual de SEO de Websy cuesta USD 200 por mes: seguimiento técnico, investigación de búsquedas, mejoras on-page, una página prioritaria por mes y un informe con posiciones, visitas y consultas. Es un trabajo continuo: los primeros avances suelen verse entre el segundo y el cuarto mes.',
     title: 'SEO & Marketing Digital',
     seoTitle: 'Posicionamiento SEO y Marketing Digital para Pymes | Websy',
-    seoDescription: 'SEO técnico, contenido, SEO local y Google Ads para que tu empresa aparezca cuando buscan lo que vendés. Desde USD 300 por mes, con informes mensuales.',
+    seoDescription: 'Seguimiento SEO técnico, contenido y SEO local para ganar posiciones en Google. Plan mensual de USD 200 con mejoras e informe todos los meses.',
     seoKeywords: 'seo argentina, posicionamiento web salta, marketing digital, google ads argentina, agencia seo latinoamerica, posicionamiento google, sem, redes sociales marketing',
     icon: IconSearch,
     color: '#ef4444',
@@ -327,7 +327,7 @@ Complementamos con campañas de Google Ads y estrategias en redes sociales para 
       { question: '¿Puedo aparecer primero en Google?', answer: 'Sí, con una estrategia SEO bien ejecutada es posible posicionarte en las primeras posiciones para las palabras clave relevantes de tu industria. Hacemos un análisis de competencia previo para definir una estrategia realista y efectiva.' },
       { question: '¿Qué diferencia hay entre SEO y Google Ads?', answer: 'SEO es posicionamiento orgánico (gratuito, resultados sostenibles a largo plazo). Google Ads es publicidad paga (resultados inmediatos mientras pagás). Lo ideal es combinar ambas estrategias para maximizar resultados.' }
     ],
-    priceRange: 'Desde USD 300/mes',
+    priceRange: 'USD 200/mes',
     ctaText: 'Posicioná tu negocio',
     relatedServices: ['desarrollo-web', 'ecommerce', 'automatizaciones-ia']
   },

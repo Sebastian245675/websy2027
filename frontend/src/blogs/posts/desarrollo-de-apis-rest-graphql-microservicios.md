@@ -95,6 +95,10 @@ Además de consultar una API, muchos sistemas avisan de eventos con webhooks: Me
 
 Ninguno es mejor en general. REST es más simple y universal; GraphQL es más eficiente para pantallas que combinan muchos datos y para varios clientes con necesidades distintas.
 
+### ¿Cuándo usar GraphQL en vez de una API REST?
+
+Cuando distintas pantallas o apps necesitan combinaciones distintas de datos y hoy hacen muchas llamadas a una API REST para armar cada vista. Para APIs públicas, integraciones simples o con mucha caché, una API REST suele ser más simple.
+
 ### ¿GraphQL reemplaza a REST?
 
 No. Conviven: muchas empresas usan REST para integraciones con terceros y GraphQL para sus propias aplicaciones.

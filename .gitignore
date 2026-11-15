@@ -78,3 +78,5 @@ agenthub/agents/youtube/db
 
 # Mobile development
 android-sdk/ 
+# Respaldos comprimidos que no van al repositorio
+**/*.rar

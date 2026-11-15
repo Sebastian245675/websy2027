@@ -1,5 +1,7 @@
 **Las formas principales de monetizar una app son: suscripciones (pago recurrente por acceso o funciones), compras dentro de la app (pagos únicos por contenido o funciones), publicidad, freemium (gratis con funciones pagas), comisiones por transacción (en marketplaces) y venta de productos o servicios físicos.** La elección depende de qué valor entrega la app y cada cuánto se usa; y hay que tener en cuenta las comisiones de Google Play y App Store, que aplican a la venta de contenido digital.
 
+Para saber si el modelo cierra, compáralo con la inversión inicial: tienes los rangos en [cuánto cuesta crear una app](/blog/cuanto-cuesta-desarrollar-una-app-movil-argentina-latam).
+
 En esta guía comparamos los modelos, explicamos las reglas y comisiones de las tiendas, cómo elegir el precio, qué métricas seguir y los errores más comunes.
 
 ## Modelos de monetización
@@ -46,6 +48,17 @@ En esta guía comparamos los modelos, explicamos las reglas y comisiones de las 
 
 La regla básica: el LTV tiene que ser varias veces mayor que el CAC.
 
+## Cómo monetizar una aplicación web
+
+Una aplicación web (un sistema que se usa desde el navegador, como un panel de reservas, un CRM o una herramienta online) tiene una ventaja frente a las apps de las tiendas: **no paga la comisión de Google Play ni de App Store**, porque cobras directo con tu pasarela de pago. Los modelos que mejor funcionan:
+
+1. **Suscripción mensual o anual por usuario o por empresa**, cobrada con Stripe, Mercado Pago u otra pasarela con cobros recurrentes. Es el modelo de casi todo el software como servicio (SaaS).
+2. **Freemium**: un plan gratuito limitado y planes pagos con más usuarios, más funciones o más volumen.
+3. **Licencias para empresas**: un precio por organización, con soporte y configuración incluidos.
+4. **Comisión por transacción**, si la aplicación conecta compradores y vendedores.
+
+Si estás pensando en un producto así, lo explicamos paso a paso en [cómo crear un SaaS](/blog/como-crear-un-saas-desde-cero-guia-tecnica-negocio).
+
 ## Monetización según el tipo de app
 
 | Tipo de app | Modelos que suelen funcionar |
@@ -79,6 +92,10 @@ Con ese número se decide cuánto se puede invertir en conseguir usuarios y en m
 - **No medir** qué funciones valoran los usuarios que pagan.
 
 ## Preguntas frecuentes
+
+### ¿Cuál es la mejor forma de monetizar apps?
+
+La que se ajusta a cada cuánto se usa la app: si se usa todos los días, suscripción o freemium; si se usa de vez en cuando, compras dentro de la app o publicidad; si conecta a dos partes, comisión por transacción. Muchas apps combinan dos modelos.
 
 ### ¿Cómo gana dinero una app gratuita?
 

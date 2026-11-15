@@ -1,6 +1,6 @@
 **Desarrollar una app móvil para Android e iOS cuesta, en 2026, desde unos USD 2.000 para una app sencilla (catálogo, turnos, contacto) y desde unos USD 5.000 para una app con pagos, mapas en tiempo real o mensajería.** Encima del desarrollo hay que sumar las cuentas de desarrollador (USD 99 por año en Apple y USD 25 por única vez en Google), el servidor y el mantenimiento anual.
 
-El precio depende de qué hace la app, no de cuántas pantallas tiene. En esta guía verás los rangos por tipo de app, qué hace subir el presupuesto, cuánto se tarda, qué costos llegan después del lanzamiento y cómo bajar el costo sin arruinar el producto.
+Si quieres un número para tu caso, más abajo tienes una [calculadora](#calculadora) que te da el rango en un minuto. El precio depende de qué hace la app, no de cuántas pantallas tiene. En esta guía verás los rangos por tipo de app, qué hace subir el presupuesto, cuánto se tarda, qué costos llegan después del lanzamiento y cómo bajar el costo sin arruinar el producto.
 
 ## Precio de una app según el tipo
 
@@ -11,7 +11,7 @@ El precio depende de qué hace la app, no de cuántas pantallas tiene. En esta g
 | App con pagos y operación en tiempo real | Pasarela de pago, seguimiento en mapa, chat, roles (cliente, repartidor, admin) | Desde 5.000 | 10 a 16 semanas |
 | Plataforma tipo marketplace o fintech | Varias apps conectadas, billetera, validación de identidad, alta seguridad | Se cotiza por alcance | Más de 4 meses |
 
-Para tener una referencia en moneda local (tipo de cambio de octubre de 2026): USD 2.000 son unos 2.920.000 pesos argentinos, 6.600.000 pesos colombianos o 36.400 pesos mexicanos. USD 5.000 son unos 7.300.000 ARS, 16.500.000 COP o 91.000 MXN.
+Para tener una referencia en moneda local (con las tasas de referencia de Websy de octubre de 2026): USD 2.000 son unos 2.930.000 pesos argentinos, 7.600.000 pesos colombianos o 37.000 pesos mexicanos. USD 5.000 son unos 7.310.000 ARS, 19.000.000 COP o 92.500 MXN. En España, USD 2.000 son unos 1.850 € y USD 5.000, unos 4.600 €.
 
 Si ves presupuestos de USD 500 o 1.000 por "una app", suele tratarse de una web envuelta en una app, de una plantilla genérica o de un trabajo que no incluye el panel de administración ni la publicación en las tiendas. Pregunta siempre qué queda afuera.
 
@@ -70,6 +70,18 @@ Las tiendas también cobran comisión si vendes contenido digital dentro de la a
 4. **Define el alcance por escrito**: cada función nueva a mitad del proyecto cuesta más que si estaba prevista desde el inicio.
 5. **Diseña antes de programar**: un prototipo navegable permite probar la app con usuarios reales antes de invertir en desarrollo.
 
+## Precio de los desarrolladores de apps: freelance, agencia o equipo propio
+
+El presupuesto para crear una app cambia según a quién se la encargas. No es solo una diferencia de tarifa: cambia qué parte del trabajo queda cubierta y quién responde si algo falla.
+
+| Opción | Qué pagas | Riesgo principal | Cuándo conviene |
+| --- | --- | --- | --- |
+| Desarrollador freelance | Las horas de una persona; diseño, servidor y publicación suelen ir aparte | Si se enferma, cambia de trabajo o deja el proyecto, la app se frena | Prototipos y apps chicas con alcance muy claro |
+| Empresa de desarrollo de apps | Un proyecto cerrado: diseño, app, panel, servidor y publicación | Pagar por funciones que no necesitas si el alcance no está bien definido | Apps que tienen que salir a las tiendas y mantenerse en el tiempo |
+| Equipo propio | Sueldos de al menos 2 o 3 personas (móvil, backend, diseño) todo el año | Costo fijo alto antes de saber si la app funciona | Cuando la app es el producto principal de la empresa |
+
+Para la mayoría de las pymes y emprendimientos, lo más eficiente es una [empresa de desarrollo de apps](/servicios/aplicaciones-moviles) para la primera versión, con el código y las cuentas a tu nombre, y decidir después si sumas un equipo propio.
+
 ## Cómo pedir un presupuesto de app y comparar cotizaciones
 
 Los precios entre desarrolladores varían mucho porque cada uno incluye cosas distintas. Para que las cotizaciones sean comparables, envía a todos la misma información y pide que respondan los mismos puntos.
@@ -108,6 +120,22 @@ Una app informativa o de catálogo para Android e iOS arranca en unos USD 2.000,
 ### ¿Cuánto cuesta crear una app web?
 
 Una aplicación web (un sistema que se usa desde el navegador, como un panel de turnos, de pedidos o de clientes) cuesta parecido a una app móvil del mismo alcance, pero no requiere cuentas en las tiendas ni su revisión. Un sistema de gestión para una pyme suele estar entre USD 4.000 y 8.000. Si no sabes cuál necesitas, mira la [diferencia entre página web y aplicación web](/blog/diferencia-entre-pagina-web-y-aplicacion-web-cual-necesito).
+
+### ¿Cuánto cobra un desarrollador de apps?
+
+Depende de qué incluye. Un desarrollador independiente suele cobrar por hora o por proyecto y muchas veces deja afuera el diseño, el servidor y la publicación en las tiendas. Una empresa de desarrollo cotiza el proyecto cerrado: en Websy, desde USD 2.000 una app informativa, de USD 3.000 a 5.000 una de turnos o pedidos y desde USD 5.000 una con pagos o mapas, con el panel y la publicación incluidos.
+
+### ¿Cómo hago un presupuesto para una aplicación móvil?
+
+Define primero las 5 a 10 funciones imprescindibles de la primera versión, quién va a usar la app y si necesitas cobrar dentro de ella. Con eso puedes usar la [calculadora](#calculadora) para tener un rango y pedir cotizaciones comparables: envía a todos la misma lista y pide que respondan si incluyen panel, servidor y publicación.
+
+### ¿Cuál es el precio de una app móvil en Colombia y México?
+
+Con los precios de Websy, una app sencilla parte de unos COP 7.600.000 o MXN 37.000 (USD 2.000), y una con pagos o mapas en tiempo real, de unos COP 19.000.000 o MXN 92.500 (USD 5.000). Si buscas proveedor en Colombia, revisa [cómo elegir una empresa de desarrollo de apps en Colombia](/blog/empresa-de-desarrollo-de-aplicaciones-moviles-en-colombia).
+
+### ¿Cuánto cuesta crear una app en España, en euros?
+
+Con los precios de Websy, una app sencilla para Android e iOS parte de unos 1.850 € (USD 2.000) y una con pagos o mapas en tiempo real, de unos 4.600 € (USD 5.000). Trabajamos a distancia y el precio queda cerrado por escrito antes de empezar.
 
 ### ¿Cuánto cuesta una app como Uber o Rappi?
 

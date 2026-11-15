@@ -52,7 +52,7 @@ const CaseView = ({ study }) => {
       description: study.seoDescription,
       url,
       ...(image && { image }),
-      dateModified: VERIFIED_AT,
+      dateModified: study.verifiedAt || VERIFIED_AT,
       inLanguage: 'es',
       author: ORG,
       publisher: ORG,
@@ -161,7 +161,7 @@ const CaseView = ({ study }) => {
             {study.verified && (
               <section className="bg-[#f6f7f4] p-6 md:p-8">
                 <SectionTitle>Verificado en el sitio publicado</SectionTitle>
-                <p className="text-sm text-slate-500 mb-5">Revisión del sitio en producción del {formatDate(VERIFIED_AT)}.</p>
+                <p className="text-sm text-slate-500 mb-5">Revisión del sitio en producción del {formatDate(study.verifiedAt || VERIFIED_AT)}.</p>
                 <dl className="space-y-4 text-base">
                   {study.verified.rendering && (
                     <div><dt className="font-bold text-[#182A2C]">Cómo se entrega el contenido</dt><dd className="text-slate-700">{study.verified.rendering}</dd></div>

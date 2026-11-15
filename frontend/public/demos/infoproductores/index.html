@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Forja · Entrenamiento online de 12 semanas — Demo Websy</title>
+<meta name="description" content="Demo de Websy: landing de venta para un programa de entrenamiento online, con video en el hero, método por fases, clases, coach, precios en cuotas y checkout. Marca ficticia.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://www.websysrl.com/demos/infoproductores">
+<meta name="theme-color" content="#09090b">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Forja — Demo de landing para infoproductores fitness | Websy">
+<meta property="og:description" content="Así se ve una landing de lanzamiento hecha por Websy: video, método, clases, coach, precios y checkout.">
+<meta property="og:image" content="https://www.websysrl.com/demos/infoproductores/portada.jpg">
+<meta property="og:url" content="https://www.websysrl.com/demos/infoproductores">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2309090b'/%3E%3Cpath d='M23 14h29l-4 8H19zM19 28h21l-4 8H15zM15 42h11l-4 8H11z' fill='%23cdff3a'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="preload" as="image" href="/demos/infoproductores/video/hero-poster.jpg" media="(min-width:761px)">
+<link rel="preload" as="image" href="/demos/infoproductores/video/hero-poster-movil.jpg" media="(max-width:760px)">
+<script>document.documentElement.className='js'</script>
+<style>
+:root{
+  --bg:#09090b;--bg2:#111114;--bg3:#18181c;--fg:#f4f4f0;--mute:#a1a1a6;--dim:#6b6b72;--line:rgba(244,244,240,.12);
+  --acc:#cdff3a;--acc-ink:#0b0b0c;
+  --display:'Archivo',ui-sans-serif,system-ui,sans-serif;--text:'Inter',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+  --pad:clamp(16px,4.5vw,64px);--ease:cubic-bezier(.16,1,.3,1);--r:20px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--bg);color:var(--fg);-webkit-text-size-adjust:100%;scroll-padding-top:80px}
+body{margin:0;font-family:var(--text);font-size:16px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:var(--acc);color:var(--acc-ink)}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+img,svg,video{display:block}
+h1,h2,h3,p,figure{margin:0}
+.wrap{width:100%;max-width:1320px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px;border-radius:6px}
+.label{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.label-acc{color:var(--acc)}
+
+/* Tipografía: Archivo expandida en titulares, Inter en el texto */
+.display{font-family:var(--display);font-stretch:118%;font-weight:850;text-transform:uppercase;line-height:.92;letter-spacing:-.02em}
+.h2{font-family:var(--display);font-stretch:112%;font-weight:800;font-size:clamp(2rem,4.6vw,4rem);line-height:1;letter-spacing:-.025em;text-transform:uppercase}
+.h2 em{font-style:normal;color:var(--acc)}
+.lead{font-size:clamp(16px,1.3vw,18px);color:var(--mute);max-width:540px}
+.sec{padding-top:clamp(88px,11vw,150px);padding-bottom:clamp(88px,11vw,150px)}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px 48px;flex-wrap:wrap;margin-bottom:clamp(40px,5vw,64px)}
+.head .label{display:block;margin-bottom:18px}
+
+/* Botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:54px;padding:0 26px;border-radius:999px;font-weight:600;font-size:15px;white-space:nowrap;transition:background .25s,color .25s,transform .25s var(--ease),border-color .25s}
+.btn:active{transform:scale(.98)}
+.btn-acc{background:var(--acc);color:var(--acc-ink)}
+.btn-acc:hover{background:#e1ff7a}
+.btn-line{border:1px solid rgba(244,244,240,.3);color:var(--fg);background:rgba(9,9,11,.25);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.btn-line:hover{border-color:var(--fg)}
+.btn-sm{height:42px;padding:0 18px;font-size:14px}
+.btn .arr{transition:transform .3s var(--ease)}
+.btn:hover .arr{transform:translateX(3px)}
+.pi{width:24px;height:24px;border-radius:50%;background:var(--fg);color:var(--bg);display:grid;place-items:center;flex:none}
+
+/* Franja de Websy */
+.websy-strip{position:relative;z-index:50;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;padding:8px 16px;background:var(--acc);color:var(--acc-ink);font-size:12.5px;font-weight:600;text-align:center}
+.websy-strip a{border-bottom:1.5px solid currentColor;white-space:nowrap;font-weight:700}
+
+/* Navegación */
+.nav{position:fixed;left:0;right:0;top:var(--strip,36px);z-index:40;transition:background .35s,top .35s,border-color .35s;border-bottom:1px solid transparent}
+.nav.solid{top:0;background:rgba(9,9,11,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-color:var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:20px}
+.brand{display:flex;align-items:center;gap:11px;line-height:1}
+.brand .mark{width:34px;height:27px;overflow:visible;transition:transform .5s var(--ease)}
+.brand:hover .mark{transform:translateX(3px)}
+.brand .word{font-family:var(--display);font-stretch:125%;font-weight:900;font-size:21px;letter-spacing:.02em;font-style:italic;transform:skewX(-6deg)}
+.brand .word i{color:var(--acc);font-style:normal}
+.nav-links{display:flex;gap:30px;font-size:14px;color:rgba(244,244,240,.75)}
+.nav-links a:hover{color:var(--fg)}
+@media (max-width:900px){.nav-links{display:none}}
+
+/* Hero con video */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;isolation:isolate;background:#000}
+.hero-media{position:absolute;inset:0;z-index:-2}
+.hero-media img,.hero-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-media video{opacity:0;transition:opacity .8s}
+.hero-media video.on{opacity:1}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(90deg,rgba(9,9,11,.88) 0%,rgba(9,9,11,.55) 38%,rgba(9,9,11,.05) 70%),linear-gradient(0deg,rgba(9,9,11,.95) 0%,rgba(9,9,11,0) 45%),linear-gradient(180deg,rgba(9,9,11,.6) 0%,rgba(9,9,11,0) 22%)}
+.hero-in{padding-bottom:clamp(36px,6vh,72px);padding-top:140px}
+.hero .label{display:inline-flex;align-items:center;gap:10px;color:var(--fg);margin-bottom:22px}
+.live{width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 0 rgba(205,255,58,.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(205,255,58,0)}100%{box-shadow:0 0 0 0 rgba(205,255,58,0)}}
+.hero h1{font-size:clamp(3rem,9.4vw,8.6rem);max-width:12ch}
+.hero h1 span{display:block}
+.hero h1 em{font-style:normal;color:var(--acc)}
+.hero-sub{margin-top:24px;max-width:520px;font-size:clamp(16px,1.35vw,19px);color:rgba(244,244,240,.82)}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+.hero-row{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
+.proof{display:flex;align-items:center;gap:14px;margin-top:28px;font-size:14px;color:rgba(244,244,240,.8)}
+.avs{display:flex}
+.avs span{width:32px;height:32px;border-radius:50%;border:2px solid var(--bg);margin-left:-8px;display:grid;place-items:center;font-size:11px;font-weight:700;color:var(--acc-ink)}
+.avs span:first-child{margin-left:0}
+.stars{color:var(--acc);letter-spacing:1px}
+/* Indicador de escena sincronizado con el video */
+.scenes{display:grid;gap:10px;min-width:240px}
+.scene-now{display:flex;align-items:baseline;gap:12px}
+.scene-now b{font-family:var(--display);font-stretch:118%;font-weight:800;font-size:28px;text-transform:uppercase;letter-spacing:-.01em}
+.scene-now span{font-size:13px;color:var(--mute)}
+.scene-bars{display:flex;gap:6px}
+.scene-bars i{flex:1;height:3px;border-radius:3px;background:rgba(244,244,240,.22);overflow:hidden;position:relative}
+.scene-bars i::after{content:"";position:absolute;inset:0;background:var(--fg);transform-origin:left;transform:scaleX(var(--p,0))}
+.vctl{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--mute);margin-top:4px;justify-self:start}
+.vctl:hover{color:var(--fg)}
+.swap{animation:swap .5s var(--ease)}
+@keyframes swap{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (max-width:760px){.hero::before{background:linear-gradient(0deg,rgba(9,9,11,.97) 8%,rgba(9,9,11,.35) 55%,rgba(9,9,11,.55) 100%)}.scenes{min-width:0;width:100%}.hero-ctas .btn{flex:1 1 100%}}
+.js .rise{opacity:0;transform:translateY(24px);transition:opacity .9s var(--ease),transform 1s var(--ease);transition-delay:var(--d,0s)}
+.js .rise.in{opacity:1;transform:none}
+
+/* Cifras */
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats div{padding:clamp(28px,4vw,48px) clamp(16px,2vw,28px)}
+.stats div+div{border-left:1px solid var(--line)}
+.stats b{display:block;font-family:var(--display);font-stretch:112%;font-weight:800;font-size:clamp(2rem,4vw,3.4rem);line-height:1;letter-spacing:-.02em}
+.stats span{display:block;margin-top:10px;color:var(--mute);font-size:14px}
+@media (max-width:760px){.stats{grid-template-columns:1fr 1fr}.stats div:nth-child(3){border-left:0}.stats div:nth-child(n+3){border-top:1px solid var(--line)}}
+
+/* Manifiesto: palabras que se encienden con el scroll */
+.manifesto{min-height:220vh}
+.manifesto-in{position:sticky;top:0;min-height:100vh;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:clamp(32px,5vw,80px);align-items:center;padding-top:68px}
+.manifesto .label{display:block;margin-bottom:28px}
+.manifesto p{font-family:var(--display);font-stretch:108%;font-weight:700;font-size:clamp(1.7rem,3.4vw,3.3rem);line-height:1.12;letter-spacing:-.02em}
+.pillars{list-style:none;padding:0;margin:clamp(32px,5vh,56px) 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.pillars li{position:relative;padding-top:18px;color:var(--dim);transition:color .4s}
+.pillars li::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--line)}
+.pillars li::after{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--acc);transform:scaleX(0);transform-origin:left;transition:transform .6s var(--ease)}
+.pillars li.on{color:var(--fg)}.pillars li.on::after{transform:scaleX(1)}
+.pillars span{font-size:12px;font-weight:600;letter-spacing:.12em}
+.pillars b{display:block;font-family:var(--display);font-stretch:115%;font-weight:800;font-size:20px;text-transform:uppercase;margin:6px 0 4px}
+.pillars small{display:block;font-size:13.5px;line-height:1.45;color:var(--mute);opacity:.5;transition:opacity .4s}
+.pillars li.on small{opacity:1}
+.mf-media{position:relative;aspect-ratio:4/5;border-radius:var(--r);overflow:hidden;background:var(--bg2)}
+.mf-media figure{position:absolute;inset:0;opacity:0;transform:scale(1.08);transition:opacity .8s var(--ease),transform 1.4s var(--ease)}
+.mf-media figure.on{opacity:1;transform:none}
+.mf-media img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.15) brightness(.75)}
+.mf-media figure::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(9,9,11,.9),transparent 50%)}
+.mf-media figcaption{position:absolute;left:22px;right:22px;bottom:20px;z-index:2;color:var(--mute);font-size:14px}
+.mf-media figcaption b{display:block;font-family:var(--display);font-stretch:115%;font-weight:850;font-size:clamp(2.4rem,3.6vw,3.4rem);line-height:1;color:var(--acc);margin-bottom:6px}
+.mf-count{position:absolute;top:18px;right:18px;z-index:2;padding:6px 10px;border-radius:999px;background:rgba(9,9,11,.6);font-size:12px;font-weight:600;letter-spacing:.08em}
+@media (max-width:900px){
+  .manifesto{min-height:0}.manifesto-in{position:relative;min-height:0;grid-template-columns:1fr;padding:96px 0}
+  .mf-media{aspect-ratio:16/11;order:-1}.pillars{grid-template-columns:1fr;gap:18px}.manifesto .mw{opacity:1}.manifesto .mw.hl{color:var(--acc)}
+}
+.mw{opacity:.16;transition:opacity .3s,color .3s}
+.mw.on{opacity:1}
+.mw.hl.on{color:var(--acc)}
+
+/* Método: pista horizontal en escritorio */
+.hscroll{position:relative}
+.hs-in{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;padding-top:68px}
+.track{display:flex;gap:20px;padding:0 var(--pad);will-change:transform}
+.track::after{content:"";flex:0 0 1px}
+.mod{flex:0 0 clamp(290px,26vw,370px);border-radius:var(--r);overflow:hidden;background:var(--bg2);border:1px solid var(--line);display:flex;flex-direction:column}
+.mod-img{position:relative;aspect-ratio:4/3;overflow:hidden}
+.mod-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.1) brightness(.8);transition:filter .6s,transform .9s var(--ease)}
+.mod:hover .mod-img img{filter:grayscale(0) brightness(.95);transform:scale(1.04)}
+.mod-n{position:absolute;left:18px;top:16px;font-family:var(--display);font-stretch:118%;font-weight:800;font-size:14px;padding:6px 10px;border-radius:999px;background:rgba(9,9,11,.7);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.mod-b{padding:22px 24px 24px;display:flex;flex-direction:column;flex:1}
+.mod-b .label{margin-bottom:10px}
+.mod h3{font-family:var(--display);font-stretch:110%;font-weight:800;font-size:22px;text-transform:uppercase;letter-spacing:-.01em;margin-bottom:8px}
+.mod p{color:var(--mute);font-size:14.5px}
+.mod .res{margin-top:auto;padding-top:16px;font-size:14px;font-weight:600}
+.mod .res::before{content:"→ ";color:var(--acc)}
+.hs-prog{display:flex;align-items:center;gap:16px;padding:0 var(--pad);margin-top:28px;font-size:13px;color:var(--mute)}
+.hs-bar{flex:1;height:2px;background:var(--line);position:relative}
+.hs-bar i{position:absolute;inset:0;background:var(--acc);transform-origin:left;transform:scaleX(var(--p,0))}
+@media (max-width:900px),(max-height:620px){
+  .hscroll{height:auto!important}.hs-in{position:relative;height:auto;overflow:visible;padding-top:0}
+  .track{overflow-x:auto;scroll-snap-type:x mandatory;transform:none!important;padding-bottom:8px;scrollbar-width:none}
+  .track::-webkit-scrollbar{display:none}.mod{scroll-snap-align:start;flex-basis:78vw}.hs-prog{display:none}
+}
+
+/* Clases en video */
+.videos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.vid{position:relative;display:block;text-align:left;border-radius:var(--r);overflow:hidden;background:#000;cursor:pointer}
+.vid img{width:100%;aspect-ratio:16/10;object-fit:cover;filter:grayscale(.35) brightness(.72);transition:filter .5s,transform .8s var(--ease)}
+.vid:hover img{filter:grayscale(0) brightness(.85);transform:scale(1.04)}
+.vid:first-child{grid-column:span 2;grid-row:span 2}
+.vid:first-child img{height:100%;aspect-ratio:auto}
+.vid::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.85),transparent 55%)}
+.v-play{position:absolute;left:50%;top:50%;z-index:2;width:58px;height:58px;margin:-29px 0 0 -29px;border-radius:50%;background:rgba(244,244,240,.95);color:#000;display:grid;place-items:center;transition:transform .35s var(--ease),background .25s}
+.vid:first-child .v-play{width:80px;height:80px;margin:-40px 0 0 -40px}
+.vid:hover .v-play,.coach-ph:hover .v-play{transform:scale(1.1);background:var(--acc)}
+.v-dur{position:absolute;right:12px;top:12px;z-index:2;padding:4px 8px;border-radius:6px;background:rgba(0,0,0,.75);font-size:12px;font-weight:600}
+.v-info{position:absolute;left:18px;right:18px;bottom:16px;z-index:2}
+.v-info small{display:block;font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin-bottom:6px}
+.v-info b{display:block;font-size:17px;line-height:1.25}
+.vid:first-child .v-info{left:28px;bottom:26px}
+.vid:first-child .v-info b{font-family:var(--display);font-stretch:110%;font-weight:800;font-size:clamp(1.4rem,2.4vw,2.2rem);text-transform:uppercase;line-height:1.05}
+@media (max-width:900px){.videos{grid-template-columns:1fr 1fr}.vid:first-child{grid-column:1/3;grid-row:auto}.vid:first-child img{aspect-ratio:16/10;height:auto}}
+@media (max-width:560px){.videos{grid-template-columns:1fr}.vid:first-child{grid-column:auto}.vid:first-child .v-info b{font-size:1.25rem}}
+
+/* Coach + testimonios */
+.coach{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,6vw,96px);align-items:center}
+.coach-ph{position:relative;display:block;width:100%;aspect-ratio:4/5;border-radius:var(--r);overflow:hidden;cursor:pointer;background:#000}
+.coach-ph img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;filter:grayscale(1) contrast(1.1);transition:transform .9s var(--ease)}
+.coach-ph:hover img{transform:scale(1.03)}
+.coach-ph .v-play{width:76px;height:76px;margin:-38px 0 0 -38px}
+.coach-tag{position:absolute;left:18px;bottom:18px;z-index:2;padding:10px 14px;border-radius:12px;background:rgba(9,9,11,.7);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-size:13px;text-align:left}
+.coach-tag b{display:block;font-size:14px}
+.coach .lead{margin:22px 0 28px}
+.creds{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.creds li{display:flex;gap:12px;align-items:flex-start;color:rgba(244,244,240,.88)}
+.creds li::before,.plan li::before{content:"";width:18px;height:18px;flex:none;margin-top:3px;border-radius:50%;background:var(--acc) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M6 10.5l2.6 2.5L14 7.5' fill='none' stroke='%23111' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat}
+@media (max-width:900px){.coach{grid-template-columns:1fr}.coach-ph{max-width:440px}}
+.quotes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:clamp(64px,8vw,110px)}
+.q{border:1px solid var(--line);border-radius:var(--r);padding:26px;background:var(--bg2);display:flex;flex-direction:column;gap:18px}
+.q p{font-size:15.5px;color:rgba(244,244,240,.88)}
+.q-res{font-family:var(--display);font-stretch:112%;font-weight:800;font-size:26px;text-transform:uppercase;color:var(--acc);line-height:1}
+.q-who{display:flex;align-items:center;gap:12px;margin-top:auto;font-size:14px}
+.q-who span span{color:var(--mute);font-size:13px;display:block}
+.q-av{width:40px;height:40px;border-radius:50%;background:var(--bg3);display:grid;place-items:center;font-weight:700;font-size:13px}
+@media (max-width:900px){.quotes{grid-template-columns:1fr}}
+
+/* Precios */
+.toggle{display:inline-flex;padding:4px;border-radius:999px;border:1px solid var(--line);background:var(--bg2);position:relative}
+.toggle button{position:relative;z-index:1;height:40px;padding:0 18px;border-radius:999px;font-size:14px;font-weight:600;color:var(--mute);transition:color .25s}
+.toggle button[aria-pressed="true"]{color:var(--acc-ink)}
+.pill{position:absolute;top:4px;bottom:4px;left:4px;border-radius:999px;background:var(--fg);transition:transform .45s var(--ease),width .45s var(--ease)}
+.plans{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.plan{position:relative;border-radius:24px;padding:clamp(26px,3vw,40px);border:1px solid var(--line);background:var(--bg2);display:flex;flex-direction:column}
+.plan-pro{border-color:var(--acc);background:linear-gradient(180deg,rgba(205,255,58,.07),var(--bg2) 40%)}
+.badge{position:absolute;top:22px;right:22px;padding:6px 12px;border-radius:999px;background:var(--acc);color:var(--acc-ink);font-size:12px;font-weight:700}
+.plan h3{font-family:var(--display);font-stretch:112%;font-weight:800;font-size:24px;text-transform:uppercase}
+.plan .for{color:var(--mute);font-size:14.5px;margin-top:6px;max-width:320px}
+.amount{display:flex;align-items:baseline;gap:8px;margin:30px 0 4px}
+.amount .cur{font-size:14px;color:var(--mute);font-weight:600}
+.amount b{font-family:var(--display);font-stretch:105%;font-weight:850;font-size:clamp(3.2rem,5.5vw,4.6rem);line-height:.9;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.amount s{color:var(--dim);font-size:15px}
+.note{color:var(--mute);font-size:13.5px;min-height:1.6em}
+.plan ul{list-style:none;padding:0;margin:26px 0 32px;display:grid;gap:12px;font-size:15px}
+.plan li{display:flex;gap:12px;color:rgba(244,244,240,.9)}
+.plan li.off{color:var(--dim);text-decoration:line-through}
+.plan li.off::before{background:var(--bg3)}
+.plan .btn{margin-top:auto;width:100%}
+.btn-ghost2{border:1px solid var(--line);color:var(--fg)}
+.btn-ghost2:hover{border-color:var(--fg)}
+.pay{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;margin-top:14px;font-size:12.5px;color:var(--dim)}
+.below{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;margin-top:16px;padding:22px 26px;border-radius:24px;border:1px solid var(--line)}
+.shield{width:52px;height:52px;border-radius:14px;background:var(--bg3);display:grid;place-items:center;color:var(--acc)}
+.below b{display:block;font-size:16px}
+.below p{color:var(--mute);font-size:14px}
+.cd{display:flex;gap:6px;font-family:var(--display);font-weight:800;font-size:20px;font-variant-numeric:tabular-nums;text-align:center}
+.cd span{min-width:46px;padding:8px 6px;border-radius:10px;background:var(--bg3)}
+.cd small{display:block;font-family:var(--text);font-size:10px;font-weight:500;color:var(--mute);letter-spacing:.06em}
+@media (max-width:860px){.plans{grid-template-columns:1fr}.below{grid-template-columns:auto 1fr}.below>div:last-child{grid-column:1/-1}}
+
+/* Preguntas */
+.faq{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,96px)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq details:first-child{border-top:1px solid var(--line)}
+.faq summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 0;cursor:pointer;font-size:clamp(16px,1.4vw,18px);font-weight:600}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary i{position:relative;width:28px;height:28px;flex:none;border-radius:50%;border:1px solid var(--line)}
+.faq summary i::before,.faq summary i::after{content:"";position:absolute;left:50%;top:50%;width:10px;height:1.5px;background:currentColor;transform:translate(-50%,-50%)}
+.faq summary i::after{transform:translate(-50%,-50%) rotate(90deg);transition:transform .35s var(--ease)}
+.faq details[open] summary i{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+.faq details[open] summary i::after{transform:translate(-50%,-50%)}
+.faq .ans{color:var(--mute);padding:0 48px 24px 0}
+@media (max-width:860px){.faq{grid-template-columns:minmax(0,1fr)}}
+
+/* Cierre con el mismo video */
+.final{position:relative;overflow:hidden;isolation:isolate;text-align:center}
+.final video,.final img.fb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.final::before{content:"";position:absolute;inset:0;z-index:-1;background:rgba(9,9,11,.76)}
+.final h2{font-size:clamp(2.6rem,7.5vw,6.6rem)}
+.final p{margin:22px auto 34px;max-width:520px;color:rgba(244,244,240,.85)}
+
+/* Pie */
+footer{border-top:1px solid var(--line);padding:44px 0 calc(44px + env(safe-area-inset-bottom))}
+.foot{display:flex;flex-wrap:wrap;gap:28px;justify-content:space-between;align-items:flex-start}
+.foot p{color:var(--dim);font-size:13px;max-width:560px;margin-top:14px}
+.made{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.made a{display:inline-flex;align-items:center;gap:8px;padding:11px 16px;border-radius:12px;border:1px solid var(--line);font-size:14px;font-weight:600}
+.made a:hover{border-color:var(--acc)}
+.made a b{color:var(--acc)}
+
+/* Barra fija en celular */
+.mbar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:45;display:none;align-items:center;gap:12px;padding:10px 10px 10px 16px;border-radius:18px;
+  background:rgba(17,17,20,.92);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--line);transform:translateY(140%);visibility:hidden;transition:transform .5s var(--ease),visibility 0s .5s}
+.mbar.show{transform:none;visibility:visible;transition:transform .5s var(--ease)}
+.mbar div{flex:1;font-size:12.5px;line-height:1.3;color:var(--mute)}
+.mbar div b{display:block;color:var(--fg);font-size:14px}
+@media (max-width:760px){.mbar{display:flex}}
+
+/* Ventanas: checkout y reproductor de muestra */
+.modal{position:fixed;inset:0;z-index:80;display:grid;place-items:center;padding:16px;visibility:hidden;pointer-events:none}
+.modal.open{visibility:visible;pointer-events:auto}
+.modal-bg{position:absolute;inset:0;background:rgba(0,0,0,.75);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:0;transition:opacity .35s}
+.modal.open .modal-bg{opacity:1}
+.sheet{position:relative;width:min(100%,460px);max-height:calc(100svh - 32px);overflow:auto;border-radius:24px;background:var(--bg2);border:1px solid var(--line);padding:28px;transform:translateY(20px);opacity:0;transition:transform .45s var(--ease),opacity .3s}
+.modal.open .sheet{transform:none;opacity:1}
+.x{position:absolute;top:14px;right:14px;z-index:5;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;background:rgba(9,9,11,.6)}
+.sheet h3{font-family:var(--display);font-stretch:112%;font-weight:800;font-size:24px;text-transform:uppercase;margin:6px 0 2px}
+.sum{display:flex;justify-content:space-between;align-items:center;margin:20px 0;padding:14px 16px;border-radius:14px;background:var(--bg3)}
+.sum b{font-family:var(--display);font-weight:800;font-size:20px}
+.field{display:grid;gap:6px;margin-bottom:12px;font-size:13px;color:var(--mute)}
+.field input{height:48px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--fg);padding:0 14px;font:inherit;font-size:15px}
+.field input:focus{outline:none;border-color:var(--acc)}
+.methods{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:6px 0 18px}
+.methods label{display:flex;align-items:center;gap:10px;padding:12px;border-radius:12px;border:1px solid var(--line);font-size:13.5px;cursor:pointer}
+.methods input{accent-color:#cdff3a}
+.methods label:has(input:checked){border-color:var(--acc)}
+.sheet .btn{width:100%}
+.secure{text-align:center;margin-top:12px;font-size:12px;color:var(--mute)}
+.step2{display:none}.done .step1{display:none}.done .step2{display:block}
+.ok{width:56px;height:56px;border-radius:50%;background:var(--acc);color:var(--acc-ink);display:grid;place-items:center;margin-bottom:16px}
+.flow{padding-left:20px;margin:16px 0 22px;display:grid;gap:8px;color:rgba(244,244,240,.88);font-size:14.5px}
+.player{width:min(100%,960px);padding:0;background:#000}
+.screen{position:relative;aspect-ratio:16/9;overflow:hidden;background:#000}
+.screen img{width:100%;height:100%;object-fit:cover}
+.modal.open .screen img{animation:kb 16s linear forwards}
+@keyframes kb{from{transform:scale(1.02)}to{transform:scale(1.15)}}
+.vnote{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(88%,440px);text-align:center;padding:22px;border-radius:18px;background:rgba(17,17,20,.9);border:1px solid var(--line)}
+.vnote b{display:block;font-size:18px;margin-bottom:6px}
+.vnote p{color:var(--mute);font-size:14px;margin-bottom:16px}
+.vnote .btn{width:auto}
+.vbar{display:flex;align-items:center;gap:12px;padding:12px 16px;font-size:12px;color:var(--mute)}
+.vbar i{flex:1;height:3px;border-radius:3px;background:var(--bg3);overflow:hidden}
+.vbar i::after{content:"";display:block;height:100%;width:0;background:var(--acc)}
+.modal.open .vbar i::after{animation:prog 16s linear forwards}
+@keyframes prog{to{width:100%}}
+.vtitle{padding:4px 16px 18px}
+.vtitle b{display:block;font-size:16px}
+.vtitle span{color:var(--mute);font-size:13px}
+@media (max-width:560px){.vnote p{display:none}}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div class="websy-strip" id="strip">
+  <span><b>Demo de Websy</b> · Landing para infoproductores. Marca y personas ficticias.</span>
+  <a href="https://wa.me/5493884846695?text=Hola%20Websy%2C%20vi%20la%20demo%20Forja%20y%20quiero%20una%20landing%20as%C3%AD%20para%20mi%20programa." data-wa="demo_infoproductores_franja" target="_blank" rel="noopener">Quiero una así →</a>
+</div>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a href="#top" class="brand" aria-label="Forja, inicio"><svg class="mark" viewBox="0 0 40 32" aria-hidden="true"><path d="M9 0h31l-4 8H5z" fill="#cdff3a"/><path d="M5 12h23l-4 8H1z" fill="#cdff3a"/><path d="M1 24h11l-4 8H-3z" fill="#cdff3a" transform="translate(3 0)"/></svg><span class="word">FORJA<i>.</i></span></a>
+    <nav class="nav-links" aria-label="Secciones"><a href="#metodo">Método</a><a href="#clases">Clases</a><a href="#coach">Coach</a><a href="#precios">Precios</a><a href="#faq">Preguntas</a></nav>
+    <button class="btn btn-acc btn-sm" data-buy="pro">Reservar lugar</button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-media" aria-hidden="true">
+      <picture><source media="(max-width:760px)" srcset="/demos/infoproductores/video/hero-poster-movil.jpg"><img src="/demos/infoproductores/video/hero-poster.jpg" alt="" fetchpriority="high"></picture>
+      <video id="heroVid" muted loop playsinline preload="none"></video>
+    </div>
+    <div class="wrap hero-in">
+      <span class="label rise"><i class="live"></i>Temporada 07 · Inscripciones abiertas</span>
+      <h1 class="display rise" style="--d:.08s"><span>Entrena</span><span>como <em>atleta.</em></span></h1>
+      <div class="hero-row">
+        <div>
+          <p class="hero-sub rise" style="--d:.16s">Programa online de 12 semanas para ganar fuerza, músculo y energía. Cuatro sesiones por semana, en el gym o en casa, con una coach que revisa tu progreso.</p>
+          <div class="hero-ctas rise" style="--d:.24s">
+            <button class="btn btn-acc" data-buy="pro">Reservar mi lugar <span class="arr">→</span></button>
+            <button class="btn btn-line" data-play="1"><span class="pi"><svg width="9" height="9" viewBox="0 0 10 10"><path d="M2 1l7 4-7 4z" fill="currentColor"/></svg></span>Ver una clase gratis</button>
+          </div>
+          <div class="proof rise" style="--d:.32s">
+            <span class="avs" aria-hidden="true"><span style="background:#cdff3a">CR</span><span style="background:#f4f4f0">DP</span><span style="background:#a1a1a6">LM</span></span>
+            <span><span class="stars">★★★★★</span> 4,9 · más de 5.400 alumnos</span>
+          </div>
+        </div>
+        <div class="scenes rise" style="--d:.4s">
+          <div class="scene-now" aria-hidden="true"><b id="sceneT">Fuerza</b><span id="sceneS">Press con barra</span></div>
+          <div class="scene-bars" id="sceneBars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+          <button class="vctl" id="vctl" type="button"><svg width="10" height="10" viewBox="0 0 10 10" id="vctlI"></svg><span id="vctlT">Pausar video</span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="stats">
+      <div class="rise"><b data-count="5400" data-suffix="+">0</b><span>alumnos entrenando</span></div>
+      <div class="rise" style="--d:.06s"><b data-count="4.9" data-dec="1">0</b><span>valoración promedio</span></div>
+      <div class="rise" style="--d:.12s"><b data-count="92" data-suffix="%">0</b><span>sigue entrenando al terminar</span></div>
+      <div class="rise" style="--d:.18s"><b data-count="23">0</b><span>países</span></div>
+    </div>
+  </div>
+
+  <section class="manifesto wrap" id="idea">
+    <div class="manifesto-in">
+      <div class="mf-text">
+        <span class="label label-acc">La idea</span>
+        <p id="mf">No te falta motivación. Te falta un plan: qué entrenar, cuánto comer y cómo progresar cada semana sin lesionarte. Eso es Forja.</p>
+        <ol class="pillars" id="pillars">
+          <li class="on"><span>01</span><b>Entrenar</b><small>4 sesiones guiadas por semana, con cargas que suben solas.</small></li>
+          <li><span>02</span><b>Comer</b><small>Un plato simple que se arma sin contar calorías.</small></li>
+          <li><span>03</span><b>Progresar</b><small>Medidas y fuerza registradas, revisadas por tu coach.</small></li>
+        </ol>
+      </div>
+      <div class="mf-media" aria-hidden="true">
+        <figure class="on"><img src="/demos/infoproductores/img/m3.webp" alt="" loading="lazy" decoding="async"><figcaption><b>4×6</b>Sentadilla · 62,5 kg</figcaption></figure>
+        <figure><img src="/demos/infoproductores/img/v3.webp" alt="" loading="lazy" decoding="async"><figcaption><b>½ · ¼ · ¼</b>Verdura · proteína · carbohidrato</figcaption></figure>
+        <figure><img src="/demos/infoproductores/img/m8.webp" alt="" loading="lazy" decoding="async"><figcaption><b>+38%</b>Fuerza total en 12 semanas</figcaption></figure>
+        <span class="mf-count" id="mfCount">01 / 03</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="metodo" class="hscroll">
+    <div class="hs-in">
+      <div class="wrap head">
+        <div><span class="label label-acc">El método · 12 semanas</span><h2 class="h2">8 fases.<br><em>Un cuerpo nuevo.</em></h2></div>
+        <p class="lead">Cada fase prepara la siguiente. Tu coach ajusta cargas y comidas con lo que registras en la app.</p>
+      </div>
+      <div class="track" id="track">
+        <article class="mod"><div class="mod-img"><img src="/demos/infoproductores/img/m1.webp" alt="" width="700" height="525" loading="lazy" decoding="async"><span class="mod-n">01</span></div><div class="mod-b"><span class="label">Semana 1</span><h3>Evaluación</h3><p>Test de fuerza, medidas y fotos de inicio. Con eso armamos tu plan.</p><span class="res">Plan personalizado</span></div></article>
+        <article class="mod"><div class="mod-img"><img src="/demos/infoproductores/img/m2.webp" alt="" width="700" height="525" loading="lazy" decoding="async"><span class="mod-n">02</span></div><div class="mod-b"><span class="label">Semana 2</span><h3>Técnica</h3><p>Sentadilla, peso muerto, press y remo. Envías tu video y la coach te corrige.</p><span class="res">Los básicos dominados</span></div></article>
+        <article class="mod"><div class="mod-img"><img src="/demos/infoproductores/img/m3.webp" alt="" width="700" height="525" loading="lazy" decoding="async"><span class="mod-n">03</span></div><div class="mod-b"><span class="label">Semanas 3–4</span><h3>Fuerza base</h3><p>Pocas repeticiones y cargas que suben cada semana.</p><span class="res">Levantamientos que suben</span></div></article>
+        <article class="mod"><div class="mod-img"><img src="/demos/infoproductores/img/m4.webp" alt="" width="700" height="525" loading="lazy" decoding="async"><span class="mod-n">04</span></div><div class="mod-b"><span class="label">Semanas 5–6</span><h3>Hipertrofia</h3><p>Más volumen por grupo muscular para construir músculo.</p><span class="res">Medidas que cambian</span></div></article>
+        <article class="mod"><div class="mod-img"><img src="/demos/infoproductores/img/m5.webp" alt="" width="700" height="525" loading="lazy" decoding="async"><span class="mod-n">05</span></div><div class="mod-b"><span class="label">Semana 7</span><h3>Movilidad</h3><p>Descarga activa: core, cadera y hombros listos para lo que viene.</p><span class="res">Entrenar sin molestias</span></div></article>
+        <article class="mod"><div class="mod-img"><img src="/demos/infoproductores/img/m6.webp" alt="" width="700" height="525" loading="lazy" decoding="async"><span class="mod-n">06</span></div><div class="mod-b"><span class="label">Semanas 8–9</span><h3>Motor</h3><p>Circuitos e intervalos cortos para ganar aire sin perder fuerza.</p><span class="res">Más energía todo el día</span></div></article>
+        <article class="mod"><div class="mod-img"><img src="/demos/infoproductores/img/m7.webp" alt="" width="700" height="525" loading="lazy" decoding="async"><span class="mod-n">07</span></div><div class="mod-b"><span class="label">Semanas 10–11</span><h3>Potencia</h3><p>Saltos y levantamientos rápidos: el cuerpo de un atleta.</p><span class="res">Fuerza que se nota</span></div></article>
+        <article class="mod"><div class="mod-img"><img src="/demos/infoproductores/img/m8.webp" alt="" width="700" height="525" loading="lazy" decoding="async"><span class="mod-n">08</span></div><div class="mod-b"><span class="label">Semana 12</span><h3>Test final</h3><p>Repites la evaluación del día 1 y comparas números y fotos.</p><span class="res">Tu antes y después</span></div></article>
+      </div>
+      <div class="hs-prog"><span id="hsn">01 / 08</span><div class="hs-bar"><i id="hsb"></i></div></div>
+    </div>
+  </section>
+
+  <section id="clases" class="sec wrap">
+    <div class="head">
+      <div><span class="label label-acc">Clases en video</span><h2 class="h2">48 clases.<br><em>Dale play y sigue.</em></h2></div>
+      <p class="lead">Cada ejercicio explicado con versión para gym y para casa. En el celular, la tele o la compu.</p>
+    </div>
+    <div class="videos">
+      <button class="vid rise" data-play="1"><img src="/demos/infoproductores/img/v1.webp" alt="" width="800" height="450" loading="lazy" decoding="async"><span class="v-dur">14:20</span><span class="v-play"><svg width="22" height="22" viewBox="0 0 10 10"><path d="M2.5 1.2l6.3 3.8-6.3 3.8z" fill="currentColor"/></svg></span><span class="v-info"><small>Clase gratis · Técnica</small><b>Mancuernas sin errores: la guía completa</b></span></button>
+      <button class="vid rise" data-play="2" style="--d:.06s"><img src="/demos/infoproductores/img/v2.webp" alt="" width="800" height="450" loading="lazy" decoding="async"><span class="v-dur">22:05</span><span class="v-play"><svg width="18" height="18" viewBox="0 0 10 10"><path d="M2.5 1.2l6.3 3.8-6.3 3.8z" fill="currentColor"/></svg></span><span class="v-info"><small>Módulo 6</small><b>Circuito de boxeo para quemar</b></span></button>
+      <button class="vid rise" data-play="3" style="--d:.12s"><img src="/demos/infoproductores/img/v3.webp" alt="" width="800" height="450" loading="lazy" decoding="async"><span class="v-dur">11:48</span><span class="v-play"><svg width="18" height="18" viewBox="0 0 10 10"><path d="M2.5 1.2l6.3 3.8-6.3 3.8z" fill="currentColor"/></svg></span><span class="v-info"><small>Nutrición</small><b>Arma tu plato sin contar calorías</b></span></button>
+      <button class="vid rise" data-play="4"><img src="/demos/infoproductores/img/v4.webp" alt="" width="800" height="450" loading="lazy" decoding="async"><span class="v-dur">30:00</span><span class="v-play"><svg width="18" height="18" viewBox="0 0 10 10"><path d="M2.5 1.2l6.3 3.8-6.3 3.8z" fill="currentColor"/></svg></span><span class="v-info"><small>En casa</small><b>Full body de 30 minutos</b></span></button>
+      <button class="vid rise" data-play="5" style="--d:.06s"><img src="/demos/infoproductores/img/v5.webp" alt="" width="800" height="450" loading="lazy" decoding="async"><span class="v-dur">9:32</span><span class="v-play"><svg width="18" height="18" viewBox="0 0 10 10"><path d="M2.5 1.2l6.3 3.8-6.3 3.8z" fill="currentColor"/></svg></span><span class="v-info"><small>Módulo 5</small><b>Flexiones: de 0 a 20 seguidas</b></span></button>
+      <button class="vid rise" data-play="6" style="--d:.12s"><img src="/demos/infoproductores/img/v6.webp" alt="" width="800" height="450" loading="lazy" decoding="async"><span class="v-dur">18:10</span><span class="v-play"><svg width="18" height="18" viewBox="0 0 10 10"><path d="M2.5 1.2l6.3 3.8-6.3 3.8z" fill="currentColor"/></svg></span><span class="v-info"><small>Módulo 3</small><b>Tu primer día en el gym</b></span></button>
+    </div>
+  </section>
+
+  <section id="coach" class="sec wrap" style="padding-top:0">
+    <div class="coach">
+      <button class="coach-ph rise" data-play="7" aria-label="Ver la presentación de la coach">
+        <img src="/demos/infoproductores/img/coach.webp" alt="" width="509" height="637" loading="lazy" decoding="async">
+        <span class="v-play"><svg width="22" height="22" viewBox="0 0 10 10"><path d="M2.5 1.2l6.3 3.8-6.3 3.8z" fill="currentColor"/></svg></span>
+        <span class="coach-tag"><b>Por qué creé Forja</b>Video · 2:14</span>
+      </button>
+      <div>
+        <span class="label label-acc rise">Tu coach</span>
+        <h2 class="h2 rise" style="margin-top:18px">Hola, soy Vale.</h2>
+        <p class="lead rise">Llevo 11 años entrenando a gente común para que se mueva como atleta. Forja es el sistema que uso con mis alumnos presenciales, convertido en un programa que puedes seguir desde cualquier lugar.</p>
+        <ul class="creds rise">
+          <li>Preparadora física de equipos de fútbol y básquet</li>
+          <li>Reviso personalmente los videos de técnica del plan con coach</li>
+          <li>Preguntas y respuestas en vivo todas las semanas</li>
+        </ul>
+      </div>
+    </div>
+    <div class="quotes">
+      <figure class="q rise"><span class="q-res">+25 kg</span><p>“En 12 semanas subí 25 kilos en sentadilla. Por fin sé qué estoy haciendo en el gym.”</p><figcaption class="q-who"><span class="q-av">CR</span><span><b>Camila R.</b><span>Contadora</span></span></figcaption></figure>
+      <figure class="q rise" style="--d:.06s"><span class="q-res">−6 cm</span><p>“Entreno en casa con dos mancuernas. Bajé 6 cm de cintura y tengo más energía que nunca.”</p><figcaption class="q-who"><span class="q-av">DP</span><span><b>Diego P.</b><span>Diseñador</span></span></figcaption></figure>
+      <figure class="q rise" style="--d:.12s"><span class="q-res">48 / 48</span><p>“Tengo dos hijos y poco tiempo. Cuatro sesiones de 50 minutos y no me salteé ninguna.”</p><figcaption class="q-who"><span class="q-av">AV</span><span><b>Andrés V.</b><span>Abogado</span></span></figcaption></figure>
+    </div>
+  </section>
+
+  <section id="precios" class="sec wrap" style="padding-top:0">
+    <div class="head">
+      <div><span class="label label-acc">Inversión</span><h2 class="h2">Elige cómo<br><em>entrenar.</em></h2></div>
+      <div class="toggle" id="toggle" role="group" aria-label="Forma de pago"><span class="pill" aria-hidden="true"></span><button type="button" aria-pressed="false" data-mode="full">Pago único</button><button type="button" aria-pressed="true" data-mode="split">3 cuotas sin interés</button></div>
+    </div>
+    <div class="plans">
+      <article class="plan rise">
+        <h3>Programa</h3>
+        <p class="for">Las 12 semanas, la app y la comunidad, a tu ritmo.</p>
+        <div class="amount"><span class="cur">USD</span><b data-price data-full="197" data-split="72">72</b><s data-old data-full="297" data-split=""></s></div>
+        <p class="note" data-note data-full="Un solo pago · acceso de por vida" data-split="× 3 cuotas · total USD 216">× 3 cuotas · total USD 216</p>
+        <ul><li>48 clases en video</li><li>Plan de comidas flexible</li><li>App de seguimiento</li><li>Comunidad y retos mensuales</li><li class="off">Revisión de técnica por video</li><li class="off">Ajustes semanales con la coach</li></ul>
+        <button class="btn btn-ghost2" data-buy="esencial">Elegir Programa</button>
+      </article>
+      <article class="plan plan-pro rise" style="--d:.08s">
+        <span class="badge">Más elegido</span>
+        <h3>Con coach</h3>
+        <p class="for">Todo el programa más seguimiento directo de Vale durante 12 semanas.</p>
+        <div class="amount"><span class="cur">USD</span><b data-price data-full="447" data-split="159">159</b><s data-old data-full="647" data-split=""></s></div>
+        <p class="note" data-note data-full="Un solo pago · acceso de por vida" data-split="× 3 cuotas · total USD 477">× 3 cuotas · total USD 477</p>
+        <ul><li>Todo lo del plan Programa</li><li>Revisión de técnica por video</li><li>Ajuste semanal de cargas y comidas</li><li>Chat directo con tu coach</li><li>Llamada 1 a 1 al inicio y al final</li></ul>
+        <button class="btn btn-acc" data-buy="pro">Reservar mi lugar <span class="arr">→</span></button>
+        <div class="pay"><span>Tarjeta</span><span>Mercado Pago</span><span>PayPal</span><span>Transferencia</span></div>
+      </article>
+    </div>
+    <div class="below rise">
+      <span class="shield"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></span>
+      <div><b>Garantía de 14 días</b><p>Si no es para ti, te devolvemos el 100% con un solo mensaje.</p></div>
+      <div><span class="label" style="display:block;margin-bottom:8px">Preventa termina en</span><div class="cd" id="cd"><span><b data-u="d">00</b><small>días</small></span><span><b data-u="h">00</b><small>hs</small></span><span><b data-u="m">00</b><small>min</small></span><span><b data-u="s">00</b><small>seg</small></span></div></div>
+    </div>
+  </section>
+
+  <section id="faq" class="sec wrap" style="padding-top:0">
+    <div class="faq">
+      <div><span class="label label-acc">Preguntas</span><h2 class="h2" style="margin-top:18px">Lo que todos<br><em>preguntan.</em></h2></div>
+      <div>
+        <details><summary>¿Sirve si nunca fui al gym?<i></i></summary><p class="ans">Sí. Las dos primeras semanas son de evaluación y técnica, y cada ejercicio tiene una versión más simple para empezar.</p></details>
+        <details><summary>¿Puedo hacerlo en casa?<i></i></summary><p class="ans">Sí. Cada clase tiene versión para casa con mancuernas y una banda elástica. Si después vas al gym, el plan se adapta.</p></details>
+        <details><summary>¿Cuánto tiempo necesito?<i></i></summary><p class="ans">Cuatro sesiones de 45 a 50 minutos por semana. El plan de comidas está pensado para cocinar poco.</p></details>
+        <details><summary>¿Cómo puedo pagar?<i></i></summary><p class="ans">Con tarjeta, Mercado Pago, PayPal o transferencia, en un pago o en 3 cuotas sin interés.</p></details>
+        <details><summary>¿Y si me lesiono o me atraso?<i></i></summary><p class="ans">El acceso es de por vida: puedes pausar y retomar cuando quieras. Ante una lesión, consulta primero a tu médico; en el plan con coach adaptamos los ejercicios.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="final sec" id="final">
+    <img class="fb" src="/demos/infoproductores/video/hero-poster.jpg" alt="" loading="lazy" aria-hidden="true">
+    <video id="finalVid" muted loop playsinline preload="none" aria-hidden="true"></video>
+    <div class="wrap">
+      <span class="label label-acc rise">Temporada 07 · Arranca <span data-start>en noviembre</span></span>
+      <h2 class="display rise" style="margin-top:20px">Sin excusas.</h2>
+      <p class="rise">Quedan pocos lugares con coach para esta temporada. Reserva hoy con precio de preventa y empieza con tu evaluación el primer día.</p>
+      <button class="btn btn-acc rise" data-buy="pro">Reservar mi lugar <span class="arr">→</span></button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <a href="#top" class="brand"><svg class="mark" viewBox="0 0 40 32" aria-hidden="true"><path d="M9 0h31l-4 8H5z" fill="#cdff3a"/><path d="M5 12h23l-4 8H1z" fill="#cdff3a"/><path d="M1 24h11l-4 8H-3z" fill="#cdff3a" transform="translate(3 0)"/></svg><span class="word">FORJA<i>.</i></span></a>
+      <p>Forja es una marca ficticia: esta página es una demo de Websy de una landing de lanzamiento para programas de entrenamiento, cursos y mentorías online. Testimonios, cifras y precios son de ejemplo, y las personas de las fotos y videos no tienen relación con la marca. Videos de Mixkit; fotos libres de derechos (CC0) de StockSnap y Wikimedia Commons.</p>
+    </div>
+    <div class="made">
+      <span class="label">Diseño y desarrollo</span>
+      <a href="https://wa.me/5493884846695?text=Hola%20Websy%2C%20vi%20la%20demo%20Forja%20y%20quiero%20una%20landing%20as%C3%AD%20para%20mi%20programa." data-wa="demo_infoproductores_pie" target="_blank" rel="noopener">Quiero una landing así · <b>Websy</b> ↗</a>
+      <a href="/casos-de-exito/demo-landing-page-infoproductores-forja">Cómo está hecha esta demo →</a>
+    </div>
+  </div>
+</footer>
+
+<div class="mbar" id="mbar"><div><b>Temporada 07</b>Preventa · 3 cuotas sin interés</div><button class="btn btn-acc btn-sm" data-buy="pro">Reservar</button></div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mt">
+  <div class="modal-bg" data-close></div>
+  <div class="sheet" id="sheet">
+    <button class="x" data-close aria-label="Cerrar"><svg width="12" height="12" viewBox="0 0 14 14"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.8"/></svg></button>
+    <div class="step1">
+      <span class="label">Checkout seguro</span>
+      <h3 id="mt">Reserva tu lugar</h3>
+      <div class="sum"><div><div id="sumPlan" style="font-weight:600">Con coach</div><div id="sumMode" style="color:var(--mute);font-size:13px">3 cuotas sin interés</div></div><b id="sumPrice">USD 159</b></div>
+      <form id="pay" novalidate>
+        <label class="field">Nombre<input autocomplete="name" placeholder="Tu nombre"></label>
+        <label class="field">Email<input type="email" autocomplete="email" placeholder="tu@email.com"></label>
+        <div class="field" style="margin-bottom:0">Medio de pago</div>
+        <div class="methods"><label><input type="radio" name="m" checked>Tarjeta</label><label><input type="radio" name="m">Mercado Pago</label><label><input type="radio" name="m">PayPal</label><label><input type="radio" name="m">Transferencia</label></div>
+        <button class="btn btn-acc" type="submit">Continuar al pago <span class="arr">→</span></button>
+        <p class="secure">Pago cifrado · Garantía de 14 días</p>
+      </form>
+    </div>
+    <div class="step2">
+      <div class="ok"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <span class="label">Esto es una demo</span>
+      <h3>Aquí cobraría tu landing</h3>
+      <p style="color:var(--mute)">En tu versión real, este paso queda conectado y funciona solo:</p>
+      <ol class="flow"><li>Cobro con Mercado Pago, Stripe o PayPal, en cuotas si quieres.</li><li>Acceso inmediato a las clases y a la app.</li><li>Email y WhatsApp de bienvenida automáticos.</li><li>Píxel de Meta y TikTok midiendo cada venta.</li></ol>
+      <a class="btn btn-acc" href="https://wa.me/5493884846695?text=Hola%20Websy%2C%20prob%C3%A9%20el%20checkout%20de%20la%20demo%20Forja%20y%20quiero%20una%20landing%20as%C3%AD." data-wa="demo_infoproductores_checkout" target="_blank" rel="noopener">Quiero mi landing con Websy <span class="arr">↗</span></a>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="vmodal" role="dialog" aria-modal="true" aria-labelledby="vt">
+  <div class="modal-bg" data-close></div>
+  <div class="sheet player">
+    <button class="x" data-close aria-label="Cerrar video"><svg width="12" height="12" viewBox="0 0 14 14"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.8"/></svg></button>
+    <div class="screen"><img id="vimg" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="">
+      <div class="vnote"><b>Aquí se reproduce tu clase</b><p>En tu landing real conectamos YouTube, Vimeo o Bunny Stream, con acceso solo para tus alumnos.</p><a class="btn btn-acc btn-sm" href="https://wa.me/5493884846695?text=Hola%20Websy%2C%20vi%20la%20demo%20Forja%20y%20quiero%20una%20landing%20con%20videos%20para%20mi%20programa." data-wa="demo_infoproductores_video" target="_blank" rel="noopener">Quiero una así ↗</a></div>
+    </div>
+    <div class="vbar"><span id="vcur">0:00</span><i></i><span id="vdur">14:20</span></div>
+    <div class="vtitle"><b id="vt">Clase</b><span id="vs">Forja</span></div>
+  </div>
+</div>
+
+<script>
+(function(){
+'use strict';
+var d=document,w=window,body=d.body;
+var reduce=w.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var $=function(s,c){return(c||d).querySelector(s)},$$=function(s,c){return Array.prototype.slice.call((c||d).querySelectorAll(s))};
+var clamp=function(v,a,b){return Math.max(a,Math.min(b,v))};
+var vw=w.innerWidth,vh=w.innerHeight;
+
+/* ---------- Video del hero: versión según pantalla; con ahorro de datos o 2G queda la foto ---------- */
+var conn=navigator.connection||{},slow=!!(conn.saveData||/2g/.test(conn.effectiveType||''));
+var SRC=vw<=760?'/demos/infoproductores/video/hero-movil.mp4':'/demos/infoproductores/video/hero-1280.mp4';
+var hv=$('#heroVid'),fv=$('#finalVid'),paused=reduce||slow;
+// Cortes del video en segundos: press, cinta, soga, cuerdas, kettlebell
+var SC=[[0,'Fuerza','Press con barra'],[2.6,'Cardio','Cinta · 11 km/h'],[4.9,'Coordinación','Salto a la soga'],[7.3,'Resistencia','Cuerdas de batalla'],[9.6,'Potencia','Kettlebell'],[12.2]];
+var bars=$$('#sceneBars i'),sT=$('#sceneT'),sS=$('#sceneS'),cur=0;
+function load(v){if(!v.getAttribute('src')&&!slow){v.src=SRC;v.preload='auto'}}
+function play(v){if(paused||slow)return;load(v);var p=v.play();if(p&&p.catch)p.catch(function(){})}
+hv.addEventListener('playing',function(){hv.classList.add('on')});
+fv.addEventListener('playing',function(){fv.style.opacity=1});
+function scene(){var t=hv.currentTime||0,i=0;while(i<SC.length-2&&t>=SC[i+1][0])i++;
+  if(i!==cur){cur=i;sT.textContent=SC[i][1];sS.textContent=SC[i][2];sT.classList.remove('swap');void sT.offsetWidth;sT.classList.add('swap')}
+  bars.forEach(function(b,j){b.style.setProperty('--p',j<i?1:j>i?0:clamp((t-SC[i][0])/(SC[i+1][0]-SC[i][0]),0,1))})}
+var vctl=$('#vctl');
+function setCtl(){$('#vctlT').textContent=paused?'Reproducir video':'Pausar video';
+  $('#vctlI').innerHTML=paused?'<path d="M2 1l7 4-7 4z" fill="currentColor"/>':'<rect x="1.5" y="1" width="2.4" height="8" fill="currentColor"/><rect x="6" y="1" width="2.4" height="8" fill="currentColor"/>'}
+vctl.addEventListener('click',function(){paused=!paused;if(paused){hv.pause();fv.pause()}else play(hv);setCtl()});
+setCtl();if(slow)vctl.style.display='none';
+// Cada video solo corre mientras se ve
+if('IntersectionObserver' in w){
+  new IntersectionObserver(function(es){es.forEach(function(e){e.isIntersecting?play(hv):hv.pause()})},{threshold:.05}).observe($('.hero'));
+  new IntersectionObserver(function(es){es.forEach(function(e){e.isIntersecting?play(fv):fv.pause()})},{threshold:.05}).observe($('#final'));
+}else play(hv);
+
+/* ---------- Fecha de inicio y cuenta regresiva (siempre a futuro) ---------- */
+var start=new Date();start.setHours(0,0,0,0);start.setDate(start.getDate()+12);while(start.getDay()!==1)start.setDate(start.getDate()+1);
+var close=new Date(start.getTime()-2*864e5);close.setHours(23,59,59,0);
+try{var lbl='el '+start.toLocaleDateString('es',{day:'numeric',month:'long'});$$('[data-start]').forEach(function(el){el.textContent=lbl})}catch(e){}
+var cdE={};$$('#cd [data-u]').forEach(function(el){cdE[el.dataset.u]=el});
+function tick(){var s=Math.max(0,(close-Date.now())/1e3|0),p=function(n){return n<10?'0'+n:''+n};cdE.d.textContent=p(s/86400|0);cdE.h.textContent=p(s%86400/3600|0);cdE.m.textContent=p(s%3600/60|0);cdE.s.textContent=p(s%60)}
+tick();setInterval(tick,1000);
+
+/* ---------- Revelado al entrar en pantalla y contadores ---------- */
+function count(el){var to=parseFloat(el.dataset.count),dec=+(el.dataset.dec||0),suf=el.dataset.suffix||'',t0=performance.now();
+  function f(v){return v.toFixed(dec).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g,'.')+suf}
+  if(reduce){el.textContent=f(to);return}
+  (function s(n){var p=clamp((n-t0)/1400,0,1);el.textContent=f(to*(1-Math.pow(1-p,4)));if(p<1)requestAnimationFrame(s)})(t0)}
+if('IntersectionObserver' in w){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;e.target.classList.add('in');$$('[data-count]',e.target).forEach(count);io.unobserve(e.target)})},{rootMargin:'0px 0px -8% 0px'});
+  $$('.rise').forEach(function(el){io.observe(el)})}else $$('.rise').forEach(function(el){el.classList.add('in')});
+
+/* ---------- Manifiesto ---------- */
+var mf=$('#mf'),HL={'plan:':1,'Forja.':1};
+mf.innerHTML=mf.textContent.trim().split(/\s+/).map(function(t){return'<span class="mw'+(HL[t]?' hl':'')+'">'+t+'</span>'}).join(' ');
+var mws=$$('.mw',mf),mfSec=$('.manifesto'),pils=$$('#pillars li'),figs=$$('.mf-media figure'),mfc=$('#mfCount'),stage=0;
+function setStage(k){if(k===stage)return;stage=k;pils.forEach(function(l,j){l.classList.toggle('on',j<=k)});figs.forEach(function(f,j){f.classList.toggle('on',j===k)});mfc.textContent='0'+(k+1)+' / 03'}
+// En celular no hay scroll fijo: las etapas rotan solas
+if(w.innerWidth<=900&&!reduce)setInterval(function(){setStage((stage+1)%3)},3200);
+
+/* ---------- Precios ---------- */
+var mode='split',tg=$('#toggle'),pill=$('.pill',tg);
+function setMode(m){mode=m;$$('button',tg).forEach(function(b){var on=b.dataset.mode===m;b.setAttribute('aria-pressed',on);if(on){pill.style.width=b.offsetWidth+'px';pill.style.transform='translateX('+(b.offsetLeft-4)+'px)'}});
+  $$('[data-price]').forEach(function(el){el.textContent=el.dataset[m]});$$('[data-old]').forEach(function(el){el.textContent=el.dataset[m]?'USD '+el.dataset[m]:''});$$('[data-note]').forEach(function(el){el.textContent=el.dataset[m]})}
+$$('button',tg).forEach(function(b){b.addEventListener('click',function(){setMode(b.dataset.mode)})});setMode('split');
+
+/* ---------- Ventanas: checkout y reproductor de muestra ---------- */
+var last=null,openM=null,vClock;
+function show(m){last=d.activeElement;openM=m;m.classList.add('open');body.style.overflow='hidden';setTimeout(function(){var x=$('.x',m);x&&x.focus()},60)}
+function hide(){if(!openM)return;openM.classList.remove('open');body.style.overflow='';openM=null;clearInterval(vClock);last&&last.focus&&last.focus()}
+var modal=$('#modal'),sheet=$('#sheet'),PL={pro:['Con coach',447,159],esencial:['Programa',197,72]};
+function buy(k){var P=PL[k]||PL.pro;sheet.classList.remove('done');$('#sumPlan').textContent=P[0];$('#sumMode').textContent=mode==='split'?'3 cuotas sin interés':'Pago único';$('#sumPrice').textContent='USD '+(mode==='split'?P[2]+' / mes':P[1]);show(modal)}
+$$('[data-buy]').forEach(function(b){b.addEventListener('click',function(){buy(b.dataset.buy)})});
+$('#pay').addEventListener('submit',function(e){e.preventDefault();sheet.classList.add('done')});
+var VIDS=[0,['v1','Mancuernas sin errores: la guía completa','Clase gratis · Técnica','14:20',860],['v2','Circuito de boxeo para quemar','Módulo 6','22:05',1325],['v3','Arma tu plato sin contar calorías','Nutrición','11:48',708],['v4','Full body de 30 minutos','En casa','30:00',1800],['v5','Flexiones: de 0 a 20 seguidas','Módulo 5','9:32',572],['v6','Tu primer día en el gym','Módulo 3','18:10',1090],['coach','Por qué creé Forja','Vale · Tu coach','2:14',134]];
+var vm=$('#vmodal'),vimg=$('#vimg');
+function restart(el){el.style.animation='none';void el.offsetWidth;el.style.animation=''}
+function openVid(i){var v=VIDS[i]||VIDS[1],t=0,step=v[4]/16;vimg.src='/demos/infoproductores/img/'+v[0]+'.webp';$('#vt').textContent=v[1];$('#vs').textContent=v[2];$('#vdur').textContent=v[3];$('#vcur').textContent='0:00';
+  restart(vimg);show(vm);clearInterval(vClock);vClock=setInterval(function(){t=Math.min(v[4],t+step);$('#vcur').textContent=(t/60|0)+':'+('0'+(t%60|0)).slice(-2)},1000)}
+$$('[data-play]').forEach(function(el){el.addEventListener('click',function(){openVid(+el.dataset.play)})});
+$$('[data-close]').forEach(function(b){b.addEventListener('click',hide)});
+d.addEventListener('keydown',function(e){if(e.key==='Escape')hide()});
+
+/* ---------- WhatsApp: mismo registro y etiqueta de origen que el resto de websysrl.com ---------- */
+d.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[data-wa]');if(!a)return;
+  try{var u=new URL(a.href),t=u.searchParams.get('text')||'';if(t.indexOf('(Página: ')<0){u.searchParams.set('text',t+'\n\n(Página: websysrl.com'+location.pathname+')');a.href=u.toString()}}catch(_){}
+  try{var pl=JSON.stringify({location:a.dataset.wa,page:location.pathname,referrer:d.referrer});if(!(navigator.sendBeacon&&navigator.sendBeacon('/api/whatsapp-clicks',new Blob([pl],{type:'text/plain'}))))fetch('/api/whatsapp-clicks',{method:'POST',headers:{'Content-Type':'text/plain'},body:pl}).catch(function(){})}catch(_){}
+  if(w.gtag)w.gtag('event','click_whatsapp',{link_location:a.dataset.wa})},true);
+
+/* ---------- Scroll: navegación, manifiesto, pista horizontal, barra móvil ---------- */
+var nav=$('#nav'),strip=$('#strip'),mbar=$('#mbar'),hs=$('#metodo'),track=$('#track'),hsb=$('#hsb'),hsn=$('#hsn'),hsOn=false;
+function layout(){vw=w.innerWidth;vh=w.innerHeight;hsOn=vw>900&&vh>620;hs.style.height=hsOn?(track.scrollWidth-vw+vh)+'px':'';d.documentElement.style.setProperty('--strip',strip.offsetHeight+'px')}
+function onScroll(){var y=w.scrollY;nav.classList.toggle('solid',y>strip.offsetHeight);
+  mbar.classList.toggle('show',y>vh*.9&&y<d.body.scrollHeight-vh*1.8);
+  if(vw>900){var r=mfSec.getBoundingClientRect(),p=clamp((-r.top+vh*.2)/(r.height-vh*.9),0,1),n=Math.round(clamp(p/.7,0,1)*mws.length);for(var i=0;i<mws.length;i++)mws[i].classList.toggle('on',i<n);setStage(p<.36?0:p<.68?1:2)}
+  if(hsOn){var hr=hs.getBoundingClientRect(),hp=clamp(-hr.top/(hs.offsetHeight-vh),0,1);track.style.transform='translate3d('+(-hp*(track.scrollWidth-vw))+'px,0,0)';hsb.style.setProperty('--p',hp);hsn.textContent='0'+Math.min(8,1+Math.floor(hp*8))+' / 08'}}
+w.addEventListener('scroll',onScroll,{passive:true});w.addEventListener('resize',function(){layout();onScroll();setMode(mode)});
+layout();onScroll();
+(function loop(){if(!d.hidden&&w.scrollY<vh)scene();requestAnimationFrame(loop)})();
+})();
+</script>
+</body>
+</html>

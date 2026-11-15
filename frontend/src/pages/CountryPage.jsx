@@ -11,7 +11,7 @@ import { COUNTRY_ALTERNATES, countryPageByCode, countryPages } from '../countryP
 import { cityPages } from '../cityPages';
 import { whatsappUrl } from '../siteConfig';
 import { saveCountry } from '../lib/geo';
-import { formatPrice, getMarket, localAmount, PLAN_PRICES, pricingNote } from '../pricing';
+import { formatPrice, formatSeoMonthlyPrice, getMarket, localAmount, PLAN_PRICES, pricingNote } from '../pricing';
 
 // Versión del sitio para un país (/colombia, /mexico, /estados-unidos). El contenido está en src/countryPages.js.
 
@@ -94,6 +94,7 @@ export const CountryPage = ({ code }) => {
   const posts = page.posts.map(getPostBySlug).filter(Boolean);
   const others = countryPages.filter((c) => c.code !== code);
   const cities = cityPages.filter((c) => c.country.code === code);
+  const seoPath = { AR: '/argentina/seo', CO: '/colombia/seo', MX: '/mexico/seo' }[code];
 
   // Entrar directamente a /colombia, /mexico o /estados-unidos también fija el mercado
   // para que /planes conserve la moneda correcta durante el resto de la visita.
@@ -102,7 +103,7 @@ export const CountryPage = ({ code }) => {
 
   const WhatsAppCta = ({ dark = false }) => (
     <a
-      href={whatsappUrl(page.waText)}
+      href={whatsappUrl(page.waText, code)}
       target="_blank"
       rel="noopener noreferrer"
       data-wa-location={`pais_${code.toLowerCase()}`}
@@ -241,6 +242,18 @@ export const CountryPage = ({ code }) => {
             </table>
           </div>
           <p className="mt-4 text-sm text-slate-500">{pricingNote(code)}</p>
+          {seoPath && (
+            <div className="mt-7 rounded-2xl border-2 border-[#d9fb06] bg-[#faffdc] p-6 md:flex md:items-center md:justify-between md:gap-8">
+              <div>
+                <p className="text-xs font-black uppercase tracking-[.16em] text-[#556902]">Seguimiento y mejora continua</p>
+                <h3 className="mt-2 text-2xl font-black text-[#182A2C]">Plan SEO mensual: {formatSeoMonthlyPrice(code)}</h3>
+                <p className="mt-2 max-w-3xl text-[15px] leading-relaxed text-slate-700">Trabajamos cada mes sobre posiciones, contenido, SEO técnico y una página comercial prioritaria. Equivale a USD 200 por mes.</p>
+              </div>
+              <Link to={seoPath} className="mt-5 inline-flex shrink-0 items-center gap-2 rounded-full bg-[#182A2C] px-6 py-3.5 font-bold text-white hover:bg-black md:mt-0">
+                Ver plan SEO en {page.name} <ArrowRight size={16} />
+              </Link>
+            </div>
+          )}
           <div className="mt-8 grid md:grid-cols-2 gap-6 text-[15px] text-slate-700 leading-relaxed">
             <div className="rounded-2xl bg-[#f4f7f9] p-6">
               <h3 className="flex items-center gap-2 text-lg font-bold text-[#182A2C] mb-2"><CreditCard size={18} /> Cómo se paga</h3>
@@ -347,7 +360,6 @@ export const CountryPage = ({ code }) => {
                 <Link to={c.path} onClick={() => saveCountry(c.code)} className={linkCls}>{c.name}</Link>
               </React.Fragment>
             ))}
-            {' · '}<Link to="/" onClick={() => saveCountry('AR')} className={linkCls}>Argentina</Link>
           </p>
         </div>
       </section>

@@ -9,7 +9,7 @@ import { COUNTRIES } from '../siteConfig';
 import { useLanguage } from '../LanguageContext';
 
 // Países de la franja inferior; los que tienen versión propia enlazan a ella
-const STRIP = [{ code: 'AR', name: 'Argentina' }, ...countryPages.map(({ code, name, path }) => ({ code, name, path }))];
+const STRIP = countryPages.map(({ code, name, path }) => ({ code, name, path }));
 
 // Aviso sobre el título según el país del visitante (null = buscadores, prerender o Argentina).
 // Ocupa siempre el mismo alto para que el cambio de texto al detectar el país no mueva la página.

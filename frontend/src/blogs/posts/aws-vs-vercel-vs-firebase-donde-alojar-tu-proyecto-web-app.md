@@ -65,6 +65,10 @@ Los planes y precios cambian; revisa la página de cada proveedor.
 
 Depende del proyecto: Vercel para sitios y apps web modernas, Firebase para apps móviles y MVP con backend listo, AWS para arquitecturas complejas o de gran escala.
 
+### ¿Vercel o Firebase: cuál conviene?
+
+Vercel conviene para publicar la parte visible de una web o app hecha en Next.js o React, con muy poca configuración. Firebase conviene cuando además necesitas base de datos, usuarios y datos en tiempo real sin armar un servidor propio. Muchos proyectos usan los dos: el frontend en Vercel y los datos en Firebase.
+
 ### ¿Vercel es gratis?
 
 Tiene un plan gratuito que alcanza para muchos sitios personales y pequeños. Para uso comercial con equipo y más consumo hay planes pagos.

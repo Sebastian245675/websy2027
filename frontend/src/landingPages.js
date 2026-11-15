@@ -47,7 +47,7 @@ const base = {
   },
   infoproductores: {
     rubro: 'Infoproductores',
-    caseIds: [],
+    caseIds: ['demo-forja-infoproductores'],
   },
 };
 

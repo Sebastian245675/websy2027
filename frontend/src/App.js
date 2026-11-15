@@ -64,6 +64,10 @@ const PlansPage = lazy(() => {
   });
 });
 
+const PlanDetailPage = lazy(() =>
+  import("./pages/PlanDetailPage").then(module => ({ default: module.PlanDetailPage }))
+);
+
 const LeadsPanel = lazy(() =>
   import("./pages/LeadsPanel").then(module => ({ default: module.LeadsPanel }))
 );
@@ -129,6 +133,10 @@ const AboutPage = lazy(() =>
 
 const CountryPage = lazy(() =>
   import("./pages/CountryPage").then(module => ({ default: module.CountryPage }))
+);
+
+const SeoCountryPage = lazy(() =>
+  import("./pages/SeoCountryPage").then(module => ({ default: module.SeoCountryPage }))
 );
 
 const AutomationCountryPage = lazy(() =>
@@ -214,6 +222,11 @@ function App() {
                         <PlansPage />
                       </Suspense>
                     } />
+                    <Route path="/planes/:planId" element={
+                      <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
+                        <PlanDetailPage />
+                      </Suspense>
+                    } />
                     <Route path="/panel" element={
                       <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
                         <SEOHead title="Panel de consultas | Websy" noindex />
@@ -262,6 +275,11 @@ function App() {
                       </Suspense>
                     } />
                     {/* Versiones por país (src/countryPages.js), enlazadas con la home por hreflang */}
+                    <Route path="/argentina" element={
+                      <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
+                        <CountryPage code="AR" />
+                      </Suspense>
+                    } />
                     <Route path="/colombia" element={
                       <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
                         <CountryPage code="CO" />
@@ -270,6 +288,21 @@ function App() {
                     <Route path="/mexico" element={
                       <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
                         <CountryPage code="MX" />
+                      </Suspense>
+                    } />
+                    <Route path="/argentina/seo" element={
+                      <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
+                        <SeoCountryPage code="AR" />
+                      </Suspense>
+                    } />
+                    <Route path="/colombia/seo" element={
+                      <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
+                        <SeoCountryPage code="CO" />
+                      </Suspense>
+                    } />
+                    <Route path="/mexico/seo" element={
+                      <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
+                        <SeoCountryPage code="MX" />
                       </Suspense>
                     } />
                     <Route path="/colombia/automatizacion-procesos" element={
@@ -290,6 +323,26 @@ function App() {
                     <Route path="/mexico/diseno-web-cdmx" element={
                       <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
                         <CityWebPage slug="cdmx" />
+                      </Suspense>
+                    } />
+                    <Route path="/colombia/desarrollo-web-medellin" element={
+                      <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
+                        <CityWebPage slug="medellin" />
+                      </Suspense>
+                    } />
+                    <Route path="/colombia/desarrollo-web-barranquilla" element={
+                      <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
+                        <CityWebPage slug="barranquilla" />
+                      </Suspense>
+                    } />
+                    <Route path="/mexico/diseno-web-monterrey" element={
+                      <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
+                        <CityWebPage slug="monterrey" />
+                      </Suspense>
+                    } />
+                    <Route path="/mexico/diseno-web-guadalajara" element={
+                      <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
+                        <CityWebPage slug="guadalajara" />
                       </Suspense>
                     } />
                     <Route path="/mexico/automatizacion-procesos" element={

@@ -118,7 +118,7 @@ export const AutomationCountryPage = ({ code }) => {
               <h1 className="text-[35px] sm:text-5xl lg:text-[3.5rem] font-black leading-[1.05] tracking-tight">{page.h1}</h1>
               <p className="mt-6 max-w-3xl text-lg text-white/80 leading-relaxed">{page.lead}</p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <a href={whatsappUrl(page.wa)} target="_blank" rel="noopener noreferrer" data-wa-location={`automatizacion_${code.toLowerCase()}`} className="inline-flex items-center gap-2 rounded-full bg-[#d9fb06] px-6 py-3.5 font-bold text-[#182A2C] hover:bg-white transition-colors">
+                <a href={whatsappUrl(page.wa, code)} target="_blank" rel="noopener noreferrer" data-wa-location={`automatizacion_${code.toLowerCase()}`} className="inline-flex items-center gap-2 rounded-full bg-[#d9fb06] px-6 py-3.5 font-bold text-[#182A2C] hover:bg-white transition-colors">
                   <MessageCircle size={18} /> Analizar mi proceso <ArrowRight size={16} />
                 </a>
                 <a href="#casos-de-uso" className="inline-flex items-center rounded-full border border-white/30 px-6 py-3.5 font-bold hover:bg-white/10">Ver qué automatizar</a>
@@ -187,7 +187,7 @@ export const AutomationCountryPage = ({ code }) => {
         <div className="container mx-auto px-5 max-w-3xl">
           <h2 className="text-3xl md:text-4xl font-black">¿Qué tarea repite tu equipo todas las semanas?</h2>
           <p className="mt-4 text-lg text-white/70">Cuéntanos el proceso. Te diremos qué parte conviene automatizar, qué debe seguir en manos de una persona y cuál sería el siguiente paso.</p>
-          <a href={whatsappUrl(page.wa)} target="_blank" rel="noopener noreferrer" data-wa-location={`automatizacion_${code.toLowerCase()}_cierre`} className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#d9fb06] px-7 py-4 font-bold text-[#182A2C] hover:bg-white transition-colors"><MessageCircle size={18} /> Solicitar diagnóstico</a>
+          <a href={whatsappUrl(page.wa, code)} target="_blank" rel="noopener noreferrer" data-wa-location={`automatizacion_${code.toLowerCase()}_cierre`} className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#d9fb06] px-7 py-4 font-bold text-[#182A2C] hover:bg-white transition-colors"><MessageCircle size={18} /> Solicitar diagnóstico</a>
           <p className="mt-6 text-sm text-white/60">También puedes revisar el <Link to="/servicios/automatizaciones-ia" className="underline">servicio general de automatización con IA</Link>.</p>
         </div>
       </section>

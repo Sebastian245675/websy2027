@@ -25,7 +25,9 @@ const caseSlugs = new Set([
   ...[...casesSrc.matchAll(/^\s{4}slug:\s*'([^']+)'/gm)].map((m) => m[1]),
   ...[...hubsSrc.matchAll(/^\s{4}path:\s*'([^']+)'/gm)].map((m) => m[1]),
 ]);
-const STATIC = new Set(['/', '/servicios', '/planes', '/casos-de-exito', '/contacto', '/blog', '/politica-de-privacidad']);
+const cityPaths = slugsIn(path.join(SRC, 'cityPages.js'), /path:\s*'(\/[^']+)'/g);
+const STATIC = new Set(['/', '/servicios', '/planes', '/casos-de-exito', '/contacto', '/blog', '/politica-de-privacidad',
+  '/cotizador', '/auditoria-gratis', '/quienes-somos', '/argentina', '/colombia', '/mexico', '/estados-unidos', ...cityPaths]);
 
 // Country per post from the cluster map; pillars count as LATAM
 const countryOf = {};

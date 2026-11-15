@@ -11,14 +11,20 @@ const DEFAULT_IMAGE = '/og/websy.png';
 const SECTION_NAMES = {
   servicios: 'Servicios',
   planes: 'Inversión',
+  estandar: 'Plan Estándar',
+  comercio: 'Plan Comercio',
+  pymes: 'Plan PYMES',
+  corpo: 'Plan Corpo',
   blog: 'Blog',
   contacto: 'Contacto',
   'casos-de-exito': 'Casos de Éxito',
+  argentina: 'Argentina',
   colombia: 'Colombia',
   cotizador: 'Cotizador',
   'auditoria-gratis': 'Auditoría web gratis',
   'quienes-somos': 'Quiénes somos',
   mexico: 'México',
+  seo: 'SEO mensual',
   'estados-unidos': 'Estados Unidos',
 };
 
