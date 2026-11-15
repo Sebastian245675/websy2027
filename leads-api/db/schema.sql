@@ -107,3 +107,12 @@ CREATE TABLE IF NOT EXISTS prospect_pool (
   updated_at     TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 CREATE INDEX IF NOT EXISTS prospect_pool_oportunidad_idx ON prospect_pool (oportunidad DESC);
+
+-- Mensajes editados desde el panel antes de enviarse. Los servidores de campaña los consultan antes de
+-- cada envío (GET /api/outreach/overrides) y, si hay uno, mandan este texto en lugar del de la plantilla.
+CREATE TABLE IF NOT EXISTS outreach_overrides (
+  key            TEXT PRIMARY KEY,                 -- misma clave que outreach_prospects
+  mensaje        TEXT NOT NULL,
+  asunto         TEXT,                             -- solo correo
+  updated_at     TIMESTAMPTZ NOT NULL DEFAULT now()
+);

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { ArrowLeft, Bot, CalendarClock, Mail, MessageCircle, Search, User } from 'lucide-react';
+import { ArrowLeft, Bot, CalendarClock, Mail, MessageCircle, Pencil, RotateCcw, Search, User, X } from 'lucide-react';
 import { panel } from '../lib/api';
 
 // Centro de prospección del panel: campañas de WhatsApp y de correo en un solo lugar, al estilo Apollo.
@@ -26,6 +26,8 @@ const stateOf = (id) => OUTREACH_STATES[id] || { label: id, cls: 'bg-slate-100 t
 const CAMPAIGNS = {
   'contadores-co': 'Contadores Colombia · web',
   'agente-ia-ar': 'Agente IA · Argentina',
+  'web-negocios-co': 'Webs para negocios · Colombia',
+  'web-negocios-mx': 'Webs para negocios · México',
   prueba: 'Prueba',
 };
 const campaignLabel = (c) => CAMPAIGNS[c] || c || '—';
@@ -169,8 +171,90 @@ const Funnel = ({ items }) => {
   );
 };
 
+// Mensaje que se le va a enviar a un prospecto en cola: el de la plantilla o el editado desde el panel.
+// El servidor de campaña consulta las ediciones justo antes de enviar.
+const ScheduledMessage = ({ prospect, onSaved }) => {
+  const original = { mensaje: prospect.extra?.mensaje || '', asunto: prospect.extra?.asunto || '' };
+  const current = prospect.editado || original;
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState(current);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState('');
+  const isEmail = prospect.canal === 'email';
+  useEffect(() => {
+    setEditing(false);
+    setError('');
+  }, [prospect.key]);
+
+  const save = async (mensaje, asunto) => {
+    setBusy(true);
+    setError('');
+    try {
+      await panel.saveOutreachMessage(prospect.key, mensaje, asunto);
+      setEditing(false);
+      await onSaved?.();
+    } catch (err) {
+      setError(err.message);
+    }
+    setBusy(false);
+  };
+
+  if (!current.mensaje && !editing) {
+    return <p className="text-sm text-slate-500">El servidor de campaña todavía no informó el texto de este mensaje. Aparece en la próxima sincronización (cada 5 a 10 minutos).</p>;
+  }
+  return (
+    <div className="space-y-3">
+      <div className="flex flex-wrap items-center gap-2 text-xs">
+        <span className="font-bold uppercase tracking-wider text-slate-500">{isEmail ? 'Correo programado' : 'WhatsApp programado'}</span>
+        <span className="text-slate-400">· sale el {fmtDay(prospect.programadoPara)} entre 9 y 16 h de Colombia</span>
+        {prospect.editado && <span className="rounded-full bg-amber-100 px-2 py-0.5 font-bold text-amber-800">Editado</span>}
+      </div>
+      {editing ? (
+        <div className="space-y-2">
+          {isEmail && <input value={draft.asunto || ''} onChange={(e) => setDraft({ ...draft, asunto: e.target.value })} placeholder="Asunto" className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-semibold" />}
+          <textarea value={draft.mensaje} onChange={(e) => setDraft({ ...draft, mensaje: e.target.value })} rows={isEmail ? 16 : 12} className="w-full rounded-lg border border-slate-300 bg-white p-3 text-sm leading-relaxed" />
+          <p className="text-xs text-slate-500">{draft.mensaje.length} caracteres{isEmail ? '' : ' · los párrafos se separan con una línea en blanco'}</p>
+          <div className="flex flex-wrap gap-2">
+            <button type="button" disabled={busy || !draft.mensaje.trim()} onClick={() => save(draft.mensaje, draft.asunto)} className="rounded-full bg-[#182A2C] px-4 py-2 text-sm font-bold text-white disabled:opacity-50">{busy ? 'Guardando…' : 'Guardar mensaje'}</button>
+            <button type="button" onClick={() => { setEditing(false); setDraft(current); }} className="rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-bold text-slate-600">Cancelar</button>
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className={`rounded-2xl p-4 text-sm shadow-sm ${isEmail ? 'border border-slate-200 bg-white text-slate-800' : 'ml-auto max-w-[90%] rounded-br-md bg-[#182A2C] text-white'}`}>
+            {isEmail && <p className="mb-3 border-b border-slate-100 pb-2 font-bold text-[#182A2C]">Asunto: {current.asunto}</p>}
+            <p className="whitespace-pre-wrap leading-relaxed">{current.mensaje}</p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <button type="button" onClick={() => { setDraft(current); setEditing(true); }} className="inline-flex items-center gap-1.5 rounded-full bg-[#182A2C] px-4 py-2 text-sm font-bold text-white"><Pencil size={14} /> Editar mensaje</button>
+            {prospect.editado && <button type="button" disabled={busy} onClick={() => save('', '')} className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-bold text-slate-600"><RotateCcw size={14} /> Volver al original</button>}
+          </div>
+          {isEmail && <p className="text-xs text-slate-500">Se edita el primer correo. Los dos seguimientos (a los 3 y 7 días hábiles) salen con su texto de siempre.</p>}
+        </>
+      )}
+      {error && <p className="text-sm font-semibold text-red-600">{error}</p>}
+    </div>
+  );
+};
+
+const MessageModal = ({ prospect, onClose, onSaved }) => (
+  <div className="fixed inset-0 z-[80] flex items-start justify-center overflow-y-auto bg-black/40 p-4 md:p-10" onClick={onClose}>
+    <div className="w-full max-w-2xl rounded-2xl bg-[#f4f7f9] shadow-2xl" onClick={(e) => e.stopPropagation()}>
+      <header className="flex items-start gap-3 rounded-t-2xl border-b border-slate-200 bg-white px-5 py-4">
+        <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100"><ChannelIcon canal={prospect.canal} size={17} /></span>
+        <div className="min-w-0 flex-1">
+          <h3 className="truncate text-lg font-black text-[#182A2C]">{prospect.nombre}</h3>
+          <p className="truncate text-sm text-slate-500">{campaignLabel(prospect.campana)} · {prospect.contacto}{prospect.extra?.rubro ? ` · ${prospect.extra.rubro}` : ''}{prospect.extra?.ciudad ? ` · ${prospect.extra.ciudad}` : ''}</p>
+        </div>
+        <button type="button" onClick={onClose} className="bg-transparent text-slate-400 hover:text-slate-700" aria-label="Cerrar"><X size={20} /></button>
+      </header>
+      <div className="p-5"><ScheduledMessage prospect={prospect} onSaved={onSaved} /></div>
+    </div>
+  </div>
+);
+
 // Conversación completa de un prospecto (panel derecho de la bandeja)
-const Conversation = ({ prospect, onBack }) => {
+const Conversation = ({ prospect, onBack, onSaved }) => {
   const [msgs, setMsgs] = useState(null);
   useEffect(() => {
     setMsgs(null);
@@ -198,7 +282,7 @@ const Conversation = ({ prospect, onBack }) => {
       </header>
       <div className="min-h-0 flex-1 space-y-3 overflow-y-auto bg-[#eef2f4] p-5">
         {msgs === null && <p className="text-sm text-slate-500">Cargando conversación…</p>}
-        {msgs && msgs.length === 0 && <p className="text-sm text-slate-500">{prospect.estado === 'programado' ? `Todavía no se le escribió. Envío estimado: ${fmtDay(prospect.programadoPara)}.` : 'Sin mensajes registrados todavía.'}</p>}
+        {msgs && msgs.length === 0 && (prospect.estado === 'programado' ? <ScheduledMessage prospect={prospect} onSaved={onSaved} /> : <p className="text-sm text-slate-500">Sin mensajes registrados todavía.</p>)}
         {(msgs || []).map((m) => {
           if (m.de === 'sistema') return <p key={m.id} className="mx-auto w-fit max-w-[90%] rounded-lg bg-white/70 px-3 py-1.5 text-center text-xs font-semibold text-slate-600">{m.texto} · {fmt(m.at)}</p>;
           const mine = m.de !== 'prospecto';
@@ -225,7 +309,7 @@ const INBOX_TABS = [
   ['todas', 'Todas'],
 ];
 
-const Inbox = ({ items, selected, onSelect }) => {
+const Inbox = ({ items, selected, onSelect, onSaved }) => {
   const [tab, setTab] = useState('atender');
   const [q, setQ] = useState('');
   const lists = {
@@ -274,7 +358,7 @@ const Inbox = ({ items, selected, onSelect }) => {
         </ul>
       </div>
       <div className={`${current ? 'flex' : 'hidden lg:flex'} min-w-0 flex-1 flex-col`}>
-        {current ? <Conversation prospect={current} onBack={() => onSelect(null)} /> : (
+        {current ? <Conversation prospect={current} onBack={() => onSelect(null)} onSaved={onSaved} /> : (
           <div className="flex flex-1 flex-col items-center justify-center bg-[#f8fafb] p-8 text-center">
             <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-sm"><Bot size={26} className="text-[#182A2C]" /></span>
             <p className="mt-4 font-bold text-[#182A2C]">Elige una conversación</p>
@@ -411,13 +495,15 @@ const Prospects = ({ scoped, onOpen }) => {
   );
 };
 
-const Queue = ({ scoped }) => {
+const Queue = ({ scoped, onSaved }) => {
+  const [openKey, setOpenKey] = useState(null);
   const queued = scoped.filter((p) => p.estado === 'programado');
+  const open = queued.find((p) => p.key === openKey);
   const days = [...new Set(queued.map((p) => String(p.programadoPara || '').slice(0, 10)))].sort();
   if (!queued.length) return <Card><p className="p-8 text-center text-slate-500">No hay envíos en cola.</p></Card>;
   return (
     <div className="space-y-4">
-      <p className="text-sm text-slate-500">{queued.length} envíos programados en {days.length} día{days.length === 1 ? '' : 's'}. Se mandan de lunes a viernes entre 9 y 16 h de Colombia, espaciados durante el día para cuidar el número.</p>
+      <p className="text-sm text-slate-500">{queued.length} envíos programados en {days.length} día{days.length === 1 ? '' : 's'}. Se mandan de lunes a viernes entre 9 y 16 h de Colombia, espaciados durante el día para cuidar el número. Toca un envío para ver o editar el mensaje.</p>
       {days.map((d) => {
         const it = queued.filter((p) => String(p.programadoPara || '').slice(0, 10) === d);
         const wa = it.filter((p) => p.canal === 'whatsapp').length;
@@ -425,23 +511,28 @@ const Queue = ({ scoped }) => {
           <Card key={d} title={d ? fmtLongDay(d) : 'Sin fecha'} sub={`${wa} WhatsApp · ${it.length - wa} correos`}>
             <ul className="grid divide-y divide-slate-100 md:grid-cols-2 md:divide-y-0">
               {it.map((p) => (
-                <li key={p.key} className="flex items-center gap-3 border-slate-100 px-5 py-2.5 text-sm md:border-b">
-                  <ChannelIcon canal={p.canal} />
-                  <span className="min-w-0 flex-1 truncate font-semibold text-[#182A2C]">{p.nombre}</span>
-                  <span className="shrink-0 text-xs text-slate-400">{campaignLabel(p.campana)}</span>
+                <li key={p.key} className="border-slate-100 md:border-b">
+                  <button type="button" onClick={() => setOpenKey(p.key)} className="flex w-full items-center gap-3 bg-transparent px-5 py-2.5 text-left text-sm hover:bg-slate-50">
+                    <ChannelIcon canal={p.canal} />
+                    <span className="min-w-0 flex-1 truncate font-semibold text-[#182A2C]">{p.nombre}</span>
+                    {p.editado && <span className="shrink-0 rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-bold text-amber-800">Editado</span>}
+                    <span className="hidden shrink-0 text-xs text-slate-400 sm:inline">{campaignLabel(p.campana)}</span>
+                    <Pencil size={13} className="shrink-0 text-slate-300" />
+                  </button>
                 </li>
               ))}
             </ul>
           </Card>
         );
       })}
+      {open && <MessageModal prospect={open} onClose={() => setOpenKey(null)} onSaved={onSaved} />}
     </div>
   );
 };
 
 // view: 'resumen' | 'bandeja' | 'prospectos' | 'cola'
 export const ProspectingCenter = ({ view, onView, outreach }) => {
-  const { data, error } = outreach;
+  const { data, error, load } = outreach;
   const [selected, setSelected] = useState(null);
   const [f, setF] = useState({ canal: '', campana: '' });
   const all = useMemo(() => data?.prospects || [], [data]);
@@ -469,9 +560,9 @@ export const ProspectingCenter = ({ view, onView, outreach }) => {
           </select>
         </div>
       )}
-      {view === 'bandeja' ? <Inbox items={all} selected={selected} onSelect={setSelected} />
+      {view === 'bandeja' ? <Inbox items={all} selected={selected} onSelect={setSelected} onSaved={load} />
         : view === 'prospectos' ? <Prospects scoped={scoped} onOpen={open} />
-          : view === 'cola' ? <Queue scoped={scoped} />
+          : view === 'cola' ? <Queue scoped={scoped} onSaved={load} />
             : <Overview scoped={scoped} data={data} canal={f.canal} onOpen={open} onView={onView} />}
     </div>
   );

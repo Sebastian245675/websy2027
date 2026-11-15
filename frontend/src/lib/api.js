@@ -47,6 +47,7 @@ export const panel = {
   archive: () => request('/panel/archive'),
   outreach: () => request('/panel/outreach'),
   outreachMessages: (key) => request(`/panel/outreach/messages?key=${encodeURIComponent(key)}`),
+  saveOutreachMessage: (key, mensaje, asunto) => request('/panel/outreach/message', { method: 'PUT', body: { key, mensaje, asunto } }),
   pool: () => request('/panel/pool'),
   updatePool: (id, changes) => request(`/panel/pool/${encodeURIComponent(id)}`, { method: 'PATCH', body: changes }),
 };

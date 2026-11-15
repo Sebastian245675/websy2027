@@ -10,9 +10,10 @@
 //   GET /api/panel/whatsapp-clicks  ·  GET /api/panel/archive
 //   GET /api/panel/outreach  ·  GET /api/panel/outreach/messages?key=…   (centro de prospección)
 //   GET /api/panel/pool  ·  PATCH /api/panel/pool/:id {estado, nota}   (posibles clientes)
+//   PUT /api/panel/outreach/message {key, mensaje, asunto}   (editar un mensaje en cola; mensaje vacío = volver al original)
 // Servidores de campaña (token X-Outreach-Token = OUTREACH_TOKEN):
 //   POST /api/outreach/ingest {prospects: [...], messages: [...]}
-//   POST /api/outreach/pool {items: [...]}
+//   POST /api/outreach/pool {items: [...]}  ·  GET /api/outreach/overrides
 const http = require('http');
 const crypto = require('crypto');
 const fs = require('fs');
@@ -296,8 +297,9 @@ const routes = {
   'GET /api/panel/outreach': async (req, res) => {
     const [prospects, porDia, respuestasDia] = await Promise.all([
       pool.query(`SELECT p.*, (SELECT texto FROM outreach_messages m WHERE m.prospect_key = p.key AND m.de = 'prospecto' ORDER BY at DESC LIMIT 1) AS ultima_respuesta,
-                         (SELECT count(*)::int FROM outreach_messages m WHERE m.prospect_key = p.key) AS mensajes
-                  FROM outreach_prospects p ORDER BY COALESCE(p.ultimo_at, p.enviado_at, p.updated_at) DESC LIMIT 5000`),
+                         (SELECT count(*)::int FROM outreach_messages m WHERE m.prospect_key = p.key) AS mensajes,
+                         o.mensaje AS o_mensaje, o.asunto AS o_asunto, o.updated_at AS o_at
+                  FROM outreach_prospects p LEFT JOIN outreach_overrides o ON o.key = p.key ORDER BY COALESCE(p.ultimo_at, p.enviado_at, p.updated_at) DESC LIMIT 5000`),
       pool.query(`SELECT canal, to_char(date_trunc('day', enviado_at AT TIME ZONE 'America/Bogota'), 'YYYY-MM-DD') AS dia, count(*)::int AS n
                   FROM outreach_prospects WHERE enviado_at > now() - interval '45 days' GROUP BY 1, 2`),
       pool.query(`SELECT canal, to_char(date_trunc('day', respondio_at AT TIME ZONE 'America/Bogota'), 'YYYY-MM-DD') AS dia, count(*)::int AS n
@@ -308,10 +310,39 @@ const routes = {
         key: r.key, canal: r.canal, campana: r.campana, pais: r.pais, nombre: r.nombre, contacto: r.contacto, web: r.web, estado: r.estado,
         programadoPara: r.programado_para, enviadoAt: r.enviado_at, respondioAt: r.respondio_at, reunion: r.reunion, ultimoAt: r.ultimo_at,
         ultimaRespuesta: r.ultima_respuesta, mensajes: r.mensajes, extra: r.extra,
+        editado: r.o_mensaje ? { mensaje: r.o_mensaje, asunto: r.o_asunto, at: r.o_at } : null,
       })),
       enviosPorDia: porDia.rows,
       respuestasPorDia: respuestasDia.rows,
     });
+  },
+
+  // Editar el mensaje de un prospecto que todavía está en cola. Sin mensaje: vuelve al de la plantilla.
+  'PUT /api/panel/outreach/message': async (req, res) => {
+    const body = await readJson(req);
+    const key = str(body.key, 300);
+    if (!key) return send(res, 400, { error: 'Falta key' });
+    const { rows } = await pool.query('SELECT estado FROM outreach_prospects WHERE key = $1', [key]);
+    if (!rows.length) return send(res, 404, { error: 'No existe' });
+    if (rows[0].estado !== 'programado') return send(res, 409, { error: 'Ese mensaje ya se envió' });
+    const mensaje = str(body.mensaje && String(body.mensaje).trim(), 4000);
+    if (!mensaje) {
+      await pool.query('DELETE FROM outreach_overrides WHERE key = $1', [key]);
+      return send(res, 200, { ok: true, editado: null });
+    }
+    const r = await pool.query(
+      `INSERT INTO outreach_overrides (key, mensaje, asunto) VALUES ($1, $2, $3)
+       ON CONFLICT (key) DO UPDATE SET mensaje = $2, asunto = $3, updated_at = now() RETURNING mensaje, asunto, updated_at`,
+      [key, mensaje, str(body.asunto && String(body.asunto).trim(), 300)],
+    );
+    send(res, 200, { ok: true, editado: { mensaje: r.rows[0].mensaje, asunto: r.rows[0].asunto, at: r.rows[0].updated_at } });
+  },
+
+  // Los servidores de campaña consultan los mensajes editados antes de cada envío
+  'GET /api/outreach/overrides': async (req, res) => {
+    if (!tokenOk(req.headers['x-outreach-token'])) return send(res, 401, { error: 'Token inválido' });
+    const { rows } = await pool.query("SELECT o.key, o.mensaje, o.asunto FROM outreach_overrides o JOIN outreach_prospects p ON p.key = o.key WHERE p.estado = 'programado'");
+    send(res, 200, Object.fromEntries(rows.map((r) => [r.key, { mensaje: r.mensaje, asunto: r.asunto }])));
   },
 
   'GET /api/panel/outreach/messages': async (req, res) => {

@@ -23,7 +23,7 @@ const call = async (path, { method = 'GET', body, ip = '10.0.0.1', auth = true }
 };
 
 test.before(async () => {
-  await pool.query('DROP TABLE IF EXISTS leads, whatsapp_clicks, firestore_archive, outreach_prospects, outreach_messages, prospect_pool');
+  await pool.query('DROP TABLE IF EXISTS leads, whatsapp_clicks, firestore_archive, outreach_prospects, outreach_messages, prospect_pool, outreach_overrides');
   await start();
 });
 test.after(async () => {
@@ -154,4 +154,25 @@ test('posibles clientes: carga con token, marca los que ya están en campaña y 
   assert.strictEqual(dos.estado, 'descartado');
   assert.strictEqual(dos.nota, 'franquicia');
   assert.strictEqual(dos.oportunidad, 45);
+});
+
+test('mensajes en cola: se editan desde el panel, los ve la campaña y vuelven al original', async () => {
+  await fetch(`${BASE}/outreach/ingest`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Outreach-Token': 'token-de-prueba' },
+    body: JSON.stringify({ prospects: [{ key: 'email:hola@clinica.mx', canal: 'email', estado: 'programado', extra: { mensaje: 'Plantilla', asunto: 'Asunto' } }] }),
+  });
+  const overrides = () => fetch(`${BASE}/outreach/overrides`, { headers: { 'X-Outreach-Token': 'token-de-prueba' } }).then((r) => r.json());
+  assert.strictEqual((await fetch(`${BASE}/outreach/overrides`)).status, 401);
+
+  const put = await call('/panel/outreach/message', { method: 'PUT', body: { key: 'email:hola@clinica.mx', mensaje: '  Texto nuevo  ', asunto: 'Otro asunto' } });
+  assert.strictEqual(put.status, 200);
+  assert.deepStrictEqual(await overrides(), { 'email:hola@clinica.mx': { mensaje: 'Texto nuevo', asunto: 'Otro asunto' } });
+  const panel = await call('/panel/outreach');
+  assert.strictEqual(panel.body.prospects.find((p) => p.key === 'email:hola@clinica.mx').editado.mensaje, 'Texto nuevo');
+
+  // Un mensaje ya enviado no se puede editar
+  assert.strictEqual((await call('/panel/outreach/message', { method: 'PUT', body: { key: 'wa:573000000000', mensaje: 'x' } })).status, 409);
+
+  await call('/panel/outreach/message', { method: 'PUT', body: { key: 'email:hola@clinica.mx', mensaje: '' } });
+  assert.deepStrictEqual(await overrides(), {});
 });
