@@ -454,8 +454,25 @@ const Overview = ({ scoped, data, canal, onOpen, onView }) => {
 const Prospects = ({ scoped, onOpen }) => {
   const [estado, setEstado] = useState('');
   const [q, setQ] = useState('');
-  const table = scoped.filter((p) => (!estado || p.estado === estado)
-    && (!q || JSON.stringify([p.nombre, p.contacto, p.ultimaRespuesta, p.extra?.rubro]).toLowerCase().includes(q.toLowerCase())));
+  const [remitente, setRemitente] = useState('');
+  const [periodo, setPeriodo] = useState('');
+  const [dia, setDia] = useState('');
+  // Día del envío (o el programado, si sigue en cola), en hora de Colombia
+  const sendDay = (p) => (p.enviadoAt ? dayKey(new Date(p.enviadoAt)) : String(p.programadoPara || '').slice(0, 10));
+  const today = dayKey(new Date());
+  const since = periodo && periodo !== 'hoy' ? dayKey(new Date(Date.now() - Number(periodo) * 864e5)) : null;
+  const inDate = (p) => {
+    const d = sendDay(p);
+    if (dia) return d === dia;
+    if (periodo === 'hoy') return d === today;
+    if (since) return !!p.enviadoAt && d >= since;
+    return true;
+  };
+  const senders = [...new Set(scoped.map(senderOf))].sort();
+  const digits = q.replace(/\D/g, '');
+  const table = scoped.filter((p) => (!estado || p.estado === estado) && (!remitente || senderOf(p) === remitente) && inDate(p)
+    && (!q || JSON.stringify([p.nombre, p.contacto, p.ultimaRespuesta, p.extra?.rubro]).toLowerCase().includes(q.toLowerCase())
+      || (digits.length >= 3 && String(p.contacto || '').replace(/\D/g, '').includes(digits))));
   const counts = scoped.reduce((acc, p) => ({ ...acc, [p.estado]: (acc[p.estado] || 0) + 1 }), {});
   return (
     <Card>
@@ -469,10 +486,28 @@ const Prospects = ({ scoped, onOpen }) => {
           <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Buscar nombre, contacto, respuesta…" className="w-64 rounded-lg border border-slate-200 bg-slate-50 py-2 pl-9 pr-3 text-sm" />
         </label>
       </div>
+      <div className="flex flex-wrap items-center gap-2 border-b border-slate-100 px-4 py-3 text-sm">
+        <select value={remitente} onChange={(e) => setRemitente(e.target.value)} className="rounded-lg border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700" aria-label="Enviado desde">
+          <option value="">Todos los remitentes</option>
+          {senders.map((n) => <option key={n} value={n}>Desde {n}</option>)}
+        </select>
+        <select value={periodo} onChange={(e) => { setPeriodo(e.target.value); setDia(''); }} className="rounded-lg border border-slate-200 bg-white px-3 py-2 font-semibold text-slate-700" aria-label="Fecha de envío">
+          <option value="">Cualquier fecha</option>
+          <option value="hoy">Enviados hoy</option>
+          <option value="7">Últimos 7 días</option>
+          <option value="30">Últimos 30 días</option>
+        </select>
+        <label className="flex items-center gap-2 text-slate-500">
+          o el día
+          <input type="date" value={dia} onChange={(e) => { setDia(e.target.value); setPeriodo(''); }} className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-slate-700" />
+        </label>
+        {(remitente || periodo || dia || q || estado) && <button type="button" onClick={() => { setRemitente(''); setPeriodo(''); setDia(''); setQ(''); setEstado(''); }} className="bg-transparent text-xs font-bold text-slate-500 underline">Limpiar filtros</button>}
+        <span className="ml-auto text-xs text-slate-400">{table.length} de {scoped.length}</span>
+      </div>
       <div className="overflow-x-auto">
         <table className="w-full text-left text-sm">
           <thead className="bg-slate-50 text-[11px] uppercase tracking-wider text-slate-500">
-            <tr><th className="px-5 py-3 font-bold">Negocio</th><th className="px-4 py-3 font-bold">Estado</th><th className="px-4 py-3 font-bold">Campaña</th><th className="px-4 py-3 font-bold">Enviado</th><th className="px-5 py-3 font-bold">Última respuesta</th></tr>
+            <tr><th className="px-5 py-3 font-bold">Negocio</th><th className="px-4 py-3 font-bold">Estado</th><th className="px-4 py-3 font-bold">Campaña</th><th className="px-4 py-3 font-bold">Desde</th><th className="px-4 py-3 font-bold">Enviado</th><th className="px-5 py-3 font-bold">Última respuesta</th></tr>
           </thead>
           <tbody className="divide-y divide-slate-100">
             {table.slice(0, 400).map((p) => (
@@ -482,12 +517,13 @@ const Prospects = ({ scoped, onOpen }) => {
                   <span className="ml-6 block text-xs text-slate-400">{p.contacto}</span>
                 </td>
                 <td className="px-4 py-3"><Badge estado={p.estado} /></td>
-                <td className="px-4 py-3 text-slate-600">{campaignLabel(p.campana)} · {p.pais}</td>
+                <td className="whitespace-nowrap px-4 py-3 text-slate-600">{campaignLabel(p.campana)} · {p.pais}</td>
+                <td className="whitespace-nowrap px-4 py-3 text-xs text-slate-500">{senderOf(p)}</td>
                 <td className="whitespace-nowrap px-4 py-3 text-slate-600">{p.enviadoAt ? fmt(p.enviadoAt) : p.programadoPara ? `Programado ${fmtDay(p.programadoPara)}` : '—'}</td>
                 <td className="max-w-[300px] truncate px-5 py-3 text-slate-500">{p.ultimaRespuesta || '—'}</td>
               </tr>
             ))}
-            {!table.length && <tr><td colSpan="5" className="px-5 py-8 text-center text-slate-500">No hay prospectos con estos filtros.</td></tr>}
+            {!table.length && <tr><td colSpan="6" className="px-5 py-8 text-center text-slate-500">No hay prospectos con estos filtros.</td></tr>}
           </tbody>
         </table>
       </div>
