@@ -64,7 +64,6 @@
     ],
     "include": [
       "/",
-      "/servicios",
       "/planes",
       "/planes/estandar",
       "/planes/comercio",
