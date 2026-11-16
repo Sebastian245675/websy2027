@@ -31,6 +31,12 @@ export const testimonials = {
     name: 'Che Carreta',
     quote: 'Estamos como empresa, Che Carreta, muy agradecidos con el apoyo brindado en el desarrollo de mi página web. Websy nos asesoró constantemente en todo, ha sido una experiencia satisfactoria, el compromiso para que todo salga como nosotros queríamos, una página que sea fácil navegar y que sea ligera para poder hacerla parte de nuestro ecosistema digital. Muchas gracias por toda la paciencia y sé que cuento con ustedes para mis futuros proyectos. Che Carreta Perú recomienda poner tus proyectos en sus manos.',
   },
+  // Ascenta (no está en el portfolio). Texto redactado con Agustín para su socio Nicolás, a confirmar con él.
+  ascenta: {
+    name: 'Nicolás Tula Monsech',
+    role: 'socio de Ascenta',
+    quote: 'Con Websy armamos una web que explica claro lo que hacemos en Ascenta y suma herramientas reales para nuestros clientes, como los simuladores. Estamos muy contentos con el trabajo y con el acompañamiento en todo el proceso.',
+  },
   // Cuervo Tarot (testimonio en video)
   11: { name: 'Cuervo Tarot', video: TESTIMONIALS_HIGHLIGHT_URL },
   // Estudio Ruarte (testimonio en video)
