@@ -18,7 +18,6 @@ const today = new Date().toISOString().slice(0, 10);
 // Each indexable static route and the page component that renders it
 const staticPages = [
   { loc: '/', page: 'pages/HomePage.jsx', changefreq: 'weekly', priority: '1.0' },
-  { loc: '/servicios', page: 'pages/ServicesPage.jsx', changefreq: 'monthly', priority: '0.9' },
   { loc: '/planes', page: 'pages/PlansPage.jsx', changefreq: 'monthly', priority: '0.9' },
   { loc: '/planes/estandar', page: 'pages/PlanDetailPage.jsx', changefreq: 'monthly', priority: '0.8' },
   { loc: '/planes/comercio', page: 'pages/PlanDetailPage.jsx', changefreq: 'monthly', priority: '0.8' },
@@ -28,7 +27,7 @@ const staticPages = [
   { loc: '/cotizador', page: 'pages/QuotePage.jsx', changefreq: 'monthly', priority: '0.9' },
   { loc: '/quienes-somos', page: 'pages/AboutPage.jsx', changefreq: 'yearly', priority: '0.6' },
   { loc: '/auditoria-gratis', page: 'pages/AuditPage.jsx', changefreq: 'monthly', priority: '0.9' },
-  { loc: '/argentina', page: 'pages/CountryPage.jsx', changefreq: 'monthly', priority: '0.9' },
+  { loc: '/argentina', page: 'pages/ArgentinaPage.jsx', changefreq: 'monthly', priority: '0.9' },
   { loc: '/argentina/seo', page: 'pages/SeoCountryPage.jsx', changefreq: 'monthly', priority: '0.9' },
   { loc: '/colombia', page: 'pages/CountryPage.jsx', changefreq: 'monthly', priority: '0.9' },
   { loc: '/colombia/seo', page: 'pages/SeoCountryPage.jsx', changefreq: 'monthly', priority: '0.9' },

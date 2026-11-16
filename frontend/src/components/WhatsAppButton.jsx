@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { isArgentinaView } from '../lib/argentinaView';
 import { openWhatsApp } from '../lib/tracking';
 import { COUNTRIES } from '../siteConfig';
 import useVisitorCountry from '../hooks/useVisitorCountry';
@@ -19,6 +21,8 @@ const WhatsAppIcon = ({ size = 24, className = "" }) => (
 export const WhatsAppButton = () => {
   const [isHovered, setIsHovered] = useState(false);
   const country = useVisitorCountry();
+  const { pathname, search } = useLocation();
+  const compact = isArgentinaView(pathname, search);
   // Fuera de Argentina: tuteo, y el mensaje ya dice desde dónde escribe (sirve para responder en su horario)
   const countryName = country && country !== 'AR' && COUNTRIES.find((c) => c.code === country && c.dial)?.name;
 
@@ -27,6 +31,22 @@ export const WhatsAppButton = () => {
       ? `¡Hola! Les escribo desde ${countryName}. Me interesa conocer más sobre sus servicios.`
       : '¡Hola! Me interesa conocer más sobre sus servicios. ¿Me pasan más información?', 'boton_flotante');
   };
+
+  // Versión Argentina: botón chico, solo el ícono
+  if (compact) {
+    return (
+      <div className="fixed bottom-5 right-5 z-[60]">
+        <button
+          onClick={handleWhatsAppClick}
+          className="flex items-center justify-center w-12 h-12 rounded-full bg-[#2ecc71] hover:bg-[#27ae60] text-white shadow-[0_8px_20px_rgba(46,204,113,0.35)] transition-transform hover:-translate-y-0.5"
+          aria-label="Contactar por WhatsApp"
+          title="Escribinos por WhatsApp"
+        >
+          <WhatsAppIcon size={24} />
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="fixed bottom-6 right-6 z-[60]">

@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useLanguage } from '../LanguageContext';
 import { useScrollSpy } from '../hooks/useScrollSpy';
 import { contactForPath, whatsappUrl } from '../siteConfig';
+import { isArgentinaView, withArgentina } from '../lib/argentinaView';
 
 // SVG icons inline
 const MenuIcon = ({ size = 24 }) => (
@@ -77,21 +78,32 @@ export const Navigation = () => {
   const sectionIds = useMemo(() => ['inicio', 'servicios', 'portfolio', 'planes', 'nosotros', 'testimonios', 'contacto'], []);
   const activeSection = useScrollSpy(sectionIds);
 
+  // Versión Argentina (/argentina y lo que se abre desde ahí con ?pais=argentina): menú reducido.
+  // Productos baja a la sección de /argentina, Contacto al formulario "Armá tu plan".
+  // El resto del sitio usa el menú de siempre.
+  const isArgentina = isArgentinaView(location.pathname, location.search);
+  const homePath = isArgentina ? '/argentina' : '/';
+
   // Memoize navItems to prevent recreation on every render
-  const navItems = useMemo(() => [
+  const navItems = useMemo(() => (isArgentina ? [
+    { name: t('nav.home'), href: '/argentina', isRoute: true },
+    { name: currentLanguage === 'en' ? 'Products' : 'Productos', href: '#productos', base: '/argentina' },
+    { name: t('nav.portfolio'), href: withArgentina('/casos-de-exito'), isRoute: true },
+    { name: 'Blog', href: withArgentina('/blog'), isRoute: true }
+  ] : [
     { name: t('nav.home'), href: '/', isRoute: true },
     { name: t('nav.services'), href: '/servicios', isRoute: true },
     { name: t('nav.portfolio'), href: '/casos-de-exito', isRoute: true },
     { name: t('nav.plans') || 'Inversión', href: '/planes', isRoute: true },
     { name: 'Blog', href: '/blog', isRoute: true }
-  ], [t]);
+  ]), [t, isArgentina, currentLanguage]);
 
   // Contact item separate for right side
   const contactItem = useMemo(() => ({
     name: t('nav.contact'),
-    href: '/contacto',
+    href: isArgentina ? '/argentina#plan' : '/contacto',
     isRoute: true
-  }), [t]);
+  }), [t, isArgentina]);
 
   // Sin banderas: el español del sitio es para toda Latinoamérica (una bandera de un país confunde al resto)
   // y así no se descargan imágenes de un sitio externo en cada página
@@ -112,11 +124,11 @@ export const Navigation = () => {
     };
   }, []);
 
-  const scrollToSection = useCallback((href, isRoute = false) => {
+  const scrollToSection = useCallback((href, isRoute = false, base = '/') => {
     setIsOpen(false);
     if (isRoute) {
-      if (href === '/') {
-        navigate('/');
+      if (href === homePath) {
+        navigate(href);
         setTimeout(() => {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }, 100);
@@ -124,8 +136,9 @@ export const Navigation = () => {
         navigate(href);
       }
     } else {
-      if (location.pathname !== '/') {
-        navigate('/');
+      if (location.pathname !== base) {
+        // Con el ancla en la URL, la página de destino baja sola a la sección cuando termina de cargar
+        navigate(base === '/' ? base : `${base}${href}`);
         setTimeout(() => {
           const element = document.querySelector(href);
           if (element) {
@@ -139,7 +152,7 @@ export const Navigation = () => {
         }
       }
     }
-  }, [navigate, location.pathname]);
+  }, [navigate, location.pathname, homePath]);
 
   const handleLanguageChange = useCallback((language) => {
     changeLanguage(language.code);
@@ -154,7 +167,8 @@ export const Navigation = () => {
   return (
     <nav className="fixed top-0 w-full z-50">
       {/* Top Info Bar - RE-ENABLED for Mobile & Desktop (CIMA STYLE) */}
-      <div className="w-full text-white overflow-hidden relative h-[50px] md:h-[40px] bg-white border-b border-gray-100">
+      {/* Sin overflow-hidden: recortaba el desplegable de idiomas y al hacer clic no se veía nada */}
+      <div className="w-full text-white relative h-[50px] md:h-[40px] bg-white border-b border-gray-100">
         {/* Polygon background - Websy Lime for high impact */}
         <div
           className="absolute left-0 top-0 h-full z-10"
@@ -231,7 +245,7 @@ export const Navigation = () => {
             {/* Logo */}
             <div
               className="flex items-center gap-3 group cursor-pointer pr-8"
-              onClick={() => navigate('/')}
+              onClick={() => navigate(homePath)}
             >
               <img
                 src="/websy-logo.png"
@@ -264,7 +278,7 @@ export const Navigation = () => {
                       title={`${t('nav.goTo')} ${item.name}`}
                       onClick={(e) => {
                         e.preventDefault();
-                        scrollToSection(item.href, item.isRoute);
+                        scrollToSection(item.href, item.isRoute, item.base);
                       }}
                       className={`relative transition-all duration-300 font-bold text-sm px-4 py-3 group ${isActive ? 'text-[#d9fb06]' : 'text-[#182A2C] hover:text-[#d9fb06]'
                         }`}
@@ -339,7 +353,7 @@ export const Navigation = () => {
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        scrollToSection(item.href, item.isRoute);
+                        scrollToSection(item.href, item.isRoute, item.base);
                       }}
                       className={`block w-full text-right px-8 py-4 text-2xl md:text-4xl font-black uppercase tracking-tighter transition-all duration-300 ${
                         isActive ? 'text-[#d9fb06] border-r-8' : 'text-white hover:text-[#d9fb06] hover:border-r-8'

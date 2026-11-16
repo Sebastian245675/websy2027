@@ -5,6 +5,7 @@ import { CONTACT, contactForPath, SOCIAL, whatsappUrl } from '../siteConfig';
 import { countryPages } from '../countryPages';
 import { cityPages } from '../cityPages';
 import { saveCountry } from '../lib/geo';
+import { isArgentinaView, withArgentina } from '../lib/argentinaView';
 
 const COUNTRY_LINKS = countryPages.map(({ code, name, path }) => ({ code, name, path }));
 
@@ -34,7 +35,7 @@ const icons = {
 
 export const Footer = () => {
   const { t, currentLanguage } = useLanguage();
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
   const regionalContact = contactForPath(pathname);
   const currentYear = new Date().getFullYear();
 
@@ -71,6 +72,42 @@ export const Footer = () => {
 
   const headingCls = 'text-sm font-semibold mb-3 text-[#333]';
   const linkCls = 'text-xs hover:underline transition-colors text-[#666] leading-[1.5]';
+
+  // Versión Argentina: pie mínimo de un solo color, con los mismos apartados del menú de arriba
+  if (isArgentinaView(pathname, search)) {
+    const en = currentLanguage === 'en';
+    const arLinks = [
+      { name: t('nav.home'), to: '/argentina' },
+      { name: en ? 'Products' : 'Productos', to: '/argentina#productos' },
+      { name: t('nav.portfolio'), to: withArgentina('/casos-de-exito') },
+      { name: 'Blog', to: withArgentina('/blog') },
+      { name: t('nav.contact'), to: '/argentina#plan' },
+    ];
+    return (
+      <footer className="bg-[#182A2C] text-white">
+        <div className="container mx-auto px-6 md:px-10 lg:px-14 py-10 flex flex-col md:flex-row md:items-start md:justify-between gap-8">
+          <div>
+            <div className="text-xl font-black uppercase tracking-tighter">Websy</div>
+            <p className="mt-2 text-sm text-white/70 max-w-xs">
+              {en ? 'Argentina · 100% online service' : 'Argentina · Atención 100 % en línea'} · {CONTACT.phoneDisplay}
+            </p>
+          </div>
+          <nav aria-label={t('footer.sitemap')}>
+            <ul className="flex flex-wrap gap-x-7 gap-y-3 text-sm font-semibold">
+              {arLinks.map((item) => (
+                <li key={item.to}><Link to={item.to} className="text-white/80 hover:text-[#d9fb06] transition-colors">{item.name}</Link></li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+        <div className="border-t border-white/10">
+          <p className="container mx-auto px-6 md:px-10 lg:px-14 py-5 text-[10px] uppercase font-black tracking-widest text-white/40">
+            © {currentYear} {t('footer.copyright')} · <Link to="/politica-de-privacidad" className="hover:text-white">{t('footer.links.privacy')}</Link>
+          </p>
+        </div>
+      </footer>
+    );
+  }
 
   return (
     <footer className="bg-[#f5f5f5] border-t border-[#e0e0e0]">
