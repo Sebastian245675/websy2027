@@ -49,7 +49,7 @@ const staticPages = [
   { loc: '/politica-de-privacidad', page: 'pages/PrivacyPolicyPage.jsx', changefreq: 'yearly', priority: '0.2' },
 ];
 // Routes in App.js that are deliberately not in the sitemap
-const NOT_IN_SITEMAP = ['/panel', '/panel-cotizaciones', '/lp/:slug', '*', '/desarrollo-web-salta', '/diseno-web-en-salta'];
+const NOT_IN_SITEMAP = ['/panel', '/panel-cotizaciones', '/lp/:slug', '*', '/desarrollo-web-salta', '/diseno-web-en-salta', '/servicios'];
 // Dynamic routes; their URLs come from services, case studies and blog posts below
 const DYNAMIC_ROUTES = ['/planes/:planId', '/servicios/:slug', '/casos-de-exito/:slug', '/blog/:slug', '/autores/:slug'];
 
