@@ -64,7 +64,7 @@ const REDIRECTS = [
   ...movedPaths(),
   [`${SITE}/blog/index.html`, `${SITE}/blog`],
   [`${SITE}/index.html`, `${SITE}/`],
-  [`${SITE}/servicios/`, `${SITE}/servicios`],
+  [`${SITE}/servicios/`, `${SITE}/argentina`], // /servicios se eliminó: va a /argentina
   [`${SITE}/planes/`, `${SITE}/planes`],
   [`${SITE}/blog/`, `${SITE}/blog`],
   [`${SITE}/casos-de-exito/`, `${SITE}/casos-de-exito`],

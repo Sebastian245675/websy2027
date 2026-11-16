@@ -169,7 +169,9 @@ const pool = async (items, size, fn) => {
   // Duplicates and moved URLs
   await expectRedirect(`${SITE}/index.html`, `${SITE}/`);
   await expectRedirect(`${SITE}/blog/index.html`, `${SITE}/blog`);
-  await expectRedirect(`${SITE}/servicios/index.html`, `${SITE}/servicios`);
+  // /servicios se eliminó: todas sus variantes van en un salto a /argentina (deploy/websysrl-redirects.conf)
+  await expectRedirect(`${SITE}/servicios`, `${SITE}/argentina`);
+  await expectRedirect(`${SITE}/servicios/index.html`, `${SITE}/argentina`);
   await expectRedirect(`${SITE}/planes/?utm_source=test`, `${SITE}/planes?utm_source=test`);
   await expectPage(`${SITE}/planes?utm_source=test`, { canonical: `${SITE}/planes` });
   await expectPage(`${SITE}/blog?pagina=2`, { canonical: `${SITE}/blog` });
