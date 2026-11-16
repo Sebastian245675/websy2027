@@ -39,7 +39,7 @@ export const portfolio = [
     id: 'casamax-inmobiliaria',
     title: "CASAMAX Inmobiliaria",
     description: "Plataforma inmobiliaria para descubrir propiedades con filtros de operación y tipo, fichas de detalle y acceso a favoritos, alertas e historial. Incluye recorridos para tasar o publicar una propiedad y contacto directo con asesores. Interfaz desarrollada con React y Vite, adaptable a móviles y con contenidos en español e inglés.",
-    image: "/casamax/portada.webp",
+    image: "/casamax/captura.jpg", // captura de la web real, con el logo y los colores de Casamax
     url: "https://inmobiliariacasamax.com/",
     category: "Plataforma inmobiliaria",
     technologies: ["React", "Vite", "JavaScript", "Búsqueda y filtros", "SEO on-page"],

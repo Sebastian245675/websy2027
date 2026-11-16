@@ -44,16 +44,6 @@ const ContactPage = lazy(() => {
   });
 });
 
-const ServicesPage = lazy(() => {
-  const start = performance.now();
-  console.log('📥 [LAZY] Loading ServicesPage...');
-  return import("./pages/ServicesPage").then(module => {
-    const end = performance.now();
-    console.log('✅ [LAZY] ServicesPage loaded in', Math.round(end - start), 'ms');
-    return { default: module.ServicesPage };
-  });
-});
-
 const PlansPage = lazy(() => {
   const start = performance.now();
   console.log('📥 [LAZY] Loading PlansPage...');
@@ -135,6 +125,10 @@ const CountryPage = lazy(() =>
   import("./pages/CountryPage").then(module => ({ default: module.CountryPage }))
 );
 
+const ArgentinaPage = lazy(() =>
+  import("./pages/ArgentinaPage").then(module => ({ default: module.ArgentinaPage }))
+);
+
 const SeoCountryPage = lazy(() =>
   import("./pages/SeoCountryPage").then(module => ({ default: module.SeoCountryPage }))
 );
@@ -212,11 +206,9 @@ function App() {
                         <ContactPage />
                       </Suspense>
                     } />
-                    <Route path="/servicios" element={
-                      <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
-                        <ServicesPage />
-                      </Suspense>
-                    } />
+                    {/* La página /servicios se eliminó: sus visitas van a los productos de /argentina.
+                        En producción nginx responde con 301 a /argentina (deploy/websysrl-redirects.conf). */}
+                    <Route path="/servicios" element={<Navigate to="/argentina#productos" replace />} />
                     <Route path="/planes" element={
                       <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
                         <PlansPage />
@@ -277,7 +269,7 @@ function App() {
                     {/* Versiones por país (src/countryPages.js), enlazadas con la home por hreflang */}
                     <Route path="/argentina" element={
                       <Suspense fallback={<div style={{ minHeight: '100vh', paddingTop: '68px' }} />}>
-                        <CountryPage code="AR" />
+                        <ArgentinaPage />
                       </Suspense>
                     } />
                     <Route path="/colombia" element={
