@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ArrowRight, Check, MapPin, MessageCircle, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Check, MapPin, MessageCircle, Play, ShieldCheck } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
 import { FAQSection } from '../components/FAQSection';
 import { COUNTRY_ALTERNATES, countryPageByCode } from '../countryPages';
@@ -11,6 +11,7 @@ import { trackFormSubmit } from '../lib/tracking';
 import { saveCountry } from '../lib/geo';
 import { withArgentina } from '../lib/argentinaView';
 import { portfolio } from '../mockData';
+import { initialsOf, testimonialFor } from '../testimonials';
 
 // Página propia de /argentina (ya no usa el molde de CountryPage, que siguen usando México, Colombia y EE. UU.).
 // Textos, precios y orden base: maqueta-argentina.html. Lo que está entre corchetes [ ] falta completarlo.
@@ -32,22 +33,21 @@ const COPY = {
     lead: 'Hacemos páginas web, tiendas online y asistentes de WhatsApp para negocios argentinos. Ves el diseño antes de publicarlo y sabés el precio final antes de empezar.',
     ctaPlan: 'Armá tu plan en 1 minuto',
     ctaPrices: 'Ver precios',
-    h1: 'Tu web lista en 7 días, o te devolvemos lo que pagaste.',
-    eyebrow: 'Precio cerrado · Plazo garantizado · Factura',
-    small: 'El plazo corre desde que recibimos tu material. Condiciones en el presupuesto.',
 
     casos: {
       chip: 'Casos y testimonios en Argentina',
       title: 'Negocios argentinos que ya trabajan con su web.',
       items: [
+        // Clientes argentinos de la historia destacada "clientes" de Instagram, más Ascenta (testimonios en src/testimonials.js)
         { portfolioId: 3, tag: 'Tienda online', name: 'Regala Algo', result: '~ARS 2 M por mes', text: 'Qué hicimos: tienda online con catálogo de más de 3.000 productos y cobro integrado.' },
-        { tag: 'Estudio contable', name: 'Ascenta', result: '[RESULTADO]', text: 'Qué hicimos: web con simuladores y asistente que atiende consultas.' },
-        { portfolioId: 14, tag: 'Estudio jurídico', name: 'Estudio Ruarte', result: '[RESULTADO]', text: 'Qué hicimos: web para recibir consultas urgentes por WhatsApp desde el celular.' },
+        { image: '/ascenta/captura.jpg', tag: 'Estudio contable', name: 'Ascenta', text: 'Qué hicimos: web con simuladores y asistente que atiende consultas.' },
+        { portfolioId: 14, tag: 'Estudio jurídico', name: 'Estudio Ruarte', text: 'Qué hicimos: web para recibir consultas urgentes por WhatsApp desde el celular.' },
+        { portfolioId: 1, tag: 'Logística y distribución', name: 'M Logística y Distribución', text: 'Qué hicimos: sitio web corporativo para una empresa de transporte de litio, hidróxido y carbonato para exportación.' },
+        { portfolioId: 2, tag: 'Tienda online', name: 'Covenant', text: 'Qué hicimos: tienda online de materiales eléctricos e iluminación, con catálogo, cotizaciones y envíos.' },
+        { portfolioId: 4, tag: 'Perfumería', name: 'NUVÓ Perfumería', text: 'Qué hicimos: landing page para una perfumería, pensada en la experiencia del cliente.' },
       ],
       captura: '[CAPTURA DE LA WEB]',
-      testimonio: '“[TESTIMONIO DEL CLIENTE, CON SUS PALABRAS]”',
-      foto: '[FOTO]',
-      nombre: '[Nombre y apellido]',
+      video: 'Mirá su testimonio en video',
       verTodos: 'Ver todos los casos',
       instagram: 'Testimonios en Instagram',
       resena: 'Dejá tu reseña',
@@ -79,7 +79,7 @@ const COPY = {
           tag: 'Lista en 7 días', name: 'Web institucional', featured: true,
           text: 'Para negocios que ofrecen servicios: estudios, consultorios, profesionales y empresas.',
           antes: 'USD 743', precio: 'USD 474', nota: 'Precio de promo. Fuera de la promo: USD 743. En pesos: [ARS]',
-          items: ['Hasta [X] secciones', 'Diseño que ves y ajustás antes de publicar', 'Adaptada al celular', 'Botón de WhatsApp', 'Preparada para aparecer en Google', 'Dominio a tu nombre', '[3 a 5] rondas de cambios'],
+          items: ['Hasta 7 secciones', 'Diseño que ves y ajustás antes de publicar', '4 rondas de cambios', 'Adaptada al celular', 'Botón de WhatsApp', 'Preparada para aparecer en Google', 'Conectada a Google Search Console y Google Analytics para ver tus estadísticas', 'Panel para cambiar los textos, sin costo', 'Dominio a tu nombre'],
           prep: 'Logo, textos y fotos',
           cta: 'Armá tu plan',
         },
@@ -87,7 +87,7 @@ const COPY = {
           tag: 'Lista en 12 días', name: 'Tienda online',
           text: 'Para negocios que venden productos y quieren cobrar por internet.',
           antes: 'USD 1.244', precio: 'USD 796', nota: 'Precio de promo. Fuera de la promo: USD 1.244. En pesos: [ARS]',
-          items: ['Catálogo y carrito', 'Cobro con Mercado Pago', 'Envíos', 'Carga inicial de hasta [X] productos', 'Panel para cargar productos y precios', 'Adaptada al celular', 'Dominio a tu nombre'],
+          items: ['Catálogo y carrito', 'Cobro con Mercado Pago o la pasarela de pagos que prefieras', 'Envíos', 'Carga inicial de hasta 300 productos sin costo (más productos se cotizan aparte)', 'Panel para cargar productos y precios y cambiar los textos', 'Conectada a Google Search Console y Google Analytics para ver tus estadísticas', 'Adaptada al celular', 'Dominio a tu nombre'],
           prep: 'Logo, fotos y lista de productos con precios',
           cta: 'Armá tu plan',
         },
@@ -103,14 +103,12 @@ const COPY = {
         fuerte: 'Si no entregamos tu web en el plazo acordado, te devolvemos lo que pagaste.',
         text: 'El plazo corre desde que recibimos tu material y cubre la primera versión completa del sitio. Condiciones en el presupuesto.',
       },
-      pago: 'Pagás en [3 partes: 30, 30 y 40 % — o 2 partes: 50 y 50 %] por Mercado Pago o Naranja X. Emitimos factura.',
       despues: 'Después de publicar, no quedás solo.',
       porMes: 'por mes',
       mensuales: [
         { tag: 'Plan Servidor', precio: 'USD 34', text: 'Alojamiento de tu web, copias de seguridad y soporte por WhatsApp para [X] cambios chicos por mes.' },
         { tag: 'Plan Posicionamiento en Google', precio: 'USD 148', text: 'Revisión mensual de cómo aparecés en Google, mejoras en tu web, una página nueva por mes e informe de visitas y consultas.' },
       ],
-      baja: 'Se renueva mes a mes. Lo das de baja cuando quieras.',
     },
 
     pasos: {
@@ -126,8 +124,13 @@ const COPY = {
 
     quien: {
       chip: 'Quién está detrás',
-      title: 'Quién está detrás de Websy.',
-      bio: 'Contador Público y fundador de Websy. Te atiende, entiende tu negocio y arma la propuesta. Un equipo técnico de ingenieros diseña y publica cada web.',
+      cargo: 'Fundador de Websy · Contador Público Nacional',
+      bio: [
+        'Arranqué Websy con una idea: ayudar a emprendedores y pymes a crecer en lo digital, con una web que trabaje para el negocio y no sea un gasto más.',
+        'Como contador, miro cada proyecto por sus números: cuánto cuesta, en cuánto tiempo se recupera y qué tiene que lograr la web para que valga la pena.',
+        'Te atiendo, entiendo tu negocio y armo la propuesta. Un equipo técnico de ingenieros diseña y publica cada web.',
+      ],
+      aptitudes: ['Costos y presupuestos de proyectos digitales', 'Retorno de la inversión en tecnología', 'Gestión de pymes'],
       nota: 'Hablás siempre con la misma persona, de principio a fin.',
     },
 
@@ -136,23 +139,13 @@ const COPY = {
       items: [
         { q: '¿De verdad está lista en 7 días?', a: 'Sí. El plazo empieza cuando nos mandás tus textos, fotos y logo. En 7 días tenés la primera versión completa. La tienda lleva 12.' },
         { q: '¿Qué pasa si no cumplen el plazo?', a: 'Te devolvemos lo que pagaste. Queda por escrito en el presupuesto.' },
-        { q: '¿Qué pasa si no me gusta el diseño?', a: 'Lo ves antes de publicar y lo ajustamos con tus comentarios. Tenés [3 a 5] rondas de cambios.' },
+        { q: '¿Qué pasa si no me gusta el diseño?', a: 'Lo ves antes de publicar y lo ajustamos con tus comentarios. Tenés 4 rondas de cambios.' },
         { q: '¿La web queda a mi nombre?', a: 'Sí. El dominio se registra a tu nombre y la web es tuya.' },
         { q: '¿Tengo que pagar algo por mes?', a: 'Solo si querés que nos ocupemos del servidor y los cambios: desde USD 34 por mes, y lo das de baja cuando quieras.' },
         { q: '¿Emiten factura?', a: 'Sí, en cada pago.' },
       ],
     },
 
-    blog: {
-      chip: 'Blog',
-      title: 'Guías para decidir antes de invertir.',
-      imagen: '[IMAGEN]',
-      items: [
-        { tag: 'Precios', title: 'Cuánto cuesta una página web en Argentina', text: 'Qué entra en el precio, qué no y cómo comparar presupuestos.', to: '/blog/cuanto-cuesta-pagina-web-argentina-2026' },
-        { tag: 'Tiendas online', title: 'Cómo cobrar con Mercado Pago en tu tienda', text: 'Comisiones, plazos de acreditación y qué conviene activar.', to: '/blog/e-commerce-mercadopago-argentina-integracion-pasarela-pagos' },
-        { tag: 'WhatsApp', title: 'Cuántas consultas perdés por contestar tarde', text: 'Cómo calcularlo y qué hacer para no perderlas.', to: '/blog' },
-      ],
-    },
 
     plan: {
       chip: 'Gratis y sin compromiso',
@@ -176,11 +169,11 @@ const COPY = {
         negocio: (nombre) => (nombre ? `${nombre}, ¿qué hace tu negocio?` : '¿Qué hace tu negocio?'),
         hoy: '¿Qué tenés hoy?',
         rubro: '¿En qué rubro está tu negocio?',
-        facturacion: '¿Cuánto facturó tu negocio en el último año?',
+        facturacion: '¿Cuánto factura tu negocio por mes?',
         inversion: '¿Cuánto estás dispuesto a invertir en tu web?',
         socios: '¿Sos el único dueño o tenés socios?',
         consultas: '¿Cuántas consultas recibís por semana?',
-        conoces: '¿Hace cuánto conocés a Websy?',
+        canal: '¿Por dónde nos conociste?',
         contacto: '¿A dónde te enviamos tu plan personalizado?',
       },
       contactoSub: 'Tu plan ya está listo. Dejanos tus datos y te lo mostramos.',
@@ -188,15 +181,17 @@ const COPY = {
         negocio: { servicios: 'Ofrezco servicios', productos: 'Vendo productos', ambos: 'Las dos cosas' },
         hoy: { sin: 'No tengo web', vieja: 'Tengo una web vieja', redes: 'Solo uso redes y WhatsApp' },
         rubro: { inmobiliario: 'Inmobiliario', tecnologia: 'Tecnología', finanzas: 'Finanzas', salud: 'Salud', industria: 'Industria y fabricación', profesionales: 'Servicios profesionales', hogar: 'Servicios locales o para el hogar', comercio: 'Comercio', educacion: 'Educación', otro: 'Otro' },
-        facturacion: { f0: 'Menos de USD 100 mil', f1: 'USD 100 mil a 250 mil', f2: 'USD 250 mil a 500 mil', f3: 'USD 500 mil a 1 millón', f4: 'USD 1 a 3 millones', f5: 'USD 3 a 10 millones', f6: 'USD 10 a 30 millones', f7: 'Más de USD 30 millones' },
-        // Mismos rangos que el formulario de contacto del sitio (BUDGET_RANGES en siteConfig.js)
-        inversion: { i0: 'Menos de USD 800', i1: 'USD 800 a 1.500', i2: 'USD 1.500 a 3.500', i3: 'Más de USD 3.500', i4: 'Todavía no sé' },
-        socios: { mayoritario: 'Soy el dueño mayoritario (más del 51 %)', mitad: 'Soy socio 50/50', minoritario: 'Soy dueño minoritario (menos del 50 %)', empleado: 'Soy empleado' },
+        // Facturación mensual (rangos definidos por Agustín)
+        facturacion: { f0: 'Menos de USD 500', f1: 'USD 500 a 1.000', f2: 'USD 1.000 a 2.000', f3: 'USD 2.000 a 5.000', f4: 'USD 5.000 a 10.000', f5: 'Más de USD 10.000' },
+        // Rangos de Agustín: "Menos de USD 500" es el umbral en el que no podemos ayudar (en /panel sirve para filtrar)
+        inversion: { i0: 'Menos de USD 500', i1: 'USD 500 a 1.500', i2: 'USD 1.500 a 3.500', i3: 'Más de USD 3.500', i4: 'Todavía no sé' },
+        socios: { sociedad: 'En sociedad', unico: 'Único dueño', empleado: 'Soy empleado' },
         consultas: { pocas: 'Menos de 10', medio: 'Entre 10 y 50', muchas: 'Más de 50' },
-        conoces: { recien: 'Recién los descubro', menos6: 'Menos de 6 meses', seis: '6 meses a 1 año', uno: '1 a 2 años', dos: 'Más de 2 años' },
+        canal: { instagram: 'Instagram', tiktok: 'TikTok', facebook: 'Facebook', google: 'Google', recomendacion: 'Me lo recomendó alguien', otro: 'Otro' },
       },
-      campos: { nombre: 'Nombre', apellido: 'Apellido', email: 'Email', whatsapp: 'WhatsApp', ciudad: 'Ciudad y provincia', instagram: 'Instagram' },
-      ph: { nombre: 'Tu nombre', apellido: 'Tu apellido', email: 'tu@email.com', whatsapp: 'Ej.: 387 555 0000', ciudad: 'Ej.: Salta, Salta', instagram: '@tunegocio' },
+      campos: { nombre: 'Nombre', apellido: 'Apellido', email: 'Email', whatsapp: 'WhatsApp', ciudad: 'Ciudad y provincia', instagram: 'Instagram', rubroOtro: '¿Cuál?', canalOtro: '¿Dónde?' },
+      ph: { nombre: 'Tu nombre', apellido: 'Tu apellido', email: 'tu@email.com', whatsapp: 'Ej.: 387 555 0000', ciudad: 'Ej.: Salta, Salta', instagram: '@tunegocio', rubroOtro: 'Ej.: gastronomía, turismo, construcción', canalOtro: 'Ej.: un evento, una publicidad, LinkedIn' },
+      errOtro: 'Contanos cuál para seguir.',
       errNombre: 'Escribí tu nombre y apellido para seguir.',
       errOpcion: 'Elegí una opción para seguir.',
       errEmail: 'Escribí un email válido.',
@@ -234,22 +229,20 @@ const COPY = {
     lead: 'We build websites, online stores and WhatsApp assistants for Argentine businesses. You see the design before it goes live and you know the final price before we start.',
     ctaPlan: 'Build your plan in 1 minute',
     ctaPrices: 'See prices',
-    h1: 'Your website ready in 7 days, or we refund what you paid.',
-    eyebrow: 'Fixed price · Guaranteed deadline · Invoice',
-    small: 'The deadline starts when we receive your material. Terms in the quote.',
 
     casos: {
       chip: 'Case studies and testimonials in Argentina',
       title: 'Argentine businesses already working with their website.',
       items: [
         { portfolioId: 3, tag: 'Online store', name: 'Regala Algo', result: '~ARS 2 M per month', text: 'What we did: online store with a catalog of more than 3,000 products and integrated payments.' },
-        { tag: 'Accounting firm', name: 'Ascenta', result: '[RESULT]', text: 'What we did: website with simulators and an assistant that answers inquiries.' },
-        { portfolioId: 14, tag: 'Law firm', name: 'Estudio Ruarte', result: '[RESULT]', text: 'What we did: website to receive urgent inquiries through WhatsApp from a phone.' },
+        { image: '/ascenta/captura.jpg', tag: 'Accounting firm', name: 'Ascenta', text: 'What we did: website with simulators and an assistant that answers inquiries.' },
+        { portfolioId: 14, tag: 'Law firm', name: 'Estudio Ruarte', text: 'What we did: website to receive urgent inquiries through WhatsApp from a phone.' },
+        { portfolioId: 1, tag: 'Logistics and distribution', name: 'M Logística y Distribución', text: 'What we did: corporate website for a company that transports lithium, hydroxide and carbonate for export.' },
+        { portfolioId: 2, tag: 'Online store', name: 'Covenant', text: 'What we did: online store for electrical materials and lighting, with catalog, quotes and shipping.' },
+        { portfolioId: 4, tag: 'Perfumery', name: 'NUVÓ Perfumería', text: 'What we did: landing page for a perfumery, designed around the customer experience.' },
       ],
       captura: '[WEBSITE SCREENSHOT]',
-      testimonio: '“[CLIENT TESTIMONIAL, IN THEIR OWN WORDS]”',
-      foto: '[PHOTO]',
-      nombre: '[First and last name]',
+      video: 'Watch their video testimonial',
       verTodos: 'See all case studies',
       instagram: 'Testimonials on Instagram',
       resena: 'Leave your review',
@@ -281,7 +274,7 @@ const COPY = {
           tag: 'Ready in 7 days', name: 'Business website', featured: true,
           text: 'For businesses that offer services: firms, practices, professionals and companies.',
           antes: 'USD 743', precio: 'USD 474', nota: 'Promo price. Regular price: USD 743. In pesos: [ARS]',
-          items: ['Up to [X] sections', 'Design you see and adjust before it goes live', 'Mobile-friendly', 'WhatsApp button', 'Ready to show up on Google', 'Domain in your name', '[3 to 5] rounds of changes'],
+          items: ['Up to 7 sections', 'Design you see and adjust before it goes live', '4 rounds of changes', 'Mobile-friendly', 'WhatsApp button', 'Ready to show up on Google', 'Connected to Google Search Console and Google Analytics to see your stats', 'Dashboard to edit your texts, free of charge', 'Domain in your name'],
           prep: 'Logo, texts and photos',
           cta: 'Build your plan',
         },
@@ -289,7 +282,7 @@ const COPY = {
           tag: 'Ready in 12 days', name: 'Online store',
           text: 'For businesses that sell products and want to get paid online.',
           antes: 'USD 1,244', precio: 'USD 796', nota: 'Promo price. Regular price: USD 1,244. In pesos: [ARS]',
-          items: ['Catalog and cart', 'Payments with Mercado Pago', 'Shipping', 'Initial upload of up to [X] products', 'Dashboard to add products and prices', 'Mobile-friendly', 'Domain in your name'],
+          items: ['Catalog and cart', 'Payments with Mercado Pago or the payment gateway you prefer', 'Shipping', 'Initial upload of up to 300 products free of charge (more products quoted separately)', 'Dashboard to add products and prices and edit your texts', 'Connected to Google Search Console and Google Analytics to see your stats', 'Mobile-friendly', 'Domain in your name'],
           prep: 'Logo, photos and product list with prices',
           cta: 'Build your plan',
         },
@@ -305,14 +298,12 @@ const COPY = {
         fuerte: 'If we don’t deliver your website by the agreed deadline, we refund what you paid.',
         text: 'The deadline starts when we receive your material and covers the first complete version of the site. Terms in the quote.',
       },
-      pago: 'You pay in [3 installments: 30, 30 and 40% — or 2 installments: 50 and 50%] through Mercado Pago or Naranja X. We issue an invoice.',
       despues: 'After launch, you’re not on your own.',
       porMes: 'per month',
       mensuales: [
         { tag: 'Hosting Plan', precio: 'USD 34', text: 'Hosting for your website, backups and WhatsApp support for [X] small changes per month.' },
         { tag: 'Google Ranking Plan', precio: 'USD 148', text: 'Monthly review of how you show up on Google, improvements to your website, one new page per month and a report on visits and inquiries.' },
       ],
-      baja: 'Renews month to month. Cancel whenever you want.',
     },
 
     pasos: {
@@ -328,8 +319,13 @@ const COPY = {
 
     quien: {
       chip: 'Who’s behind it',
-      title: 'Who’s behind Websy.',
-      bio: 'Certified Public Accountant and founder of Websy. He looks after you, understands your business and puts together the proposal. A technical team of engineers designs and publishes each website.',
+      cargo: 'Founder of Websy · Certified Public Accountant',
+      bio: [
+        'I started Websy with one idea: to help entrepreneurs and small businesses grow online, with a website that works for the business instead of being one more expense.',
+        'As an accountant, I look at every project through its numbers: how much it costs, how long it takes to pay off and what the website has to achieve to be worth it.',
+        'I look after you, understand your business and put together the proposal. A technical team of engineers designs and publishes each website.',
+      ],
+      aptitudes: ['Costs and budgets for digital projects', 'Return on technology investment', 'Small business management'],
       nota: 'You always talk to the same person, from start to finish.',
     },
 
@@ -338,21 +334,10 @@ const COPY = {
       items: [
         { q: 'Is it really ready in 7 days?', a: 'Yes. The deadline starts when you send us your texts, photos and logo. In 7 days you have the first complete version. The store takes 12.' },
         { q: 'What if you miss the deadline?', a: 'We refund what you paid. It’s in writing in the quote.' },
-        { q: 'What if I don’t like the design?', a: 'You see it before it goes live and we adjust it with your feedback. You get [3 to 5] rounds of changes.' },
+        { q: 'What if I don’t like the design?', a: 'You see it before it goes live and we adjust it with your feedback. You get 4 rounds of changes.' },
         { q: 'Is the website in my name?', a: 'Yes. The domain is registered in your name and the website is yours.' },
         { q: 'Do I have to pay anything monthly?', a: 'Only if you want us to take care of the server and changes: from USD 34 per month, and you can cancel whenever you want.' },
         { q: 'Do you issue invoices?', a: 'Yes, for every payment.' },
-      ],
-    },
-
-    blog: {
-      chip: 'Blog',
-      title: 'Guides to help you decide before investing.',
-      imagen: '[IMAGE]',
-      items: [
-        { tag: 'Prices', title: 'How much a website costs in Argentina', text: 'What’s included in the price, what isn’t and how to compare quotes.', to: '/blog/cuanto-cuesta-pagina-web-argentina-2026' },
-        { tag: 'Online stores', title: 'How to get paid with Mercado Pago in your store', text: 'Fees, payout times and what’s worth turning on.', to: '/blog/e-commerce-mercadopago-argentina-integracion-pasarela-pagos' },
-        { tag: 'WhatsApp', title: 'How many inquiries you lose by replying late', text: 'How to calculate it and what to do so you don’t lose them.', to: '/blog' },
       ],
     },
 
@@ -376,11 +361,11 @@ const COPY = {
         negocio: (nombre) => (nombre ? `${nombre}, what does your business do?` : 'What does your business do?'),
         hoy: 'What do you have today?',
         rubro: 'What industry is your business in?',
-        facturacion: 'How much did your business make last year?',
+        facturacion: 'How much does your business make per month?',
         inversion: 'How much are you willing to invest in your website?',
         socios: 'Are you a solo owner or have a partner(s)?',
         consultas: 'How many inquiries do you get per week?',
-        conoces: 'How long ago did you first hear of Websy?',
+        canal: 'How did you find us?',
         contacto: 'Where should we send your personalized plan?',
       },
       contactoSub: 'Your plan is ready. Leave your details and we’ll show it to you.',
@@ -388,14 +373,15 @@ const COPY = {
         negocio: { servicios: 'I offer services', productos: 'I sell products', ambos: 'Both' },
         hoy: { sin: 'I don’t have a website', vieja: 'I have an old website', redes: 'I only use social media and WhatsApp' },
         rubro: { inmobiliario: 'Real Estate', tecnologia: 'Tech', finanzas: 'Finance', salud: 'Healthcare', industria: 'Manufacturing', profesionales: 'Professional Services', hogar: 'Home/Local Services', comercio: 'Retail', educacion: 'Education', otro: 'Other' },
-        facturacion: { f0: 'Under $100k', f1: '$100k to $250k', f2: '$250k to $500k', f3: '$500k to $1M', f4: '$1M to $3M', f5: '$3M to $10M', f6: '$10M to $30M', f7: '$30 Million +' },
-        inversion: { i0: 'Under USD 800', i1: 'USD 800 to 1,500', i2: 'USD 1,500 to 3,500', i3: 'Over USD 3,500', i4: 'Not sure yet' },
-        socios: { mayoritario: 'I’m the majority owner (>51%)', mitad: 'I’m a 50/50 partner', minoritario: 'I’m the minority owner (<50%)', empleado: 'I am an employee' },
+        facturacion: { f0: 'Under USD 500', f1: 'USD 500 to 1,000', f2: 'USD 1,000 to 2,000', f3: 'USD 2,000 to 5,000', f4: 'USD 5,000 to 10,000', f5: 'Over USD 10,000' },
+        inversion: { i0: 'Under USD 500', i1: 'USD 500 to 1,500', i2: 'USD 1,500 to 3,500', i3: 'Over USD 3,500', i4: 'Not sure yet' },
+        socios: { sociedad: 'In a partnership', unico: 'Sole owner', empleado: 'I am an employee' },
         consultas: { pocas: 'Fewer than 10', medio: 'Between 10 and 50', muchas: 'More than 50' },
-        conoces: { recien: 'Just discovered you', menos6: '< 6 months', seis: '6 months - 1 year', uno: '1 - 2 years', dos: '2 years +' },
+        canal: { instagram: 'Instagram', tiktok: 'TikTok', facebook: 'Facebook', google: 'Google', recomendacion: 'Someone recommended you', otro: 'Other' },
       },
-      campos: { nombre: 'First name', apellido: 'Last name', email: 'Email', whatsapp: 'WhatsApp', ciudad: 'City and province', instagram: 'Instagram' },
-      ph: { nombre: 'Your first name', apellido: 'Your last name', email: 'you@email.com', whatsapp: 'E.g.: 387 555 0000', ciudad: 'E.g.: Salta, Salta', instagram: '@yourbusiness' },
+      campos: { nombre: 'First name', apellido: 'Last name', email: 'Email', whatsapp: 'WhatsApp', ciudad: 'City and province', instagram: 'Instagram', rubroOtro: 'Which one?', canalOtro: 'Where?' },
+      ph: { nombre: 'Your first name', apellido: 'Your last name', email: 'you@email.com', whatsapp: 'E.g.: 387 555 0000', ciudad: 'E.g.: Salta, Salta', instagram: '@yourbusiness', rubroOtro: 'E.g.: food, tourism, construction', canalOtro: 'E.g.: an event, an ad, LinkedIn' },
+      errOtro: 'Tell us which one to continue.',
       errNombre: 'Type your first and last name to continue.',
       errOpcion: 'Choose an option to continue.',
       errEmail: 'Type a valid email.',
@@ -437,15 +423,15 @@ const PASOS = [
   { id: 'negocio', tipo: 'opciones' },
   { id: 'hoy', tipo: 'opciones' },
   { id: 'rubro', tipo: 'opciones' },
-  { id: 'facturacion', tipo: 'opciones' }, // bruta o neta, da igual: es para tener una idea
+  { id: 'facturacion', tipo: 'opciones' }, // mensual, bruta o neta da igual: es para tener una idea
   { id: 'inversion', tipo: 'opciones' },
   { id: 'socios', tipo: 'opciones' },
   { id: 'consultas', tipo: 'opciones' },
-  { id: 'conoces', tipo: 'opciones' },
+  { id: 'canal', tipo: 'opciones' },
   { id: 'contacto', tipo: 'contacto' },
 ];
 const TOTAL = PASOS.length;
-const VACIO = { nombre: '', apellido: '', negocio: '', hoy: '', rubro: '', facturacion: '', inversion: '', socios: '', consultas: '', conoces: '', email: '', tel: '', ciudad: '', instagram: '' };
+const VACIO = { nombre: '', apellido: '', negocio: '', hoy: '', rubro: '', rubroOtro: '', facturacion: '', inversion: '', socios: '', consultas: '', canal: '', canalOtro: '', email: '', tel: '', ciudad: '', instagram: '' };
 
 const PlanForm = ({ c, formRef }) => {
   const f = c.form;
@@ -462,6 +448,8 @@ const PlanForm = ({ c, formRef }) => {
   const validar = () => {
     if (paso0.tipo === 'nombre' && (!d.nombre.trim() || !d.apellido.trim())) return f.errNombre;
     if (paso0.tipo === 'opciones' && !paso0.opcional && !d[paso0.id]) return f.errOpcion;
+    // "Otro" en cualquier pregunta: hay que escribir cuál (campo <id>Otro)
+    if (paso0.tipo === 'opciones' && d[paso0.id] === 'otro' && !(d[`${paso0.id}Otro`] || '').trim()) return f.errOtro;
     if (paso0.tipo === 'contacto') {
       if (!/^\S+@\S+\.\S+$/.test(d.email.trim())) return f.errEmail;
       if (d.tel.replace(/\D/g, '').length < 8) return f.errTel;
@@ -474,6 +462,7 @@ const PlanForm = ({ c, formRef }) => {
   const guardar = async () => {
     const es = COPY.es;
     const o = es.form.opts;
+    const conOtro = (id) => (d[id] === 'otro' ? `Otro: ${(d[`${id}Otro`] || '').trim()}` : o[id][d[id]]);
     const p = es.prod[prodKey];
     const phone = `+54 ${d.tel.trim()}`;
     const nombre = `${d.nombre.trim()} ${d.apellido.trim()}`;
@@ -483,7 +472,7 @@ const PlanForm = ({ c, formRef }) => {
       whatsapp: phone,
       email: d.email.trim(),
       country: 'Argentina',
-      rubro: o.rubro[d.rubro],
+      rubro: conOtro('rubro'),
       projectType: p.nombre,
       budget: o.inversion[d.inversion],
       source: SOURCE,
@@ -496,12 +485,12 @@ const PlanForm = ({ c, formRef }) => {
         `Instagram: ${d.instagram.trim() || '—'}`,
         `Qué hace el negocio: ${o.negocio[d.negocio]}`,
         `Qué tiene hoy: ${o.hoy[d.hoy]}`,
-        `Rubro: ${o.rubro[d.rubro]}`,
-        `Facturación del último año: ${o.facturacion[d.facturacion]}`,
+        `Rubro: ${conOtro('rubro')}`,
+        `Facturación mensual: ${o.facturacion[d.facturacion]}`,
         `Dispuesto a invertir: ${o.inversion[d.inversion]}`,
         `Dueño o socios: ${o.socios[d.socios]}`,
         `Consultas por semana: ${o.consultas[d.consultas]}`,
-        `Hace cuánto conoce a Websy: ${o.conoces[d.conoces]}`,
+        `Cómo nos conoció: ${conOtro('canal')}`,
         `Plan mostrado: ${p.nombre}, ${p.promo}, ${p.plazo}`,
         'Página: /argentina',
       ].join('\n'),
@@ -578,6 +567,10 @@ const PlanForm = ({ c, formRef }) => {
                 <button key={v} type="button" onClick={() => elegir(paso0.id, v)} aria-pressed={d[paso0.id] === v} className={optCls(d[paso0.id] === v)}>{texto}</button>
               ))}
             </div>
+            {/* Rubro "Otro": se escribe cuál */}
+            {d[paso0.id] === 'otro' && (
+              <div className="mt-4">{campoTexto(`${paso0.id}Otro`, { input: { autoFocus: true } })}</div>
+            )}
           </div>
         )}
 
@@ -716,9 +709,10 @@ export const ArgentinaPage = () => {
       <section id="inicio-ar" className="relative bg-[#182A2C] text-white overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#244246]/60 via-[#182A2C]/90 to-[#0e1b1d] pointer-events-none" />
         <div className="relative container mx-auto px-5 lg:px-8 max-w-5xl text-center flex flex-col items-center py-12 md:py-16">
-          <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#d9fb06]/40 bg-white/5 px-4 py-2 text-xs sm:text-sm font-semibold text-white/90">
-            <MapPin size={14} className="shrink-0 text-[#d9fb06]" /> {c.pill}
-          </span>
+          {/* El cartel es el h1 de la página (Agustín sacó la frase de los 7 días que antes cumplía ese rol) */}
+          <h1 className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#d9fb06]/40 bg-white/5 px-4 py-2 text-xs sm:text-sm font-semibold text-white/90">
+            <MapPin size={14} className="shrink-0 text-[#d9fb06]" aria-hidden="true" /> {c.pill}
+          </h1>
           <div aria-hidden="true" className="ar-brand text-7xl sm:text-8xl lg:text-[128px] font-black leading-none tracking-tight uppercase drop-shadow-2xl">WEBSY</div>
           <p aria-hidden="true" className="ar-cursive text-4xl sm:text-5xl lg:text-6xl text-[#d9fb06] -mt-1 sm:-mt-4 mb-6 rotate-[-2deg]">{c.tagline}</p>
           <p className="max-w-3xl text-base sm:text-lg text-gray-100 font-medium leading-relaxed mb-8">{c.lead}</p>
@@ -730,9 +724,6 @@ export const ArgentinaPage = () => {
               {c.ctaPrices}
             </a>
           </div>
-          <h1 className="mt-10 max-w-[44rem] text-3xl sm:text-[2.6rem] font-black leading-[1.08] tracking-tight">{c.h1}</h1>
-          <p className="mt-4 text-xs sm:text-sm font-bold uppercase tracking-[0.14em] text-[#d9fb06]">{c.eyebrow}</p>
-          <p className="mt-3 text-[13px] text-white/70">{c.small}</p>
         </div>
       </section>
 
@@ -744,21 +735,36 @@ export const ArgentinaPage = () => {
           {casos.items.map((it) => (
             <article key={it.name} className="rounded-2xl border border-slate-200 bg-white p-5 flex flex-col gap-3">
               {/* La misma captura que usa el sitio en Casos de Éxito (mockData.js); sin captura, el lugar marcado */}
-              {portfolio.find((p) => p.id === it.portfolioId)?.image ? (
-                <img src={portfolio.find((p) => p.id === it.portfolioId).image} alt={`${it.name}: ${it.tag}`} width="640" height="400" loading="lazy" decoding="async"
+              {it.image || portfolio.find((p) => p.id === it.portfolioId)?.image ? (
+                <img src={it.image || portfolio.find((p) => p.id === it.portfolioId).image} alt={`${it.name}: ${it.tag}`} width="640" height="400" loading="lazy" decoding="async"
                   className="h-36 w-full rounded-xl object-cover object-top border border-slate-200" />
               ) : (
                 <Placeholder className="h-36 rounded-xl">{casos.captura}</Placeholder>
               )}
               <Tag>{it.tag}</Tag>
               <h3 className="text-xl font-extrabold text-[#182A2C] leading-tight">{it.name}</h3>
-              <span className="text-2xl font-black tracking-tight text-[#182A2C]">{it.result}</span>
+              {it.result && <span className="text-2xl font-black tracking-tight text-[#182A2C]">{it.result}</span>}
               <p className="text-[15px] text-slate-600 leading-relaxed">{it.text}</p>
-              <p className="border-t border-slate-200 pt-3 italic text-[15px] text-slate-700">{casos.testimonio}</p>
-              <div className="flex items-center gap-3 text-[13px] font-semibold text-slate-500">
-                <Placeholder className="h-10 w-10 rounded-full !bg-[#182A2C] !text-white text-[10px]">{casos.foto}</Placeholder>
-                {casos.nombre}
-              </div>
+              {/* Testimonio de la historia destacada "clientes" de Instagram (src/testimonials.js) */}
+              {(() => {
+                const t = testimonialFor(it.portfolioId);
+                if (!t) return null;
+                return (
+                  <div className="mt-auto border-t border-slate-200 pt-3 flex flex-col gap-3">
+                    {t.quote ? (
+                      <p className="italic text-[15px] text-slate-700 leading-relaxed">“{t.quote}”</p>
+                    ) : (
+                      <a href={t.video} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[15px] font-bold text-[#182A2C] underline decoration-[#d9fb06] decoration-2 underline-offset-4">
+                        <Play size={16} /> {casos.video}
+                      </a>
+                    )}
+                    <div className="flex items-center gap-3 text-[13px] font-semibold text-slate-500">
+                      <span className="h-10 w-10 shrink-0 rounded-full bg-[#182A2C] text-[#d9fb06] text-xs font-black flex items-center justify-center" aria-hidden="true">{initialsOf(t.name)}</span>
+                      <span><span className="text-[#182A2C]">{t.name}</span>{t.role ? `, ${t.role}` : ''}</span>
+                    </div>
+                  </div>
+                );
+              })()}
             </article>
           ))}
         </div>
@@ -834,20 +840,19 @@ export const ArgentinaPage = () => {
             <p className="mt-1 text-[15px] leading-relaxed">{pr.garantia.text}</p>
           </div>
         </div>
-        <p className="mt-5 text-base text-slate-600 leading-relaxed">{pr.pago}</p>
 
         <div className="mt-10 pt-8 border-t border-slate-200">
           <h3 className="text-2xl md:text-3xl font-black tracking-tight text-[#182A2C] mb-5">{pr.despues}</h3>
           <div className="grid md:grid-cols-2 gap-5">
-            {pr.mensuales.map((m) => (
-              <div key={m.tag} className="rounded-2xl border border-slate-200 p-6 flex flex-col gap-2">
-                <Tag>{m.tag}</Tag>
-                <span className="text-3xl font-black tracking-tight text-[#182A2C]">{m.precio} <span className="text-[15px] font-semibold text-slate-500 tracking-normal">{pr.porMes}</span></span>
-                <p className="text-[15px] text-slate-600 leading-relaxed">{m.text}</p>
+            {/* Planes mensuales con los verdes oscuros de la marca (en blanco quedaban pálidos) */}
+            {pr.mensuales.map((m, i) => (
+              <div key={m.tag} className={`rounded-2xl p-6 flex flex-col gap-2 text-white ${i === 0 ? 'bg-[#182A2C]' : 'bg-[#244246]'}`}>
+                <span className="text-[11px] font-black uppercase tracking-[.18em] text-[#d9fb06]">{m.tag}</span>
+                <span className="text-3xl font-black tracking-tight text-white">{m.precio} <span className="text-[15px] font-semibold text-white/60 tracking-normal">{pr.porMes}</span></span>
+                <p className="text-[15px] text-white/80 leading-relaxed">{m.text}</p>
               </div>
             ))}
           </div>
-          <p className="mt-4 text-[15px] text-slate-600">{pr.baja}</p>
         </div>
       </Seccion>
 
@@ -866,41 +871,35 @@ export const ArgentinaPage = () => {
         </div>
       </Seccion>
 
-      {/* Quién está detrás */}
-      <Seccion className="bg-[#f4f7f9]">
+      {/* Quién está detrás: foto grande y redonda, quién es y por qué arrancó Websy (estilo "Meet the team") */}
+      <Seccion className="bg-white">
         <Chip>{c.quien.chip}</Chip>
-        <Titulo>{c.quien.title}</Titulo>
-        <div className="rounded-2xl border border-slate-200 bg-white p-6 flex flex-wrap items-center gap-6 max-w-3xl">
-          <img src="/equipo/agustin-davila.jpg" alt="Agustín Dávila, fundador de Websy" width="640" height="640" loading="lazy" decoding="async"
-            className="h-28 w-28 rounded-2xl object-cover shrink-0" />
-          <div className="flex-1 min-w-[16rem]">
-            <h3 className="text-xl font-extrabold text-[#182A2C]">Agustín Dávila</h3>
-            <p className="mt-2 text-[15px] text-slate-600 leading-relaxed">{c.quien.bio}</p>
+        <div className="grid md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-10 md:gap-14 items-center">
+          <div className="relative mx-auto w-64 h-64 md:w-80 md:h-80">
+            <div className="absolute -inset-3 rounded-full bg-[#d9fb06]" aria-hidden="true" />
+            <img src="/equipo/agustin-davila.jpg" alt="Agustín Dávila, fundador de Websy" width="640" height="640" loading="lazy" decoding="async"
+              className="relative w-full h-full rounded-full object-cover border-4 border-white shadow-[0_20px_40px_rgba(24,42,44,.18)]" />
+          </div>
+          <div>
+            <h2 className="text-[30px] md:text-[42px] font-black leading-[1.05] tracking-tight text-[#182A2C]">Agustín Dávila</h2>
+            <p className="mt-2 text-[13px] font-black uppercase tracking-[.18em] text-[#556902]">{c.quien.cargo}</p>
+            <div className="mt-5 space-y-3 text-[16px] md:text-[17px] text-slate-700 leading-relaxed">
+              {c.quien.bio.map((p) => <p key={p.slice(0, 30)}>{p}</p>)}
+            </div>
+            <ul className="mt-6 flex flex-wrap gap-2">
+              {c.quien.aptitudes.map((a) => (
+                <li key={a} className="rounded-full bg-[#182A2C] text-white text-[13px] font-semibold px-4 py-2">{a}</li>
+              ))}
+            </ul>
+            <p className="mt-6 inline-flex items-center gap-2 rounded-xl bg-[#faffdc] border border-[#d9fb06] px-4 py-3 text-[15px] font-bold text-[#182A2C]">
+              <MessageCircle size={18} className="shrink-0 text-[#556902]" /> {c.quien.nota}
+            </p>
           </div>
         </div>
-        <p className="mt-5 text-base text-slate-600">{c.quien.nota}</p>
       </Seccion>
 
-      {/* Blog */}
-      <Seccion id="blog" className="bg-[#f4f7f9]">
-        <Chip>{c.blog.chip}</Chip>
-        <Titulo>{c.blog.title}</Titulo>
-        <div className="grid md:grid-cols-3 gap-5">
-          {c.blog.items.map((g) => (
-            <Link key={g.title} to={withArgentina(g.to)} className="group rounded-2xl border border-slate-200 bg-white overflow-hidden flex flex-col">
-              <Placeholder className="h-32">{c.blog.imagen}</Placeholder>
-              <div className="p-5 flex flex-col gap-2">
-                <Tag>{g.tag}</Tag>
-                <h3 className="text-lg font-extrabold text-[#182A2C] leading-snug group-hover:underline decoration-[#d9fb06] decoration-4 underline-offset-4">{g.title}</h3>
-                <p className="text-[15px] text-slate-600 leading-relaxed">{g.text}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </Seccion>
-
-      {/* Preguntas frecuentes justo antes del formulario: responden las dudas en el momento de decidir */}
-      <FAQSection items={c.faq.items} title={c.faq.title} id="preguntas" />
+      {/* Preguntas frecuentes justo antes del formulario (sin el blog, pedido de Agustín), en tarjetas sobre verde claro */}
+      <FAQSection items={c.faq.items} title={c.faq.title} id="preguntas" variant="cards" />
 
       {/* Armá tu plan */}
       <Seccion id="plan" className="bg-[#182A2C] text-white">
