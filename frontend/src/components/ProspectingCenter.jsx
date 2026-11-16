@@ -206,7 +206,7 @@ const ScheduledMessage = ({ prospect, onSaved }) => {
     <div className="space-y-3">
       <div className="flex flex-wrap items-center gap-2 text-xs">
         <span className="font-bold uppercase tracking-wider text-slate-500">{isEmail ? 'Correo programado' : 'WhatsApp programado'}</span>
-        <span className="text-slate-400">· sale el {fmtDay(prospect.programadoPara)} entre 9 y 16 h de Colombia</span>
+        <span className="text-slate-400">· sale el {fmtDay(prospect.programadoPara)} entre 9 y 16 h de Colombia, desde {senderOf(prospect)}</span>
         {prospect.editado && <span className="rounded-full bg-amber-100 px-2 py-0.5 font-bold text-amber-800">Editado</span>}
       </div>
       {editing ? (
@@ -495,12 +495,21 @@ const Prospects = ({ scoped, onOpen }) => {
   );
 };
 
-const Queue = ({ scoped, onSaved }) => {
+// Número o casilla desde la que sale cada envío (los servidores de campaña lo informan en extra.remitente)
+export const senderOf = (p) => p.extra?.remitente || (p.canal === 'email' ? 'websyagencia@gmail.com' : '+57 305 357 7980');
+const dayOf = (p) => String(p.programadoPara || '').slice(0, 10);
+
+const Queue = ({ queued: all, qf, onSaved }) => {
   const [openKey, setOpenKey] = useState(null);
-  const queued = scoped.filter((p) => p.estado === 'programado');
+  const q = qf.q.trim().toLowerCase();
+  const digits = q.replace(/\D/g, '');
+  const queued = all.filter((p) => (!qf.dia || dayOf(p) === qf.dia) && (!qf.remitente || senderOf(p) === qf.remitente)
+    && (!q || String(p.nombre || '').toLowerCase().includes(q) || String(p.contacto || '').toLowerCase().includes(q)
+      || (digits.length >= 3 && String(p.contacto || '').replace(/\D/g, '').includes(digits))));
   const open = queued.find((p) => p.key === openKey);
-  const days = [...new Set(queued.map((p) => String(p.programadoPara || '').slice(0, 10)))].sort();
-  if (!queued.length) return <Card><p className="p-8 text-center text-slate-500">No hay envíos en cola.</p></Card>;
+  const days = [...new Set(queued.map(dayOf))].sort();
+  if (!all.length) return <Card><p className="p-8 text-center text-slate-500">No hay envíos en cola.</p></Card>;
+  if (!queued.length) return <Card><p className="p-8 text-center text-slate-500">Ningún envío coincide con estos filtros.</p></Card>;
   return (
     <div className="space-y-4">
       <p className="text-sm text-slate-500">{queued.length} envíos programados en {days.length} día{days.length === 1 ? '' : 's'}. Se mandan de lunes a viernes entre 9 y 16 h de Colombia, espaciados durante el día para cuidar el número. Toca un envío para ver o editar el mensaje.</p>
@@ -514,7 +523,10 @@ const Queue = ({ scoped, onSaved }) => {
                 <li key={p.key} className="border-slate-100 md:border-b">
                   <button type="button" onClick={() => setOpenKey(p.key)} className="flex w-full items-center gap-3 bg-transparent px-5 py-2.5 text-left text-sm hover:bg-slate-50">
                     <ChannelIcon canal={p.canal} />
-                    <span className="min-w-0 flex-1 truncate font-semibold text-[#182A2C]">{p.nombre}</span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate font-semibold text-[#182A2C]">{p.nombre}</span>
+                      <span className="block truncate text-xs text-slate-400">{p.contacto}</span>
+                    </span>
                     {p.editado && <span className="shrink-0 rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-bold text-amber-800">Editado</span>}
                     <span className="hidden shrink-0 text-xs text-slate-400 sm:inline">{campaignLabel(p.campana)}</span>
                     <Pencil size={13} className="shrink-0 text-slate-300" />
@@ -535,6 +547,7 @@ export const ProspectingCenter = ({ view, onView, outreach }) => {
   const { data, error, load } = outreach;
   const [selected, setSelected] = useState(null);
   const [f, setF] = useState({ canal: '', campana: '' });
+  const [qf, setQf] = useState({ q: '', dia: '', remitente: '' });
   const all = useMemo(() => data?.prospects || [], [data]);
   const scoped = useMemo(() => all.filter((p) => (!f.canal || p.canal === f.canal) && (!f.campana || p.campana === f.campana)), [all, f]);
 
@@ -542,6 +555,9 @@ export const ProspectingCenter = ({ view, onView, outreach }) => {
   if (!data) return <p className="text-slate-500">Cargando prospección…</p>;
 
   const campaigns = [...new Set(all.map((p) => p.campana).filter(Boolean))];
+  const queued = scoped.filter((p) => p.estado === 'programado');
+  const queueDays = [...new Set(queued.map(dayOf))].filter(Boolean).sort();
+  const senders = [...new Set(queued.map(senderOf))].sort();
   const open = (key) => { setSelected(key); onView('bandeja'); };
   const sel = 'rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700';
 
@@ -558,11 +574,28 @@ export const ProspectingCenter = ({ view, onView, outreach }) => {
             <option value="">Todas las campañas</option>
             {campaigns.map((c) => <option key={c} value={c}>{campaignLabel(c)}</option>)}
           </select>
+          {view === 'cola' && (
+            <>
+              <label className="relative">
+                <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                <input value={qf.q} onChange={(e) => setQf({ ...qf, q: e.target.value })} placeholder="Nombre, teléfono o correo" className="w-56 rounded-lg border border-slate-200 bg-white py-2 pl-9 pr-3 text-sm" />
+              </label>
+              <select value={qf.dia} onChange={(e) => setQf({ ...qf, dia: e.target.value })} className={sel} aria-label="Día de envío">
+                <option value="">Todos los días</option>
+                {queueDays.map((d) => <option key={d} value={d}>{fmtLongDay(d)} ({queued.filter((p) => dayOf(p) === d).length})</option>)}
+              </select>
+              <select value={qf.remitente} onChange={(e) => setQf({ ...qf, remitente: e.target.value })} className={sel} aria-label="Sale desde">
+                <option value="">Todos los remitentes</option>
+                {senders.map((n) => <option key={n} value={n}>Sale desde {n}</option>)}
+              </select>
+              {(qf.q || qf.dia || qf.remitente) && <button type="button" onClick={() => setQf({ q: '', dia: '', remitente: '' })} className="bg-transparent text-xs font-bold text-slate-500 underline">Limpiar</button>}
+            </>
+          )}
         </div>
       )}
       {view === 'bandeja' ? <Inbox items={all} selected={selected} onSelect={setSelected} onSaved={load} />
         : view === 'prospectos' ? <Prospects scoped={scoped} onOpen={open} />
-          : view === 'cola' ? <Queue scoped={scoped} onSaved={load} />
+          : view === 'cola' ? <Queue queued={queued} qf={qf} onSaved={load} />
             : <Overview scoped={scoped} data={data} canal={f.canal} onOpen={open} onView={onView} />}
     </div>
   );
