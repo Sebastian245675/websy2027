@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { withArgentina } from '../lib/argentinaView';
+import { initialsOf, testimonialFor } from '../testimonials';
 import { portfolio, caseResults } from '../mockData';
 import { SEOHead } from '../components/SEOHead';
 import { caseForPortfolio, rubroHubs } from '../caseStudies';
@@ -164,6 +165,24 @@ export const SuccessStoriesPage = () => {
                                 </>
                             )}
                         </div>
+
+                        {/* Testimonio de la historia destacada "clientes" de Instagram (src/testimonials.js) */}
+                        {testimonialFor(story.id) && (() => {
+                            const t = testimonialFor(story.id);
+                            return (
+                                <figure className="mt-8 rounded-2xl bg-[#faffdc] border border-[#d9fb06] p-5 md:p-6">
+                                    {t.quote ? (
+                                        <blockquote className="text-lg italic text-[#182A2C] leading-relaxed">“{t.quote}”</blockquote>
+                                    ) : (
+                                        <a href={t.video} target="_blank" rel="noopener noreferrer" className="text-lg font-bold text-[#182A2C] underline decoration-[#d9fb06] decoration-4 underline-offset-4">Mirá su testimonio en video</a>
+                                    )}
+                                    <figcaption className="mt-3 flex items-center gap-3 text-sm font-semibold text-gray-600">
+                                        <span className="h-9 w-9 shrink-0 rounded-full bg-[#182A2C] text-[#d9fb06] text-xs font-black flex items-center justify-center" aria-hidden="true">{initialsOf(t.name)}</span>
+                                        <span><span className="text-[#182A2C]">{t.name}</span>{t.role ? `, ${t.role}` : ''}</span>
+                                    </figcaption>
+                                </figure>
+                            );
+                        })()}
 
                         {story.technologies.length > 0 && (
                             <p className="mt-6 text-xs text-gray-400">

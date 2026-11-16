@@ -44,8 +44,12 @@ export const faqSchema = (items) => ({
   })),
 });
 
-export const FAQSection = ({ items, title = 'Preguntas frecuentes', id = 'preguntas-frecuentes' }) => (
-  <section id={id} className="py-16 md:py-24 bg-white">
+// variant="cards" (lo usa /argentina): fondo verde claro y cada pregunta en una tarjeta blanca.
+// Sin variant se ve como siempre (inicio, /planes y el resto).
+export const FAQSection = ({ items, title = 'Preguntas frecuentes', id = 'preguntas-frecuentes', variant }) => {
+  const cards = variant === 'cards';
+  return (
+  <section id={id} className={`py-16 md:py-24 ${cards ? 'bg-[#faffdc] border-y border-[#d9fb06]/60' : 'bg-white'}`} style={cards ? { scrollMarginTop: '120px' } : undefined}>
     <div className="container mx-auto px-5 lg:px-8 max-w-4xl">
       <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-[.2em] text-[#52645d] mb-5">
         <span className="h-2 w-2 rounded-full bg-[#d9fb06] ring-4 ring-[#d9fb06]/25" />
@@ -55,12 +59,14 @@ export const FAQSection = ({ items, title = 'Preguntas frecuentes', id = 'pregun
         {title}
       </h2>
 
-      <div className="divide-y divide-slate-200 border-y border-slate-200">
+      <div className={cards ? 'flex flex-col gap-3' : 'divide-y divide-slate-200 border-y border-slate-200'}>
         {items.map(({ q, a, link }) => (
-          <details key={q} className="group py-1">
+          <details key={q} className={`group ${cards ? 'rounded-2xl bg-white border border-[#182A2C]/10 shadow-[0_6px_18px_rgba(24,42,44,.06)] px-5 md:px-6 open:border-[#182A2C]/30' : 'py-1'}`}>
             <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-left text-lg md:text-xl font-bold text-[#182A2C] [&::-webkit-details-marker]:hidden">
               {q}
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-200 transition-transform duration-300 group-open:rotate-45 group-open:bg-[#d9fb06] group-open:border-[#d9fb06]">
+              <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-transform duration-300 group-open:rotate-45 ${
+                cards ? 'bg-[#182A2C] text-[#d9fb06] group-open:bg-[#d9fb06] group-open:text-[#182A2C]' : 'border border-slate-200 group-open:bg-[#d9fb06] group-open:border-[#d9fb06]'
+              }`}>
                 <Plus size={18} />
               </span>
             </summary>
@@ -80,4 +86,5 @@ export const FAQSection = ({ items, title = 'Preguntas frecuentes', id = 'pregun
       </div>
     </div>
   </section>
-);
+  );
+};
