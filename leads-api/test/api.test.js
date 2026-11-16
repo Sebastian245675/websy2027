@@ -147,6 +147,7 @@ test('posibles clientes: carga con token, marca los que ya están en campaña y 
   const upd = await call('/panel/pool/ChIJ-dos', { method: 'PATCH', body: { estado: 'descartado', nota: 'franquicia' } });
   assert.strictEqual(upd.body.estado, 'descartado');
   assert.strictEqual((await call('/panel/pool/ChIJ-dos', { method: 'PATCH', body: { estado: 'otro' } })).status, 400);
+  assert.strictEqual((await call('/panel/pool/ChIJ-uno', { method: 'PATCH', body: { estado: 'contactado' } })).body.estado, 'contactado');
   // Recargar no pisa lo hecho en el panel
   await load([{ id: 'ChIJ-dos', nombre: 'Taller Pérez', oportunidad: 45 }]);
   list = await call('/panel/pool');

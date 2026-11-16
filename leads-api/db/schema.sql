@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS prospect_pool (
   servicio       TEXT,                             -- servicio sugerido
   motivos        JSONB NOT NULL DEFAULT '[]'::jsonb,
   info           JSONB NOT NULL DEFAULT '{}'::jsonb, -- redes, horarios, datos de la web, correos extra…
-  estado         TEXT NOT NULL DEFAULT 'nuevo',    -- nuevo | guardado | descartado
+  estado         TEXT NOT NULL DEFAULT 'nuevo',    -- nuevo | guardado | contactado (ya se le habló) | descartado
   nota           TEXT,
   created_at     TIMESTAMPTZ NOT NULL DEFAULT now(),
   updated_at     TIMESTAMPTZ NOT NULL DEFAULT now()

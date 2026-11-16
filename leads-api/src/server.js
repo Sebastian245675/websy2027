@@ -153,7 +153,7 @@ const tokenOk = (given) => {
   return crypto.timingSafeEqual(a, b);
 };
 const ts = (v) => (v ? new Date(v) : null);
-const POOL_STATES = ['nuevo', 'guardado', 'descartado'];
+const POOL_STATES = ['nuevo', 'guardado', 'contactado', 'descartado'];
 const num = (v) => (v === undefined || v === null || v === '' || Number.isNaN(Number(v)) ? null : Number(v));
 const poolRow = (r) => ({
   id: r.id, pais: r.pais, ciudad: r.ciudad, rubro: r.rubro, nombre: r.nombre, telefono: r.telefono, whatsapp: r.whatsapp, email: r.email,

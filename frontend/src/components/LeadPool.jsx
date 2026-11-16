@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import {
-  Bookmark, Check, Clock, Download, ExternalLink, Facebook, Globe, Instagram, Linkedin, Mail, MapPin, MessageCircle, Phone, Search, Star, X,
+  Bookmark, Check, CheckCheck, Clock, Download, ExternalLink, Facebook, Globe, Instagram, Linkedin, Mail, MapPin, MessageCircle, Phone, Search, Star, X,
 } from 'lucide-react';
 import { panel } from '../lib/api';
 
@@ -109,6 +109,7 @@ const Detail = ({ p, onClose, onChange }) => {
             {waHref && <a href={waHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full bg-[#25D366] px-3.5 py-1.5 text-sm font-bold text-white"><MessageCircle size={15} /> Escribir por WhatsApp</a>}
             {p.email && <a href={`mailto:${p.email}?subject=${encodeURIComponent(`${p.nombre} · Websy`)}&body=${encodeURIComponent(opener(p))}`} className="inline-flex items-center gap-1.5 rounded-full bg-sky-600 px-3.5 py-1.5 text-sm font-bold text-white"><Mail size={15} /> Enviar correo</a>}
             <button type="button" onClick={() => save({ estado: p.estado === 'guardado' ? 'nuevo' : 'guardado' })} className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-sm font-bold ${p.estado === 'guardado' ? 'bg-[#182A2C] text-white' : 'border border-slate-300 bg-white text-[#182A2C]'}`}><Bookmark size={15} /> {p.estado === 'guardado' ? 'Guardado' : 'Guardar'}</button>
+            <button type="button" onClick={() => save({ estado: p.estado === 'contactado' ? 'nuevo' : 'contactado' })} className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-sm font-bold ${p.estado === 'contactado' ? 'bg-emerald-600 text-white' : 'border border-slate-300 bg-white text-[#182A2C]'}`}><CheckCheck size={15} /> {p.estado === 'contactado' ? 'Hablado' : 'Ya le hablé'}</button>
             <button type="button" onClick={() => save({ estado: p.estado === 'descartado' ? 'nuevo' : 'descartado' })} className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-3.5 py-1.5 text-sm font-bold text-slate-500">{p.estado === 'descartado' ? 'Restaurar' : 'Descartar'}</button>
           </div>
           {p.enCampana && <p className="mt-3 rounded-lg bg-violet-50 px-3 py-2 text-xs font-semibold text-violet-800">Ya está en una campaña de prospección (estado: {p.enCampana}).</p>}
@@ -185,6 +186,12 @@ export const LeadPool = () => {
   const [sort, setSort] = useState('oportunidad');
   const [shown, setShown] = useState(PAGE);
   const [open, setOpen] = useState(null);
+  const [undo, setUndo] = useState(null);
+  useEffect(() => {
+    if (!undo) return undefined;
+    const t = setTimeout(() => setUndo(null), 6000);
+    return () => clearTimeout(t);
+  }, [undo]);
 
   useEffect(() => {
     panel.pool().then(setItems).catch((err) => setError(err.message));
@@ -224,6 +231,21 @@ export const LeadPool = () => {
     setItems((prev) => prev.map((x) => (x.id === u.id ? { ...x, ...u, enCampana: x.enCampana } : x)));
     setOpen((o) => (o && o.id === u.id ? { ...o, ...u, enCampana: o.enCampana } : o));
   };
+  // Marcar como hablado desde la fila: sale de la lista al instante, con opción de deshacer
+  const setEstado = async (p, estado) => {
+    setItems((prev) => prev.map((x) => (x.id === p.id ? { ...x, estado } : x)));
+    try {
+      await panel.updatePool(p.id, { estado });
+    } catch (err) {
+      setItems((prev) => prev.map((x) => (x.id === p.id ? { ...x, estado: p.estado } : x)));
+      window.alert(`No se pudo guardar: ${err.message}`);
+    }
+  };
+  const markTalked = (p) => {
+    setEstado(p, 'contactado');
+    setUndo(p);
+  };
+  const byState = count((items || []).filter((p) => !f.ocultarCampana || !p.enCampana), (p) => p.estado);
   const active = JSON.stringify(f) !== JSON.stringify(EMPTY);
   const high = visible.filter((p) => p.oportunidad >= 60).length;
 
@@ -236,8 +258,10 @@ export const LeadPool = () => {
         </div>
         <FilterGroup title="Mostrar">
           <div className="grid grid-cols-2 gap-1 rounded-lg bg-slate-100 p-1 text-xs font-bold">
-            {[['nuevo', 'Nuevos'], ['guardado', 'Guardados'], ['descartado', 'Descartados'], ['todos', 'Todos']].map(([id, label]) => (
-              <button key={id} type="button" onClick={() => set('estado', id)} className={`rounded-md py-1.5 ${f.estado === id ? 'bg-white text-[#182A2C] shadow-sm' : 'bg-transparent text-slate-500'}`}>{label}</button>
+            {[['nuevo', 'Nuevos'], ['contactado', 'Hablados'], ['guardado', 'Guardados'], ['descartado', 'Descartados'], ['todos', 'Todos']].map(([id, label]) => (
+              <button key={id} type="button" onClick={() => set('estado', id)} className={`rounded-md py-1.5 ${id === 'todos' ? 'col-span-2' : ''} ${f.estado === id ? 'bg-white text-[#182A2C] shadow-sm' : 'bg-transparent text-slate-500'}`}>
+                {label} <span className="font-semibold text-slate-400">{id === 'todos' ? '' : (byState[id] || 0).toLocaleString('es-AR')}</span>
+              </button>
             ))}
           </div>
           <label className="mt-3 flex items-center gap-2 text-sm text-slate-700">
@@ -303,6 +327,7 @@ export const LeadPool = () => {
                 <th className="px-4 py-3 font-bold">Qué ofrecerle</th>
                 <th className="px-4 py-3 font-bold">Contacto</th>
                 <th className="px-4 py-3 font-bold">Google</th>
+                <th className="px-4 py-3"><span className="sr-only">Acciones</span></th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
@@ -310,7 +335,7 @@ export const LeadPool = () => {
                 <tr key={p.id} onClick={() => setOpen(p)} className="cursor-pointer align-top hover:bg-slate-50">
                   <td className="py-3 pl-4 pr-2"><span className={`inline-flex h-9 w-11 items-center justify-center rounded-lg text-sm font-black tabular-nums ${scoreCls(p.oportunidad)}`}>{p.oportunidad}</span></td>
                   <td className="max-w-[230px] px-4 py-3">
-                    <p className="flex items-center gap-1.5 truncate font-bold text-[#182A2C]">{p.estado === 'guardado' && <Bookmark size={13} className="shrink-0 fill-[#182A2C]" />}{p.nombre}</p>
+                    <p className="flex items-center gap-1.5 truncate font-bold text-[#182A2C]">{p.estado === 'guardado' && <Bookmark size={13} className="shrink-0 fill-[#182A2C]" />}{p.nombre}{p.estado === 'contactado' && <span className="shrink-0 rounded-full bg-emerald-100 px-1.5 py-0.5 text-[10px] font-bold text-emerald-800">Hablado</span>}</p>
                     <p className="truncate text-xs text-slate-500">{p.rubro} · {p.ciudad} <span className="ml-0.5 rounded bg-slate-100 px-1 text-[10px] font-bold text-slate-500">{p.pais}</span></p>
                     {p.enCampana && <p className="mt-1 text-[11px] font-bold text-violet-700">En campaña</p>}
                   </td>
@@ -331,9 +356,16 @@ export const LeadPool = () => {
                     {p.rating ? <span className="flex items-center gap-1 font-semibold text-slate-700"><Star size={13} className="fill-amber-400 text-amber-400" /> {p.rating}</span> : <span className="text-slate-400">—</span>}
                     <span className="text-xs text-slate-400">{p.resenas || 0} reseñas</span>
                   </td>
+                  <td className="px-4 py-3 text-right">
+                    {p.estado === 'contactado' ? (
+                      <button type="button" onClick={(e) => { e.stopPropagation(); setEstado(p, 'nuevo'); }} title="Volver a nuevos" className="rounded-lg bg-emerald-50 p-2 text-emerald-700 hover:bg-emerald-100"><CheckCheck size={16} /></button>
+                    ) : (
+                      <button type="button" onClick={(e) => { e.stopPropagation(); markTalked(p); }} title="Marcar como hablado" className="rounded-lg border border-slate-200 bg-white p-2 text-slate-400 hover:border-emerald-300 hover:bg-emerald-50 hover:text-emerald-700"><Check size={16} /></button>
+                    )}
+                  </td>
                 </tr>
               ))}
-              {!visible.length && <tr><td colSpan="5" className="px-4 py-10 text-center text-slate-500">Ningún negocio coincide con estos filtros.</td></tr>}
+              {!visible.length && <tr><td colSpan="6" className="px-4 py-10 text-center text-slate-500">Ningún negocio coincide con estos filtros.</td></tr>}
             </tbody>
           </table>
         </div>
@@ -345,6 +377,12 @@ export const LeadPool = () => {
       </section>
 
       {open && <Detail p={open} onClose={() => setOpen(null)} onChange={replace} />}
+      {undo && (
+        <div className="fixed bottom-6 left-1/2 z-[90] flex -translate-x-1/2 items-center gap-4 rounded-xl bg-[#182A2C] px-5 py-3 text-sm text-white shadow-2xl">
+          <span><strong>{undo.nombre}</strong> marcado como hablado</span>
+          <button type="button" onClick={() => { setEstado(undo, undo.estado); setUndo(null); }} className="bg-transparent font-bold text-[#d9fb06] underline">Deshacer</button>
+        </div>
+      )}
     </div>
   );
 };
