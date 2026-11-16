@@ -6,6 +6,7 @@ import {
   Building2, TrendingUp, FileText,
 } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
+import { withArgentina } from '../lib/argentinaView';
 import { blogPosts, blogCategories } from '../blogData';
 import postStats from '../blogs/postStats.json';
 
@@ -140,12 +141,19 @@ const Pagination = ({ page, totalPages, hrefFor, onNavigate }) => {
   );
 };
 
+// Notas de Argentina: precios en el país, Mercado Pago, AFIP, monotributo y Salta
+const ARGENTINA_POST = /argentin|afip|mercadopago|monotributo|salta/;
+
 export const BlogPage = () => {
   const [params, setParams] = useSearchParams();
   const listTopRef = useRef(null);
 
   const activeCategory = params.get('categoria') || 'Todos';
   const searchQuery = params.get('q') || '';
+  // ?pais=argentina: el link "Blog" de /argentina abre solo las notas pensadas para Argentina
+  const onlyArgentina = params.get('pais') === 'argentina';
+  // Las notas abiertas desde la versión Argentina siguen con su menú reducido
+  const postUrl = (slug) => (onlyArgentina ? withArgentina(`/blog/${slug}`) : `/blog/${slug}`);
   const pageSize = PAGE_SIZES.includes(Number(params.get('mostrar'))) ? Number(params.get('mostrar')) : DEFAULT_PAGE_SIZE;
 
   const updateParams = (changes) => {
@@ -169,19 +177,21 @@ export const BlogPage = () => {
   }, []);
 
   const mostRead = useMemo(
-    () => MOST_READ_SLUGS.map((slug) => blogPosts.find((p) => p.slug === slug)).filter(Boolean),
-    []
+    () => MOST_READ_SLUGS.map((slug) => blogPosts.find((p) => p.slug === slug))
+      .filter((p) => p && (!onlyArgentina || ARGENTINA_POST.test(p.slug))),
+    [onlyArgentina]
   );
 
   const filteredPosts = useMemo(() => {
     const q = searchQuery.toLowerCase().trim();
     return sortedPosts.filter((post) => {
+      if (onlyArgentina && !ARGENTINA_POST.test(post.slug)) return false;
       if (activeCategory !== 'Todos' && post.category !== activeCategory) return false;
       if (!q) return true;
       return [post.title, post.seoDescription, post.seoKeywords, post.category]
         .some((field) => field && field.toLowerCase().includes(q));
     });
-  }, [sortedPosts, activeCategory, searchQuery]);
+  }, [sortedPosts, activeCategory, searchQuery, onlyArgentina]);
 
   // The newest post of the current view (all posts or one category) leads the page, as in an editorial home
   const featured = !searchQuery ? filteredPosts[0] : null;
@@ -208,6 +218,7 @@ export const BlogPage = () => {
 
   const listTitle = searchQuery
     ? `Resultados para "${searchQuery}"`
+    : onlyArgentina ? 'Notas para negocios de Argentina'
     : activeCategory === 'Todos' ? 'Lo más reciente' : `Lo más reciente en ${activeCategory}`;
 
   const categoryLinks = blogCategories.filter((c) => c !== 'Todos');
@@ -269,7 +280,7 @@ export const BlogPage = () => {
       {showFeatured && (
         <section className="pt-7 md:pt-8 pb-12 md:pb-16">
           <div className="container mx-auto px-5 lg:px-8 max-w-7xl">
-          <Link to={`/blog/${featured.slug}`} className="group grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
+          <Link to={postUrl(featured.slug)} className="group grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
             <PostCover post={featured} size="lg" className="lg:col-span-7 aspect-[16/9.5] rounded-2xl shadow-sm" />
             <div className="lg:col-span-5">
               <h2 className="text-[28px] md:text-[36px] font-extrabold text-[#182A2C] leading-[1.12] tracking-tight group-hover:underline decoration-[#d9fb06] decoration-4 underline-offset-[6px]">
@@ -296,7 +307,7 @@ export const BlogPage = () => {
             <div className="lg:col-span-8 min-w-0 lg:border-r lg:border-slate-200 lg:pr-12" ref={listTopRef} style={{ scrollMarginTop: '135px' }}>
               <div className="flex flex-wrap items-end justify-between gap-3 mb-7">
                 <h2 className="text-[28px] md:text-[34px] font-extrabold text-[#182A2C] tracking-tight leading-tight">{listTitle}</h2>
-                {(searchQuery || activeCategory !== 'Todos') && (
+                {(searchQuery || activeCategory !== 'Todos' || onlyArgentina) && (
                   <button onClick={resetFilters} className="text-sm font-semibold text-slate-500 hover:text-[#182A2C] underline underline-offset-4">
                     Ver todos los artículos
                   </button>
@@ -325,7 +336,7 @@ export const BlogPage = () => {
                   {pagePosts.map((post) => (
                     <article key={post.slug} className="h-full">
                       <Link
-                        to={`/blog/${post.slug}`}
+                        to={postUrl(post.slug)}
                         className="group flex flex-col h-full bg-white rounded-2xl overflow-hidden border border-slate-200/70 shadow-[0_1px_2px_rgba(16,24,40,0.04)] hover:shadow-[0_12px_30px_-12px_rgba(16,24,40,0.25)] hover:-translate-y-0.5 transition-all duration-200"
                       >
                         <PostCover post={post} className="aspect-[16/9.5]" />
@@ -410,10 +421,10 @@ export const BlogPage = () => {
                   </ul>
                 </div>
 
-                <div>
+                {mostRead.length > 0 && <div>
                   <h2 className="text-[28px] md:text-[34px] font-extrabold text-[#182A2C] tracking-tight leading-tight mb-7">Lo más leído</h2>
                   {mostRead[0] && (
-                    <Link to={`/blog/${mostRead[0].slug}`} className="group block bg-white rounded-2xl overflow-hidden border border-slate-200/70 mb-5">
+                    <Link to={postUrl(mostRead[0].slug)} className="group block bg-white rounded-2xl overflow-hidden border border-slate-200/70 mb-5">
                       <PostCover post={mostRead[0]} className="aspect-[16/10]" />
                       <h3 className="p-5 text-[17px] font-bold text-[#182A2C] leading-snug group-hover:underline decoration-[#d9fb06] decoration-[3px] underline-offset-4">
                         {mostRead[0].title}
@@ -423,7 +434,7 @@ export const BlogPage = () => {
                   <ol className="bg-white rounded-2xl border border-slate-200/70 divide-y divide-slate-100">
                     {mostRead.slice(1).map((post, i) => (
                       <li key={post.slug}>
-                        <Link to={`/blog/${post.slug}`} className="group flex gap-4 p-5">
+                        <Link to={postUrl(post.slug)} className="group flex gap-4 p-5">
                           <span className="text-2xl font-extrabold text-[#182A2C]/20 leading-none w-6 shrink-0">{i + 2}</span>
                           <h3 className="text-[15px] font-semibold text-[#182A2C] leading-snug line-clamp-3 group-hover:underline decoration-[#d9fb06] decoration-2 underline-offset-2">
                             {post.title}
@@ -432,7 +443,7 @@ export const BlogPage = () => {
                       </li>
                     ))}
                   </ol>
-                </div>
+                </div>}
 
                 <div className="rounded-2xl bg-[#182A2C] p-7 text-white">
                   <h2 className="text-xl font-bold">¿Tenés un proyecto en mente?</h2>
@@ -454,7 +465,8 @@ export const BlogPage = () => {
         </div>
       </section>
 
-      <div className="py-14 md:py-20">
+      {/* Con ?pais=argentina se ven solo las notas de Argentina: sin el índice con todos los artículos */}
+      {!onlyArgentina && <div className="py-14 md:py-20">
       <div className="container mx-auto px-5 lg:px-8 max-w-7xl">
         {/* About the blog */}
         <section aria-labelledby="sobre-el-blog" className="max-w-3xl">
@@ -483,7 +495,7 @@ export const BlogPage = () => {
                 <ul className="space-y-2">
                   {posts.map((post) => (
                     <li key={post.slug}>
-                      <Link to={`/blog/${post.slug}`} className="text-[15px] text-[#182A2C] hover:underline decoration-[#d9fb06] decoration-2 underline-offset-4">
+                      <Link to={postUrl(post.slug)} className="text-[15px] text-[#182A2C] hover:underline decoration-[#d9fb06] decoration-2 underline-offset-4">
                         {post.title}
                       </Link>
                     </li>
@@ -494,7 +506,7 @@ export const BlogPage = () => {
           </div>
         </section>
       </div>
-      </div>
+      </div>}
 
       <style>{`
         .scrollbar-hide::-webkit-scrollbar { display: none; }

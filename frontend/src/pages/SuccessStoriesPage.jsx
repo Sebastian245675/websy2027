@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
+import { withArgentina } from '../lib/argentinaView';
 import { portfolio, caseResults } from '../mockData';
 import { SEOHead } from '../components/SEOHead';
 import { caseForPortfolio, rubroHubs } from '../caseStudies';
@@ -21,7 +22,15 @@ const stories = [
   ...portfolio.filter((p) => !resultFor(p)),
 ];
 
+// Desde /argentina (?pais=argentina): solo los proyectos hechos en Argentina, sin demos
+const argentinaStories = stories.filter((s) => caseForPortfolio(s.id)?.location?.includes('Argentina'));
+
 export const SuccessStoriesPage = () => {
+  const [params] = useSearchParams();
+  const onlyArgentina = params.get('pais') === 'argentina';
+  const list = onlyArgentina ? argentinaStories : stories;
+  const caseLink = (slug) => (onlyArgentina ? withArgentina(`/casos-de-exito/${slug}`) : `/casos-de-exito/${slug}`);
+
   return (
     <div className="pt-[32px] md:pt-[100px] bg-white min-h-screen font-outfit">
       <SEOHead
@@ -45,7 +54,7 @@ export const SuccessStoriesPage = () => {
 
         <div className="container relative z-10 text-center">
             <nav className="flex justify-center items-center gap-3 text-[10px] font-extrabold text-gray-400 uppercase tracking-[0.2em] mb-4">
-                <a href="/" className="hover:text-[#182A2C] transition-all">HOME</a>
+                <Link to={onlyArgentina ? '/argentina' : '/'} className="hover:text-[#182A2C] transition-all">HOME</Link>
                 <span className="opacity-20">/</span>
                 <span className="text-gray-900 font-black">CASOS DE ÉXITO</span>
             </nav>
@@ -54,15 +63,17 @@ export const SuccessStoriesPage = () => {
             </h1>
             <div className="w-16 h-1 bg-[#182A2C] mx-auto mt-4 transition-all duration-500 hover:w-32" />
             <p className="mt-8 text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
-                {portfolio.length} proyectos reales en Argentina, Colombia, México y Estados Unidos: qué problema tenía cada cliente, cómo lo resolvimos y con qué tecnología.
+                {onlyArgentina
+                  ? `${list.length} proyectos reales en Argentina: qué problema tenía cada cliente, cómo lo resolvimos y con qué tecnología.`
+                  : `${portfolio.length} proyectos reales en Argentina, Colombia, México y Estados Unidos: qué problema tenía cada cliente, cómo lo resolvimos y con qué tecnología.`}
             </p>
-            <nav aria-label="Ejemplos por rubro" className="mt-8 flex flex-wrap justify-center gap-2">
+            {!onlyArgentina && <nav aria-label="Ejemplos por rubro" className="mt-8 flex flex-wrap justify-center gap-2">
                 {rubroHubs.map((h) => (
                     <Link key={h.path} to={`/casos-de-exito/${h.path}`} className="border border-gray-300 bg-white px-4 py-2 text-sm font-bold text-[#182A2C] hover:border-[#182A2C] hover:bg-[#d9fb06] transition-colors">
                         {h.name}
                     </Link>
                 ))}
-            </nav>
+            </nav>}
         </div>
 
         {/* V-Divider Peak */}
@@ -89,11 +100,11 @@ export const SuccessStoriesPage = () => {
       {/* Main Stories List */}
       <section className="pb-32 px-6">
         <div className="container mx-auto max-w-7xl">
-            {stories.map((story, idx) => {
+            {list.map((story, idx) => {
                 const result = resultFor(story);
                 const study = caseForPortfolio(story.id);
                 return (
-                <div key={story.id} className={`flex flex-col ${idx % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-16 lg:gap-24 items-center py-24 ${idx !== stories.length - 1 ? 'border-b border-gray-100' : ''}`}>
+                <div key={story.id} className={`flex flex-col ${idx % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-16 lg:gap-24 items-center py-24 ${idx !== list.length - 1 ? 'border-b border-gray-100' : ''}`}>
                     {/* Visual Container */}
                     <div className="w-full lg:w-1/2 group">
                         {story.image ? (
@@ -164,7 +175,7 @@ export const SuccessStoriesPage = () => {
                             <div className="mt-12 flex flex-wrap gap-4">
                                 {study && (
                                     <Link
-                                        to={`/casos-de-exito/${study.slug}`}
+                                        to={caseLink(study.slug)}
                                         className="bg-[#182A2C] text-white px-10 py-5 font-black text-xs uppercase tracking-[0.25em] hover:bg-[#d9fb06] hover:text-[#182A2C] transition-all shadow-sm hover:shadow-xl"
                                     >
                                         Ver el caso completo
