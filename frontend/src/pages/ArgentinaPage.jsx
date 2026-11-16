@@ -33,18 +33,20 @@ const COPY = {
     lead: 'Hacemos páginas web, tiendas online y asistentes de WhatsApp para negocios argentinos. Ves el diseño antes de publicarlo y sabés el precio final antes de empezar.',
     ctaPlan: 'Armá tu plan en 1 minuto',
     ctaPrices: 'Ver precios',
+    trabajan: 'Negocios que ya trabajan con su web',
 
     casos: {
       chip: 'Casos y testimonios en Argentina',
       title: 'Negocios argentinos que ya trabajan con su web.',
       items: [
         // Clientes argentinos de la historia destacada "clientes" de Instagram, más Ascenta (testimonios en src/testimonials.js)
-        { portfolioId: 3, tag: 'Tienda online', name: 'Regala Algo', result: '~ARS 2 M por mes', text: 'Qué hicimos: tienda online con catálogo de más de 3.000 productos y cobro integrado.' },
-        { image: '/ascenta/captura.jpg', tag: 'Estudio contable', name: 'Ascenta', text: 'Qué hicimos: web con simuladores y asistente que atiende consultas.' },
-        { portfolioId: 14, tag: 'Estudio jurídico', name: 'Estudio Ruarte', text: 'Qué hicimos: web para recibir consultas urgentes por WhatsApp desde el celular.' },
-        { portfolioId: 1, tag: 'Logística y distribución', name: 'M Logística y Distribución', text: 'Qué hicimos: sitio web corporativo para una empresa de transporte de litio, hidróxido y carbonato para exportación.' },
-        { portfolioId: 2, tag: 'Tienda online', name: 'Covenant', text: 'Qué hicimos: tienda online de materiales eléctricos e iluminación, con catálogo, cotizaciones y envíos.' },
-        { portfolioId: 4, tag: 'Perfumería', name: 'NUVÓ Perfumería', text: 'Qué hicimos: landing page para una perfumería, pensada en la experiencia del cliente.' },
+        // Textos compensados: si el testimonio es corto o es un video, la descripción es más larga (pedido de Agustín)
+        { portfolioId: 3, tag: 'Tienda online', name: 'Regala Algo', result: '~ARS 2 M por mes', text: 'Qué hicimos: tienda online con panel propio para gestionar inventario, pedidos y ventas. Hoy tiene más de 3.000 productos activos.' },
+        { image: '/ascenta/captura.jpg', testimonial: 'ascenta', tag: 'Estudio contable', name: 'Ascenta', text: 'Qué hicimos: web para un estudio contable de Salta, con simuladores gratis de monotributo, IVA y deudas, y un asistente que responde consultas.' },
+        { portfolioId: 14, tag: 'Estudio jurídico', name: 'Estudio Ruarte', text: 'Qué hicimos: landing page para Ruarte & Ruarte, un estudio de abogados de Salta que trabaja derecho penal y derecho canábico. Presenta los servicios legales y a los profesionales, con contacto por WhatsApp desde el celular y preparada para aparecer en la búsqueda local.' },
+        { portfolioId: 1, tag: 'Logística y distribución', name: 'M Logística y Distribución', text: 'Qué hicimos: sitio web corporativo para una empresa de transporte de litio para exportación.' },
+        { portfolioId: 2, tag: 'Tienda online', name: 'Covenant', text: 'Qué hicimos: tienda online de materiales eléctricos e iluminación. El catálogo, las cotizaciones y los envíos funcionan sobre el mismo sistema que gestiona inventario, pedidos y clientes.' },
+        { portfolioId: 11, tag: 'Servicios online', name: 'Cuervo Tarot', text: 'Qué hicimos: landing page para un servicio de lecturas de tarot y runas online, con un diseño envolvente de marca, los servicios presentados como ofertas y contacto por WhatsApp para convertir visitas en consultas.' },
       ],
       captura: '[CAPTURA DE LA WEB]',
       video: 'Mirá su testimonio en video',
@@ -229,17 +231,18 @@ const COPY = {
     lead: 'We build websites, online stores and WhatsApp assistants for Argentine businesses. You see the design before it goes live and you know the final price before we start.',
     ctaPlan: 'Build your plan in 1 minute',
     ctaPrices: 'See prices',
+    trabajan: 'Businesses already working with their website',
 
     casos: {
       chip: 'Case studies and testimonials in Argentina',
       title: 'Argentine businesses already working with their website.',
       items: [
-        { portfolioId: 3, tag: 'Online store', name: 'Regala Algo', result: '~ARS 2 M per month', text: 'What we did: online store with a catalog of more than 3,000 products and integrated payments.' },
-        { image: '/ascenta/captura.jpg', tag: 'Accounting firm', name: 'Ascenta', text: 'What we did: website with simulators and an assistant that answers inquiries.' },
-        { portfolioId: 14, tag: 'Law firm', name: 'Estudio Ruarte', text: 'What we did: website to receive urgent inquiries through WhatsApp from a phone.' },
-        { portfolioId: 1, tag: 'Logistics and distribution', name: 'M Logística y Distribución', text: 'What we did: corporate website for a company that transports lithium, hydroxide and carbonate for export.' },
-        { portfolioId: 2, tag: 'Online store', name: 'Covenant', text: 'What we did: online store for electrical materials and lighting, with catalog, quotes and shipping.' },
-        { portfolioId: 4, tag: 'Perfumery', name: 'NUVÓ Perfumería', text: 'What we did: landing page for a perfumery, designed around the customer experience.' },
+        { portfolioId: 3, tag: 'Online store', name: 'Regala Algo', result: '~ARS 2 M per month', text: 'What we did: online store with its own dashboard to manage inventory, orders and sales. It now has more than 3,000 active products.' },
+        { image: '/ascenta/captura.jpg', testimonial: 'ascenta', tag: 'Accounting firm', name: 'Ascenta', text: 'What we did: website for an accounting firm in Salta, with free simulators for small-taxpayer regime, VAT and debts, and an assistant that answers inquiries.' },
+        { portfolioId: 14, tag: 'Law firm', name: 'Estudio Ruarte', text: 'What we did: landing page for Ruarte & Ruarte, a law firm in Salta that handles criminal law and cannabis law. It presents the legal services and the lawyers, with WhatsApp contact from a phone, and is ready to show up in local search.' },
+        { portfolioId: 1, tag: 'Logistics and distribution', name: 'M Logística y Distribución', text: 'What we did: corporate website for a company that transports lithium for export.' },
+        { portfolioId: 2, tag: 'Online store', name: 'Covenant', text: 'What we did: online store for electrical materials and lighting. The catalog, quotes and shipping run on the same system that manages inventory, orders and customers.' },
+        { portfolioId: 11, tag: 'Online services', name: 'Cuervo Tarot', text: 'What we did: landing page for an online tarot and rune reading service, with an immersive brand design, services presented as offers and WhatsApp contact to turn visits into inquiries.' },
       ],
       captura: '[WEBSITE SCREENSHOT]',
       video: 'Watch their video testimonial',
@@ -708,7 +711,7 @@ export const ArgentinaPage = () => {
       {/* Inicio: marca, propuesta y botones; la promesa de los 7 días va debajo de "Armá tu plan" */}
       <section id="inicio-ar" className="relative bg-[#182A2C] text-white overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#244246]/60 via-[#182A2C]/90 to-[#0e1b1d] pointer-events-none" />
-        <div className="relative container mx-auto px-5 lg:px-8 max-w-5xl text-center flex flex-col items-center py-12 md:py-16">
+        <div className="relative container mx-auto px-5 lg:px-8 max-w-5xl text-center flex flex-col items-center py-14 md:py-20">
           {/* El cartel es el h1 de la página (Agustín sacó la frase de los 7 días que antes cumplía ese rol) */}
           <h1 className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#d9fb06]/40 bg-white/5 px-4 py-2 text-xs sm:text-sm font-semibold text-white/90">
             <MapPin size={14} className="shrink-0 text-[#d9fb06]" aria-hidden="true" /> {c.pill}
@@ -723,6 +726,24 @@ export const ArgentinaPage = () => {
             <a href="#productos" className="w-full sm:w-auto bg-black/50 hover:bg-black/80 text-white hover:text-[#d9fb06] font-black px-8 py-4 text-xs sm:text-sm uppercase tracking-[0.15em] border border-[#d9fb06]/60 hover:border-[#d9fb06] transition-all hover:scale-105">
               {c.ctaPrices}
             </a>
+          </div>
+          {/* Franja de clientes: suma confianza y completa el inicio (las capturas son las mismas de los casos) */}
+          <div className="mt-12 md:mt-14 pt-8 w-full border-t border-white/10">
+            <p className="text-[11px] font-black uppercase tracking-[0.2em] text-white/60 mb-5">{c.trabajan}</p>
+            <ul className="grid grid-cols-3 sm:grid-cols-6 gap-3 md:gap-4">
+              {casos.items.map((it) => {
+                const src = it.image || portfolio.find((p) => p.id === it.portfolioId)?.image;
+                return (
+                  <li key={it.name}>
+                    <a href="#casos" className="group block" aria-label={it.name}>
+                      <img src={src} alt="" width="320" height="200" loading="eager" decoding="async"
+                        className="w-full aspect-[16/10] rounded-lg object-cover object-top border border-white/15 group-hover:border-[#d9fb06] transition-colors" />
+                      <span className="mt-2 block text-[11px] sm:text-xs font-semibold text-white/75 group-hover:text-[#d9fb06] truncate">{it.name}</span>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         </div>
       </section>
@@ -747,7 +768,7 @@ export const ArgentinaPage = () => {
               <p className="text-[15px] text-slate-600 leading-relaxed">{it.text}</p>
               {/* Testimonio de la historia destacada "clientes" de Instagram (src/testimonials.js) */}
               {(() => {
-                const t = testimonialFor(it.portfolioId);
+                const t = testimonialFor(it.testimonial || it.portfolioId);
                 if (!t) return null;
                 return (
                   <div className="mt-auto border-t border-slate-200 pt-3 flex flex-col gap-3">
