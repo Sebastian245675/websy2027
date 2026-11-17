@@ -80,6 +80,10 @@ export const RUBROS = [
 // ('estandar' | 'comercio' | 'pymes' | 'corpo'). null = ninguno destacado.
 export const HIGHLIGHTED_PLAN_ID = null;
 
+// Link para dejar una reseña en el Perfil de Empresa de Google (Google Business Profile → "Pedir reseñas").
+// Mientras sea null, la sección de reseñas de /argentina no muestra el botón "Dejala también en Google".
+export const GOOGLE_REVIEW_URL = null;
+
 // Link de agenda para videollamadas (Cal.com, Calendly o Google Calendar "citas").
 // Mientras sea null, el botón "Agendar llamada" abre WhatsApp con el pedido de reunión ya escrito.
 export const BOOKING_URL = null;
