@@ -108,6 +108,22 @@ CREATE TABLE IF NOT EXISTS prospect_pool (
 );
 CREATE INDEX IF NOT EXISTS prospect_pool_oportunidad_idx ON prospect_pool (oportunidad DESC);
 
+-- Reseñas que dejan los clientes desde el sitio (/argentina). Entran como 'pendiente' y solo se publican
+-- cuando se aprueban desde el panel; desde ahí también se rechazan o se borran.
+CREATE TABLE IF NOT EXISTS reviews (
+  id             BIGSERIAL PRIMARY KEY,
+  created_at     TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at     TIMESTAMPTZ,
+  status         TEXT NOT NULL DEFAULT 'pendiente', -- pendiente | aprobada | rechazada
+  name           TEXT NOT NULL,
+  business       TEXT,                             -- negocio o rubro, opcional
+  rating         INT NOT NULL CHECK (rating BETWEEN 1 AND 5),
+  text           TEXT NOT NULL,
+  page           TEXT,
+  user_agent     TEXT
+);
+CREATE INDEX IF NOT EXISTS reviews_status_created_idx ON reviews (status, created_at DESC);
+
 -- Mensajes editados desde el panel antes de enviarse. Los servidores de campaña los consultan antes de
 -- cada envío (GET /api/outreach/overrides) y, si hay uno, mandan este texto en lugar del de la plantilla.
 CREATE TABLE IF NOT EXISTS outreach_overrides (
