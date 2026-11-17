@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { ArrowRight, Check, MapPin, MessageCircle, Play, ShieldCheck } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
 import { FAQSection } from '../components/FAQSection';
+import { ReviewsSection } from '../components/ReviewsSection';
 import { COUNTRY_ALTERNATES, countryPageByCode } from '../countryPages';
 import { CONTACT, SOCIAL, whatsappUrl } from '../siteConfig';
 import { useLanguage } from '../LanguageContext';
@@ -69,9 +70,9 @@ const COPY = {
       chip: 'Tres productos · Precio cerrado, sin sorpresas',
       title: 'Elegí lo que necesita tu negocio.',
       promo: {
-        small: 'Promo verano · [15 de diciembre al 7 de enero]',
+        small: 'Promo verano · del 15 de diciembre al 14 de febrero',
         strong: 'Arrancá el año con tu web funcionando.',
-        nota: 'Mismo plazo y misma garantía. [Cupo limitado: X webs y X tiendas]',
+        nota: 'Mismo plazo y misma garantía. Cupo limitado: solo para los primeros 20 clientes.',
         cta: 'Quiero la promo',
       },
       incluye: 'Incluye',
@@ -80,7 +81,7 @@ const COPY = {
         {
           tag: 'Lista en 7 días', name: 'Web institucional', featured: true,
           text: 'Para negocios que ofrecen servicios: estudios, consultorios, profesionales y empresas.',
-          antes: 'USD 743', precio: 'USD 474', nota: 'Precio de promo. Fuera de la promo: USD 743. En pesos: [ARS]',
+          antes: 'USD 743', precio: 'USD 474', nota: 'Precio de promo. Fuera de la promo: USD 743. Se puede pagar en pesos.',
           items: ['Hasta 7 secciones', 'Diseño que ves y ajustás antes de publicar', '4 rondas de cambios', 'Adaptada al celular', 'Botón de WhatsApp', 'Preparada para aparecer en Google', 'Conectada a Google Search Console y Google Analytics para ver tus estadísticas', 'Panel para cambiar los textos, sin costo', 'Dominio a tu nombre'],
           prep: 'Logo, textos y fotos',
           cta: 'Armá tu plan',
@@ -88,7 +89,7 @@ const COPY = {
         {
           tag: 'Lista en 12 días', name: 'Tienda online',
           text: 'Para negocios que venden productos y quieren cobrar por internet.',
-          antes: 'USD 1.244', precio: 'USD 796', nota: 'Precio de promo. Fuera de la promo: USD 1.244. En pesos: [ARS]',
+          antes: 'USD 1.244', precio: 'USD 796', nota: 'Precio de promo. Fuera de la promo: USD 1.244. Se puede pagar en pesos.',
           items: ['Catálogo y carrito', 'Cobro con Mercado Pago o la pasarela de pagos que prefieras', 'Envíos', 'Carga inicial de hasta 300 productos sin costo (más productos se cotizan aparte)', 'Panel para cargar productos y precios y cambiar los textos', 'Conectada a Google Search Console y Google Analytics para ver tus estadísticas', 'Adaptada al celular', 'Dominio a tu nombre'],
           prep: 'Logo, fotos y lista de productos con precios',
           cta: 'Armá tu plan',
@@ -265,9 +266,9 @@ const COPY = {
       chip: 'Three products · Fixed price, no surprises',
       title: 'Choose what your business needs.',
       promo: {
-        small: 'Summer promo · [December 15 to January 7]',
+        small: 'Summer promo · December 15 to February 14',
         strong: 'Start the year with your website up and running.',
-        nota: 'Same deadline and same guarantee. [Limited spots: X websites and X stores]',
+        nota: 'Same deadline and same guarantee. Limited spots: only for the first 20 clients.',
         cta: 'I want the promo',
       },
       incluye: 'Includes',
@@ -276,7 +277,7 @@ const COPY = {
         {
           tag: 'Ready in 7 days', name: 'Business website', featured: true,
           text: 'For businesses that offer services: firms, practices, professionals and companies.',
-          antes: 'USD 743', precio: 'USD 474', nota: 'Promo price. Regular price: USD 743. In pesos: [ARS]',
+          antes: 'USD 743', precio: 'USD 474', nota: 'Promo price. Regular price: USD 743. You can pay in Argentine pesos.',
           items: ['Up to 7 sections', 'Design you see and adjust before it goes live', '4 rounds of changes', 'Mobile-friendly', 'WhatsApp button', 'Ready to show up on Google', 'Connected to Google Search Console and Google Analytics to see your stats', 'Dashboard to edit your texts, free of charge', 'Domain in your name'],
           prep: 'Logo, texts and photos',
           cta: 'Build your plan',
@@ -284,7 +285,7 @@ const COPY = {
         {
           tag: 'Ready in 12 days', name: 'Online store',
           text: 'For businesses that sell products and want to get paid online.',
-          antes: 'USD 1,244', precio: 'USD 796', nota: 'Promo price. Regular price: USD 1,244. In pesos: [ARS]',
+          antes: 'USD 1,244', precio: 'USD 796', nota: 'Promo price. Regular price: USD 1,244. You can pay in Argentine pesos.',
           items: ['Catalog and cart', 'Payments with Mercado Pago or the payment gateway you prefer', 'Shipping', 'Initial upload of up to 300 products free of charge (more products quoted separately)', 'Dashboard to add products and prices and edit your texts', 'Connected to Google Search Console and Google Analytics to see your stats', 'Mobile-friendly', 'Domain in your name'],
           prep: 'Logo, photos and product list with prices',
           cta: 'Build your plan',
@@ -792,7 +793,7 @@ export const ArgentinaPage = () => {
         <div className="mt-6 flex flex-wrap gap-3">
           <Link to={withArgentina('/casos-de-exito')} className={btnDark}>{casos.verTodos}</Link>
           {INSTAGRAM && <a href={INSTAGRAM} target="_blank" rel="noopener noreferrer" className={btnLine}>{casos.instagram}</a>}
-          <a href="#casos" className={btnLine}>{casos.resena}</a>
+          <a href="#resenas" className={btnLine}>{casos.resena}</a>
         </div>
       </Seccion>
 
@@ -945,6 +946,9 @@ export const ArgentinaPage = () => {
           {' '}· {CONTACT.phoneDisplay}
         </p>
       </Seccion>
+
+      {/* Reseñas al final, después del plan (pedido de Agustín): se aprueban o borran desde /panel */}
+      <ReviewsSection lang={currentLanguage} />
     </div>
   );
 };
