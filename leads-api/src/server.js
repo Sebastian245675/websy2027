@@ -4,7 +4,10 @@
 // Público (sin sesión, con límite por IP):
 //   POST /api/leads              formulario del sitio
 //   POST /api/whatsapp-clicks    clic en un botón o link de WhatsApp
+//   POST /api/reviews            reseña de un cliente (queda pendiente de aprobación)
+//   GET /api/reviews             reseñas aprobadas, con promedio y cantidad
 // Panel (cookie de sesión):
+//   GET /api/panel/reviews  ·  PATCH /api/panel/reviews/:id {status}  ·  DELETE /api/panel/reviews/:id
 //   POST /api/panel/login {password}   ·  POST /api/panel/logout  ·  GET /api/panel/session
 //   GET /api/panel/leads  ·  PATCH /api/panel/leads/:id {status, note}  ·  DELETE /api/panel/leads/:id
 //   GET /api/panel/whatsapp-clicks  ·  GET /api/panel/archive
@@ -33,6 +36,7 @@ const SESSION_DAYS = 7;
 const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: Number(process.env.PG_POOL_MAX || 10) });
 
 const STATUSES = ['nuevo', 'contactado', 'reunion', 'propuesta', 'ganado', 'perdido', 'spam'];
+const REVIEW_STATES = ['pendiente', 'aprobada', 'rechazada'];
 const LEAD_FIELDS = { name: 200, phone: 60, email: 200, country: 80, website: 300, rubro: 200, projectType: 200, budget: 200, source: 80, page: 300, message: 5000 };
 
 // ---------- utilidades ----------
@@ -170,7 +174,55 @@ const leadRow = (r) => ({
   source: r.source, page: r.page, message: r.message, note: r.note, reunionAt: r.reunion_at, extra: r.extra,
 });
 
+const reviewRow = (r, full = false) => ({
+  id: String(r.id), createdAt: r.created_at, name: r.name, business: r.business, rating: r.rating, text: r.text,
+  ...(full ? { status: r.status, page: r.page, updatedAt: r.updated_at } : {}),
+});
+
 const routes = {
+  // Reseña desde el sitio: entra pendiente y no se muestra hasta que se aprueba en el panel
+  'POST /api/reviews': async (req, res) => {
+    if (!allow(`review:${clientIp(req)}`, 5, 60 * 60 * 1000)) return send(res, 429, { error: 'Demasiados envíos, intenta más tarde' });
+    const body = await readJson(req, 8000);
+    if (body.company_website) return send(res, 201, { ok: true }); // campo trampa para bots
+    const name = str(body.name && String(body.name).trim(), 120);
+    const text = str(body.text && String(body.text).trim(), 1500);
+    const rating = Number(body.rating);
+    if (!name) return send(res, 400, { error: 'Falta el nombre' });
+    if (!Number.isInteger(rating) || rating < 1 || rating > 5) return send(res, 400, { error: 'Elegí de 1 a 5 estrellas' });
+    if (!text || text.length < 10) return send(res, 400, { error: 'Contanos un poco más (al menos 10 caracteres)' });
+    const { rows } = await pool.query(
+      'INSERT INTO reviews (name, business, rating, text, page, user_agent) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *',
+      [name, str(body.business && String(body.business).trim(), 120), rating, text, str(body.page, 300), str(req.headers['user-agent'], 300)],
+    );
+    notify({ name, source: 'reseña', page: rows[0].page, message: `${'★'.repeat(rating)}${'☆'.repeat(5 - rating)} ${text}\n\nAprobala o borrala desde /panel → Reseñas.` });
+    send(res, 201, { ok: true, id: String(rows[0].id) });
+  },
+
+  'GET /api/reviews': async (req, res) => {
+    const { rows } = await pool.query("SELECT * FROM reviews WHERE status = 'aprobada' ORDER BY created_at DESC LIMIT 100");
+    const stats = await pool.query("SELECT count(*)::int AS n, round(avg(rating)::numeric, 1) AS avg FROM reviews WHERE status = 'aprobada'");
+    send(res, 200, { count: stats.rows[0].n, average: stats.rows[0].avg === null ? null : Number(stats.rows[0].avg), reviews: rows.map((r) => reviewRow(r)) });
+  },
+
+  'GET /api/panel/reviews': async (req, res) => {
+    const { rows } = await pool.query('SELECT * FROM reviews ORDER BY created_at DESC LIMIT 2000');
+    send(res, 200, rows.map((r) => reviewRow(r, true)));
+  },
+
+  'PATCH /api/panel/reviews/:id': async (req, res, id) => {
+    const body = await readJson(req);
+    if (!REVIEW_STATES.includes(body.status)) return send(res, 400, { error: 'Estado inválido' });
+    const { rows } = await pool.query('UPDATE reviews SET status = $1, updated_at = now() WHERE id = $2 RETURNING *', [body.status, id]);
+    if (!rows.length) return send(res, 404, { error: 'No existe' });
+    send(res, 200, reviewRow(rows[0], true));
+  },
+
+  'DELETE /api/panel/reviews/:id': async (req, res, id) => {
+    const { rowCount } = await pool.query('DELETE FROM reviews WHERE id = $1', [id]);
+    send(res, rowCount ? 200 : 404, { ok: !!rowCount });
+  },
+
   'POST /api/leads': async (req, res) => {
     if (!allow(`lead:${clientIp(req)}`, 20, 60 * 60 * 1000)) return send(res, 429, { error: 'Demasiados envíos, intenta más tarde' });
     const body = await readJson(req);
@@ -425,7 +477,7 @@ const routes = {
 const match = (method, url) => {
   const p = url.split('?')[0].replace(/\/+$/, '');
   if (routes[`${method} ${p}`]) return [routes[`${method} ${p}`]];
-  const m = p.match(/^(\/api\/panel\/leads)\/(\d+)$/);
+  const m = p.match(/^(\/api\/panel\/(?:leads|reviews))\/(\d+)$/);
   if (m && routes[`${method} ${m[1]}/:id`]) return [routes[`${method} ${m[1]}/:id`], m[2]];
   const pm = p.match(/^\/api\/panel\/pool\/([A-Za-z0-9_-]{1,300})$/);
   if (pm && routes[`${method} /api/panel/pool/:id`]) return [routes[`${method} /api/panel/pool/:id`], pm[1]];

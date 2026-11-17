@@ -23,7 +23,7 @@ const call = async (path, { method = 'GET', body, ip = '10.0.0.1', auth = true }
 };
 
 test.before(async () => {
-  await pool.query('DROP TABLE IF EXISTS leads, whatsapp_clicks, firestore_archive, outreach_prospects, outreach_messages, prospect_pool, outreach_overrides');
+  await pool.query('DROP TABLE IF EXISTS leads, whatsapp_clicks, firestore_archive, outreach_prospects, outreach_messages, prospect_pool, outreach_overrides, reviews');
   await start();
 });
 test.after(async () => {
@@ -176,4 +176,46 @@ test('mensajes en cola: se editan desde el panel, los ve la campaña y vuelven a
 
   await call('/panel/outreach/message', { method: 'PUT', body: { key: 'email:hola@clinica.mx', mensaje: '' } });
   assert.deepStrictEqual(await overrides(), {});
+});
+
+test('reseñas: entran pendientes, se publican al aprobarlas y se borran desde el panel', async () => {
+  // Validaciones
+  assert.strictEqual((await call('/reviews', { method: 'POST', ip: '10.0.0.50', body: { name: 'Ana', rating: 9, text: 'Muy buen trabajo' } })).status, 400);
+  assert.strictEqual((await call('/reviews', { method: 'POST', ip: '10.0.0.50', body: { name: 'Ana', rating: 5, text: 'corto' } })).status, 400);
+  assert.strictEqual((await call('/reviews', { method: 'POST', ip: '10.0.0.50', body: { rating: 5, text: 'Muy buen trabajo, recomendados' } })).status, 400);
+  // Campo trampa: responde ok pero no guarda
+  assert.strictEqual((await call('/reviews', { method: 'POST', ip: '10.0.0.51', body: { name: 'Bot', rating: 5, text: 'texto de un bot cualquiera', company_website: 'x' } })).status, 201);
+
+  const r = await call('/reviews', { method: 'POST', ip: '10.0.0.52', body: { name: 'Agustín Dávila', business: 'Ascenta', rating: 5, text: 'Los chicos laburan sumamente bien.', page: '/argentina' } });
+  assert.strictEqual(r.status, 201);
+  // Pendiente: no aparece en el sitio
+  let pub = await call('/reviews', { auth: false });
+  assert.strictEqual(pub.body.count, 0);
+  assert.strictEqual(pub.body.reviews.length, 0);
+
+  // El panel exige sesión y ve la pendiente
+  assert.strictEqual((await call('/panel/reviews', { auth: false })).status, 401);
+  const list = await call('/panel/reviews');
+  assert.strictEqual(list.body.length, 1);
+  assert.strictEqual(list.body[0].status, 'pendiente');
+  const id = list.body[0].id;
+
+  assert.strictEqual((await call(`/panel/reviews/${id}`, { method: 'PATCH', body: { status: 'cualquiera' } })).status, 400);
+  assert.strictEqual((await call(`/panel/reviews/${id}`, { method: 'PATCH', body: { status: 'aprobada' } })).status, 200);
+  pub = await call('/reviews', { auth: false });
+  assert.strictEqual(pub.body.count, 1);
+  assert.strictEqual(pub.body.average, 5);
+  assert.strictEqual(pub.body.reviews[0].name, 'Agustín Dávila');
+  assert.strictEqual(pub.body.reviews[0].status, undefined); // el sitio no ve datos internos
+
+  assert.strictEqual((await call(`/panel/reviews/${id}`, { method: 'DELETE' })).status, 200);
+  assert.strictEqual((await call('/reviews', { auth: false })).body.count, 0);
+  assert.strictEqual((await call(`/panel/reviews/${id}`, { method: 'DELETE' })).status, 404);
+});
+
+test('reseñas: límite de 5 por hora por IP', async () => {
+  for (let i = 0; i < 5; i += 1) {
+    assert.strictEqual((await call('/reviews', { method: 'POST', ip: '10.0.0.60', body: { name: `N${i}`, rating: 4, text: 'Reseña de prueba número ' + i } })).status, 201);
+  }
+  assert.strictEqual((await call('/reviews', { method: 'POST', ip: '10.0.0.60', body: { name: 'N6', rating: 4, text: 'Una más de las permitidas' } })).status, 429);
 });

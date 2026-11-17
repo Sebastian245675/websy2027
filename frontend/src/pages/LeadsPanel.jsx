@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Archive, ChartColumn, Download, FileText, Inbox, LayoutDashboard, LogOut, Menu, MessageCircle, MousePointerClick, RefreshCw, Search, Send, Target, Trash2, Users, X } from 'lucide-react';
+import { Archive, ChartColumn, Download, FileText, Inbox, LayoutDashboard, LogOut, Menu, MessageCircle, MousePointerClick, RefreshCw, Search, Send, Star, Target, Trash2, Users, X } from 'lucide-react';
+import { ReviewsAdmin } from '../components/ReviewsAdmin';
 import { panel } from '../lib/api';
 import { LeadPool } from '../components/LeadPool';
 import { OUTREACH_STATES, ProspectingCenter, attentionCount, queuedCount, useOutreach } from '../components/ProspectingCenter';
@@ -103,7 +104,7 @@ const Stat = ({ label, value, sub, highlight }) => (
 // Navegación de la barra lateral: [id, etiqueta, icono]
 const NAV = [
   { items: [['inicio', 'Inicio', LayoutDashboard]] },
-  { group: 'Entrantes', items: [['formularios', 'Formularios', FileText], ['whatsapp', 'Clics a WhatsApp', MousePointerClick]] },
+  { group: 'Entrantes', items: [['formularios', 'Formularios', FileText], ['whatsapp', 'Clics a WhatsApp', MousePointerClick], ['resenas', 'Reseñas', Star]] },
   { group: 'Prospección', items: [['p-clientes', 'Posibles clientes', Target], ['p-resumen', 'Resumen', ChartColumn], ['p-bandeja', 'Bandeja', Inbox], ['p-prospectos', 'Prospectos', Users], ['p-cola', 'Cola de envíos', Send]] },
   { group: 'Otros', items: [['archivo', 'Archivo', Archive]] },
 ];
@@ -111,6 +112,7 @@ const SECTIONS = {
   inicio: ['Inicio', 'Lo importante de la semana en un vistazo'],
   formularios: ['Formularios', 'Consultas que llegan desde los formularios del sitio'],
   whatsapp: ['Clics a WhatsApp', 'Conversaciones iniciadas desde los botones del sitio'],
+  resenas: ['Reseñas', 'Lo que dejan los clientes en /argentina: publicar, ocultar o borrar'],
   'p-clientes': ['Posibles clientes', 'Negocios a los que todavía no les escribimos y por qué les serviría Websy'],
   'p-resumen': ['Prospección', 'Campañas de WhatsApp y correo: envíos, respuestas y reuniones'],
   'p-bandeja': ['Bandeja', 'Conversaciones con prospectos y lo que respondió el agente de IA'],
@@ -435,6 +437,8 @@ const Dashboard = ({ onLogout }) => {
               </ul>
             </>
           )}
+
+          {section === 'resenas' && <ReviewsAdmin onError={setError} />}
 
           {section === 'p-clientes' && <LeadPool />}
           {section.startsWith('p-') && section !== 'p-clientes' && <ProspectingCenter view={section.slice(2)} onView={(v) => go(`p-${v}`)} outreach={outreach} />}

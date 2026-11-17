@@ -21,6 +21,12 @@ export const saveLead = (lead) => request('/leads', {
   body: { page: window.location.pathname, ...lead },
 });
 
+// Reseñas del sitio: se mandan pendientes y solo se ven las que se aprueban desde el panel
+export const reviews = {
+  list: () => request('/reviews'),
+  send: (review) => request('/reviews', { method: 'POST', body: { page: window.location.pathname, ...review } }),
+};
+
 // Clic a WhatsApp: no debe frenar la apertura de WhatsApp ni fallar si la API no responde.
 // sendBeacon sobrevive a que la pestaña cambie de página; va como text/plain porque un fetch con
 // keepalive y JSON necesita preflight, y varios navegadores no lo soportan (el clic se perdía).
@@ -48,6 +54,9 @@ export const panel = {
   outreach: () => request('/panel/outreach'),
   outreachMessages: (key) => request(`/panel/outreach/messages?key=${encodeURIComponent(key)}`),
   saveOutreachMessage: (key, mensaje, asunto) => request('/panel/outreach/message', { method: 'PUT', body: { key, mensaje, asunto } }),
+  reviews: () => request('/panel/reviews'),
+  updateReview: (id, status) => request(`/panel/reviews/${id}`, { method: 'PATCH', body: { status } }),
+  deleteReview: (id) => request(`/panel/reviews/${id}`, { method: 'DELETE' }),
   pool: () => request('/panel/pool'),
   updatePool: (id, changes) => request(`/panel/pool/${encodeURIComponent(id)}`, { method: 'PATCH', body: changes }),
 };
