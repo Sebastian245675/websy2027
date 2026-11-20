@@ -38,6 +38,8 @@ const buildCanonical = (url, pathname) => {
   return path ? `${SITE_URL}${path}` : `${SITE_URL}/`;
 };
 
+const PAGELESS_SECTIONS = new Set(['autores', 'lp']);
+
 const buildBreadcrumbs = (pathname, title) => {
   const segments = pathname.split('/').filter(Boolean);
   if (segments.length === 0) return null;
@@ -45,6 +47,8 @@ const buildBreadcrumbs = (pathname, title) => {
   const items = [{ name: 'Inicio', item: `${SITE_URL}/` }];
   segments.forEach((segment, i) => {
     const isLast = i === segments.length - 1;
+    // Secciones sin página propia: no se listan, para no mandar a Google a una URL que no existe
+    if (!isLast && PAGELESS_SECTIONS.has(segment)) return;
     const name = isLast && i > 0
       ? title.split('|')[0].trim()
       : SECTION_NAMES[segment] || segment.replace(/-/g, ' ');
