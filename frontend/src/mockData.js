@@ -234,28 +234,6 @@ export const portfolio = [
     year: "2026"
   },
   {
-    id: 'semillamind',
-    title: "SemillaMind Psicoterapia",
-    description: "Sitio web informativo para un consultorio de psicología en Bogotá. Presenta consultas presenciales y virtuales, al equipo terapéutico y accesos directos para agendar, con diseño adaptable y optimización de imágenes.",
-    image: "/mv-portfolio/semillamind.png",
-    url: "https://semillamind.com.co/",
-    category: "Salud mental y bienestar · Bogotá",
-    technologies: ["React", "Vite", "Tailwind CSS", "SEO On-Page", "Accesibilidad"],
-    client: "SemillaMind",
-    year: "2026"
-  },
-  {
-    id: 'entre-relatos-psicoterapia',
-    title: "Entre Relatos Psicoterapia",
-    description: "Sitio web para un consultorio de psicoterapia en Bogotá. Incluye un selector de sedes —La Castellana, Galerías o modalidad virtual— y contacto directo por WhatsApp para agendar la primera cita.",
-    image: "/mv-portfolio/entre-relatos.png",
-    url: "https://entrerelatospsicologia.com/",
-    category: "Salud mental y psicoterapia · Bogotá",
-    technologies: ["React", "Vite", "Tailwind CSS", "SEO On-Page", "Accesibilidad"],
-    client: "Entre Relatos",
-    year: "2026"
-  },
-  {
     id: 'farmadesk',
     title: "FarmaDesk Pharmacy System",
     description: "Sistema web para farmacias con punto de venta, control de inventario de medicamentos, alertas por stock bajo y reportes diarios. Incluye backend en Node.js y Express y base de datos PostgreSQL.",
@@ -286,17 +264,6 @@ export const portfolio = [
     category: "Servicios jurídicos · Derecho penal",
     technologies: ["React", "Next.js", "Tailwind CSS", "SEO Local", "Schema.org"],
     client: "LM & Asociados",
-    year: "2026"
-  },
-  {
-    id: 'dra-nancy-melo',
-    title: "Dra. Nancy Aseneth Melo — Despacho Jurídico",
-    description: "Sitio web para un despacho jurídico en Cali con asesoría presencial y virtual. Expone sus servicios en derecho penal, justicia penal militar y derechos humanos, e incorpora un canal directo de consulta.",
-    image: "/mv-portfolio/nancy-melo.png",
-    url: "https://abogadanancymelo.com/",
-    category: "Servicios jurídicos · Cali",
-    technologies: ["React", "Next.js", "Tailwind CSS", "SEO Local", "WhatsApp"],
-    client: "Dra. Nancy Melo",
     year: "2026"
   },
   {

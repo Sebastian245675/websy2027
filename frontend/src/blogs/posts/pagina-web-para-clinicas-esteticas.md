@@ -77,7 +77,7 @@ En pesos, un sitio parte de unos COP 3.000.000 o MXN 15.000. El precio final dep
 
 ## Lo que ya hicimos en salud
 
-Todavía no tenemos una clínica estética en el portafolio. Sí hicimos webs de salud con el mismo desafío, que el primer contacto sea simple y privado: [Entre Relatos](/casos-de-exito/pagina-web-psicologos-bogota-entre-relatos), un consultorio de psicología con dos sedes en Bogotá, y [SemillaMind](/casos-de-exito/pagina-web-psicologa-bogota-semillamind), un consultorio de psicología de Bogotá con terapia presencial y online. Tienes también la guía de [página web para médicos y clínicas](/blog/pagina-web-para-medicos-clinicas-consultorios-turnos-online).
+Todavía no tenemos una clínica estética en el portafolio. Sí hicimos una web de salud con el mismo desafío, que el primer contacto sea simple y privado: la web de la [psicóloga Estefany Lozano](/casos-de-exito/pagina-web-psicologa-online-estefany-lozano), que atiende online a pacientes de distintos países y agenda por WhatsApp. Tienes también la guía de [página web para médicos y clínicas](/blog/pagina-web-para-medicos-clinicas-consultorios-turnos-online).
 
 ## Errores comunes
 

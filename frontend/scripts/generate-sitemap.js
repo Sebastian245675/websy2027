@@ -249,10 +249,10 @@ const llms = `# Websy
 
 - [Desarrollo web en Argentina](${SITE_URL}/argentina): páginas, tiendas, sistemas y automatizaciones para empresas argentinas, con precios en pesos y casos reales.
 - [SEO en Argentina](${SITE_URL}/argentina/seo): plan mensual de posicionamiento, mejoras técnicas y contenido por USD 200 al mes, con referencia en pesos argentinos.
-- [Desarrollo web en Colombia](${SITE_URL}/colombia): proyectos en Bogotá, Cali y Manizales; precios orientativos en pesos colombianos y pago desde Colombia.
+- [Desarrollo web en Colombia](${SITE_URL}/colombia): proyectos en Bogotá y Manizales; precios orientativos en pesos colombianos y pago desde Colombia.
 - [SEO en Colombia](${SITE_URL}/colombia/seo): plan mensual de posicionamiento nacional y local, con seguimiento e informe de resultados.
 - [Diseño y desarrollo web en Bogotá](${SITE_URL}/colombia/desarrollo-web-bogota): servicio remoto, precios en COP y cuatro casos reales publicados en Bogotá.
-- [Desarrollo web en Cali](${SITE_URL}/colombia/desarrollo-web-cali): páginas web, tiendas virtuales y automatización de marketing y WhatsApp para empresas de Cali; caso real de un despacho de abogados penalistas de Cali.
+- [Desarrollo web en Cali](${SITE_URL}/colombia/desarrollo-web-cali): páginas web, tiendas virtuales y automatización de marketing y WhatsApp para empresas de Cali.
 - [Automatización de procesos en Colombia](${SITE_URL}/colombia/automatizacion-procesos): WhatsApp, CRM, n8n, agentes de IA e integraciones para empresas colombianas.
 - [Desarrollo web en México](${SITE_URL}/mexico): webs, tiendas en línea y sistemas multisucursal; precios orientativos en pesos mexicanos y pago desde México.
 - [SEO en México](${SITE_URL}/mexico/seo): plan mensual para mejorar búsquedas comerciales en México y sus ciudades.

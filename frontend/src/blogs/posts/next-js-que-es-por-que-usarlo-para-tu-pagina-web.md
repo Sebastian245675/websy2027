@@ -22,7 +22,7 @@ En un mismo sitio se combinan: la página de servicios estática, el carrito en 
 
 ### SEO
 
-El contenido está en el HTML, y Next.js facilita definir títulos, descripciones, canonical, datos estructurados y sitemap por página. Por ejemplo, la web de la [Dra. Nancy Melo](/casos-de-exito/pagina-web-abogada-penalista-cali-nancy-melo), hecha con Next.js, declara el perfil profesional y sus credenciales en datos estructurados.
+El contenido está en el HTML, y Next.js facilita definir títulos, descripciones, canonical, datos estructurados y sitemap por página. Por ejemplo, la web de la [psicóloga Estefany Lozano](/casos-de-exito/pagina-web-psicologa-online-estefany-lozano), hecha con Next.js, declara a la profesional, el idioma de atención y los países que cubre en datos estructurados.
 
 ### Velocidad
 

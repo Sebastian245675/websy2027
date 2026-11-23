@@ -41,7 +41,7 @@ En esta guía verás la diferencia entre UX y UI con ejemplos, el proceso de dis
 | Retroalimentación | El usuario sabe qué pasó después de cada acción |
 | Accesibilidad | Contraste, tamaños y navegación usables por todas las personas |
 
-Un ejemplo real: en la web de [Entre Relatos](/casos-de-exito/pagina-web-psicologos-bogota-entre-relatos), con dos sedes y atención virtual, el primer paso del recorrido es elegir la sede, porque es la primera duda del paciente.
+Un ejemplo real: en la web de [LM & Asociados](/casos-de-exito/pagina-web-abogados-penalistas-bogota-lm-asociados), una firma de derecho penal, el título principal es la pregunta que se hace quien tiene un proceso abierto y el WhatsApp está a un toque en toda la página, porque esa consulta es urgente.
 
 ## Señales de problemas de UX en tu web
 

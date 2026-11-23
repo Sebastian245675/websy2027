@@ -16,10 +16,10 @@
 
 - [Desarrollo web en Argentina](https://www.websysrl.com/argentina): páginas, tiendas, sistemas y automatizaciones para empresas argentinas, con precios en pesos y casos reales.
 - [SEO en Argentina](https://www.websysrl.com/argentina/seo): plan mensual de posicionamiento, mejoras técnicas y contenido por USD 200 al mes, con referencia en pesos argentinos.
-- [Desarrollo web en Colombia](https://www.websysrl.com/colombia): proyectos en Bogotá, Cali y Manizales; precios orientativos en pesos colombianos y pago desde Colombia.
+- [Desarrollo web en Colombia](https://www.websysrl.com/colombia): proyectos en Bogotá y Manizales; precios orientativos en pesos colombianos y pago desde Colombia.
 - [SEO en Colombia](https://www.websysrl.com/colombia/seo): plan mensual de posicionamiento nacional y local, con seguimiento e informe de resultados.
 - [Diseño y desarrollo web en Bogotá](https://www.websysrl.com/colombia/desarrollo-web-bogota): servicio remoto, precios en COP y cuatro casos reales publicados en Bogotá.
-- [Desarrollo web en Cali](https://www.websysrl.com/colombia/desarrollo-web-cali): páginas web, tiendas virtuales y automatización de marketing y WhatsApp para empresas de Cali; caso real de un despacho de abogados penalistas de Cali.
+- [Desarrollo web en Cali](https://www.websysrl.com/colombia/desarrollo-web-cali): páginas web, tiendas virtuales y automatización de marketing y WhatsApp para empresas de Cali.
 - [Automatización de procesos en Colombia](https://www.websysrl.com/colombia/automatizacion-procesos): WhatsApp, CRM, n8n, agentes de IA e integraciones para empresas colombianas.
 - [Desarrollo web en México](https://www.websysrl.com/mexico): webs, tiendas en línea y sistemas multisucursal; precios orientativos en pesos mexicanos y pago desde México.
 - [SEO en México](https://www.websysrl.com/mexico/seo): plan mensual para mejorar búsquedas comerciales en México y sus ciudades.
@@ -45,7 +45,7 @@
 ## Ejemplos por rubro
 
 - [Páginas web para abogados: ejemplos reales y qué tiene que tener la tuya](https://www.websysrl.com/casos-de-exito/paginas-web-para-abogados)
-- [Páginas web para psicólogos: ejemplos reales de consultorios](https://www.websysrl.com/casos-de-exito/paginas-web-para-psicologos)
+- [Páginas web para psicólogos: un caso real y qué tiene que tener la tuya](https://www.websysrl.com/casos-de-exito/paginas-web-para-psicologos)
 - [Ejemplos de tiendas online hechas a medida](https://www.websysrl.com/casos-de-exito/ejemplos-de-tiendas-online)
 - [Ejemplos de sistemas de gestión a medida para pymes](https://www.websysrl.com/casos-de-exito/ejemplos-de-sistemas-de-gestion-a-medida)
 - [Páginas web para empresas e industria: ejemplos reales](https://www.websysrl.com/casos-de-exito/paginas-web-para-empresas)
@@ -55,10 +55,7 @@
 ## Casos de éxito
 
 - [Página web para abogados penalistas en Bogotá: LM & Asociados](https://www.websysrl.com/casos-de-exito/pagina-web-abogados-penalistas-bogota-lm-asociados): Sitio para una firma de derecho penal con sede en Bogotá y cobertura nacional.
-- [Página web para abogada penalista en Cali: Dra. Nancy Melo](https://www.websysrl.com/casos-de-exito/pagina-web-abogada-penalista-cali-nancy-melo): Sitio para un despacho jurídico de Cali con asesoría presencial y virtual en derecho penal, justicia penal militar y derechos humanos.
 - [Página web para estudio jurídico en Salta: Ruarte & Ruarte](https://www.websysrl.com/casos-de-exito/pagina-web-estudio-juridico-salta-ruarte): Landing page para un estudio de abogados de Salta que trabaja derecho penal y derecho canábico.
-- [Página web para consultorio de psicoterapia en Bogotá: Entre Relatos](https://www.websysrl.com/casos-de-exito/pagina-web-psicologos-bogota-entre-relatos): Sitio para un consultorio de psicoterapia con dos sedes en Bogotá (La Castellana y Galerías) y modalidad virtual, para adolescentes, adultos y parejas.
-- [Página web para psicóloga en Bogotá: SemillaMind](https://www.websysrl.com/casos-de-exito/pagina-web-psicologa-bogota-semillamind): Sitio informativo para un consultorio de psicología en Bogotá con terapia presencial y online.
 - [Página web para psicóloga online internacional: Estefany Lozano](https://www.websysrl.com/casos-de-exito/pagina-web-psicologa-online-estefany-lozano): Plataforma para atención psicoterapéutica por videollamada dirigida a hispanohablantes de cualquier país.
 - [Tienda online para perfumería y regalería: VISFUM](https://www.websysrl.com/casos-de-exito/tienda-online-perfumeria-visfum): Tienda online de perfumería, regalería y productos para el hogar, hecha a medida.
 - [Tienda online con panel de administración: Regala Algo](https://www.websysrl.com/casos-de-exito/tienda-online-regalos-panel-admin-regala-algo): Tienda online de regalería y electrodomésticos con un panel administrativo propio para gestionar inventario, pedidos y análisis de ventas.

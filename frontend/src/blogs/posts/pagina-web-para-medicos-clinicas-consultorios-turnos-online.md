@@ -22,7 +22,7 @@ En esta guía verás las secciones imprescindibles, cómo integrar turnos online
 | Sedes y horarios | Dirección, mapa, cómo llegar, estacionamiento |
 | Preguntas frecuentes | Preparación para estudios, documentación, cancelaciones |
 
-Un ejemplo real: [Entre Relatos](/casos-de-exito/pagina-web-psicologos-bogota-entre-relatos), un consultorio de psicoterapia con dos sedes en Bogotá y atención virtual, ordena la web alrededor de la elección de sede, la primera duda del paciente.
+Un ejemplo real: la web de la [psicóloga Estefany Lozano](/casos-de-exito/pagina-web-psicologa-online-estefany-lozano), que atiende online, deja claro desde el inicio que la atención es en español y a distancia, y lleva al agendamiento por WhatsApp, que funciona igual desde cualquier país.
 
 ## Turnos online
 

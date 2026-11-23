@@ -30,7 +30,7 @@ Evita el lenguaje técnico y las frases genéricas ("excelencia jurídica", "sol
 
 - **Una página por área y ciudad**: "Abogado laboral en Salta", "Abogado de familia en Cali".
 - **Perfil de empresa en Google** con la categoría correcta y reseñas.
-- **Datos estructurados** de tipo LegalService o del abogado como persona, con dirección, horario y zona de atención. La web de la [Dra. Nancy Melo](/casos-de-exito/pagina-web-abogada-penalista-cali-nancy-melo), en Cali, declara sus credenciales profesionales en datos estructurados.
+- **Datos estructurados** de tipo LegalService o del abogado como persona, con dirección, horario y zona de atención. La web de [LM & Asociados](/casos-de-exito/pagina-web-abogados-penalistas-bogota-lm-asociados), en Bogotá, declara cada servicio de la firma en datos estructurados.
 - **Contenido que responde dudas**: "cuánto cobra un abogado laboral", "qué hacer si me despiden".
 
 Ver [SEO local](/blog/como-posicionar-mi-negocio-local-en-google-seo-local).

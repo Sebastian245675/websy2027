@@ -43,7 +43,7 @@ const base = {
   },
   juridicos: {
     rubro: 'Estudios jurídicos',
-    caseIds: [14, 'lm-asociados-abogados-penalistas', 'dra-nancy-melo'],
+    caseIds: [14, 'lm-asociados-abogados-penalistas'],
   },
   infoproductores: {
     rubro: 'Infoproductores',

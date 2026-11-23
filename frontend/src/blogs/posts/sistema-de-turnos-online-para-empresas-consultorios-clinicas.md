@@ -33,7 +33,7 @@ En esta guía verás qué funciones debe tener un sistema de turnos, cómo elegi
 - **En la web**: un botón de "Reservar turno" visible en todas las páginas, que abre la agenda con los horarios disponibles. Si el sistema está integrado en tu sitio, Google puede indexar los servicios y las sedes.
 - **Por WhatsApp**: un asistente que ofrece los horarios disponibles y confirma la reserva en la misma agenda. Ver [cómo automatizar WhatsApp Business](/blog/automatizacion-whatsapp-negocios-guia-completa).
 
-Un ejemplo real: para [Entre Relatos](/casos-de-exito/pagina-web-psicologos-bogota-entre-relatos), un consultorio de psicoterapia con dos sedes en Bogotá y atención virtual, la web empieza por elegir la sede y lleva a la primera cita por WhatsApp.
+Un ejemplo real: en la web de la [psicóloga Estefany Lozano](/casos-de-exito/pagina-web-psicologa-online-estefany-lozano), que atiende online a pacientes de distintos países, la primera cita se agenda por WhatsApp, que funciona igual desde cualquier lugar.
 
 ## Cómo reducir las ausencias
 

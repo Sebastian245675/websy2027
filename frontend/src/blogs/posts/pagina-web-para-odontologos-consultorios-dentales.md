@@ -20,7 +20,7 @@ La web tiene que servir a los tres: contacto inmediato para el primero, resultad
 
 ### El profesional al frente
 
-Nombre, foto, formación, especialidades y años de experiencia. En salud, el paciente elige a la persona. Declarar esa información en datos estructurados ayuda a que Google y los asistentes de IA sepan quién es el profesional; lo hicimos así en la web de una [abogada de Cali](/casos-de-exito/pagina-web-abogada-penalista-cali-nancy-melo), y el principio es el mismo.
+Nombre, foto, formación, especialidades y años de experiencia. En salud, el paciente elige a la persona. Declarar esa información en datos estructurados ayuda a que Google y los asistentes de IA sepan quién es el profesional; lo hicimos así en la web de la [psicóloga Estefany Lozano](/casos-de-exito/pagina-web-psicologa-online-estefany-lozano), y el principio es el mismo.
 
 ### Fotos reales, con consentimiento
 
@@ -56,10 +56,9 @@ En pesos, una web parte de unos COP 3.000.000 o MXN 15.000. El precio final depe
 
 ## Lo que ya hicimos en salud
 
-Todavía no tenemos un consultorio dental en el portafolio. Sí hicimos webs de salud con el mismo desafío: que el primer contacto sea simple y privado.
+Todavía no tenemos un consultorio dental en el portafolio. Sí hicimos una web de salud con el mismo desafío: que el primer contacto sea simple y privado.
 
-- **[Entre Relatos](/casos-de-exito/pagina-web-psicologos-bogota-entre-relatos)**, consultorio de psicología con dos sedes en Bogotá.
-- **[SemillaMind](/casos-de-exito/pagina-web-psicologa-bogota-semillamind)**, consultorio de psicología de Bogotá con terapia presencial y online.
+- **[Psicóloga Estefany Lozano](/casos-de-exito/pagina-web-psicologa-online-estefany-lozano)**, terapia online para hispanohablantes de cualquier país, con agenda por WhatsApp.
 
 Puedes ver más en [páginas web para psicólogos](/casos-de-exito/paginas-web-para-psicologos) y en la guía de [página web para médicos y clínicas](/blog/pagina-web-para-medicos-clinicas-consultorios-turnos-online).
 

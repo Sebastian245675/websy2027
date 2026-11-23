@@ -55,7 +55,7 @@ Tailwind genera una hoja de estilos con solo las clases que se usan, por lo que 
 | Landing muy liviana o sitio estático simple | CSS puro o Tailwind |
 | Equipo que ya domina Bootstrap y un proyecto estándar | Bootstrap |
 
-En Websy usamos Tailwind CSS en la mayoría de los proyectos, como [Remix Producciones](/casos-de-exito/pagina-web-productora-eventos-manizales-remix) o [SemillaMind](/casos-de-exito/pagina-web-psicologa-bogota-semillamind), y CSS puro en sitios muy livianos, como la web de [ABO Colombia](/casos-de-exito/pagina-web-fabrica-forros-industriales-abo-colombia).
+En Websy usamos Tailwind CSS en la mayoría de los proyectos, como [Remix Producciones](/casos-de-exito/pagina-web-productora-eventos-manizales-remix) o [LM & Asociados](/casos-de-exito/pagina-web-abogados-penalistas-bogota-lm-asociados), y CSS puro en sitios muy livianos, como la web de [ABO Colombia](/casos-de-exito/pagina-web-fabrica-forros-industriales-abo-colombia).
 
 ## Errores comunes
 

@@ -48,7 +48,7 @@ Es la principal ventaja de WordPress: su panel es conocido y permite publicar si
 | Web con funciones a medida (cotizador, área de clientes) | Next.js |
 | Equipo sin acceso a desarrolladores para mantenimiento | WordPress con hosting administrado |
 
-En Websy desarrollamos con React y Next.js: por ejemplo, las webs de [LM & Asociados](/casos-de-exito/pagina-web-abogados-penalistas-bogota-lm-asociados) y [Entre Relatos](/casos-de-exito/pagina-web-psicologos-bogota-entre-relatos) entregan el contenido en el HTML con datos estructurados.
+En Websy desarrollamos con React y Next.js: por ejemplo, las webs de [LM & Asociados](/casos-de-exito/pagina-web-abogados-penalistas-bogota-lm-asociados) y la de la [psicóloga Estefany Lozano](/casos-de-exito/pagina-web-psicologa-online-estefany-lozano) entregan el contenido en el HTML con datos estructurados.
 
 ## Migrar de WordPress a Next.js
 
