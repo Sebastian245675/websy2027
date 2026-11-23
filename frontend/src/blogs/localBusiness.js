@@ -88,7 +88,7 @@ export const localBusinessPosts = [
     slug: 'desarrollo-software-colombia-empresas-bogota-medellin',
     title: 'Desarrollo de software y páginas web en Colombia: Bogotá, Medellín y Cali',
     seoTitle: 'Desarrollo de software en Colombia: Bogotá, Medellín y Cali',
-    seoDescription: 'Cómo contratar desarrollo web en Colombia, precios en pesos colombianos, PSE, facturación DIAN y casos reales en Bogotá, Cali y Manizales.',
+    seoDescription: 'Cómo contratar desarrollo web en Colombia, precios en pesos colombianos, PSE, facturación DIAN y casos reales en Bogotá.',
     seoKeywords: 'desarrollo software colombia, empresa desarrollo web bogota, desarrollo web medellin, programadores colombia, agencia web colombia',
     category: 'Desarrollo Web',
     date: '2026-07-27',

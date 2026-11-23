@@ -35,7 +35,7 @@ export const countryPages = [
     rubros: [
       { title: 'Empresas de servicios', text: 'Una página por servicio, casos reales y contacto inmediato para competir en búsquedas comerciales de alcance nacional o local.', to: '/casos-de-exito/paginas-web-para-empresas', link: 'Webs para empresas' },
       { title: 'Estudios jurídicos y profesionales', text: 'Sitios que transmiten confianza, explican cada especialidad y facilitan una consulta urgente desde el celular.', to: '/casos-de-exito/paginas-web-para-abogados', link: 'Webs para profesionales' },
-      { title: 'Hoteles y turismo', text: 'Webs con reservas directas, galería, ubicación y SEO local para depender menos de plataformas con comisión.', to: '/casos-de-exito/paginas-web-para-hoteles', link: 'Webs para turismo' },
+      { title: 'Hoteles y turismo', text: 'Webs con reservas directas, galería, ubicación y SEO local para depender menos de plataformas con comisión.', to: '/blog/pagina-web-para-hoteles-posadas-alojamientos-reservas-online', link: 'Webs para turismo' },
       { title: 'Pymes con operación propia', text: 'Sistemas para stock, ventas, clientes y reportes conectados con la web o la tienda online.', to: '/servicios/sistemas-gestion', link: 'Sistemas de gestión' },
     ],
     faq: [
@@ -57,14 +57,14 @@ export const countryPages = [
     // Texto que se busca en caseStudies[].location
     caseMatch: 'Colombia',
     seoTitle: 'Diseño y Desarrollo Web en Colombia | Agencia Websy',
-    seoDescription: 'Diseño y desarrollo web en Colombia para empresas: páginas desde COP 3.000.000, tiendas y sistemas. Casos reales en Bogotá y Manizales.',
+    seoDescription: 'Diseño y desarrollo web en Colombia para empresas: páginas desde COP 3.000.000, tiendas y sistemas. Casos reales en Bogotá.',
     h1: ['Agencia de diseño y desarrollo web para empresas en', 'Colombia'],
-    lead: 'Diseñamos y desarrollamos páginas web, tiendas virtuales, sistemas y automatizaciones para empresas y profesionales de Colombia. Ya trabajamos con una firma de abogados, una fábrica, un glamping, una productora de eventos y un marketplace de repuestos, en Bogotá, Manizales y otras ciudades, todo a distancia y con precio cerrado antes de empezar.',
-    highlights: ['Páginas web desde COP 3.000.000', '5 proyectos publicados en Colombia', 'Videollamadas en horario de Colombia', 'Pago en 3 partes'],
-    pill: 'Websy en Colombia: casos en Bogotá y Manizales',
+    lead: 'Diseñamos y desarrollamos páginas web, tiendas virtuales, sistemas y automatizaciones para empresas y profesionales de Colombia. Ya trabajamos con una firma de abogados, una fábrica de protección industrial y un marketplace de repuestos, todo a distancia y con precio cerrado antes de empezar.',
+    highlights: ['Páginas web desde COP 3.000.000', '3 proyectos publicados en Colombia', 'Videollamadas en horario de Colombia', 'Pago en 3 partes'],
+    pill: 'Websy en Colombia: casos reales en Bogotá',
     answer: [
       'Si buscas una empresa de desarrollo web en Colombia, necesitas algo más que un diseño atractivo: la página debe cargar rápido en el celular, explicar en segundos qué haces, permitir escribirte por WhatsApp y aparecer cuando buscan tu servicio en tu ciudad. En Websy hacemos eso desde COP 3.000.000, con el precio y el plazo por escrito antes de empezar.',
-      'Somos una agencia de Salta, Argentina, y trabajamos a distancia. Colombia es hoy el país desde donde más empresas nos encuentran, y ya publicamos cinco proyectos para clientes colombianos: una firma de abogados penalistas, una fábrica de protección industrial, un hotel glamping, una productora de eventos y un marketplace de repuestos para carros.',
+      'Somos una agencia de Salta, Argentina, y trabajamos a distancia. Colombia es hoy el país desde donde más empresas nos encuentran, y ya publicamos tres proyectos para clientes colombianos: una firma de abogados penalistas, una fábrica de protección industrial y un marketplace de repuestos para carros.',
     ],
     schedule: 'Argentina va 2 horas adelante de Colombia. Agendamos las videollamadas entre las 8 y las 16 h de Colombia, y por WhatsApp respondemos durante todo el día hábil.',
     payment: 'Mostramos los precios en pesos colombianos con su referencia en USD. Se paga en 3 partes (30% al empezar, 30% a mitad del proyecto y 40% en la entrega) con Dólar App o Binance.',
@@ -73,11 +73,10 @@ export const countryPages = [
     rubros: [
       { title: 'Abogados', text: 'En derecho penal la consulta es urgente: la web de LM & Asociados (Bogotá) pone el WhatsApp a un toque y explica cada servicio por separado para que posicione por su búsqueda.', to: '/casos-de-exito/paginas-web-para-abogados', link: 'Webs para abogados' },
       { title: 'Tiendas y marketplaces', text: 'R. Repuestos 24/7, de Bogotá: marketplace de repuestos para carros con búsqueda por marca, modelo y año, tiendas verificadas y pago protegido hasta la entrega.', to: '/casos-de-exito/ejemplos-de-tiendas-online', link: 'Ejemplos de tiendas online' },
-      { title: 'Hoteles y turismo', text: 'Mágica Luna, un glamping de alta gama: reservas directas por WhatsApp para no pagar comisión a las plataformas, y valoraciones visibles en Google.', to: '/casos-de-exito/paginas-web-para-hoteles', link: 'Webs para hoteles' },
-      { title: 'Industria y servicios', text: 'ABO Colombia (forros y protección industrial) y Remix Producciones (eventos en Manizales): una web clara por servicio y el pedido de cotización a un toque.', to: '/casos-de-exito/paginas-web-para-empresas', link: 'Webs para empresas' },
+      { title: 'Industria y servicios', text: 'ABO Colombia, fábrica de forros y protección industrial: una web clara por línea de producto y el pedido de cotización a un toque.', to: '/casos-de-exito/paginas-web-para-empresas', link: 'Webs para empresas' },
     ],
     faq: [
-      { q: '¿Trabajan con empresas de Colombia sin tener oficina allá?', a: 'Sí. Trabajamos a distancia por videollamada y WhatsApp, y ya publicamos cinco proyectos para clientes de Bogotá, Manizales y otras zonas de Colombia. Te mostramos el diseño antes de programar y cada avance en un enlace de prueba.' },
+      { q: '¿Trabajan con empresas de Colombia sin tener oficina allá?', a: 'Sí. Trabajamos a distancia por videollamada y WhatsApp, y ya publicamos tres proyectos para clientes de Colombia. Te mostramos el diseño antes de programar y cada avance en un enlace de prueba.' },
       { q: '¿Cuánto cuesta una página web para una empresa en Colombia?', a: 'Con Websy, una landing page o una página institucional arranca en COP 3.000.000; una tienda virtual cuesta entre COP 6.800.000 y 13.300.000, y un sistema de gestión entre COP 15.200.000 y 30.400.000. Son valores orientativos y el precio queda cerrado por escrito antes de empezar.' },
       { q: '¿Cómo pago desde Colombia?', a: 'En 3 partes: 30% al empezar, 30% a mitad del proyecto y 40% en la entrega, con Dólar App o Binance.' },
       { q: '¿En qué horario me atienden?', a: 'Argentina va 2 horas adelante de Colombia. Las videollamadas se agendan entre las 8 y las 16 h de Colombia.' },

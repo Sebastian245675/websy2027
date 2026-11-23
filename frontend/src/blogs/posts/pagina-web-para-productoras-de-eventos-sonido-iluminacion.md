@@ -1,6 +1,6 @@
 **Una página web para una productora de eventos tiene que mostrar cada servicio en su propia página (sonido, iluminación, pantallas LED, tarimas, logística), las ciudades y regiones donde trabaja, fotos y videos de eventos reales, el tipo de eventos que cubre (corporativos, conciertos, bodas, ferias) y una cotización rápida por WhatsApp con la fecha y el lugar del evento.** Con Websy una web así arranca en USD 800 (unos COP 3.000.000 o MXN 15.000).
 
-En esta guía te explicamos cómo busca un cliente a una productora, qué tiene que tener la web y cómo lo resolvimos para una productora con más de 20 años de trayectoria en el Eje Cafetero.
+En esta guía te explicamos cómo busca un cliente a una productora, qué tiene que tener la web y cómo la armamos en Websy.
 
 ## Cómo busca un cliente a una productora
 
@@ -39,11 +39,11 @@ Un formulario o un WhatsApp con el mensaje ya armado que pida la fecha, la ciuda
 
 Años de experiencia, eventos realizados y clientes, con su permiso. Para un evento grande, el cliente necesita saber que no va a fallar.
 
-## El caso de Remix Producciones
+## Cómo la armamos en Websy
 
-[Remix Producciones](/casos-de-exito/pagina-web-productora-eventos-manizales-remix) es una productora con más de 20 años de experiencia en Manizales y el Eje Cafetero. El desafío: veinte años de trayectoria no sirven si Google no sabe qué ofrece la empresa ni dónde. La web lo resuelve así:
+Años de trayectoria no sirven si Google no sabe qué ofrece la empresa ni dónde. Por eso la web de una productora la armamos así:
 
-- **Título principal con la búsqueda local**: producción de eventos en Manizales.
+- **Título principal con la búsqueda local**: por ejemplo, producción de eventos en tu ciudad.
 - **Servicios separados**: sonido, iluminación, pantallas LED y logística.
 - **Contacto por WhatsApp.**
 - **Catálogo de servicios y cobertura declarados en Schema.org**: la organización con su dirección y coordenadas, la cobertura por ciudad, departamento y país, y un catálogo con cada servicio. Es la información que Google usa para mostrar a la empresa en búsquedas locales.

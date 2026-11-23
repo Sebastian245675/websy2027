@@ -228,7 +228,7 @@ export const webDevelopmentPosts = [
     slug: 'pagina-web-para-productoras-de-eventos-sonido-iluminacion',
     title: 'Página web para productoras de eventos: sonido, iluminación y pantallas LED',
     seoTitle: 'Página web para productoras de eventos',
-    seoDescription: 'Qué necesita la web de una productora de eventos: una página por servicio, la ciudad en el título, fotos de eventos reales y un caso en Manizales.',
+    seoDescription: 'Qué necesita la web de una productora de eventos: una página por servicio, la ciudad en el título, fotos de eventos reales y la cotización por WhatsApp.',
     seoKeywords: 'pagina web para productora de eventos, pagina web empresa de sonido, alquiler de sonido y luces pagina web, diseño web eventos',
     category: 'Industrias & Tech',
     date: '2026-11-07',

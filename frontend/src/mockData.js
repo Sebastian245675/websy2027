@@ -190,28 +190,6 @@ export const portfolio = [
     year: "2026"
   },
   {
-    id: 12,
-    title: "Remix Producciones",
-    description: "Plataforma oficial para una empresa líder con más de 20 años de experiencia en Manizales y el Eje Cafetero. El sitio destaca sus servicios de sonido profesional, pantallas LED y logística de espectáculos mediante un diseño inmersivo y enfocado en SEO local.",
-    image: "/Captura-de-pantalla-2026-03-22-222545.webp",
-    url: "https://remixproducciones.com.co/",
-    category: "Sitio Web Corporativo",
-    technologies: ["React", "Vite", "Tailwind CSS", "SEO", "JSON-LD"],
-    client: "Remix Producciones",
-    year: "2026"
-  },
-  {
-    id: 13,
-    title: "Mágica Luna",
-    description: "Sitio web oficial para un hotel glamping de alta gama. Enfocado en la optimización SEO y una experiencia de usuario inmersiva que refleja el branding del lugar.",
-    image: "/Captura-de-pantalla-2026-03-22-223054.webp",
-    url: "https://hotelglampingmagicaluna.com.co/",
-    category: "Web Comercial",
-    technologies: ["Vite", "React", "Shadcn UI", "TypeScript", "Bun"],
-    client: "Mágica Luna",
-    year: "2025"
-  },
-  {
     id: 14,
     title: "Estudio Ruarte",
     description: "Landing page profesional para firma de abogados. Diseño enfocado en la conversión y presentación de servicios legales.",

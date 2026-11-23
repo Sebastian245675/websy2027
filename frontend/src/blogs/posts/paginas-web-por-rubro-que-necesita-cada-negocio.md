@@ -40,12 +40,11 @@ Esta guía resume qué necesita la web de cada tipo de negocio y enlaza a la gu�
 
 ## Ejemplos reales por rubro
 
-En Websy hicimos webs para estudios jurídicos en Salta, Bogotá y Cali, consultorios de psicología, una tienda para una veterinaria, un glamping, una plataforma inmobiliaria, empresas industriales y de servicios. Puedes verlos agrupados por rubro:
+En Websy hicimos webs para estudios jurídicos en Salta y Bogotá, una psicóloga que atiende online, una tienda para una veterinaria, una plataforma inmobiliaria, empresas industriales y de servicios. Puedes verlos agrupados por rubro:
 
 - [Páginas web para abogados: ejemplos reales](/casos-de-exito/paginas-web-para-abogados)
 - [Páginas web para psicólogos: ejemplos reales](/casos-de-exito/paginas-web-para-psicologos)
 - [Ejemplos de tiendas online](/casos-de-exito/ejemplos-de-tiendas-online)
-- [Páginas web para hoteles](/casos-de-exito/paginas-web-para-hoteles)
 - [Páginas web para inmobiliarias y arquitectos](/casos-de-exito/paginas-web-para-inmobiliarias)
 - [Páginas web para empresas e industria](/casos-de-exito/paginas-web-para-empresas)
 - [Sistemas de gestión a medida](/casos-de-exito/ejemplos-de-sistemas-de-gestion-a-medida)

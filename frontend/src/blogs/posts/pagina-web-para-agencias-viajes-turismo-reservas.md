@@ -66,7 +66,7 @@ Ver [integrar Mercado Pago o Stripe](/blog/integrar-mercadopago-stripe-tienda-on
 - Datos estructurados de tipo TravelAgency y de producto o evento para salidas con fecha.
 - Perfil de empresa en Google con reseñas.
 
-Mira los [ejemplos de páginas web para turismo](/casos-de-exito/paginas-web-para-hoteles) y la guía de [SEO local](/blog/como-posicionar-mi-negocio-local-en-google-seo-local).
+Mira la guía de [página web para hoteles y alojamientos](/blog/pagina-web-para-hoteles-posadas-alojamientos-reservas-online) y la guía de [SEO local](/blog/como-posicionar-mi-negocio-local-en-google-seo-local).
 
 ## Cuánto cuesta
 

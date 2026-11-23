@@ -26,7 +26,7 @@ export const seoCountryPages = {
     description: 'Plan de posicionamiento SEO en Colombia por USD 200 al mes: seguimiento técnico, contenido, SEO local e informe mensual para ganar búsquedas comerciales.',
     h1: 'Plan mensual de SEO en Colombia',
     lead: 'Mejoramos tu presencia para búsquedas comerciales en Colombia y para las ciudades donde realmente atiendes. La estrategia combina técnica, páginas por servicio y contenido útil sin crear páginas repetidas.',
-    proof: 'Ya publicamos proyectos para empresas de Bogotá, Cali y Manizales. Esa experiencia permite trabajar con casos reales, lenguaje local y páginas que responden búsquedas concretas.',
+    proof: 'Ya publicamos proyectos para empresas de Bogotá y otras zonas de Colombia. Esa experiencia permite trabajar con casos reales, lenguaje local y páginas que responden búsquedas concretas.',
     payment: 'Referencia en pesos colombianos; pago mediante Dólar App o Binance.',
     wa: 'Hola Websy, quiero conocer el plan mensual de SEO para Colombia.',
     searches: ['desarrollo web Colombia', 'agencia SEO Colombia', 'tu servicio + Bogotá', 'tu servicio + Cali'],

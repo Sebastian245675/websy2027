@@ -1,6 +1,6 @@
 **Para contratar desarrollo web o de software en Colombia tienes tres caminos: un freelancer, una agencia o una empresa de software grande.** Para una pyme de Bogotá, Medellín, Cali o Barranquilla, lo más habitual es una agencia que entregue el proyecto completo (diseño, desarrollo, SEO y soporte) con un precio cerrado por escrito. Una página web profesional parte de unos 2.600.000 pesos colombianos (USD 800) y una tienda online a medida va de unos 6 a 11,5 millones de pesos (USD 1.800 a 3.500).
 
-En esta guía verás cómo funciona el mercado colombiano, qué necesita una web para operar en Colombia (pagos, facturación, datos personales), cuánto cuesta cada tipo de proyecto y cómo elegir proveedor, con ejemplos de proyectos reales que hicimos en Bogotá, Cali y Manizales.
+En esta guía verás cómo funciona el mercado colombiano, qué necesita una web para operar en Colombia (pagos, facturación, datos personales), cuánto cuesta cada tipo de proyecto y cómo elegir proveedor, con ejemplos de proyectos reales que hicimos en Colombia.
 
 ## Cómo se contrata desarrollo web en Colombia
 
@@ -57,11 +57,11 @@ En Cali el mercado es más chico y la competencia en Google, menor: una web bien
 
 ### Medellín y el Eje Cafetero
 
-Medellín tiene un ecosistema tecnológico grande, con mucha oferta de desarrolladores. En el Eje Cafetero hicimos la web de [Remix Producciones](/casos-de-exito/pagina-web-productora-eventos-manizales-remix), una productora de eventos con más de 20 años en Manizales, con su catálogo de servicios y SEO local.
+Medellín tiene un ecosistema tecnológico grande, con mucha oferta de desarrolladores. Para destacar ahí sirve lo mismo que en Bogotá: una página por servicio, el WhatsApp a un toque y una web que cargue rápido en el celular.
 
 ### Barranquilla y la costa
 
-En la costa, el turismo y el comercio exterior generan demanda de webs con reservas, catálogos en varios idiomas y pagos internacionales. Para turismo, un ejemplo es la web que hicimos para el glamping colombiano [Mágica Luna](/casos-de-exito/pagina-web-glamping-hotel-colombia-magica-luna), con reservas directas por WhatsApp y su alojamiento declarado en datos estructurados.
+En la costa, el turismo y el comercio exterior generan demanda de webs con reservas, catálogos en varios idiomas y pagos internacionales. Para turismo, lo clave es la reserva directa por WhatsApp, sin comisión: lo explicamos en la guía de [página web para hoteles](/blog/pagina-web-para-hoteles-posadas-alojamientos-reservas-online).
 
 ## Tecnologías que conviene pedir
 
@@ -85,7 +85,7 @@ Una página web profesional parte de unos 2.640.000 pesos colombianos (USD 800) 
 
 ### ¿Se puede contratar una agencia de otro país?
 
-Sí. El trabajo de desarrollo se hace a distancia y las reuniones por videollamada. Lo importante es que la agencia conozca los medios de pago, la facturación y las normas de datos de Colombia. Websy es de Salta, Argentina, y tiene clientes en Bogotá, Cali y Manizales.
+Sí. El trabajo de desarrollo se hace a distancia y las reuniones por videollamada. Lo importante es que la agencia conozca los medios de pago, la facturación y las normas de datos de Colombia. Websy es de Salta, Argentina, y tiene clientes en Colombia.
 
 ### ¿Qué pasarela de pago conviene en Colombia?
 
@@ -101,4 +101,4 @@ Sí. Si recolectas nombres, correos o teléfonos, necesitas una política de tra
 
 ## Cotiza tu proyecto desde Colombia
 
-Mira cómo trabajamos con empresas colombianas en [Websy Colombia](/colombia), con los proyectos que hicimos en Bogotá, Cali y Manizales, revisa los [precios y planes](/planes) o [escríbenos](/contacto) y te enviamos una cotización en pesos colombianos en el día hábil.
+Mira cómo trabajamos con empresas colombianas en [Websy Colombia](/colombia), con los proyectos que hicimos en Bogotá, revisa los [precios y planes](/planes) o [escríbenos](/contacto) y te enviamos una cotización en pesos colombianos en el día hábil.

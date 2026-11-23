@@ -211,14 +211,6 @@ export const en = {
                 category: 'Landing Page',
                 description: 'Professional landing page for tarot and card reading services. Mystical and immersive design developed in React with user experience optimized for conversions.'
             },
-            12: {
-                category: 'Corporate Website',
-                description: 'Official platform for a leading company with over 20 years of experience in Manizales and the Coffee Axis. The site highlights its professional sound, LED screens and event logistics services through an immersive design focused on local SEO.'
-            },
-            13: {
-                category: 'Commercial Web',
-                description: 'Official website for a high-end glamping hotel. Focused on SEO optimization and an immersive user experience that reflects the place\'s branding.'
-            },
             14: {
                 category: 'Landing Page',
                 description: 'Professional landing page for a law firm. Design focused on conversion and presentation of legal services.'

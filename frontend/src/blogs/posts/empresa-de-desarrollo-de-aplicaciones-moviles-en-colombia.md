@@ -73,7 +73,7 @@ Tiene que quedar. Pídelo por escrito, junto con las cuentas de Google Play y Ap
 
 ### ¿Trabajan con empresas de Colombia?
 
-Sí, a distancia por videollamada y WhatsApp, en horario de Colombia. Tenemos proyectos publicados para clientes de Bogotá, Cali y Manizales. Más información en [desarrollo web en Colombia](/colombia).
+Sí, a distancia por videollamada y WhatsApp, en horario de Colombia. Tenemos proyectos publicados para clientes de Bogotá y otras zonas de Colombia. Más información en [desarrollo web en Colombia](/colombia).
 
 ## Cotiza tu app
 

@@ -35,9 +35,9 @@ Si en el paso 2 encuentra una web lenta, desactualizada o sin forma de reservar,
 
 El channel manager evita la sobreventa: cuando alguien reserva en una plataforma, la disponibilidad se actualiza en todas las demás y en la web.
 
-## Un caso real: Mágica Luna
+## Datos estructurados: que Google entienda tu alojamiento
 
-[Mágica Luna](/casos-de-exito/pagina-web-glamping-hotel-colombia-magica-luna) es un glamping de alta gama en Colombia. La web tiene un diseño inmersivo alineado con la marca, presenta el alojamiento y sus servicios y recibe reservas directas por WhatsApp, sin comisión. Además declara en datos estructurados el alojamiento, sus servicios y su valoración, que son datos que Google puede mostrar en el resultado de búsqueda. Mira más [ejemplos de páginas web para hoteles](/casos-de-exito/paginas-web-para-hoteles).
+Además del diseño, conviene declarar en datos estructurados (Schema.org) el tipo de alojamiento, sus servicios, la ubicación y la valoración de los huéspedes. Son datos que Google puede mostrar en el resultado de búsqueda, y que ayudan a que el alojamiento aparezca cuando alguien busca por zona o por servicio, como "glamping con jacuzzi" o "cabañas con piscina".
 
 ## Cómo incentivar la reserva directa
 

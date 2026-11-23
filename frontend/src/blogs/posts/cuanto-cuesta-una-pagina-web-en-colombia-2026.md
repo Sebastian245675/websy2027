@@ -62,7 +62,7 @@ En Websy el plan de SEO mensual cuesta unos COP 635.000 al mes (USD 200) e inclu
 
 Con Websy el proyecto se paga en 3 partes: **30% al empezar, 30% a mitad del proyecto y 40% en la entrega**, cuando ya viste la web terminada. Mostramos la referencia en pesos colombianos y coordinamos el pago mediante Dólar App o Binance.
 
-Trabajamos a distancia por videollamada y WhatsApp, en horario de Colombia. Ya publicamos proyectos para clientes de Bogotá, Cali y Manizales: firmas de abogados, consultorios de psicología, una fábrica de protección industrial, un glamping y un marketplace de repuestos para carros. Puedes ver cada uno en los [casos de éxito](/casos-de-exito).
+Trabajamos a distancia por videollamada y WhatsApp, en horario de Colombia. Ya publicamos proyectos para clientes de Colombia: una firma de abogados penalistas, una fábrica de protección industrial y un marketplace de repuestos para carros. Puedes ver cada uno en los [casos de éxito](/casos-de-exito).
 
 ## Precio por ciudad
 

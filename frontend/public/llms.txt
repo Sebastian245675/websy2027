@@ -16,7 +16,7 @@
 
 - [Desarrollo web en Argentina](https://www.websysrl.com/argentina): páginas, tiendas, sistemas y automatizaciones para empresas argentinas, con precios en pesos y casos reales.
 - [SEO en Argentina](https://www.websysrl.com/argentina/seo): plan mensual de posicionamiento, mejoras técnicas y contenido por USD 200 al mes, con referencia en pesos argentinos.
-- [Desarrollo web en Colombia](https://www.websysrl.com/colombia): proyectos en Bogotá y Manizales; precios orientativos en pesos colombianos y pago desde Colombia.
+- [Desarrollo web en Colombia](https://www.websysrl.com/colombia): proyectos en Bogotá; precios orientativos en pesos colombianos y pago desde Colombia.
 - [SEO en Colombia](https://www.websysrl.com/colombia/seo): plan mensual de posicionamiento nacional y local, con seguimiento e informe de resultados.
 - [Diseño y desarrollo web en Bogotá](https://www.websysrl.com/colombia/desarrollo-web-bogota): servicio remoto, precios en COP y cuatro casos reales publicados en Bogotá.
 - [Desarrollo web en Cali](https://www.websysrl.com/colombia/desarrollo-web-cali): páginas web, tiendas virtuales y automatización de marketing y WhatsApp para empresas de Cali.
@@ -49,7 +49,6 @@
 - [Ejemplos de tiendas online hechas a medida](https://www.websysrl.com/casos-de-exito/ejemplos-de-tiendas-online)
 - [Ejemplos de sistemas de gestión a medida para pymes](https://www.websysrl.com/casos-de-exito/ejemplos-de-sistemas-de-gestion-a-medida)
 - [Páginas web para empresas e industria: ejemplos reales](https://www.websysrl.com/casos-de-exito/paginas-web-para-empresas)
-- [Páginas web para hoteles y glamping: ejemplos reales](https://www.websysrl.com/casos-de-exito/paginas-web-para-hoteles)
 - [Páginas web para inmobiliarias y arquitectos: ejemplos reales](https://www.websysrl.com/casos-de-exito/paginas-web-para-inmobiliarias)
 
 ## Casos de éxito
@@ -67,10 +66,8 @@
 - [Sistema para farmacias con punto de venta e inventario: FarmaDesk](https://www.websysrl.com/casos-de-exito/sistema-farmacia-punto-de-venta-inventario-farmadesk): Sistema web para farmacias con punto de venta, control de inventario de medicamentos, alertas cuando un producto baja de su stock mínimo y reportes diarios.
 - [Página web para empresa de seguridad contra incendios: Jujuy MultiServicios](https://www.websysrl.com/casos-de-exito/pagina-web-seguridad-contra-incendios-jujuy-multiservicios): Sitio corporativo para una empresa de ingeniería y seguridad contra incendios que opera en Jujuy y el NOA. Presenta auditoría, ingeniería, montaje, mantenimiento NFPA y capacitación; organiza las soluciones por sector y recibe consultas por WhatsApp y formulario.
 - [Página web para empresa de logística minera: M Logística y Distribución](https://www.websysrl.com/casos-de-exito/pagina-web-empresa-logistica-litio-m-logistica): Sitio web corporativo para una empresa de Salta especializada en el transporte premium de litio, hidróxido y carbonato para exportación.
-- [Página web para productora de eventos con SEO local: Remix Producciones](https://www.websysrl.com/casos-de-exito/pagina-web-productora-eventos-manizales-remix): Plataforma oficial de una productora con más de 20 años de experiencia en Manizales y el Eje Cafetero.
 - [Página web para fábrica de protección industrial: ABO Colombia](https://www.websysrl.com/casos-de-exito/pagina-web-fabrica-forros-industriales-abo-colombia): Sitio web para una empresa colombiana que fabrica forros y protección industrial y comercial.
 - [Web con automatización para empresa de paisajismo en Estados Unidos: STL Gold Landscaping](https://www.websysrl.com/casos-de-exito/web-y-automatizacion-paisajismo-estados-unidos-stl-gold): Sitio de servicios para una empresa de paisajismo y mantenimiento de jardines en St. Louis, con una automatización para responder consultas.
-- [Página web para glamping y hotel boutique: Mágica Luna](https://www.websysrl.com/casos-de-exito/pagina-web-glamping-hotel-colombia-magica-luna): Sitio oficial de un hotel glamping de alta gama en Colombia, con una experiencia inmersiva que refleja la marca del lugar, reservas por WhatsApp y una optimización SEO pensada para que Google muestre el alojamiento con sus servicios y valoraciones.
 - [Plataforma web para inmobiliaria con buscador de propiedades: CASAMAX](https://www.websysrl.com/casos-de-exito/plataforma-inmobiliaria-propiedades-casamax): Plataforma inmobiliaria para descubrir propiedades con filtros por operación y tipo, fichas de detalle, favoritos, alertas e historial.
 - [Ejemplo de página web para estudio de arquitectura: Nórdica](https://www.websysrl.com/casos-de-exito/demo-pagina-web-estudio-arquitectura-nordica): Demo de sitio web para un estudio de arquitectura, diseño y construcción, con identidad visual editorial, servicios integrales, galería de proyectos y contacto directo por WhatsApp. Sirve como punto de partida para estudios que quieren ver cómo quedaría su web antes de encargarla.
 - [Ejemplo de landing page para infoproductores: Forja](https://www.websysrl.com/casos-de-exito/demo-landing-page-infoproductores-forja): Demo de landing de lanzamiento para un programa de entrenamiento online de 12 semanas: hero con video de entrenamientos reales que cambia de escena (fuerza, cardio, soga, cuerdas y kettlebell), el método en 8 fases, clases en video, presentación de la coach, testimonios con resultados, dos planes con pago único o en 3 cuotas, garantía, cuenta regresiva de preventa y un checkout de muestra.

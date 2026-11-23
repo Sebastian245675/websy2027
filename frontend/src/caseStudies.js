@@ -369,31 +369,6 @@ export const caseStudies = [
     ],
   },
   {
-    slug: 'pagina-web-productora-eventos-manizales-remix',
-    portfolioId: 12,
-    hub: 'empresas',
-    service: 'seo-marketing',
-    h1: 'Página web para productora de eventos con SEO local: Remix Producciones',
-    seoTitle: 'Web para productora de eventos en Manizales: Remix',
-    seoDescription: 'Web de una productora con más de 20 años en el Eje Cafetero: sonido, pantallas LED y logística, con catálogo de servicios y SEO local.',
-    location: 'Manizales, Colombia',
-    type: 'Sitio web corporativo',
-    summary: 'Plataforma oficial de una productora con más de 20 años de experiencia en Manizales y el Eje Cafetero. Presenta sus servicios de sonido profesional, pantallas LED y logística de espectáculos con un diseño inmersivo y SEO local.',
-    challenge: 'Para un evento, el cliente busca por ciudad y por servicio: "sonido para eventos Manizales", "pantallas LED Eje Cafetero". Veinte años de trayectoria no sirven si Google no sabe qué ofrece la empresa ni dónde.',
-    solution: [
-      'Título principal con la búsqueda local: producción de eventos en Manizales.',
-      'Servicios separados: sonido, iluminación, pantallas LED y logística.',
-      'Contacto por WhatsApp.',
-    ],
-    decisions: [
-      { title: 'Catálogo de servicios y cobertura en Schema.org', text: 'Organization con dirección y coordenadas, cobertura por ciudad, departamento y país, y un OfferCatalog con cada servicio. Es la información que Google usa para mostrar a la empresa en búsquedas locales.' },
-    ],
-    verified: { schema: ['Organization', 'OfferCatalog', 'Service', 'City', 'State', 'GeoCoordinates', 'OpeningHoursSpecification', 'ContactPoint'], sitemapUrls: 8, rendering: 'Servidor (Next.js)' },
-    faq: [
-      { q: '¿Cómo aparece una empresa de eventos en Google?', a: 'Con una página por servicio, la ciudad y la región que cubre declaradas en el contenido y en los datos estructurados, y una ficha de Google Business Profile coherente con la web.' },
-    ],
-  },
-  {
     slug: 'pagina-web-fabrica-forros-industriales-abo-colombia',
     portfolioId: 8,
     hub: 'empresas',
@@ -446,32 +421,6 @@ export const caseStudies = [
   },
 
   // ---------------------------------------------------------------- Turismo e inmobiliarias
-  {
-    slug: 'pagina-web-glamping-hotel-colombia-magica-luna',
-    portfolioId: 13,
-    hub: 'turismo',
-    service: 'desarrollo-web',
-    h1: 'Página web para glamping y hotel boutique: Mágica Luna',
-    seoTitle: 'Web para glamping y hotel en Colombia: Mágica Luna',
-    seoDescription: 'Web de un glamping de alta gama en Colombia: alojamiento, servicios y valoraciones en Schema.org, con reservas directas por WhatsApp.',
-    location: 'Colombia',
-    type: 'Sitio web para hotelería',
-    summary: 'Sitio oficial de un hotel glamping de alta gama en Colombia, con una experiencia inmersiva que refleja la marca del lugar, reservas por WhatsApp y una optimización SEO pensada para que Google muestre el alojamiento con sus servicios y valoraciones.',
-    challenge: 'Un glamping compite contra Booking y Airbnb por la misma búsqueda, y cada reserva que llega por esas plataformas paga comisión. La web propia tiene que estar a la altura de la experiencia que vende y darle al huésped un motivo para reservar directo.',
-    solution: [
-      'Diseño inmersivo alineado con la marca del glamping.',
-      'Presentación del alojamiento y sus servicios.',
-      'Reserva directa por WhatsApp, sin comisión de plataforma.',
-    ],
-    decisions: [
-      { title: 'Accommodation y AggregateRating en Schema.org', text: 'El sitio declara el alojamiento, sus servicios (LocationFeatureSpecification) y su valoración. Son los datos que Google puede mostrar directo en el resultado de búsqueda.' },
-      { title: 'React, TypeScript y Shadcn UI con HTML del servidor', text: 'Componentes tipados y una interfaz cuidada, con el contenido entregado en el HTML para que se indexe completo.' },
-    ],
-    verified: { schema: ['Accommodation', 'AggregateRating', 'LocationFeatureSpecification', 'Organization', 'GeoCoordinates', 'OpeningHoursSpecification'], sitemapUrls: 10, rendering: 'Servidor' },
-    faq: [
-      { q: '¿Un hotel necesita web si ya está en Booking?', a: 'Sí: la web propia es lo que permite recibir reservas directas sin comisión. Los huéspedes suelen descubrir el hotel en una plataforma y después buscarlo por nombre en Google.' },
-    ],
-  },
   {
     slug: 'plataforma-inmobiliaria-propiedades-casamax',
     portfolioId: 'casamax-inmobiliaria',
@@ -666,7 +615,7 @@ export const rubroHubs = [
     h1: 'Páginas web para empresas e industria: ejemplos reales',
     seoTitle: 'Páginas web para empresas e industria: ejemplos | Websy',
     seoDescription: 'Webs corporativas reales: seguridad industrial en Jujuy, logística de litio en Salta, fábrica en Colombia, eventos y paisajismo en EE. UU.',
-    intro: 'Webs corporativas para empresas industriales, de logística, de eventos y de servicios en Argentina, Colombia y Estados Unidos. Los compradores de empresa buscan por servicio y validan al proveedor en la web antes de la primera reunión.',
+    intro: 'Webs corporativas para empresas industriales, de logística y de servicios en Argentina, Colombia y Estados Unidos. Los compradores de empresa buscan por servicio y validan al proveedor en la web antes de la primera reunión.',
     mustHave: [
       { title: 'Una página por servicio', text: 'El comprador busca "mantenimiento NFPA", no el nombre de tu empresa.' },
       { title: 'Sectores y zona de cobertura', text: 'Qué industrias atendés y en qué región, en el texto y en los datos estructurados.' },
@@ -674,21 +623,6 @@ export const rubroHubs = [
       { title: 'Respuesta rápida', text: 'Automatizar la primera respuesta para no perder consultas mientras el equipo está en obra.' },
     ],
     posts: ['desarrollo-de-software-a-medida-para-logistica-y-distribucion', 'como-conseguir-clientes-por-internet-para-mi-negocio'],
-  },
-  {
-    slug: 'turismo',
-    path: 'paginas-web-para-hoteles',
-    name: 'Hoteles y turismo',
-    h1: 'Páginas web para hoteles y glamping: ejemplos reales',
-    seoTitle: 'Páginas web para hoteles y glamping: ejemplos | Websy',
-    seoDescription: 'Ejemplo real de web para glamping en Colombia con reservas directas por WhatsApp y valoraciones en Google, y qué necesita un hotel.',
-    intro: 'Hicimos la web de un glamping de alta gama en Colombia. Para un alojamiento, la web propia es la diferencia entre una reserva directa y una que paga comisión a una plataforma.',
-    mustHave: [
-      { title: 'Fotos que vendan la experiencia', text: 'El huésped compra el lugar antes de leer.' },
-      { title: 'Reserva directa', text: 'WhatsApp o motor de reservas propio, sin comisión.' },
-      { title: 'Datos estructurados de alojamiento', text: 'Accommodation, servicios y valoraciones para el resultado de Google.' },
-    ],
-    posts: ['pagina-web-para-hoteles-posadas-alojamientos-reservas-online', 'pagina-web-para-agencias-viajes-turismo-reservas'],
   },
   {
     slug: 'inmobiliarias',

@@ -211,14 +211,6 @@ export const es = {
                 category: 'Landing Page',
                 description: 'Landing page profesional para servicios de tarot y lectura de cartas. Diseño místico y envolvente desarrollado en React con experiencia de usuario optimizada para conversiones.'
             },
-            12: {
-                category: 'Sitio Web Corporativo',
-                description: 'Plataforma oficial para una empresa líder con más de 20 años de experiencia en Manizales y el Eje Cafetero. El sitio destaca sus servicios de sonido profesional, pantallas LED y logística de espectáculos mediante un diseño inmersivo y enfocado en SEO local.'
-            },
-            13: {
-                category: 'Web Comercial',
-                description: 'Sitio web oficial para un hotel glamping de alta gama. Enfocado en la optimización SEO y una experiencia de usuario inmersiva que refleja el branding del lugar.'
-            },
             14: {
                 category: 'Landing Page',
                 description: 'Landing page profesional para firma de abogados. Diseño enfocado en la conversión y presentación de servicios legales.'

@@ -37,7 +37,7 @@ export const RubrosStrip = () => (
           </li>
         ))}
         <li>
-          <Link to={`${HUB}paginas-web-para-hoteles`} className="block rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white hover:border-[#d9fb06] hover:text-[#d9fb06] transition-colors">
+          <Link to="/blog/pagina-web-para-hoteles-posadas-alojamientos-reservas-online" className="block rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white hover:border-[#d9fb06] hover:text-[#d9fb06] transition-colors">
             Hoteles y turismo
           </Link>
         </li>
